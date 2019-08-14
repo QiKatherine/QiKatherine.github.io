@@ -1,0 +1,10 @@
+#+STARTUP: indent
+* Financial constraints
+** TODO     :blog:hugo:@blog:
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: ./
+:END:
+The financial cosntraints can not be observed directly. But it is extremly important because we want to capture it as an indicator of economic market friction. Therefor we metigate this issue with the corresponding policies.
+** But in reality it is impossible to directly mornitor financial constraints with 
+
+when I begun to learn. There was a huge gap between a beginer and so called master. Apart from knowledge itself, there are differences lie in the mindsets.Bridge the gap . 不能领会到一些关键的问题，big picture 挺不过去。而这些问题往往难以找到答案。我试图回答这些问题，能帮助beginners 顺利的挺过学习的过程。早日变成master。 
