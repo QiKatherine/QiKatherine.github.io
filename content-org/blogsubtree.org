@@ -128,7 +128,7 @@ ox-hugo对org文件存放位置并没有特定要求，但是其头部的#+hugo_
  在源码的三篇文章里分类update和reviews被提到两次，标签fear和herpes也被提到两次。从生成的html来看，
 index.md刚好与之对应：分类的index page 提供了所有需要的分类（i.e. tags, categories）每个分类下还有list page显示所有与之相关的页面内容。导航就是这样实现建立的，使得我们能“实现不同分类间的交叉引用，点击任何一个入口进入文章”。
 
-
+this is a test
 
 
 

@@ -9,6 +9,7 @@ preserveTaxonomyNames = true
 paginate = 5 #frontpage pagination
 hasCJKLanguage = true
 
+
 [outputs]
 home = ["HTML", "RSS", "Algolia"]
 
