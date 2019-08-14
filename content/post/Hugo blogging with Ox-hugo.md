@@ -1,7 +1,7 @@
 +++
 title = "Hugo blogging with Ox-hugo"
 publishDate = 2019-07-08T00:00:00+01:00
-lastmod = 2019-08-14T17:41:32+01:00
+lastmod = 2019-08-14T20:50:31+01:00
 tags = ["Hugo", "Ox-hugo"]
 categories = ["TECH"]
 draft = false
@@ -148,4 +148,4 @@ In normal Hugo, individual pages written in markdown (or now in org-mode) are pl
  在源码的三篇文章里分类update和reviews被提到两次，标签fear和herpes也被提到两次。从生成的html来看，
 index.md刚好与之对应：分类的index page 提供了所有需要的分类（i.e. tags, categories）每个分类下还有list page显示所有与之相关的页面内容。导航就是这样实现建立的，使得我们能“实现不同分类间的交叉引用，点击任何一个入口进入文章”。
 
-this is a test
+this is a test, idont know
