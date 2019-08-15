@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-08-15 Thu 01:06 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgcdf1cd0">1. Blog</a>
+<ul>
+<li><a href="#org5d4c5d4">1.1. <span class="done DONE">DONE</span> Hugo blogging with Ox-hugo&#xa0;&#xa0;&#xa0;<span class="tag"><span class="_TECH">@TECH</span>&#xa0;<span class="Hugo">Hugo</span>&#xa0;<span class="Ox_hugo">Ox_hugo</span></span></a>
+<ul>
+<li><a href="#orgd6cb0de">1.1.1. Front matter</a></li>
+<li><a href="#orge25bd98">1.1.2. Don't get confused</a></li>
+<li><a href="#org076c0f0">1.1.3. Content type</a></li>
+<li><a href="#orga064e58">1.1.4. Page boundles</a></li>
+<li><a href="#org7d6e7f0">1.1.5. Section and nested section</a></li>
+<li><a href="#org512edf8">1.1.6. Head information</a></li>
+<li><a href="#orgad57cb2">1.1.7. Heading management</a></li>
+<li><a href="#org32b9f63">1.1.8. Tree and subtree writing</a></li>
+<li><a href="#orgb99c792">1.1.9. Taxonomies 分类型页面</a></li>
+</ul>
+</li>
+<li><a href="#org8475a1f">1.2. <span class="done DONE">DONE</span> Hugo Blogging with Werecker Auto Build &amp; Deployment&#xa0;&#xa0;&#xa0;<span class="tag"><span class="_TECH">@TECH</span>&#xa0;<span class="Hugo">Hugo</span>&#xa0;<span class="Git">Git</span></span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="orgcdf1cd0" class="outline-2">
+<h2 id="orgcdf1cd0"><span class="section-number-2">1</span> Blog</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="org5d4c5d4" class="outline-3">
+<h3 id="org5d4c5d4"><span class="section-number-3">1.1</span> <span class="done DONE">DONE</span> Hugo blogging with Ox-hugo&#xa0;&#xa0;&#xa0;<span class="tag"><span class="_TECH">@TECH</span>&#xa0;<span class="Hugo">Hugo</span>&#xa0;<span class="Ox_hugo">Ox_hugo</span></span></h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+我放弃Hexo，安装hugo的最初目的还是想用它配合Emacs-org-mode来写博客记笔记。灵感来自<a href="https://zilongshanren.com/post/move-from-hexo-to-hugo/">子龙山人</a>和<a href="https://www.xianmin.org/post/ox-hugo/">贤民</a>两位老师的博客，具体的安装和使用心得二位已经讲的比较详细，仔细读完会受益良多。本着不再重复造轮子的原则，我想简单写写hugo原生的设计,以及它和ox-hugo的对接原理与使用。
+</p>
+
+<p>
+Hugo支持直接把.org文件渲染成html发布，但是许多人提到其实支持得不是很好。Hugo支持最好的markdown语法类型是blackfriday markdown。所以我们使用后端插件ox-hugo，它提供一种方法解决用 orgmode 写博文的问题：把org文件转成blackfriday markdown &#x2014; then use hugo server to generate html.
+</p>
+
+<p>
+首先我们详细看ox-hugo官网对其功能的解说：
+According to the information documentation, ox-hugo is an Org exporter backend that exports Org to Hugo-compatible Markdown (Blackfriday) and also generates the front matter (in TOML or YAML format).
+</p>
+
+<p>
+简言之，我们主要使用ox-hugo做两件事（1）把org格式内容转换成markdown格式内容；（2）解析org file中的用org语法写front-matter，生成hugo语法的front-matter，进而使得生成的html能够正确被展示。那么front-matter具体指什么呢？
+</p>
+</div>
+
+<div id="orgd6cb0de" class="outline-4">
+<h4 id="orgd6cb0de"><span class="section-number-4">1.1.1</span> Front matter</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+Front matter give the information about the content, but NOT the information of content. It works as metadata to tell Hugo the general properties of the article. Hugo supports three types of front matter syntax: yaml, toml, json. Wheven you generate a new post/article/blog with
+</p>
+<pre class="example">
+$ hugo new site posts 
+</pre>
+<p>
+Hugo will automatically add front matter information at the top of the article like this:
+</p>
+<pre class="example">
+---
+title: Good day
+date: 2017-09-01T1705-43                    (YAML)
+draft: true
+---
+
++++
+title= Good day
+date= 2017-09-01T1705-43                   (TOML)
+draft= true
++++
+
+{ 
+"title":  "Good day" ,
+"date": "2017-09-01T1705-43",           (json)
+"draft": "true"
+}
+</pre>
+
+<p>
+所以想用org进行blog写作，也需要定义自己的front matter. 但是org file里front matter语法如下
+</p>
+<div class="org-src-container">
+<pre class="src src-lisp"><span style="color: #F92672;">:PROPERTIES:</span>
+<span style="color: #F92672;">:EXPORT_FILE_NAME:</span> ox-hugo-tutoria
+<span style="color: #F92672;">:EXPORT_DESCRIPTION:</span> Exporting to Hugo's Blackfriday Markdown from Orgmod
+<span style="color: #F92672;">:EXPORT_HUGO_IMAGES:</span> /img/org.pn
+<span style="color: #F92672;">:END:</span>
+</pre>
+</div>
+
+<p>
+以:properties: 这块为代表的code block就是org以自己的方式定义metadata information。如前段提到，ox-hugo会解这个code block以生成hugo可以识别的YAML等front matter.
+</p>
+
+<p>
+ox-hugo一般要求至少要有:EXPORT<sub>FILE</sub><sub>NAME</sub>:，我们需要通过这个命令告诉ox-hugo"有新的标题和内容需要去export"。
+</p>
+</div>
+</div>
+
+<div id="orge25bd98" class="outline-4">
+<h4 id="orge25bd98"><span class="section-number-4">1.1.2</span> Don't get confused</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+接下来这个问题可能对多大多数前端coder和Emacs熟练手都不是问题，但是这两个段头部代码被我着实混淆了一阵：
+	Heading information指的是以以下语法结构为框架的代码#+hugo<sub>base</sub><sub>dir</sub>:主管ox-hugo导出页面相关设置，例如谁是一级页面，二级页面，导出地址，导出栏目。
+</p>
+
+<p>
+Front matter指的是以以下语法结构为框架的代码:PROPERTIES:主管面向一个article内部的性质设置，例如写作作者，写作日期，写作tag。
+</p>
+
+<p>
+Heading information (#+hugo<sub>base</sub><sub>dir</sub>)的概念局限于ox-hugo里；而front-matter在markdown，网页config file等其它文件里都有。只是:PROPERTIES:这种表达形式是org式写法。换做org支持的另一种projectile导出html的front matter可能是这样:base-directory "~/Dropbox/org/blog/"
+</p>
+</div>
+</div>
+
+<div id="org076c0f0" class="outline-4">
+<h4 id="org076c0f0"><span class="section-number-4">1.1.3</span> Content type</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<p>
+Content type 就是一系列不同的表达式样（layout），根据我们指定的不同的section type有不同表达式样法则，这里暂且把section翻译成一个网站下的不同栏目，例如blog，photo，quote，post，about，tages或者其它你想自定义的栏目。Hugo通过front-matter支持这些不尽相同的content type。
+</p>
+
+<p>
+Hugo 认为每个栏目最好只做同一件事情，例如照片专栏只发发照片，post专栏集中发文章。所以除非我们自定义，hugo指定每个栏目的子单元都会自动继承一些此专栏pre-defined的特性，这样能最大限度的重复使用一个定义好的栏目，同时尽量减小‘config每个栏目’工作。
+</p>
+
+<p>
+设定content type: 只需在源文件的头部引用hugo提供的heading information/metadata information（即front matter）即可，能迅速方便的修改一两个页面的layout。如果不能满足需求，可用hugo提供的自定义设置archetypes，按照hugo指定的结构组合方式，编写正确的<sub>index.md文件拼接好一个网站的layout即可</sub>。
+</p>
+
+<p>
+如果你没有指定表达式样，比如暂时不太在乎如何展示photo这个栏目，Hugo有这么一个default设定：在front matter大部分信息缺乏的时候，通过每个文章存储path或者所在section猜出给这篇文章赋予什么layout。这会让我们在迅速上手写作blog的时候非常省心。
+</p>
+</div>
+</div>
+<div id="orga064e58" class="outline-4">
+<h4 id="orga064e58"><span class="section-number-4">1.1.4</span> Page boundles</h4>
+<div class="outline-text-4" id="text-1-1-4">
+<p>
+Hugo 0.32以上的版本，使用page boundles的模式来管理网页源和图，从父子结构分类的角度看，有两种：leaf类页面和branch类页面。branch类页面允许在其内部嵌套更深层次的页面，而leaf规定其不能再有子页面。
+</p>
+
+<p>
+任何一个叫index的页面文件都是leaf型，叫<sub>index的页面文件都是branch型</sub>。所以可见org文件里index的文件都会被输出成单页，没有子文件夹。最常见的index页面是下文会提到的分类里面的categories和tags index pages，它们都是单页，除此之外多数时候我们会使用branch型。如图:
+<a href="file:///D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 1.png ">file:///D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 1.png </a>
+Content文件夹在这里是home page, 他的主要功能是hosting“决定网站layout设定”的信息（在这里就是定义了branch型页面类型的<sub>index.md</sub>），所以hugo规定home page至多只能包含图片，而不能包含其它的content pages，只承担layout设定而不为article source提供场所。注意content里面的内容结构安排，应当和你想要渲染的网站结构一致。
+</p>
+</div>
+</div>
+
+<div id="org7d6e7f0" class="outline-4">
+<h4 id="org7d6e7f0"><span class="section-number-4">1.1.5</span> Section and nested section</h4>
+<div class="outline-text-4" id="text-1-1-5">
+<p>
+Section是一组页面的集合称呼，一般被放在content文件夹下面，就是上文提到的‘内容结构组织’的组成单元。从default设定来讲，content下面的每个一级文件夹自成一个root section。同时上面也提到section可以嵌套，即在一级文件夹下方再建二级section文件，构成一个更深层的section。
+</p>
+
+<p>
+那么问题来了，hugo是如何知道nested section呢? 答案是：通过文件夹里要有<sub>index.md文件指定结构的设定</sub>。依此原理可以构建三级四级更深的section目录。 为了确保每一级网页都能被导览正确的链接到，每个最底层的文件夹里都要至少包含一个有内容文件，例如<sub>index.md</sub>.
+</p>
+<pre class="example">
+content
+└── blog        &lt;-- Section, because first-level dir under content/
+    ├── funny-cats
+    │   ├── mypost.md
+    │   └── kittens         &lt;-- Section, because contains _index.md
+    │       └── _index.md
+    └── tech                &lt;-- Section, because contains _index.md
+        └── _index.md
+</pre>
+</div>
+</div>
+
+<div id="org512edf8" class="outline-4">
+<h4 id="org512edf8"><span class="section-number-4">1.1.6</span> Head information</h4>
+<div class="outline-text-4" id="text-1-1-6">
+<p>
+ox-hugo对org文件存放位置并没有特定要求，但是其头部的#+hugo<sub>base</sub><sub>dir</sub>: 必须要被清晰的定义，因为这个地址告诉ox-hugo你的root directory在哪里，ox-hugo就会在这个地址下的content里面生成转化的md文件。很多用户自定义#+hugo<sub>base</sub><sub>dir</sub>: ..即是本org文件所在的parent path.也有人定义#+hugo<sub>base</sub><sub>dir</sub>: .代表path与现在的org文件同文件夹，如果root directory是跟现在org文件同文件夹，c-c c-c H A转化的结果就是这样：
+<img src="file:///D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 2.png" alt="Hugo blogging with Ox-hugo 2.png" />
+</p>
+
+<p>
+仔细体会以下示例：以root目录c:\hugo\myblog\为例：
+(1) orgfile在myblog下方 且#+hugo<sub>base</sub><sub>dir</sub>: .
+(2) orgfile在myblog\content-org下方 且#+hugo<sub>base</sub><sub>dir</sub>: ..
+在c-c c-c H A 后都会产生如下形式，只不过(2)中hugotest.org在content-org里面
+<img src="file:///D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 3.png" alt="Hugo blogging with Ox-hugo 3.png" />
+</p>
+</div>
+</div>
+
+<div id="orgad57cb2" class="outline-4">
+<h4 id="orgad57cb2"><span class="section-number-4">1.1.7</span> Heading management</h4>
+<div class="outline-text-4" id="text-1-1-7">
+<p>
+The official documentation as well as the attached youtube tutorials have provided great explaintation of how hugo translate metadata of _index.md files to the headings of html with Hugo heading management system.
+</p>
+
+<p>
+建立一个有一篇文章的post
+<img src="file:///D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 4.png" alt="Hugo blogging with Ox-hugo 4.png" />
+</p>
+
+<p>
+继续新增一个有两篇文章的fishsticks
+<img src="file:///D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 5.png" alt="Hugo blogging with Ox-hugo 5.png" />
+</p>
+</div>
+</div>
+
+<div id="org32b9f63" class="outline-4">
+<h4 id="org32b9f63"><span class="section-number-4">1.1.8</span> Tree and subtree writing</h4>
+<div class="outline-text-4" id="text-1-1-8">
+<p>
+In normal Hugo, individual pages written in markdown (or now in org-mode) are placed inside the content directory inside the project root. With ox-hugo, a single org-mode file can be used to generate all pages, posts, and any other content. This has some advantages in allowing usage of org-mode functionality, as well as re-use of content or property settings across pages.
+</p>
+
+
+<div class="figure">
+<p><img src="file:///D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 6.png" alt="Hugo blogging with Ox-hugo 6.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="orgb99c792" class="outline-4">
+<h4 id="orgb99c792"><span class="section-number-4">1.1.9</span> Taxonomies 分类型页面</h4>
+<div class="outline-text-4" id="text-1-1-9">
+<p>
+• 这段是index管理page boundle的良好功能的又一个展现:通过 taxonomy index pages 就能建立一系列分类页面,例如tags and category,为分类页面单独建立管理page使拥有这些属性的文章被自右交叉引用,用户可以通过点击任何一个tag或者categories就能达到文章页面。在org写作里通过在headings添加实现，org到md转化由ox-hugo完成，语法差别很细微。如下图，还是上文的源码，只是为文章添加了两种categories，两种tag:
+<img src="file:///D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 7.png" alt="Hugo blogging with Ox-hugo 7.png" />
+</p>
+
+<p>
+ 在源码的三篇文章里分类update和reviews被提到两次，标签fear和herpes也被提到两次。从生成的html来看，
+index.md刚好与之对应：分类的index page 提供了所有需要的分类（i.e. tags, categories）每个分类下还有list page显示所有与之相关的页面内容。导航就是这样实现建立的，使得我们能“实现不同分类间的交叉引用，点击任何一个入口进入文章”。
+</p>
+
+<p>
+this is a test, idont know
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="org8475a1f" class="outline-3">
+<h3 id="org8475a1f"><span class="section-number-3">1.2</span> <span class="done DONE">DONE</span> Hugo Blogging with Werecker Auto Build &amp; Deployment&#xa0;&#xa0;&#xa0;<span class="tag"><span class="_TECH">@TECH</span>&#xa0;<span class="Hugo">Hugo</span>&#xa0;<span class="Git">Git</span></span></h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+After finishing a blog article, one of the most frequently used process to publish on to website is: save markdown file; preview on local host 1313; generate public file and push to Github or other remote server; push source code to backup. There are two things worthy discussing in this process (1) which is the best way to host html files and source code files (2) which is the better way to automize the procedure.
+</p>
+
+<p>
+Hugo requires only a binary file to generate website, with which the update cannot be easier: you just download new .exe file and replace the old one. Still if you are using a similar framework like Hugo or Hexo, keeping tracking source code, forked/cloned theme repo/ html all together can still be a major pain. 
+</p>
+
+<p>
+Regarding the first issue, Hugo official website along with github documentation has given two way to publish public file. The first way is using Master branch of user.github.io to host /doc (instead of public) folder, which is the easiest one to me. The second way is using gh-pages and the advantage of this method is that allows you to have another branch hosting source code in the same repo. I fail to generate /doc file somehow but it give me a chance to try werecker which surprisingly allows me to achieve the first method with the same advantages of the second method. Long story short, I am now using the Master branch of user.github.io to host public file and dev branch to host source file.
+</p>
+
+<p>
+The logic of automated werecker is that you write an article in markdown, add and commit the changes in git, then push the whole blog file source code to remote repo (dev branch in my case). Compared with the process mentioned above, you do NOT need to generate and deploy by yourself any more. Werecker will track your source code on github.io and do that for you. So the key thing is to put the script (werecker.yml) in root file and it tells werecker spercifically how to build and deploy. 
+</p>
+
+<p>
+The reason of this artile is that the detailed werecker instruction <a href="https://gohugo.io/hosting-and-deployment/deployment-with-wercker/">https://gohugo.io/hosting-and-deployment/deployment-with-wercker/</a> given by Hugo is an old version. The werecker has changed quite a lot and I spend a while to figure out how to use it. You do not need to search and choose boxes or steps to build and deploy. They can be done in workflow section <img src="file:///D:/Hugo/myblog/static/img/Hugo blogging with werecker 1.png" alt="Hugo blogging with werecker 1.png" /> 
+</p>
+
+<p>
+and my sript is shown here:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-yml"># This references a standard debian container from the
+# Docker Hub https://registry.hub.docker.com/_/debian/
+# Read more about containers on our dev center
+# https://devcenter.wercker.com/overview-and-core-concepts/containers/
+box: debian
+# You can also use services such as databases. Read more on our dev center:
+# https://devcenter.wercker.com/administration/services/
+# services:
+    # - postgres
+    # https://devcenter.wercker.com/administration/services/examples/postgresql/
+
+    # - mongo
+    # https://devcenter.wercker.com/administration/services/examples/mongodb/
+
+# This is the build pipeline. Pipelines are the core of wercker
+# Read more about pipelines on our dev center
+# https://devcenter.wercker.com/development/pipelines/
+build:
+    steps:
+    # Steps make up the actions in your pipeline
+    # Read more about steps on our dev center:
+    # https://devcenter.wercker.com/development/steps/
+        - arjen/hugo-build@2.8.0:
+            # your hugo theme name
+            theme: hugo-theme-cleanwhite
+            flags: --buildDrafts=false
+deploy:
+    steps:
+        - install-packages:
+            packages: git ssh-client
+
+        - sf-zhou/gh-pages@0.2.6:
+            token: $GIT_TOKEN
+            domain: sheishe.xyz
+            repo: QiKatherine/QiKatherine.github.io
+            branch: master
+            basedir: public
+</pre>
+</div>
+
+<p>
+Notice the name 'build' and 'deploy' in the workflow above need to be the same with the name in steps in the werecker.yml file.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2019-08-15 Thu 01:06</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

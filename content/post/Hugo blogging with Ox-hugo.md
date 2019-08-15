@@ -4,6 +4,7 @@ publishDate = 2019-07-08T00:00:00+01:00
 lastmod = 2019-08-14T20:50:31+01:00
 tags = ["Hugo", "Ox-hugo"]
 categories = ["TECH"]
+image = "img/111.jpg"
 draft = false
 +++
 
@@ -21,7 +22,7 @@ According to the information documentation, ox-hugo is an Org exporter backend 
 
 Front matter give the information about the content, but NOT the information of content. It works as metadata to tell Hugo the general properties of the article. Hugo supports three types of front matter syntax: yaml, toml, json. Wheven you generate a new post/article/blog with
 
-```shell
+```
 $ hugo new site posts
 ```
 

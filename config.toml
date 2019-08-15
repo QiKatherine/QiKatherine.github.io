@@ -1,9 +1,9 @@
 baseurl = "http://sheishe.xyz"
-title = "Katherine He"
+title = "Katherine's Blog"
 theme = "hugo-theme-cleanwhite"
 languageCode = "en-us"
 # Enable comments by entering your Disqus shortname
-disqusShortname = "katherineh"
+disqusShortname = "katherine He"
 googleAnalytics = ""
 preserveTaxonomyNames = true
 paginate = 5 #frontpage pagination
