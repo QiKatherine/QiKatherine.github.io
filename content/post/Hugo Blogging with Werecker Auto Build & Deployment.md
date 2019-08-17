@@ -5,6 +5,7 @@ lastmod = 2019-08-15T01:06:40+01:00
 tags = ["Hugo", "Git"]
 categories = ["TECH"]
 draft = false
+image = "/img/111.jpeg"
 +++
 
 After finishing a blog article, one of the most frequently used process to publish on to website is: save markdown file; preview on local host 1313; generate public file and push to Github or other remote server; push source code to backup. There are two things worthy discussing in this process (1) which is the best way to host html files and source code files (2) which is the better way to automize the procedure.

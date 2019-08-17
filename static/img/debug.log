@@ -24,3 +24,5 @@
 [0815/234640:WARNING:quota_manager.cc(1833)] Create directory failed for path
 [0816/001640:WARNING:quota_manager.cc(1833)] Create directory failed for path
 [0816/004640:WARNING:quota_manager.cc(1833)] Create directory failed for path
+[0816/011640:WARNING:quota_manager.cc(1833)] Create directory failed for path
+[0816/013008:ERROR:browser_gpu_channel_host_factory.cc(119)] Failed to launch GPU process.

@@ -3,6 +3,7 @@ title = "Best workaround to use Emacs in MS Windows"
 date = 2019-08-16T01:03:00+01:00
 lastmod = 2019-08-16T01:03:32+01:00
 draft = false
+image = "/img/111.jpeg"
 +++
 
 因我我还是想建立自己的memo card系统，用了org-mode和ox-reveal把代码高亮，导出到ppt等一些问题解决了，做出了纸质的支持代码高亮的卡牌。
