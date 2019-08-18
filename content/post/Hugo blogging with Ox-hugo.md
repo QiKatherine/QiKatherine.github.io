@@ -1,25 +1,35 @@
 +++
-title = "Hugo blogging with Ox-hugo"
+title = "Hugo blogging with Ox-hugo | 用ox-hugo在Emacs中搭建网站流"
 publishDate = 2019-07-08T00:00:00+01:00
-lastmod = 2019-08-17T23:56:00+01:00
+lastmod = 2019-08-18T23:10:30+01:00
 tags = ["Hugo", "Ox-hugo"]
 categories = ["TECH"]
 draft = false
-image = "/img/111.jpeg"
 +++
 
-There has been many good articles talking about using ox-hugo to aid efficient blog writting in Emacs/Spacemacs. I read these artiles carefully for several times and feel pretty confident using this tool, so I would strongly recommend you give them a look:
+There have been many good articles talking about using ox-hugo to aid efficient blog writing in Emacs/Spacemacs. I read these articles carefully several times and feel pretty confident using this tool, so I would strongly recommend you give them a look:
 
-我放弃Hexo，安装Hugo的最初目的还是想用它配合Emacs-org-mode来写博客记笔记。灵感来自[子龙山人](https://zilongshanren.com/post/move-from-hexo-to-hugo/)和[贤民](https://www.xianmin.org/post/ox-hugo/)两位老师的博客，具体的安装和使用心得二位已经讲的比较详细，仔细读完会受益良多。本着不再重复造轮子的原则，我这篇文章想简单写写我学习到的几点我觉得有用的东西：Hugo原生的结构设计；Hugo与ox-hugo的对接原理；在Emacs/Spacemacs使用ox-hugo帮助我们在org-mode以极高的效率写博客并发表。
+![](/img/Hugo blogging with Ox-hugo 8.png)
+This is true for many cases, but no, not for Hugo and ox-hugo. They are amazing official documentation! (Mr.Kaushal I know you occasionally search ox-hugo related articles in all different languages. If you happen to read this, thank you!)
 
-在阅读本文之前，强烈推荐阅读三部分内容
+-   [ox-hugo official documentation](https://ox-hugo.scripter.co/) is very well written.
 
-Hugo本身其实支持直接把.org文件渲染成html发布，但是许多人提到其实支持得不是很好。Hugo支持最好的markdown语法类型是blackfriday markdown。所以我们使用后端插件ox-hugo，它提供一种方法解决用 orgmode 写博文的问题：把org文件转成blackfriday markdown --- then use hugo server to generate html.
+-[ USING ORG MODE AND OX-HUGO TO REPLACE MARKDOWN IN HUGO WORKFLOW](https://gtpedrosa.github.io/blog/using-org-mode-and-ox-hugo-to-replace-markdown-in-hugo-workflow/) and the three other articles mentioned are very helpful to me too.
+
+-[ Ken's ox-hugo tutorial](https://www.kengrimes.com/ox-hugo-tutorial/) is the source of some of my sections mentioned below, which you can see the snapshots are directly from Ken's blog. I re-edit it to help understand the logic of the section tree.
+
+Most content comes from the Hugo official documentation along with these articles. I noticed that there had been quite a few Chinese articles talking about Hugo and ox-hugo, so I am writing this in Chinese.
+
+我放弃Hexo，安装Hugo的最初目的还是想用它配合Emacs-org-mode来写博客记笔记。灵感来自[子龙山人](https://zilongshanren.com/post/move-from-hexo-to-hugo/)和[贤民](https://www.xianmin.org/post/ox-hugo/)两位老师的博客，具体的安装和使用心得二位已经介绍的非常详细，仔细读完会受益良多。本着不再重复造轮子的原则，这篇文章我想简单写写学习中遇到到有用的东西：Hugo原生的结构设计；Hugo与ox-hugo的对接原理；在Emacs/Spacemacs使用ox-hugo帮助我们在org-mode以极高的效率写博客并发表。
+
+在阅读本文之前，强烈推荐阅读开头推荐的三部分内容。本篇博客主要就是整理了加工了一些来自Hugo官网，和以上三篇文章的内容，并配以更直观的图片帮助理解。
+
+Hugo本身其实支持直接把.org文件渲染成html发布，但是许多人提到其实支持得不是很好。Hugo支持最好的markdown语法类型是blackfriday markdown。所以Emacs user可以使用这款非常棒的后端插件ox-hugo。它提供一种方法解决用 orgmode 写博文的问题：把org文件转成blackfriday markdown --- then use hugo server to generate html.
 
 首先我们详细看ox-hugo官网对其功能的解说：
 According to the information documentation, ox-hugo is an Org exporter backend that exports Org to Hugo-compatible Markdown (Blackfriday) and also generates the front matter (in TOML or YAML format).
 
-简言之，我们主要使用ox-hugo做两件事（1）把org格式内容转换成markdown格式内容；（2）解析org file中的用org语法写front-matter，生成hugo语法的front-matter，进而使得生成的html能够正确被展示。那么front-matter具体指什么呢？
+简言之，我们主要使用ox-hugo做两件事（1）把org格式内容转换成markdown格式内容；（2）解析org file中的用org语法写front-matter，生成Hugo语法的front-matter，进而使得生成的html能够正确被展示。那么front-matter具体指什么呢？
 
 
 ## Front matter {#front-matter}
@@ -152,5 +162,3 @@ In normal Hugo, individual pages written in markdown (or now in org-mode) are pl
 
  在源码的三篇文章里分类update和reviews被提到两次，标签fear和herpes也被提到两次。从生成的html来看，
 index.md刚好与之对应：分类的index page 提供了所有需要的分类（i.e. tags, categories）每个分类下还有list page显示所有与之相关的页面内容。导航就是这样实现建立的，使得我们能“实现不同分类间的交叉引用，点击任何一个入口进入文章”。
-
-this is a test, idont know
