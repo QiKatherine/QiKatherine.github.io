@@ -4,7 +4,7 @@ theme = "hugo-theme-cleanwhite"
 languageCode = "en-us"
 # Enable comments by entering your Disqus shortname
 disqusShortname = "katherine He"
-googleAnalytics = ""
+googleAnalytics = "UA-145919675-1"
 preserveTaxonomyNames = true
 paginate = 5 #frontpage pagination
 hasCJKLanguage = true
@@ -14,7 +14,7 @@ hasCJKLanguage = true
 home = ["HTML", "RSS", "Algolia"]
 
 [params]
-  header_image = "img/vivi.jpg"
+  header_image = "img/111.jpg"
   SEOTitle = "Katherine He Blog|何琪的博客"
   description = "Katherine He coder statistician econometrician machine learning"
   keyword = " "
@@ -24,7 +24,7 @@ home = ["HTML", "RSS", "Algolia"]
   title_404 = "Http:404 Not found :("
 
   # leancloud storage for page view counter
-  page_view_conter = false 
+  page_view_conter = true 
   leancloud_app_id = ""
   leancloud_app_key = ""
 
@@ -35,7 +35,7 @@ home = ["HTML", "RSS", "Algolia"]
   algolia_apiKey = ""
 
   # Sidebar settings
-  sidebar_about_description = "Academic coder, Open Source Enthusiast and Life Adventurer"
+  sidebar_about_description = "Data scientist, Academic coder, Open Source Enthusiast and Life Adventurer"
   #sidebar_avatar     # use absolute URL, seeing it's used in both `/` and `/about/`
   sidebar_avatar = "img/avatar.jpg"      # use absolute URL, seeing it's used in both `/` and `/about/`
 

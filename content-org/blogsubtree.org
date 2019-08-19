@@ -17,9 +17,9 @@ This is true for many cases, but no, not for Hugo or ox-hugo. They are amazing o
 
 • [[https://ox-hugo.scripter.co/][ox-hugo official documentation]] is very well written.
 
-• [[ https://gtpedrosa.github.io/blog/using-org-mode-and-ox-hugo-to-replace-markdown-in-hugo-workflow][USING ORG MODE AND OX-HUGO TO REPLACE MARKDOWN IN HUGO WORKFLOW]] and the three other articles mentioned are very helpful to me too.
+• [[https://gtpedrosa.github.io/blog/using-org-mode-and-ox-hugo-to-replace-markdown-in-hugo-workflow][USING ORG MODE AND OX-HUGO TO REPLACE MARKDOWN IN HUGO WORKFLOW]] and the three other articles mentioned are very helpful to me too.
 
-• [[https://www.kengrimes.com/ox-hugo-tutorial/][ Ken's ox-hugo tutorial]] is the source of some of my sections mentioned below, which you can see the snapshots are directly from Ken's blog. I re-edit it to help understand the logic of the section tree. 
+• [[https://www.kengrimes.com/ox-hugo-tutorial/][Ken's ox-hugo tutorial]] is the source of some of my sections mentioned below, which you can see the snapshots are directly from Ken's blog. I re-edit it to help understand the logic of the section tree. 
  
 Most content comes from the Hugo official documentation along with these articles. I noticed that there had been quite a few Chinese articles talking about Hugo and ox-hugo, so I am writing this in Chinese.
 
@@ -35,7 +35,7 @@ According to the information documentation, ox-hugo is an Org exporter backend 
 	
 简言之，我们主要使用ox-hugo做两件事（1）把org格式内容转换成markdown格式内容；（2）解析org file中的用org语法写front-matter，生成Hugo语法的front-matter，进而使得生成的html能够正确被展示。那么front-matter具体指什么呢？
 
-*** Front matter 页首信息
+*** 1. Front matter 页首信息
 Front matter give the information about the content, but NOT the information of content. It works as metadata to tell Hugo the general properties of the article. Hugo supports three types of front matter syntax: yaml, toml, json. Wheven you generate a new post/article/blog with
 #+begin_src 
 $ hugo new site posts 
@@ -74,7 +74,7 @@ Hugo will automatically add front matter information at the top of the article l
 	
 ox-hugo一般要求至少要有:EXPORT_FILE_NAME:，我们需要通过这个命令告诉ox-hugo"有新的标题和内容需要去export"。
 
-*** Don't get confused 易混淆的概念
+*** 2. Don't get confused 易混淆的概念
 接下来这个问题可能对多大多数前端coder和Emacs熟练手都不是问题，但是这两个段头部代码被我着实混淆了一阵：
 	Heading information指的是以以下语法结构为框架的代码#+hugo_base_dir:主管ox-hugo导出页面相关设置，例如谁是一级页面，二级页面，导出地址，导出栏目。
 	
@@ -82,7 +82,7 @@ ox-hugo一般要求至少要有:EXPORT_FILE_NAME:，我们需要通过这个命�
 	
 	Heading information (#+hugo_base_dir)的概念局限于ox-hugo里；而front-matter在markdown，网页config file等其它文件里都有。只是:PROPERTIES:这种表达形式是org式写法。换做org支持的另一种projectile导出html的front matter可能是这样:base-directory "~/Dropbox/org/blog/"
 
-*** Content type
+*** 3. Content type
 	Content type 就是一系列不同的表达式样（layout），根据我们指定的不同的section type有不同表达式样法则，这里暂且把section翻译成一个网站下的不同栏目，例如blog，photo，quote，post，about，tages或者其它你想自定义的栏目。Hugo通过front-matter支持这些不尽相同的content type。
 	
 	Hugo 认为每个栏目最好只做同一件事情，例如照片专栏只发发照片，post专栏集中发文章。所以除非我们自定义，hugo指定每个栏目的子单元都会自动继承一些此专栏pre-defined的特性，这样能最大限度的重复使用一个定义好的栏目，同时尽量减小‘config每个栏目’工作。
@@ -90,7 +90,7 @@ ox-hugo一般要求至少要有:EXPORT_FILE_NAME:，我们需要通过这个命�
 	设定content type: 只需在源文件的头部引用hugo提供的heading information/metadata information（即front matter）即可，能迅速方便的修改一两个页面的layout。如果不能满足需求，可用hugo提供的自定义设置archetypes，按照hugo指定的结构组合方式，编写正确的_index.md文件拼接好一个网站的layout即可。
 	
 	如果你没有指定表达式样，比如暂时不太在乎如何展示photo这个栏目，Hugo有这么一个default设定：在front matter大部分信息缺乏的时候，通过每个文章存储path或者所在section猜出给这篇文章赋予什么layout。这会让我们在迅速上手写作blog的时候非常省心。
-*** Page boundles
+*** 4. Page boundles
 	Hugo 0.32以上的版本，使用page boundles的模式来管理网页源和图，从父子结构分类的角度看，有两种：leaf类页面和branch类页面。branch类页面允许在其内部嵌套更深层次的页面，而leaf规定其不能再有子页面。
 	
 	任何一个叫index的页面文件都是leaf型，叫_index的页面文件都是branch型。所以可见org文件里index的文件都会被输出成单页，没有子文件夹。最常见的index页面是下文会提到的分类里面的categories和tags index pages，它们都是单页，除此之外多数时候我们会使用branch型。如图:
@@ -98,7 +98,7 @@ ox-hugo一般要求至少要有:EXPORT_FILE_NAME:，我们需要通过这个命�
 ]]
 	Content文件夹在这里是home page, 他的主要功能是hosting“决定网站layout设定”的信息（在这里就是定义了branch型页面类型的_index.md），所以hugo规定home page至多只能包含图片，而不能包含其它的content pages，只承担layout设定而不为article source提供场所。注意content里面的内容结构安排，应当和你想要渲染的网站结构一致。
 
-*** Section and nested section
+*** 5. Section and nested section
 	Section是一组页面的集合称呼，一般被放在content文件夹下面，就是上文提到的‘内容结构组织’的组成单元。从default设定来讲，content下面的每个一级文件夹自成一个root section。同时上面也提到section可以嵌套，即在一级文件夹下方再建二级section文件，构成一个更深层的section。
 	
 	那么问题来了，hugo是如何知道nested section呢? 答案是：通过文件夹里要有_index.md文件指定结构的设定。依此原理可以构建三级四级更深的section目录。 为了确保每一级网页都能被导览正确的链接到，每个最底层的文件夹里都要至少包含一个有内容文件，例如_index.md.
@@ -113,7 +113,7 @@ content
         └── _index.md
 #+end_src
 
-*** Head information
+*** 6. Head information
 ox-hugo对org文件存放位置并没有特定要求，但是其头部的#+hugo_base_dir: 必须要被清晰的定义，因为这个地址告诉ox-hugo你的root directory在哪里，ox-hugo就会在这个地址下的content里面生成转化的md文件。很多用户自定义#+hugo_base_dir: ..即是本org文件所在的parent path.也有人定义#+hugo_base_dir: .代表path与现在的org文件同文件夹，如果root directory是跟现在org文件同文件夹，c-c c-c H A转化的结果就是这样：
 [[D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 2.png]]
 
@@ -123,7 +123,7 @@ ox-hugo对org文件存放位置并没有特定要求，但是其头部的#+hugo_
 	在c-c c-c H A 后都会产生如下形式，只不过(2)中hugotest.org在content-org里面
 [[D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 3.png]]
 
-*** Heading management
+*** 7. Heading management
 The official documentation as well as the attached youtube tutorials have provided great explaintation of how hugo translate metadata of _index.md files to the headings of html with Hugo heading management system.
 	
 建立一个有一篇文章的post
@@ -132,36 +132,37 @@ The official documentation as well as the attached youtube tutorials have provid
 继续新增一个有两篇文章的fishsticks
 [[D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 5.png]]
 
-*** Tree and subtree writing
+*** 8. Tree and subtree writing
 	In normal Hugo, individual pages written in markdown (or now in org-mode) are placed inside the content directory inside the project root. With ox-hugo, a single org-mode file can be used to generate all pages, posts, and any other content. This has some advantages in allowing usage of org-mode functionality, as well as re-use of content or property settings across pages.
 
 [[D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 6.png]]
 
-*** Taxonomies 分类型页面
+*** 9. Taxonomies 分类型页面
 	• 这段是index管理page boundle的良好功能的又一个展现:通过 taxonomy index pages 就能建立一系列分类页面,例如tags and category,为分类页面单独建立管理page使拥有这些属性的文章被自右交叉引用,用户可以通过点击任何一个tag或者categories就能达到文章页面。在org写作里通过在headings添加实现，org到md转化由ox-hugo完成，语法差别很细微。如下图，还是上文的源码，只是为文章添加了两种categories，两种tag:
 [[D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 7.png]]
 
  在源码的三篇文章里分类update和reviews被提到两次，标签fear和herpes也被提到两次。从生成的html来看，
 index.md刚好与之对应：分类的index page 提供了所有需要的分类（i.e. tags, categories）每个分类下还有list page显示所有与之相关的页面内容。导航就是这样实现建立的，使得我们能“实现不同分类间的交叉引用，点击任何一个入口进入文章”。
 
-** DONE Hugo Blogging with Werecker Auto Build & Deployment :@TECH:Hugo:Git:  
+** DONE Hugo Blogging with Wercker Auto Build & Deployment :@TECH:Hugo:Git:Wercker:  
    CLOSED: [2019-07-26 Fri 01:02]
    :PROPERTIES:
-   :EXPORT_FILE_NAME: Hugo Blogging with Werecker Auto Build & Deployment
+   :EXPORT_FILE_NAME: Hugo Blogging with Wercker Auto Build & Deployment
    :END:
 
+The automated static website generators (like Octopress, Hexo and Hugo) have made website maintaining way more relaxed than before. The workflow has been simplified to: write and save markdown -- preview on the localhost 1313 -- generate the ~/public (HTML) file -- push to a remote server (Github) -- backup source code. 
 
-After finishing a blog article, one of the most frequently used process to publish on to website is: save markdown file; preview on local host 1313; generate public file and push to Github or other remote server; push source code to backup. There are two things worthy discussing in this process (1) which is the best way to host html files and source code files (2) which is the better way to automize the procedure.
+If one considers all technicalities, there are still many questions worth discussing to make this process more efficient, such as (1) which is the best way to host HTML files and source code files (2) which is the better way to automize the procedure.
 
-Hugo requires only a binary file to generate website, with which the update cannot be easier: you just download new .exe file and replace the old one. Still if you are using a similar framework like Hugo or Hexo, keeping tracking source code, forked/cloned theme repo/ html all together can still be a major pain. 
+I used to use Hexo where three things need to be tracked separately:  source code and ~/public file (both updated for every article), forked/cloned theme (updated according to theme author) and Hexo generator. I have to use git submodules to track everything. Soon, the hustle and page generation speed make me convert to Hugo. Hugo requires only a binary file to generate a website, with which the update cannot be more straightforward: you download a new .exe file and replace the old one. The updated theme can be manually merged as long as the site config.toml file is well preserved. 
 
-Regarding the first issue, Hugo official website along with github documentation has given two way to publish public file. The first way is using Master branch of user.github.io to host /doc (instead of public) folder, which is the easiest one to me. The second way is using gh-pages and the advantage of this method is that allows you to have another branch hosting source code in the same repo. I fail to generate /doc file somehow but it give me a chance to try werecker which surprisingly allows me to achieve the first method with the same advantages of the second method. Long story short, I am now using the Master branch of user.github.io to host public file and dev branch to host source file.
+Let's go back to the first issue. The Hugo official manual has given two way to publish ~/public file: (1) using Master branch of user.github.io to host /doc (instead of public) folder, which is the easiest one to me; (2) using gh-pages and the advantage of this method is that allows you to have another branch hosting source code in the same repo. I fail to generate /doc file somehow, but it gives me a chance to try Wercker, which surprisingly allows me to achieve the first method with the same advantages of the second method. Long story short, now I am using the Master branch of user.github.io to host ~/public file and dev branch to host source file.
 
-The logic of automated werecker is that you write an article in markdown, add and commit the changes in git, then push the whole blog file source code to remote repo (dev branch in my case). Compared with the process mentioned above, you do NOT need to generate and deploy by yourself any more. Werecker will track your source code on github.io and do that for you. So the key thing is to put the script (werecker.yml) in root file and it tells werecker spercifically how to build and deploy. 
+My answer to the second issue is using Wercker. It will automatically go to your source code repo and build the ~/public folder and deploy the website. So the process mentioned at the beginning of this article becomes even easier: write and save an article in markdown -- push the whole source code to the remote repo. This means you do NOT need to generate and deploy in the local terminal any more. Wercker does the work every time it detects a new push on the designated repo on the remote server. The script  wercker.yml (generated and pushed by you) will tell Wercker precisely how and where to build and deploy. There're also other popular continuous integration tools such as Travis CI, Jenkins which has advantages at different aspects such as free usage, commercial stability, running speed and etc. I choose to use wercker based on my needs.
 
-The reason of this artile is that the detailed werecker instruction [[https://gohugo.io/hosting-and-deployment/deployment-with-wercker/]] given by Hugo is an old version. The werecker has changed quite a lot and I spend a while to figure out how to use it. You do not need to search and choose boxes or steps to build and deploy. They can be done in workflow section [[D:/Hugo/myblog/static/img/Hugo blogging with werecker 1.png]] 
+The Hugo instruction [[https://gohugo.io/hosting-and-deployment/deployment-with-wercker/]] is very detailed and well written, and you should be quite clear before the 'Configure Access' section. The Wercker has changed quite a bit in the generating wercker.yml part. You do NOT HAVE to search and choose boxes or steps to build and deploy. The default script contains the box information, and it can be modified unless you don't like it. The build and deploy part are generated separately in the workflow section (press ctrl and + to see the bigger picture) [[D:/Hugo/myblog/static/img/Hugo blogging with werecker 1.png]] 
 
-and my sript is shown here:
+Here is my wercker.yml:
 
 #+begin_src yml
 # This references a standard debian container from the
@@ -203,21 +204,44 @@ deploy:
             basedir: public
 #+end_src
 
-Notice the name 'build' and 'deploy' in the workflow above need to be the same with the name in steps in the werecker.yml file.
-** DONE Best workaround to use Emacs in MS Windows
+Notice the name 'build' and 'deploy' in the workflow above need to be the same with the name in steps in the wercker.yml file.
+
+You can also add a local deploy.sh to make source code push easier too:
+
+#+begin_src 
+#!/bin/bash
+cd ~/Hugo/myblog/
+
+# Add changes to git.
+git add .
+
+# Commit changes.
+msg="rebuilding site `date`"
+if [ $# -eq 1 ]
+  then msg="$1"
+fi
+git commit -m "$msg"
+
+# Push source and build repos.
+git push origin -u dev
+
+#+end_src
+
+Happy hacking! :)
+
+** DONE Best workaround to use Emacs in MS Windows :@TECH:Emasc:Spacemacs:msys2:
    CLOSED: [2019-08-16 Fri 01:03]
    :PROPERTIES:
-   :EXPORT_FILE_NAME: best-workaround-to-use-emacs-in-ms-windows
+   :EXPORT_FILE_NAME: Best workaround to use Emacs in MS Windows
+   :DESCRIPTION: Compiling Emacs with msys2 environment.
    :END:
    :LOGBOOK:
    - State "DONE"       from "TODO"       [2019-08-16 Fri 01:03]
    :END:
  
-因我我还是想建立自己的memo card系统，用了org-mode和ox-reveal把代码高亮，导出到ppt等一些问题解决了，做出了纸质的支持代码高亮的卡牌。
+因为工作的原因不得不使用Emacs for Windows，数次发现里面还有很作操作严重依赖*Unix system, 再尝试过cygwin, mingw64后做了一些功课，发现最好还是整合到msys2里面使用，据说msys2目前是提供最多类Unix开发工具的环境。
 
-但是我又发现有一个开源的anki可以和org接起来，做成电子版，在手机上直接使用，所以我下载安装了anki, 学会使用，然后在emacs里安装anki-editor. 结果他依赖curl，装在cywin里面但是emacs并没有使用cywin里的，终于安装了mysy2，把所有的东西都放在一个类unix系统里。
-
-按照官网直接下载，安装，配置参考以下链接
+按照msys2官网直接下载，安装，配置参考以下链接
 https://zhuanlan.zhihu.com/p/33751738
 https://zhuanlan.zhihu.com/p/33789023
 
@@ -226,16 +250,15 @@ MSYS2是MS-Windows下编译自由/开源软件的一个环境，衍生自Cygwin�
 
 在msys2里面安装最简单的是使用pacman -S Emacs，安装完的版本在c:/msys2/usr/bin里，dotfile在c:/msys2/home/user/.emacs.d下方，我试图运行内置function，正常，但是使用dotfile加载同样的function总显示加载错误。
 
-而且chris老师提到Windows下使用emacs最好的方式还是用自己编译的Emacs，所以我也选择这么做。自编译Emacs要安装一系列libraries，然后从原代码
-git.sv.gnu.org/emacs.git从这里clone所有的东西下来，按下列文章一步一步编译
+而且chris老师提到Windows下使用emacs最好的方式还是用自己编译的Emacs，所以我也选择这么做。自编译Emacs要安装一系列libraries，然后从原代码git.sv.gnu.org/emacs.git从这里clone所有的东西下来，按下列文章一步一步编译
 https://emacs-china.org/t/topic/3276/13
 https://chriszheng.science/2015/03/19/Chinese-version-of-Emacs-building-guideline/
 http://git.savannah.gnu.org/cgit/emacs.git/tree/nt/INSTALL.W64
 
-有一点不得不提，Gti自动改换行符的功能(autocrlf)很讨厌，下面的命令关掉它：
+这个安装包都是为了在msys2中编译Emacs而写，所以安装途中不需要由什么特别改动的地方，注意一步一步执行代码就好。还有一点不得不提，Gti自动改换行符的功能(autocrlf)很讨厌，下面的命令关掉它：
 $ git config core.autocrlf false
-很多人猜测这个也是造成spacemacs版本的font-lock+ error的原因，但是新版的git已经默认是关闭了。
+很多人猜测这个也是造成spacemacs版本的font-lock+ error的原因，但是新版的git已经默认这项是关闭了。如果有需要，可以安装完后再把值改回true，一直默认关闭会导致有些git操作持续return warning.
 
-安装时需要一些依赖库，如果你的系统里面MSYS2已经被添加到PATH环境变量里(例如PATH里包含了C:\msys2\mingw64\bin)，就不用从mingwin64/bin里面复制必用的libraries去c:/emacs1/bin了。
+安装时需要一些依赖库，如果你的系统里面MSYS2已经被添加到PATH环境变量里(例如PATH里包含了C:\msys2\mingw64\bin)，就不用从mingwin64/bin里面复制必用的libraries去c:/emacs1/bin了，所以直接在PATH里添加环境会比较方便。
 
-跟以前使用的Emacs for MS Win64一样，配置文件还是默认在c:/。。。roaming/.emacs.d种，但是运行速度新装的Emacs真的快很多。即便是在Windows中使用Emacs，也能发现有很多重度依赖类Unix的地方，虽然已经有WSL或者其它VM的解决方案，但是msys2仍然是一个在win环境中使用类unix系统给不错途径，希望未来能研究编译过的emacs在msys2提供的类unix系统里是否和其他libraries有更好的互动。
+跟以前使用的Emacs for MS Win64一样，配置文件还是默认在C:/Users/AppData/Roaming/.emacs.d中。但是我感觉从运行速度来讲，msys2 compiled Emacs比Emacs for Win64快很多。即便是在Windows中使用Emacs，也能发现有很多重度依赖类Unix的地方，虽然已经有WSL或者其它VM的解决方案，但是msys2仍然是一个在win环境中使用类unix系统给不错途径，希望未来能研究编译过的emacs在msys2提供的类unix系统里是否和其他libraries有更好的互动。

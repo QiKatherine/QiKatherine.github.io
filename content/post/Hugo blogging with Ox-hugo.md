@@ -1,7 +1,7 @@
 +++
 title = "Hugo blogging with Ox-hugo | 用ox-hugo在Emacs中搭建网站流"
 publishDate = 2019-07-08T00:00:00+01:00
-lastmod = 2019-08-18T23:10:30+01:00
+lastmod = 2019-08-19T22:42:28+01:00
 tags = ["Hugo", "Ox-hugo"]
 categories = ["TECH"]
 draft = false
@@ -10,13 +10,13 @@ draft = false
 There have been many good articles talking about using ox-hugo to aid efficient blog writing in Emacs/Spacemacs. I read these articles carefully several times and feel pretty confident using this tool, so I would strongly recommend you give them a look:
 
 ![](/img/Hugo blogging with Ox-hugo 8.png)
-This is true for many cases, but no, not for Hugo and ox-hugo. They are amazing official documentation! (Mr.Kaushal I know you occasionally search ox-hugo related articles in all different languages. If you happen to read this, thank you!)
+This is true for many cases, but no, not for Hugo or ox-hugo. They are amazing official documentation! (Mr.Kaushal I know you occasionally search ox-hugo related articles in all different languages. If you happen to read this, thank you!)
 
--   [ox-hugo official documentation](https://ox-hugo.scripter.co/) is very well written.
+• [ox-hugo official documentation](https://ox-hugo.scripter.co/) is very well written.
 
--[ USING ORG MODE AND OX-HUGO TO REPLACE MARKDOWN IN HUGO WORKFLOW](https://gtpedrosa.github.io/blog/using-org-mode-and-ox-hugo-to-replace-markdown-in-hugo-workflow/) and the three other articles mentioned are very helpful to me too.
+• [USING ORG MODE AND OX-HUGO TO REPLACE MARKDOWN IN HUGO WORKFLOW](https://gtpedrosa.github.io/blog/using-org-mode-and-ox-hugo-to-replace-markdown-in-hugo-workflow) and the three other articles mentioned are very helpful to me too.
 
--[ Ken's ox-hugo tutorial](https://www.kengrimes.com/ox-hugo-tutorial/) is the source of some of my sections mentioned below, which you can see the snapshots are directly from Ken's blog. I re-edit it to help understand the logic of the section tree.
+• [Ken's ox-hugo tutorial](https://www.kengrimes.com/ox-hugo-tutorial/) is the source of some of my sections mentioned below, which you can see the snapshots are directly from Ken's blog. I re-edit it to help understand the logic of the section tree.
 
 Most content comes from the Hugo official documentation along with these articles. I noticed that there had been quite a few Chinese articles talking about Hugo and ox-hugo, so I am writing this in Chinese.
 
@@ -24,15 +24,16 @@ Most content comes from the Hugo official documentation along with these article
 
 在阅读本文之前，强烈推荐阅读开头推荐的三部分内容。本篇博客主要就是整理了加工了一些来自Hugo官网，和以上三篇文章的内容，并配以更直观的图片帮助理解。
 
-Hugo本身其实支持直接把.org文件渲染成html发布，但是许多人提到其实支持得不是很好。Hugo支持最好的markdown语法类型是blackfriday markdown。所以Emacs user可以使用这款非常棒的后端插件ox-hugo。它提供一种方法解决用 orgmode 写博文的问题：把org文件转成blackfriday markdown --- then use hugo server to generate html.
+Hugo本身其实支持直接把.org文件渲染成html发布，但是许多人提到其实支持得不是很好。Hugo支持最好的markdown语法类型是blackfriday markdown。所以Emacs user可以使用这款非常棒的后端插件ox-hugo。它提供一种方法解决用 orgmode 写博文的问题：把org文件转成blackfriday markdownd, 然后再生成html文件。首先我们详细看ox-hugo官网对其功能的解说：
 
-首先我们详细看ox-hugo官网对其功能的解说：
+```text
 According to the information documentation, ox-hugo is an Org exporter backend that exports Org to Hugo-compatible Markdown (Blackfriday) and also generates the front matter (in TOML or YAML format).
+```
 
 简言之，我们主要使用ox-hugo做两件事（1）把org格式内容转换成markdown格式内容；（2）解析org file中的用org语法写front-matter，生成Hugo语法的front-matter，进而使得生成的html能够正确被展示。那么front-matter具体指什么呢？
 
 
-## Front matter {#front-matter}
+## 1. Front matter 页首信息 {#1-dot-front-matter-页首信息}
 
 Front matter give the information about the content, but NOT the information of content. It works as metadata to tell Hugo the general properties of the article. Hugo supports three types of front matter syntax: yaml, toml, json. Wheven you generate a new post/article/blog with
 
@@ -77,7 +78,7 @@ draft= true
 ox-hugo一般要求至少要有:EXPORT\_FILE\_NAME:，我们需要通过这个命令告诉ox-hugo"有新的标题和内容需要去export"。
 
 
-## Don't get confused {#don-t-get-confused}
+## 2. Don't get confused 易混淆的概念 {#2-dot-don-t-get-confused-易混淆的概念}
 
 接下来这个问题可能对多大多数前端coder和Emacs熟练手都不是问题，但是这两个段头部代码被我着实混淆了一阵：
 	Heading information指的是以以下语法结构为框架的代码#+hugo\_base\_dir:主管ox-hugo导出页面相关设置，例如谁是一级页面，二级页面，导出地址，导出栏目。
@@ -87,7 +88,7 @@ Front matter指的是以以下语法结构为框架的代码:PROPERTIES:主管�
 Heading information (#+hugo\_base\_dir)的概念局限于ox-hugo里；而front-matter在markdown，网页config file等其它文件里都有。只是:PROPERTIES:这种表达形式是org式写法。换做org支持的另一种projectile导出html的front matter可能是这样:base-directory "~/Dropbox/org/blog/"
 
 
-## Content type {#content-type}
+## 3. Content type {#3-dot-content-type}
 
 Content type 就是一系列不同的表达式样（layout），根据我们指定的不同的section type有不同表达式样法则，这里暂且把section翻译成一个网站下的不同栏目，例如blog，photo，quote，post，about，tages或者其它你想自定义的栏目。Hugo通过front-matter支持这些不尽相同的content type。
 
@@ -98,7 +99,7 @@ Hugo 认为每个栏目最好只做同一件事情，例如照片专栏只发发
 如果你没有指定表达式样，比如暂时不太在乎如何展示photo这个栏目，Hugo有这么一个default设定：在front matter大部分信息缺乏的时候，通过每个文章存储path或者所在section猜出给这篇文章赋予什么layout。这会让我们在迅速上手写作blog的时候非常省心。
 
 
-## Page boundles {#page-boundles}
+## 4. Page boundles {#4-dot-page-boundles}
 
 Hugo 0.32以上的版本，使用page boundles的模式来管理网页源和图，从父子结构分类的角度看，有两种：leaf类页面和branch类页面。branch类页面允许在其内部嵌套更深层次的页面，而leaf规定其不能再有子页面。
 
@@ -107,7 +108,7 @@ Hugo 0.32以上的版本，使用page boundles的模式来管理网页源和图�
 Content文件夹在这里是home page, 他的主要功能是hosting“决定网站layout设定”的信息（在这里就是定义了branch型页面类型的\_index.md），所以hugo规定home page至多只能包含图片，而不能包含其它的content pages，只承担layout设定而不为article source提供场所。注意content里面的内容结构安排，应当和你想要渲染的网站结构一致。
 
 
-## Section and nested section {#section-and-nested-section}
+## 5. Section and nested section {#5-dot-section-and-nested-section}
 
 Section是一组页面的集合称呼，一般被放在content文件夹下面，就是上文提到的‘内容结构组织’的组成单元。从default设定来讲，content下面的每个一级文件夹自成一个root section。同时上面也提到section可以嵌套，即在一级文件夹下方再建二级section文件，构成一个更深层的section。
 
@@ -125,7 +126,7 @@ content
 ```
 
 
-## Head information {#head-information}
+## 6. Head information {#6-dot-head-information}
 
 ox-hugo对org文件存放位置并没有特定要求，但是其头部的#+hugo\_base\_dir: 必须要被清晰的定义，因为这个地址告诉ox-hugo你的root directory在哪里，ox-hugo就会在这个地址下的content里面生成转化的md文件。很多用户自定义#+hugo\_base\_dir: ..即是本org文件所在的parent path.也有人定义#+hugo\_base\_dir: .代表path与现在的org文件同文件夹，如果root directory是跟现在org文件同文件夹，c-c c-c H A转化的结果就是这样：
 ![](/img/Hugo blogging with Ox-hugo 2.png)
@@ -137,7 +138,7 @@ ox-hugo对org文件存放位置并没有特定要求，但是其头部的#+hugo\
 ![](/img/Hugo blogging with Ox-hugo 3.png)
 
 
-## Heading management {#heading-management}
+## 7. Heading management {#7-dot-heading-management}
 
 The official documentation as well as the attached youtube tutorials have provided great explaintation of how hugo translate metadata of \_index.md files to the headings of html with Hugo heading management system.
 
@@ -148,14 +149,14 @@ The official documentation as well as the attached youtube tutorials have provid
 ![](/img/Hugo blogging with Ox-hugo 5.png)
 
 
-## Tree and subtree writing {#tree-and-subtree-writing}
+## 8. Tree and subtree writing {#8-dot-tree-and-subtree-writing}
 
 In normal Hugo, individual pages written in markdown (or now in org-mode) are placed inside the content directory inside the project root. With ox-hugo, a single org-mode file can be used to generate all pages, posts, and any other content. This has some advantages in allowing usage of org-mode functionality, as well as re-use of content or property settings across pages.
 
 {{< figure src="/img/Hugo blogging with Ox-hugo 6.png" >}}
 
 
-## Taxonomies 分类型页面 {#taxonomies-分类型页面}
+## 9. Taxonomies 分类型页面 {#9-dot-taxonomies-分类型页面}
 
 • 这段是index管理page boundle的良好功能的又一个展现:通过 taxonomy index pages 就能建立一系列分类页面,例如tags and category,为分类页面单独建立管理page使拥有这些属性的文章被自右交叉引用,用户可以通过点击任何一个tag或者categories就能达到文章页面。在org写作里通过在headings添加实现，org到md转化由ox-hugo完成，语法差别很细微。如下图，还是上文的源码，只是为文章添加了两种categories，两种tag:
 ![](/img/Hugo blogging with Ox-hugo 7.png)
