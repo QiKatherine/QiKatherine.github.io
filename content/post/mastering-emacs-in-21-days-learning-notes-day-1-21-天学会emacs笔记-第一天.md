@@ -1,9 +1,10 @@
 +++
 title = "Mastering emacs in 21 days learning notes - day 1 | 21 天学会Emacs笔记 - 第一天"
-lastmod = 2019-08-25T23:43:34+01:00
+date = 2019-08-25T23:51:00+01:00
+lastmod = 2019-08-25T23:51:13+01:00
 tags = ["Emacs"]
 categories = ["TECH"]
-draft = true
+draft = false
 +++
 
 This article is part of my learning notes of Mastering Emacs in 21 Day, which is a series of Chinese based tutorials post by [zilongshanren (子龙山人) - https://github.com/](https://github.com/zilongshanren) The official learning note is at here: [Master Emacs in 21 Days - http://book.emacs-china.org/](http://book.emacs-china.org/)  My notes extend the official notes with my personal learning experience. Since there has been ample discussion of using and learning Emacs in English community, my learning note is written in Chinese to benefit more addtional readers.
