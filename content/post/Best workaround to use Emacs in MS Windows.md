@@ -1,8 +1,8 @@
 +++
-title = "Best workaround to use Emacs in MS Windows"
+title = "Best workaround to use Emacs in MS Windows | 在MS windows中使用Emacs的最佳解决方案"
 date = 2019-08-16T01:03:00+01:00
-lastmod = 2019-08-19T22:42:28+01:00
-tags = ["Emasc", "Spacemacs", "msys2"]
+lastmod = 2019-08-26T23:52:28+01:00
+tags = ["Emasc", "msys2"]
 categories = ["TECH"]
 draft = false
 +++

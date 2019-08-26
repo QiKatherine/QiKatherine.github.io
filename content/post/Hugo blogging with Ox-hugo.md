@@ -1,7 +1,7 @@
 +++
 title = "Hugo blogging with Ox-hugo | 用ox-hugo在Emacs中搭建网站流"
 publishDate = 2019-07-08T00:00:00+01:00
-lastmod = 2019-08-19T22:42:28+01:00
+lastmod = 2019-08-26T23:52:28+01:00
 tags = ["Hugo", "Ox-hugo"]
 categories = ["TECH"]
 draft = false
@@ -26,9 +26,7 @@ Most content comes from the Hugo official documentation along with these article
 
 Hugo本身其实支持直接把.org文件渲染成html发布，但是许多人提到其实支持得不是很好。Hugo支持最好的markdown语法类型是blackfriday markdown。所以Emacs user可以使用这款非常棒的后端插件ox-hugo。它提供一种方法解决用 orgmode 写博文的问题：把org文件转成blackfriday markdownd, 然后再生成html文件。首先我们详细看ox-hugo官网对其功能的解说：
 
-```text
-According to the information documentation, ox-hugo is an Org exporter backend that exports Org to Hugo-compatible Markdown (Blackfriday) and also generates the front matter (in TOML or YAML format).
-```
+> According to the information documentation, ox-hugo is an Org exporter backend that exports Org to Hugo-compatible Markdown (Blackfriday) and also generates the front matter (in TOML or YAML format).
 
 简言之，我们主要使用ox-hugo做两件事（1）把org格式内容转换成markdown格式内容；（2）解析org file中的用org语法写front-matter，生成Hugo语法的front-matter，进而使得生成的html能够正确被展示。那么front-matter具体指什么呢？
 
@@ -158,8 +156,8 @@ In normal Hugo, individual pages written in markdown (or now in org-mode) are pl
 
 ## 9. Taxonomies 分类型页面 {#9-dot-taxonomies-分类型页面}
 
-• 这段是index管理page boundle的良好功能的又一个展现:通过 taxonomy index pages 就能建立一系列分类页面,例如tags and category,为分类页面单独建立管理page使拥有这些属性的文章被自右交叉引用,用户可以通过点击任何一个tag或者categories就能达到文章页面。在org写作里通过在headings添加实现，org到md转化由ox-hugo完成，语法差别很细微。如下图，还是上文的源码，只是为文章添加了两种categories，两种tag:
+这段是index管理page boundle的良好功能的又一个展现:通过 taxonomy index pages 就能建立一系列分类页面,例如tags and category,为分类页面单独建立管理page使拥有这些属性的文章被自右交叉引用,用户可以通过点击任何一个tag或者categories就能达到文章页面。在org写作里通过在headings添加实现，org到md转化由ox-hugo完成，语法差别很细微。如下图，还是上文的源码，只是为文章添加了两种categories，两种tag:
 ![](/img/Hugo blogging with Ox-hugo 7.png)
 
- 在源码的三篇文章里分类update和reviews被提到两次，标签fear和herpes也被提到两次。从生成的html来看，
+在源码的三篇文章里分类update和reviews被提到两次，标签fear和herpes也被提到两次。从生成的html来看，
 index.md刚好与之对应：分类的index page 提供了所有需要的分类（i.e. tags, categories）每个分类下还有list page显示所有与之相关的页面内容。导航就是这样实现建立的，使得我们能“实现不同分类间的交叉引用，点击任何一个入口进入文章”。

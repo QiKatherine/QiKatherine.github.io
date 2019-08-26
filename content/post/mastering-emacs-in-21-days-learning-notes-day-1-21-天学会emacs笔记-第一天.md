@@ -1,7 +1,7 @@
 +++
 title = "Mastering emacs in 21 days learning notes - day 1 | 21 天学会Emacs笔记 - 第一天"
 date = 2019-08-25T23:51:00+01:00
-lastmod = 2019-08-25T23:51:13+01:00
+lastmod = 2019-08-26T23:52:29+01:00
 tags = ["Emacs"]
 categories = ["TECH"]
 draft = false
@@ -65,3 +65,26 @@ Emacs像一个状态机，即使还没config init.el, 裸机Emacs也加载了许
   `(eval-after-load ,feature
      '(progn ,@body)))
 ```
+
+
+## Major mode and minor mode {#major-mode-and-minor-mode}
+
+• 【mode基础】在开始配置之前让我们先来区别 Emacs 中major mode 与 minor mode 的区别。Major mode 通常是定义对于一种文件类型编辑的核心规则，例如语法高亮、缩进、快捷键绑定等。 而 minor mode 是除去 major mode 所提供的核心功能以外的额外编辑功能（辅助功能）。 例如在下面的配置文件中 _tool-bar-mode_ 与 _linum-mode_ 等均为 minor mode。
+
+【查看minor mode】简单来说就是，一种文件类型同时只能存在一种 major mode 但是它可以同时激活一种或多种minor mode。鼠标放在powerline可以显示一些minor mode信息，如果你希望知道当前的模式全部信息，可以使用 `C-h m` 来显示当前所有开启 的全部minor mode的信息。（你如果发现已经设置过的mode没开，可能因为没有设置成global的）。
+
+• 【hook】major mode里面还有一个重要的概念是hook。一个major mode（ _e.g. Emac-lisp-mode_ ）相当于一个list，就是一些它自带的function。但这里还可以有一串儿minor mode挂在上面。这个major mode开启默认所有list上的特性都会被自动加载。如果我们需要的设置没有，需要手动添加，有可能是通过hook，一般对于每个特定的package如果使用hook，GitHub上有具体设置指南。例如 `(add-hook  'emacs-lisp-mode-hook  'show-paren-mode)` .
+![](/img/emacs 21 1-1.jpg)
+
+• Hook 就是一串特定的functions: A hook is a Lisp variable which holds a list of functions, to be called on some well-defined occasion. 大部分hook都尽量是normal且一致的，方便全局调用，我们也会自己通过add-hook加function到hook上来满足特殊的需求。自行设计hook list要注意顺序问题，因为上文提到一串function是按顺序依次执行的，如果后面的会影响前面的，那么顺序自定义就很重要。相关阅读: [Hooks - GNU Emacs Manual - https://www.gnu.org/](https://www.gnu.org/software/emacs/manual/html%5Fnode/emacs/Hooks.html)
+
+• Emacs操作系统很像一个大的状态机，储存着很多可修改的状态。Mode调用和设置也是通过function修改value实现。Emacs虽然因为没有变量空间而导致所有变量全局可见，但是因为mode的default设置，使得有些value只是buffer local的(aka mode每个buffer都独立保留了一份default 值)，如果需要在全局应用某些mode，要注意上hook或者修改global setting，注意查看每个安装文档的说明。
+
+• 如上文所说，让mode生效有三种方式（1）临时调用M-x company-mode，可以反复修改value，但有可能只修改了临时buffer local value（2）直接修改mode.el脚本；都不如这种好：(3) 写好mode设置放在init.el里面让它在Emacs开启时设置好。
+
+【mode和setq】第二课【2'10】：以company-mode为例讲解以上知识：mode的种类（还有其他state）开启还是关闭，本身是value，每个buffer都有储存一份，所以setq只会修改本buffer的值，setq-default才会修改全体buffer的值。只有当一个value生来就是全局变动的时候，setq和setq-default才是一回事。set-key也是类似，如下注意左右列的区别，尤其当想要的修改下次没生效，查看变量是否是buffer local很重要。例如以下区别：
+
+| (company-mode t)        | (global-company-mode t)          |
+|-------------------------|----------------------------------|
+| (setq cursor-type 'bar) | (setq-default  cursor-type 'bar) |
+| (set-key ..)            | (global-set-key …)               |
