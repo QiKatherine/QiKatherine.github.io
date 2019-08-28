@@ -1,7 +1,7 @@
 +++
 title = "Org-reveal:solution for math and code highlighting in presentation slide | 在ppt中展示代码高亮，数学公式的优秀解决方案 emacs org"
 date = 2019-08-23T22:50:00+01:00
-lastmod = 2019-08-26T23:52:29+01:00
+lastmod = 2019-08-28T23:56:10+01:00
 tags = ["Emacs", "Org-mode"]
 categories = ["TECH"]
 draft = false

@@ -1,7 +1,7 @@
 +++
-title = "Mastering emacs in 21 days learning notes - day 1 | 21 天学会Emacs笔记 - 第一天"
+title = "Mastering emacs in 21 days learning notes | 21 天学会Emacs笔记"
 date = 2019-08-25T23:51:00+01:00
-lastmod = 2019-08-26T23:52:29+01:00
+lastmod = 2019-08-28T23:56:10+01:00
 tags = ["Emacs"]
 categories = ["TECH"]
 draft = false
