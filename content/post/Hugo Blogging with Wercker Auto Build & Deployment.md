@@ -1,7 +1,7 @@
 +++
-title = "Hugo Blogging with Wercker Auto Build & Deployment | 用Wercker自动部署网站"
+title = "Hugo Blogging with Wercker Auto Build & Deployment 【用 Wercker 自动部署网站】"
 date = 2019-07-26T01:02:00+01:00
-lastmod = 2019-08-28T23:56:10+01:00
+lastmod = 2019-09-01T22:27:30+01:00
 tags = ["Hugo", "Git", "Wercker", "Org-mode", "Emacs"]
 categories = ["TECH"]
 draft = false
