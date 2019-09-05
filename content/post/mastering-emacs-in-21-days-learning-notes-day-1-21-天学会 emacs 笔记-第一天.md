@@ -1,7 +1,7 @@
 +++
 title = "Mastering emacs in 21 days learning notes - 1 【21 天学会 Emacs 笔记 - 1】"
 date = 2019-08-25T23:51:00+01:00
-lastmod = 2019-09-03T22:05:45+01:00
+lastmod = 2019-09-05T23:52:27+01:00
 tags = ["Emacs"]
 categories = ["TECH"]
 draft = false
@@ -88,3 +88,23 @@ Emacs 像一个状态机，即使还没 config init.el, 裸机 Emacs 也加载�
 |-------------------------|----------------------------------|
 | (setq cursor-type 'bar) | (setq-default  cursor-type 'bar) |
 | (set-key ..)            | (global-set-key …)               |
+
+
+## 在 init.el 中安装 packages {#在-init-dot-el-中安装-packages}
+
+• 裸机 Emacs 系统除了部分内置的功能，什么 cutomerized 设置都没有，因此我们手动安装想要 packages。第一次安装是从 option-manage packages 用 GUI 安装，等同于调用 M-x package-list-packages，但安装不仅是加载，系统同时自动同时在 init.el 生成 M-x package-list-packages list，以便以后在任何电脑上都可以自动复现。所以我们可以从 init.el 从命令的角度看看这是如何实现的。
+
+• 以后我们也会通过在 init.el 里编写 packages list 来实现群体安装。
+
+• 默认 packages 都装在.emacs.d/elpa 目录下面，即所有有关这个 package 的文件都下载到一个文件夹下面，以供 emacs load【注意这个跟.emacs.d/lisp 文件不要混淆】。
+
+
+### Auto-load 【2-15’00】 {#auto-load-2-15-00}
+
+ 装好后重新打开 Emacs，我们看到 init.el 文件第一行要求是（package-initialize)
+意思是自动去 elpa 目录里找安装好的 package，挨个扫描，找到 package-autoload.el 文件执行，预加载一些函数名进 workspace。为什么会有再初始时就有加载 autoload 这一过程呢？
+
+请思考如下问题。如果没有 autoload，你可以在 init.el 加载时就 load 各种各样的脚本，使得 emacs 在启动时就把整个使用过程中可能用到的函数一次性准备好。但这样真的好么？
+autoload 告诉 emacs 某个地方有一个定义好的函数，并且告诉 emacs，先别加载，只要记住在调用这个函数时去哪里寻找它的定义即可。这样做的一个好处是，避免在启动 emacs 时因为执行过多代码而效率低下，比如启动慢，卡系统等。想象一下，如果你安装了大量的有关 python 开发的插件，而某次打开 emacs 只是希望写点日记，你肯定不希望这些插件在启动时就被加载，让你白白等上几秒，也不希望这些插件在你做文本编辑时抢占系统资源（内存，CPU 时间等）。所以，一个合理的配置应该是，当你打开某个 python 脚本，或者手动进入 python 的编辑模式时，才加载那些插件.
+
+autoload 定义的函数都可以直接调用，而不需要 require，like company-mode。所以 autoload 行为的意义用一个简单的概括是：“只注册函数名而不定义函数本身”。
