@@ -6,9 +6,11 @@ languageCode = "en-us"
 disqusShortname = "katherine He"
 googleAnalytics = "UA-145919675-1"
 preserveTaxonomyNames = true
-paginate = 5 #frontpage pagination
+paginate = 20 #frontpage pagination
 hasCJKLanguage = true
-
+pygmentsCodefences = true #高亮markdown的代码块
+pygmentsCodefencesGuessSyntax = true #高亮markdown中没有标注语言的代码块
+pygmentsStyle = 'dracula' #高亮主题
 
 [outputs]
 home = ["HTML", "RSS", "Algolia"]

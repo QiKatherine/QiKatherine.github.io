@@ -1,9 +1,7 @@
 +++
-title = "Hugo Blogging with Wercker Auto Build & Deployment 【用 Wercker 自动部署网站】"
+title = "Hugo Blogging with Wercker Auto Build & Deployment 【用 Wercker 自动部署网站】 :@TECH:Hu go:Git:Wercker:Org_mode:Emacs:"
 date = 2019-07-26T01:02:00+01:00
-lastmod = 2019-09-06T23:53:53+01:00
-tags = ["Hugo", "Git", "Wercker", "Org-mode", "Emacs"]
-categories = ["TECH"]
+lastmod = 2019-09-11T00:34:34+01:00
 draft = false
 +++
 
@@ -21,7 +19,7 @@ The Hugo instruction <https://gohugo.io/hosting-and-deployment/deployment-with-w
 
 Here is my wercker.yml:
 
-```yml
+{{< highlight yml >}}
 # This references a standard debian container from the
 # Docker Hub https://registry.hub.docker.com/_/debian/
 # Read more about containers on our dev center
@@ -59,13 +57,13 @@ deploy:
             repo: QiKatherine/QiKatherine.github.io
             branch: master
             basedir: public
-```
+{{< /highlight >}}
 
 Notice the name 'build' and 'deploy' in the workflow above need to be the same with the name in steps in the wercker.yml file.
 
 You can also add a local deploy.sh to make source code push easier too:
 
-```nil
+{{< highlight bash >}}
 #!/bin/bash
 cd ~/Hugo/myblog/
 
@@ -81,6 +79,6 @@ git commit -m "$msg"
 
 # Push source and build repos.
 git push origin -u dev
-```
+{{< /highlight >}}
 
 Happy hacking! :)

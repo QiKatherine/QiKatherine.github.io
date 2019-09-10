@@ -1,7 +1,7 @@
 +++
 title = "Mastering emacs in 21 days learning notes - 1 【21 天学会 Emacs 笔记 - 1】"
 date = 2019-08-25T23:51:00+01:00
-lastmod = 2019-09-06T23:53:55+01:00
+lastmod = 2019-09-11T00:34:35+01:00
 tags = ["Emacs"]
 categories = ["TECH"]
 draft = false
@@ -20,9 +20,9 @@ This article is part of my learning notes of Mastering Emacs in 21 Day, which is
 
 • loading 的文件主要是.elc 文件，是经过编译的.el 文件的二进制形式，加载更快。但平日的修改是在更容易阅读的.el 文件上进行的，所以如果你手动修改完.el 文件，一定要记得编译以便 Emacs 自动执行，For example with Emacs-Lisp you do:
 
-```nil
+{{< highlight nil >}}
 (byte-compile-file "foo.el")
-```
+{{< /highlight >}}
 
 否则 Emacs 要么加载没有被同步修改的二进制.elc 文件，要么会因为没找到.elc，去加载更缓慢的.el 文件。
 
@@ -41,7 +41,7 @@ Emacs 像一个状态机，即使还没 config init.el, 裸机 Emacs 也加载�
 
 • Emacs 的命令执行是按顺序来的，这个顺序既只文件也只内部命令。各种 function 一个一个的被 call（也就是 load/require），一行完成后再进行下一行。例如，只保存第 1 个命令，下次打开 Emacs 显示字体为 16pt；保存 1.2 命令，在 1 之上 load open-init-file 命令去 workspace；保存 1.2.3 命令，在 12 之上还能使得我们通过按 f2 真正调用这个 open-init-file:
 
-```nil
+{{< highlight nil >}}
 ;; 更改显示字体大小 16pt
 (set-face-attribute 'default nil :height 160)                   ---- 1
 
@@ -52,19 +52,19 @@ Emacs 像一个状态机，即使还没 config init.el, 裸机 Emacs 也加载�
 
 ;; 这一行代码，将函数 open-init-file 绑定到 <f2> 键上
 (global-set-key (kbd "<f2>") 'open-init-file)                   ---- 3
-```
+{{< /highlight >}}
 
 这个知识点目前看起来很简单，但是以后涉及到要去其它.el 文件层层加载，记得这个顺序性 load 的特质会帮助理解 Emacs 的加载机制。
 
 •在 Emacs 里命令按行顺序执行 A--C，如果遇到“call A 的前提是先要加载 B function”（但是 B 没有加载在 workspace 里的情况时），Emacs 会先走开，去 B.el 相关的文件 load B function，执行完再回来继续加载剩余的东西，然后再执行 C。因此相互依赖的 feature 有可能因为调用顺序没安排好而导致 initiliaze 出错，这样能解决。为了解决依赖顺序造成的潜在问题，Purcell 写了一个 after-load 函数，目的是把一些相互依赖的 feature 的加载顺序理顺，例如 feature A 依赖于 feature B，则可以写成(after-load 'B 'A)，这样如果错误地在 B 之前 require 了 A 也不会影响正常启动：
 
-```nil
+{{< highlight nil >}}
 (defmacro after-load (feature &rest body)
   "After FEATURE is loaded, evaluate BODY."
   (declare (indent defun))
   `(eval-after-load ,feature
      '(progn ,@body)))
-```
+{{< /highlight >}}
 
 
 ## Major mode and minor mode {#major-mode-and-minor-mode}

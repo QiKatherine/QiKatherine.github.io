@@ -1,7 +1,7 @@
 +++
 title = "Installing Source Code Pro in Ubuntu and MS Windows plateform 2019 【2019 版 Souce Code Pro 字体安装指南】"
 date = 2019-09-03T21:53:00+01:00
-lastmod = 2019-09-06T23:53:56+01:00
+lastmod = 2019-09-11T00:34:35+01:00
 tags = ["Ubuntu"]
 categories = ["TECH"]
 draft = false
@@ -26,31 +26,30 @@ Linux 下安装，由下载，解压，编译，粘贴，删除源文件等一�
 
 <!--listend-->
 
-```nil
+{{< highlight emacs-lisp >}}
 touch ~/install-source-code-pro.sh
-```
+{{< /highlight >}}
 
 1.  把脚本模式改成可执行文件
 
 <!--listend-->
 
-```nil
+{{< highlight elisp >}}
 sudo chmod +x install-source-code-pro.sh
-```
+{{< /highlight >}}
 
 1.  填写脚本内容并保存
 
 <!--listend-->
 
-```nil
+{{< highlight sh >}}
 #!/usr/bin/env bash
-
 cd Downloads
 
 wget https://github.com/adobe-fonts/source-code-pro/archive/2.030R-ro/1.050R-it.zip
 
 if [ ! -d "~/.fonts" ] ; then
-    mkdir ~/.fonts
+mkdir ~/.fonts
 fi
 
 unzip 1.050R-it.zip
@@ -62,14 +61,14 @@ rm 1.050R-it.zip
 cd ~/
 
 fc-cache -f -v
-```
+{{< /highlight >}}
 
 1.  执行脚本
 
 <!--listend-->
 
-```nil
+{{< highlight shell >}}
 ./install-source-code-pro.sh
-```
+{{< /highlight >}}
 
 使用愉快:)
