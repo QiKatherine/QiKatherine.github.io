@@ -6,19 +6,23 @@
 
 * Blog
 ** DONE Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】 :@TECH:Hugo:Ox_hugo:
-
-   SCHEDULED: <2019-07-08 Mon>
    :PROPERTIES:
    :EXPORT_FILE_NAME: Hugo blogging with Ox-hugo
+   :END:
+   :LOGBOOK:
+   - State "DONE"       from "DONE"       [2019-07-24 Wed 00:42]
    :END:
 
 #+begin_description 
 My personal experience of blogging with Emacs/Spacemacs and plug-in ox-hugo, along with some explaination of Hugo's working structure.
 #+end_description
 
-There have been many good articles talking about using ~ox-hugo~ to aid efficient blog writing in Emacs/Spacemacs. I read these articles carefully several times and feel pretty confident using this tool, so I would strongly recommend you give them a look:
+There have been many good articles talking about using ~ox-hugo~ to aid
+efficient blog writing in Emacs/Spacemacs. I read these articles carefully
+several times and feel pretty confident using this tool, so I would strongly
+recommend you give them a look:
 
-[[D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 8.png]]
+[[/img/Hugo blogging with Ox-hugo 8.png]]
 This is true for many cases, but no, not for Hugo or ~ox-hugo~. They are amazing official documentation! (Mr.Kaushal I know you occasionally search ~ox-hugo~ related articles in all different languages. If you happen to read this, thank you!)
 
 • [[https://ox-hugo.scripter.co/][ox-hugo official documentation]] is very well written. The author carefully demonstrates not only all basics of using ~ox-hugo~, but also some killer choices to improvise. 
@@ -113,7 +117,7 @@ org-mode 特色的命名方式设计的变量，类似的语法在其他 org 文
 	Hugo 0.32 以上的版本，使用 page boundles 的模式来管理网页源和图，从父子结构分类的角度看，有两种：leaf 类页面和 branch 类页面。branch 类页面允许在其内部嵌套更深层次的页面，而 leaf 规定其不能再有子页面。
 	
 	任何一个叫 index 的页面文件都是 leaf 型，叫_index 的页面文件都是 branch 型。所以可见 org 文件里 index 的文件都会被输出成单页，没有子文件夹。最常见的 index 页面是下文会提到的分类里面的 categories 和 tags index pages，它们都是单页，除此之外多数时候我们会使用 branch 型。如图:
-[[D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 1.png
+[[/img/Hugo blogging with Ox-hugo 1.png
 ]]
 	Content 文件夹在这里是 home page, 他的主要功能是 hosting“决定网站 layout 设定”的信息（在这里就是定义了 branch 型页面类型的_index.md），所以 hugo 规定 home page 至多只能包含图片，而不能包含其它的 content pages，只承担 layout 设定而不为 article source 提供场所。注意 content 里面的内容结构安排，应当和你想要渲染的网站结构一致。
 
@@ -139,42 +143,46 @@ content
 ~#+hugo_base_dir:~ ..即是本 org 文件所在的 parent path.也有人定义
 ~#+hugo_base_dir:~ .代表 path 与现在的 org 文件同文件夹，如果 root directory 是
 跟现在 org 文件同文件夹，c-c c-e H A 导出 markdown 文件的结果就是这样：
-[[D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 2.png]]
+[[/img/Hugo blogging with Ox-hugo 2.png]]
 
 	仔细体会以下示例：以 root 目录 c:\hugo\myblog\为例：
 	(1) orgfile 在 myblog 下方 且#+hugo_base_dir: .
 	(2) orgfile 在 myblog\content-org 下方 且#+hugo_base_dir: ..
 	在 c-c c-c H A 后都会产生如下形式，只不过(2)中 hugotest.org 在 content-org 里面
-[[D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 3.png]]
+[[/img/Hugo blogging with Ox-hugo 3.png]]
 
 *** 7. Heading management
 The official documentation as well as the attached youtube tutorials have provided great explaintation of how hugo translate metadata of _index.md files to the headings of html with Hugo heading management system.
 	
 建立一个有一篇文章的 post
-[[D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 4.png]]
+[[/img/Hugo blogging with Ox-hugo 4.png]]
 
 继续新增一个有两篇文章的 fishsticks
-[[D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 5.png]]
+[[/img/Hugo blogging with Ox-hugo 5.png]]
 
 *** 8. Tree and subtree writing
 	In normal Hugo, individual pages written in markdown (or now in org-mode)
 	are placed inside the content directory inside the project root. With ~ox-hugo~, a single org-mode file can be used to generate all pages, posts, and any other content. This has some advantages in allowing usage of org-mode functionality, as well as re-use of content or property settings across pages.
 
-[[D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 6.png]]
+[[/img/Hugo blogging with Ox-hugo 6.png]]
 
 *** 9. Taxonomies 分类型页面
 这段是 index 管理 page boundle 的良好功能的又一个展现:通过 taxonomy index pages 就能建立一系列分类页面,例如 tags and category,为分类页面单独建立管理 page 使拥有这些属性的文章被自右交叉引用,用户可以通过点击任何一个 tag 或者 categories 就能达到文章页面。在 org 写作里通过在 headings 添加实现，org 到 md 转化由 ~ox-hugo~ 完成，语法差别很细微。如下图，还是上文的源码，只是为文章添加了两种 categories，两种 tag:
-[[D:/Hugo/myblog/static/img/Hugo blogging with Ox-hugo 7.png]]
+[[/img/Hugo blogging with Ox-hugo 7.png]]
 
 在源码的三篇文章里分类 update 和 reviews 被提到两次，标签 fear 和 herpes 也被提到两次。从生成的 html 来看，
 index.md 刚好与之对应：分类的 index page 提供了所有需要的分类（i.e. tags, categories）每个分类下还有 list page 显示所有与之相关的页面内容。导航就是这样实现建立的，使得我们能“实现不同分类间的交叉引用，点击任何一个入口进入文章”。
 
 
-** DONE Hugo Blogging with Wercker Auto Build & Deployment 【用 Wercker 自动部署网站】 :@TECH:Hu go:Git:Wercker:Org_mode:Emacs:
+** DONE Hugo Blogging with Wercker Auto Build & Deployment 【用 Wercker 自动部署网站】 :@TECH:Hugo:Git:Wercker:Org_mode:Emacs:
    CLOSED: [2019-07-26 Fri 01:02]
    :PROPERTIES:
    :EXPORT_FILE_NAME: Hugo Blogging with Wercker Auto Build & Deployment
    :END:
+
+#+begin_description
+Using Wercker to for automated website code build and deployment
+#+end_description
 
 The automated static website generators (e.g. Octopress, Hexo and Hugo) have made *website buiding and maintaining* way more relaxed than before. The workflow has been simplified to: write and save markdown -- preview on the localhost 1313 -- generate the ~/public (HTML) file -- push to a remote server (Github) -- backup source code. 
 
@@ -266,6 +274,10 @@ Happy hacking! :)
    - State "DONE"       from "TODO"       [2019-08-16 Fri 01:03]
    :END:
 
+#+begin_description
+Experience Emacs with best workaround enviroment in windows.
+#+end_description
+
 *** Background 
 Due to the working environment limitation, I occasionally have to use MS windows system (and therefore Emacs for Windows). But some similar users and I have constantly found cases where Emacs is significantly relying on *unix system. So far, my experience is that compling Emacs in msys2 has been a best (maybe) workaround in this situation. If you this is relatable to you, you might want to give it a try:
 https://chriszheng.science/2015/01/23/Guideline-for-building-GNU-Emacs-with-MSYS2-MinGW-w64/
@@ -304,7 +316,7 @@ $ git config core.autocrlf false
 方案，但是 msys2（在许多人看来）仍然是一个在 win 环境中使用类 unix 系统的优秀途径，希望未来能研究编译过的 emacs 在 msys2 提供的类 unix 系统里是否和其他 libraries 有更好的互动。
 
 
-** DONE Org-reveal:solution for math and code highlighting in presentation slide 【在 ppt 中展示代码高亮，数学公式的优秀解决方案】 :@TECH:Emacs:Org_mode:
+** DONE Org-reveal: solution for math and code highlighting in presentation slide 【在 ppt 中展示代码高亮，数学公式的优秀解决方案】 :@TECH:Emacs:Org_mode:
    CLOSED: [2019-08-23 Fri 22:50]
    :PROPERTIES:
    :EXPORT_FILE_NAME: org-reveal-solution-for-math-and-code-highlighting-in-presentation-slide
@@ -315,6 +327,10 @@ $ git config core.autocrlf false
    - State "DONE"       from "TODO"       [2019-08-22 Thu 00:44]
    :END:
  
+#+begin_description
+Learning notes and trouble shooting for using org-reveal.
+#+end_description
+
 I have used flash card for remembering new things for years. Before using software like org-drill or Anki, I was pretty much putting everything in slides, printing on papers and cutting it into a portable sized card and carried in my pocket. So I have been exploring an ultimate solution of perfect formatting for everything. This picture shows what I feel about slides making tools.
 [[../static/img/org-reveal.jpg]]
 
@@ -461,6 +477,10 @@ Emacs 像一个状态机，即使还没 config init.el, 裸机 Emacs 也加载�
    :LOGBOOK:
    - State "DONE"       from "TODO"       [2019-09-03 Tue 21:53]
    :END:
+
+#+begin_description 
+Installing source code pro and trouble shooting.
+#+end_description 
 
 使用 Emacs 的时候，有时候会用到 Source Code Pro 字体，尤其是 Spacemacs 以它作为
 默认字体。未安装会造成 Emacs 启动时出现报错。可以使用以下方式安
