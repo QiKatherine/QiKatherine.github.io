@@ -2,8 +2,8 @@
 title = "Best workaround to use Emacs in MS Windows 【在 MS windows 中使用 Emacs 的最佳解决方案】"
 summary = "Experience Emacs with best workaround enviroment in windows."
 date = 2019-08-16T01:03:00+01:00
-lastmod = 2019-09-11T00:55:51+01:00
-tags = ["Emasc", "msys2"]
+lastmod = 2019-09-13T01:39:36+01:00
+tags = ["Emasc", "Msys2", "Windows10"]
 categories = ["TECH"]
 draft = false
 +++
