@@ -1,7 +1,7 @@
 +++
 title = "Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】"
 summary = "My personal experience of blogging with Emacs/Spacemacs and plug-in ox-hugo, along with some explaination of Hugo's working structure."
-lastmod = 2019-09-13T01:39:36+01:00
+lastmod = 2019-09-15T23:12:41+01:00
 tags = ["Hugo", "Ox-hugo"]
 categories = ["TECH"]
 draft = false
@@ -9,7 +9,7 @@ draft = false
 
 There have been many good articles talking about using `ox-hugo` to aid
 efficient blog writing in Emacs/Spacemacs. I read these articles carefully
-several times and feel pretty confident using this tool, so I would strongly
+several times and feel pretty confident using ox-hugo, so I would strongly
 recommend you give them a look:
 
 ![](/img/Hugo blogging with Ox-hugo 8.png)
@@ -28,16 +28,25 @@ Most content comes from the Hugo official documentation along with these article
 在阅读本文之前，强烈推荐阅读开头推荐的三部分内容。本篇博客主要就是整理了加工了一些来自 Hugo 官网，和以上三篇文章的内容，并配以更直观的图片帮助理解。对我来说 ox-hugo+org-mode 最牛的地方的在于高度集成。org-mode 有一个优秀的原生功能是通 tags 等功能，用一个大文件+一二三四五级小标题就能管理一个文本文件树。具体到本文就是，通过一个文件管理整个网站的内容撰写。这是作者力荐的写作方式，也是他编写这个插件的主要初衷。比起各种单个文件组成的零散网站管理模式，这个结构更清晰，管理更容易，搜索 toggle 都十分方便。作者用 `ox-hugo` 的官网直接展示了样版：
 [Why ox-hugo? — ox-hugo - Org to Hugo exporter - https://ox-hugo.scripter.co/](https://ox-hugo.scripter.co/doc/why-ox-hugo/)
 
-这样的结构配合上一些 Emacs 自带的 killer 功能例如 writeroom-mode,org-tree-to-indent-buffer, predictive 英文补全, org-capture 一键捕获，让写作如虎添翼。
+这样的结构配合上一些 Emacs 自带的 killer 功能例如 `writeroom-mode`,
+`org-tree-to-indent-buffer` , `predictive` 英文补全, `org-capture` 一键捕获，能瞬间让写作如虎添翼。
+
+
+## 0. Org markup syntax and killer reference card {#0-dot-org-markup-syntax-and-killer-reference-card}
+
+在写了 7 篇文章以后，其实我还是 org-mode 语法记忆困难户。官网给了零星几个常见的语法参考，但是 org-mode 能定制格式花样的远不止于此。我在此给出一个终极解决方式：参考网站原文的
+org file。网站 org 源码从 org markup 形式到 hugo section 的 front information 都有涵盖，在网站看到想要的格式去原文直接搜索照搬即可：
+[Full website](https://ox-hugo.scripter.co/doc/hugo-section/)
+[Full website source file](https://raw.githubusercontent.com/kaushalmodi/ox-hugo/master/doc/ox-hugo-manual.org)
+
+
+## 1. Front matter 页首信息 {#1-dot-front-matter-页首信息}
 
 Hugo 本身其实支持直接把.org 文件渲染成 html 发布，但是许多人提到其实支持得不是很好。Hugo 支持最好的 markdown 语法类型是 blackfriday markdown。对很多 Emacs user 来说 org-mode 就像把有力的大锤，碰上跟写作沾边的任务不能抡一下是很遗憾的。所以可以使用这款非常棒的后端插件 `ox-hugo` 来支持 org-mode 写博文。它的解决方式是：把 org 文件转成 blackfriday markdown, 然后再生成 html 文件。首先我们详细看 `ox-hugo` 官网对其功能的解说：
 
 > According to the information documentation, `ox-hugo` is an Org exporter backend that exports Org to Hugo-compatible Markdown (Blackfriday) and also generates the front matter (in TOML or YAML format).
 
 简言之，我们主要使用 `ox-hugo` 做两件事（1）把 org 格式内容转换成 markdown 格式内容；（2）解析 org file 中的用 org 语法写 front-matter，生成 Hugo 要求语法的 front-matter，使得 Hugo 通过正确的信息生成的 html 。那么 front-matter 具体指什么呢？
-
-
-## 1. Front matter 页首信息 {#1-dot-front-matter-页首信息}
 
 Front matter give the information about the content, but NOT the information of content. It works as metadata to tell Hugo the general properties of the article. Hugo supports three types of front matter syntax: yaml, toml, json. Wheven you generate a new post/article/blog with
 

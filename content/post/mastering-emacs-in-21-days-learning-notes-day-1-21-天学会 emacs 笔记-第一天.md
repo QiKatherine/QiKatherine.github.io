@@ -1,7 +1,7 @@
 +++
 title = "Mastering emacs in 21 days learning notes - 1 【21 天学会 Emacs 笔记 - 1】"
 date = 2019-08-25T23:51:00+01:00
-lastmod = 2019-09-13T01:39:36+01:00
+lastmod = 2019-09-15T23:12:42+01:00
 tags = ["Emacs"]
 categories = ["TECH"]
 draft = false
@@ -16,9 +16,13 @@ This article is part of my learning notes of Mastering Emacs in 21 Day, which is
 
 ---
 
-• Emacs 相当于一个 elisp language based 的操作系统。这个操作系统的原理是，每次 Emacs 启动过程就相当于一系列功能通过 loading files(aka 代码块)的实现。在每次使用前，成百上千的 functions 被加载到 workspace 中 with default setting，等待调用，或者被 custermize。因此所有的设置，架构都可以通过调 function portal 修改成想要的 value；或者在原有的 value/function 的基础上，继续开发一系列指令来增进，比如我们自己编写的各种自定义函数。连整个 emacs 的启动都可以概括为一句话：加载一系列脚本。只不过这些脚本有的是内置的（built in），有的来自安装的插件包，有的是我们自己写的。配置 emacs 归根结底是在配置各种各样的脚本。
+• Emacs 相当于一个 elisp based 的操作系统。这个操作系统的原理是，每次 Emacs 启动过程就相当于一系列功能通过 loading files(代码块)的实现。在每次使用前，成百上千的
+functions 被加载到 workspace 中(其中一些带着 default 参数) ，等待被调用，或者被
+custermize。因此所有的设置，架构都可以通过调 function portal 修改成想要的 value；或者在原有的 value/function 的基础上，继续开发一系列指令来增进，比如我们自己编写的各种自定义函数。连整个 emacs 的启动都可以概括为一句话：加载一系列脚本。只不过这些脚本有的是内置的（built in），有的来自安装的插件包，有的是我们自己写的。配置
+emacs 归根结底是在配置各种各样的脚本。
 
-• 首次加载一个配置复杂/成熟的 Emacs（例如 spacemacs 或 Purcell 的 Emacs），会耗费比较长的时间，因为需要依次安装所有 cofig.el 中提到过的 packages。在经过首次配置之后的时间里，每次启动 Emacs 的 loading file 主要以加载和更新为主，而极少数 package 安装只有才加载检查发现没有 package 时候才会发生。
+• 首次加载一个配置复杂/成熟的 Emacs（例如 spacemacs 或 Purcell 的 Emacs），会耗费比较长的时间，因为需要依次安装所有 cofig.el 中提到过的 packages。在经过首次配置之后的时间里，每次启动 Emacs 的 loading file 主要以加载和更新为主，而极少数
+package 安装只有才加载检查发现没有 package 时候才会发生。
 
 • loading 的文件主要是.elc 文件，是经过编译的.el 文件的二进制形式，加载更快。但平日的修改是在更容易阅读的.el 文件上进行的，所以如果你手动修改完.el 文件，一定要记得编译以便 Emacs 自动执行，For example with Emacs-Lisp you do:
 

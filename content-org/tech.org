@@ -19,7 +19,7 @@ My personal experience of blogging with Emacs/Spacemacs and plug-in ox-hugo, alo
 
 There have been many good articles talking about using ~ox-hugo~ to aid
 efficient blog writing in Emacs/Spacemacs. I read these articles carefully
-several times and feel pretty confident using this tool, so I would strongly
+several times and feel pretty confident using ox-hugo, so I would strongly
 recommend you give them a look:
 
 [[/img/Hugo blogging with Ox-hugo 8.png]]
@@ -38,9 +38,19 @@ Most content comes from the Hugo official documentation along with these article
 在阅读本文之前，强烈推荐阅读开头推荐的三部分内容。本篇博客主要就是整理了加工了一些来自 Hugo 官网，和以上三篇文章的内容，并配以更直观的图片帮助理解。对我来说 ox-hugo+org-mode 最牛的地方的在于高度集成。org-mode 有一个优秀的原生功能是通 tags 等功能，用一个大文件+一二三四五级小标题就能管理一个文本文件树。具体到本文就是，通过一个文件管理整个网站的内容撰写。这是作者力荐的写作方式，也是他编写这个插件的主要初衷。比起各种单个文件组成的零散网站管理模式，这个结构更清晰，管理更容易，搜索 toggle 都十分方便。作者用 ~ox-hugo~ 的官网直接展示了样版：
 [[https://ox-hugo.scripter.co/doc/why-ox-hugo/][Why ox-hugo? — ox-hugo - Org to Hugo exporter - https://ox-hugo.scripter.co/]]
 
-这样的结构配合上一些 Emacs 自带的 killer 功能例如 writeroom-mode,org-tree-to-indent-buffer, predictive 英文补全, org-capture 一键捕获，让写作如虎添翼。
+这样的结构配合上一些 Emacs 自带的 killer 功能例如 ~writeroom-mode~,
+~org-tree-to-indent-buffer~ , ~predictive~ 英文补全, ~org-capture~ 一键捕获，能瞬
+间让写作如虎添翼。
 
-        
+*** 0. Org markup syntax and killer reference card
+在写了 7 篇文章以后，其实我还是 org-mode 语法记忆困难户。官网给了零星几个常见的语法
+参考，但是 org-mode 能定制格式花样的远不止于此。我在此给出一个终极解决方式：参考网站原文的
+org file。网站 org 源码从 org markup 形式到 hugo section 的 front information 都有涵盖，在网站
+看到想要的格式去原文直接搜索照搬即可：
+[[https://ox-hugo.scripter.co/doc/hugo-section/][Full website]]
+[[https://raw.githubusercontent.com/kaushalmodi/ox-hugo/master/doc/ox-hugo-manual.org][Full website source file]]
+
+*** 1. Front matter 页首信息
 Hugo 本身其实支持直接把.org 文件渲染成 html 发布，但是许多人提到其实支持得不是很好。Hugo 支持最好的 markdown 语法类型是 blackfriday markdown。对很多 Emacs user 来说 org-mode 就像把有力的大锤，碰上跟写作沾边的任务不能抡一下是很遗憾的。所以可以使用这款非常棒的后端插件 ~ox-hugo~ 来支持 org-mode 写博文。它的解决方式是：把 org 文件转成 blackfriday markdown, 然后再生成 html 文件。首先我们详细看 ~ox-hugo~ 官网对其功能的解说：
 
 #+begin_quote
@@ -50,7 +60,8 @@ According to the information documentation, ~ox-hugo~ is an Org exporter backend
 	
 简言之，我们主要使用 ~ox-hugo~ 做两件事（1）把 org 格式内容转换成 markdown 格式内容；（2）解析 org file 中的用 org 语法写 front-matter，生成 Hugo 要求语法的 front-matter，使得 Hugo 通过正确的信息生成的 html 。那么 front-matter 具体指什么呢？
 
-*** 1. Front matter 页首信息
+
+
 Front matter give the information about the content, but NOT the information of content. It works as metadata to tell Hugo the general properties of the article. Hugo supports three types of front matter syntax: yaml, toml, json. Wheven you generate a new post/article/blog with
 #+begin_src 
 $ hugo new site posts 
@@ -172,7 +183,6 @@ The official documentation as well as the attached youtube tutorials have provid
 
 在源码的三篇文章里分类 update 和 reviews 被提到两次，标签 fear 和 herpes 也被提到两次。从生成的 html 来看，
 index.md 刚好与之对应：分类的 index page 提供了所有需要的分类（i.e. tags, categories）每个分类下还有 list page 显示所有与之相关的页面内容。导航就是这样实现建立的，使得我们能“实现不同分类间的交叉引用，点击任何一个入口进入文章”。
-
 
 ** DONE Hugo Blogging with Wercker Auto Build & Deployment 【用 Wercker 自动部署网站】 :@TECH:Hugo:Git:Wercker:Org_mode:Emacs:
    CLOSED: [2019-07-26 Fri 01:02]
@@ -315,7 +325,6 @@ $ git config core.autocrlf false
 但是我感觉从运行速度来讲，msys2 compiled Emacs 比 Emacs for Win64 =快很多= 。所以在 win 中使用 Emacs，虽然也有 WSL 或者 VM based 的解决
 方案，但是 msys2（在许多人看来）仍然是一个在 win 环境中使用类 unix 系统的优秀途径，希望未来能研究编译过的 emacs 在 msys2 提供的类 unix 系统里是否和其他 libraries 有更好的互动。
 
-
 ** DONE Org-reveal: solution for math and code highlighting in presentation slide 【在 ppt 中展示代码高亮，数学公式的优秀解决方案】 :@TECH:Emacs:Org_mode:
    CLOSED: [2019-08-23 Fri 22:50]
    :PROPERTIES:
@@ -383,9 +392,19 @@ This article is part of my learning notes of Mastering Emacs in 21 Day, which is
 
 *** 1. 基本知识 
 -----
-• Emacs 相当于一个 elisp language based 的操作系统。这个操作系统的原理是，每次 Emacs 启动过程就相当于一系列功能通过 loading files(aka 代码块)的实现。在每次使用前，成百上千的 functions 被加载到 workspace 中 with default setting，等待调用，或者被 custermize。因此所有的设置，架构都可以通过调 function portal 修改成想要的 value；或者在原有的 value/function 的基础上，继续开发一系列指令来增进，比如我们自己编写的各种自定义函数。连整个 emacs 的启动都可以概括为一句话：加载一系列脚本。只不过这些脚本有的是内置的（built in），有的来自安装的插件包，有的是我们自己写的。配置 emacs 归根结底是在配置各种各样的脚本。
+• Emacs 相当于一个 elisp based 的操作系统。这个操作系统的原理是，每次 Emacs 启动
+过程就相当于一系列功能通过 loading files(代码块)的实现。在每次使用前，成百上千的
+functions 被加载到 workspace 中(其中一些带着 default 参数) ，等待被调用，或者被
+custermize。因此所有的设置，架构都可以通过调 function portal 修改成想要的 value；
+或者在原有的 value/function 的基础上，继续开发一系列指令来增进，比如我们自己编写
+的各种自定义函数。连整个 emacs 的启动都可以概括为一句话：加载一系列脚本。只不过
+这些脚本有的是内置的（built in），有的来自安装的插件包，有的是我们自己写的。配置
+emacs 归根结底是在配置各种各样的脚本。
 
-• 首次加载一个配置复杂/成熟的 Emacs（例如 spacemacs 或 Purcell 的 Emacs），会耗费比较长的时间，因为需要依次安装所有 cofig.el 中提到过的 packages。在经过首次配置之后的时间里，每次启动 Emacs 的 loading file 主要以加载和更新为主，而极少数 package 安装只有才加载检查发现没有 package 时候才会发生。
+• 首次加载一个配置复杂/成熟的 Emacs（例如 spacemacs 或 Purcell 的 Emacs），会耗
+费比较长的时间，因为需要依次安装所有 cofig.el 中提到过的 packages。在经过首次配
+置之后的时间里，每次启动 Emacs 的 loading file 主要以加载和更新为主，而极少数
+package 安装只有才加载检查发现没有 package 时候才会发生。
 
 • loading 的文件主要是.elc 文件，是经过编译的.el 文件的二进制形式，加载更快。但平日的修改是在更容易阅读的.el 文件上进行的，所以如果你手动修改完.el 文件，一定要记得编译以便 Emacs 自动执行，For example with Emacs-Lisp you do:
 
@@ -556,10 +575,6 @@ Linux 下安装，由下载，解压，编译，粘贴，删除源文件等一�
 #+end_src
 
 使用愉快:) 
-** TODO org-mode demonstration
-   :PROPERTIES:
-:EXPORT_FILE_NAME: org-mode-demonstration
-:END:
 ** DONE Using aspell in windows 10 and Emacs 26 above 【拼写检查 Emacs26 使用更新版 aspell】 :@TECH:Emacs:Spacemacs:Windows10:
    CLOSED: [2019-09-13 Fri 01:34]
    :PROPERTIES:
@@ -568,7 +583,11 @@ Linux 下安装，由下载，解压，编译，粘贴，删除源文件等一�
    :LOGBOOK:
    - State "DONE"       from "TODO"       [2019-09-13 Fri 01:34]
    :END:
- 
+
+ #+begin_description
+Installing aspell for Emacs 26+ in windows system.
+ #+end_description
+
 I just realized that my ispell doesn't work after updating my Emacs to 27.0
 version. I kept getting errors that:
  
@@ -582,8 +601,9 @@ The above discussion shows that by the time being of emacs 26 released, there wa
 binary aspell in windows OS, so the workaround was to use hunspell. Now the =final solution= has been provided by installing aspell with *Msys2*.
 
 更新 Emacs 以后发现 aspell 不能用了，调用 ~ispell-minor-mode~ 时一直收到以上报错，查
-看以上答案发现 Emacs 26 以上的版本刚发布的时候没有 windows 匹配的 aspell 安装版本，所
-以当时解决方式时暂时用 hunspell 代替。现在有了解决方案： =用msys2安装aspell= 。
+看以上 stack exchange 的答案发现， 错误原因是 Emacs 26 以上的版本刚发布的时候 windows 还没有与
+之匹配的 aspell 安装版本，所
+以当时解决方式时暂时用 hunspell 代替。现在，匹配版 aspell 已经发布, 所以下文记录了： =用msys2安装aspell= 。
 
 1. In MingW64 terminal search aspell:
  #+begin_src 
@@ -613,4 +633,9 @@ translation if needed:
 [[http://blog.lujun9972.win/blog/2018/06/03/emacs%E5%B8%AE%E4%BD%A0%E8%BF%9B%E8%A1%8C%E8%8B%B1%E6%96%87%E5%86%99%E4%BD%9C/][Emacs帮你进行英文写作 - 暗无天日 - http://blog.lujun9972.win/]]
 
 [[https://www.hahack.com/tools/ispell-and-flyspell/][ispell与emacs的拼写检查 | HaHack - https://www.hahack.com/]]
-
+** TODO Emacs line truncation in text editing mode
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: emacs-line-truncation-in-text-editing-mode
+   :END:
+ 
+Emacs has 
