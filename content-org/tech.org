@@ -1,9 +1,9 @@
    #+hugo_base_dir: d:/Google drive local/Hugo/myblog/
-   #+hugo_section: post
+   #+hugo_section: post  
    #+hugo_auto_set_lastmod: t
    #+hugo_code_fence: nil  
    #+hugo_front_matter_key_replace: description>summary
-
+   
 * Blog
 ** DONE Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】 :@TECH:Hugo:Ox_hugo:
    :PROPERTIES:
@@ -638,4 +638,6 @@ translation if needed:
    :EXPORT_FILE_NAME: emacs-line-truncation-in-text-editing-mode
    :END:
  
-Emacs has 
+Emacs has dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over
+the lazy dog. The quick brown fox jumps over the lazy dog.The quick brown fox
+jumps over the lazy dog.
