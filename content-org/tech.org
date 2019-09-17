@@ -633,11 +633,65 @@ translation if needed:
 [[http://blog.lujun9972.win/blog/2018/06/03/emacs%E5%B8%AE%E4%BD%A0%E8%BF%9B%E8%A1%8C%E8%8B%B1%E6%96%87%E5%86%99%E4%BD%9C/][Emacs帮你进行英文写作 - 暗无天日 - http://blog.lujun9972.win/]]
 
 [[https://www.hahack.com/tools/ispell-and-flyspell/][ispell与emacs的拼写检查 | HaHack - https://www.hahack.com/]]
-** TODO Emacs line truncation in text editing mode
+** DONE Overview: Emacs line truncation in text editing 【Emacs org 换行排版操作 汇总指南】 :@Tech:Emacs:Org_mode:
+   CLOSED: [2019-09-17 Tue 12:53]
    :PROPERTIES:
    :EXPORT_FILE_NAME: emacs-line-truncation-in-text-editing-mode
    :END:
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2019-09-17 Tue 12:53]
+   :END:
  
-Emacs has dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over
-the lazy dog. The quick brown fox jumps over the lazy dog.The quick brown fox
-jumps over the lazy dog.
+The text line (with line number) in Emacs, is called =logical line= . When a logical
+line gets _too long_ in typing window, Emacs provides two distinguish solutions: =line truncation= and =line wrapping= .
+
+*** Common approaches
+Here is the link of technicalities of the solutions:
+
+[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Truncation.html][Truncation - GNU Emacs Lisp Reference Manual - https://www.gnu.org/]]
+
+I draw a more straightforward figure:
+[[/img/line operation 1.jpg]] 
+
+• The breaked or wrapped line is refered as =screen line=, as opposed to
+  =logical line=. Why do we care the
+  differences? To precisely control the keybinding navigation between lines. 
+
+• Although the default line setting in Emacs is =wrapping on=, you may want to
+  check your local setting with ~C-h m~ to see which exactly major/minor-mode
+  you're using before rushing in trying other settings. 
+
+• If you're using =j(or k)= to navigate between lines, check which function it is binded
+to. ~evil-next-line~ moves between _logical_ lines. Conventionally this binds to =j= in
+evil-mode and VIM. ~evil-next-visual-line~ moves between _screen_ lines. Conventionally this binds to =gj=.  
+
+• Note most other line operation commands act on =logical lines=, NOT screen
+lines. For instance, ~C-k~ kills a =logical line=.
+
+• If making MS office word instances: =truncate off= and =text-mode= are like violent _justified on both sides_; =visual-line-mode=
+  and =auto-fill-paragraph= are like _left alighned_.
+
+• I personally use =auto-fill-paragraph= with self-setting fill-column to write
+  articles, pressing ~M-q~ to arrange lines as I needed. It's neatly fast, coz other automated
+  indentation rules are quite complicated and therefore slows your computer.
+
+This may help you decide your configuration:
+[[/img/line operation 2.jpg]]
+
+*** More reading
+• This code can rearrange wrapped lines to long logical lines：
+#+begin_src emacs-lisp
+;; unfill paragraph: the opposite of fill-paragraph
+(defun y:unfill-paragraph-or-region (&optional region)
+  "Takes a multi-line paragraph and makes it into a single line of text."
+  (interactive (progn (barf-if-buffer-read-only) '(t)))
+  (let ((fill-column (point-max))
+        ;; This would override `fill-column' if it's an integer.
+        (emacs-lisp-docstring-fill-column t))
+    (fill-paragraph nil region)))
+(define-key global-map "\M-Q" 'y:unfill-paragraph-or-region)
+#+end_src
+
+• More helpful packages about line breaking：
+
+[[https://github.com/davidshepherd7/aggressive-fill-paragraph-mode][davidshepherd7/aggressive-fill-paragraph-mode: An emacs minor-mode for keeping paragraphs filled (in both comments and prose) - https://github.com/]]
