@@ -383,7 +383,11 @@ There are also two ways of calling reveal.js as described by the readme. I am us
    :LOGBOOK:
    - State "DONE"       from "TODO"       [2019-08-25 Sun 23:51]
    :END:
- 
+
+ #+begin_description
+Learning notes about Emacs.
+#+end_description
+
 This article is part of my learning notes of Mastering Emacs in 21 Day, which is a series of Chinese based tutorials post by [[https://github.com/zilongshanren][zilongshanren (子龙山人) - https://github.com/]] The official learning note is at here: [[http://book.emacs-china.org/][Master Emacs in 21 Days - http://book.emacs-china.org/]]  My notes extend the official notes with my personal learning experience. Since there has been ample discussion of using and learning Emacs in English community, my learning note is written in Chinese to benefit more addtional readers. 
 
 这篇文章是我学习子龙山人老师的 spacemacs rock 系列笔记之一。在原视频配套的基础上
@@ -633,7 +637,7 @@ translation if needed:
 [[http://blog.lujun9972.win/blog/2018/06/03/emacs%E5%B8%AE%E4%BD%A0%E8%BF%9B%E8%A1%8C%E8%8B%B1%E6%96%87%E5%86%99%E4%BD%9C/][Emacs帮你进行英文写作 - 暗无天日 - http://blog.lujun9972.win/]]
 
 [[https://www.hahack.com/tools/ispell-and-flyspell/][ispell与emacs的拼写检查 | HaHack - https://www.hahack.com/]]
-** DONE Overview: Emacs line truncation in text editing 【Emacs org 换行排版操作 汇总指南】 :@Tech:Emacs:Org_mode:
+** DONE Overview: Emacs line truncation in text editing 【Emacs org 换行/对齐/排版  汇总指南】 :@TECH:Emacs:Org_mode:
    CLOSED: [2019-09-17 Tue 12:53]
    :PROPERTIES:
    :EXPORT_FILE_NAME: emacs-line-truncation-in-text-editing-mode
@@ -641,7 +645,11 @@ translation if needed:
    :LOGBOOK:
    - State "DONE"       from "TODO"       [2019-09-17 Tue 12:53]
    :END:
- 
+
+ #+begin_description
+Line visualization and navigation settings in Emacs text editing.
+#+end_description
+
 The text line (with line number) in Emacs, is called =logical line= . When a logical
 line gets _too long_ in typing window, Emacs provides two distinguish solutions: =line truncation= and =line wrapping= .
 
