@@ -378,7 +378,7 @@ There are also two ways of calling reveal.js as described by the readme. I am us
 ** DONE Mastering emacs in 21 days learning notes - 1 【21 天学会 Emacs 笔记 - 1】 :@TECH:Emacs:
    CLOSED: [2019-08-25 Sun 23:51]
    :PROPERTIES:
-   :EXPORT_FILE_NAME: mastering-emacs-in-21-days-learning-notes-day-1-21-天学会 emacs 笔记-第一天
+   :EXPORT_FILE_NAME: mastering-emacs-in-21-days-learning-notes-day
    :END:
    :LOGBOOK:
    - State "DONE"       from "TODO"       [2019-08-25 Sun 23:51]
@@ -518,7 +518,7 @@ Emac-lisp-mode/ ）相当于一个 list，就是一些它自带的 function。�
 ** DONE Installing Source Code Pro in Ubuntu and MS Windows plateform 2019 【2019 版 Souce Code Pro 字体安装指南】 :@TECH:Ubuntu:
    CLOSED: [2019-09-03 Tue 21:53]
    :PROPERTIES:
-   :EXPORT_FILE_NAME: source-code-pro-在-ubuntu-和-ms-windows 的安装
+   :EXPORT_FILE_NAME: source-code-pro-in-ubuntu-mswindows
    :END:
    :LOGBOOK:
    - State "DONE"       from "TODO"       [2019-09-03 Tue 21:53]
@@ -703,3 +703,10 @@ This may help you decide your configuration:
 • More helpful packages about line breaking：
 
 [[https://github.com/davidshepherd7/aggressive-fill-paragraph-mode][davidshepherd7/aggressive-fill-paragraph-mode: An emacs minor-mode for keeping paragraphs filled (in both comments and prose) - https://github.com/]]
+** DONE Linear algebra done right :@MATH:Emacs:
+   CLOSED: [2019-09-18 Wed 21:48]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: Linear-algebra
+   :END:
+ 
+test for new taxonomy
