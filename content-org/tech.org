@@ -710,3 +710,19 @@ This may help you decide your configuration:
    :END:
  
 test for new taxonomy
+(require comm fed
+** TODO Text based file management in Emacs 【Emacs 文本文件管理】
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: Test-based-file-management-in-emacs
+   :END:
+ 
+People discuss the most efficient way text management methods for a number of reasons. Someone wants to build an digitalized notebooks for new
+knowledge. Someone wants to manage the increasing case files in office work.
+Someone wants to review thousands of articles they hoard on internet. Either
+way, I call that 'text digesting system'.    
+
+I think we have all been drenched in various tools, some excel at
+surpporting markdown, some are good at coding highlighting, some surpport
+real-time online collaboration. If one haven't used Emacs, I would probably
+recommend Evernote or Onenote. But softwares like them has glitches when there
+are thousand files to manage.
