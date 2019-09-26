@@ -2,7 +2,7 @@
 title = "Overview: Emacs line truncation in text editing 【Emacs org 换行/对齐/排版  汇总指南】"
 summary = "Line visualization and navigation settings in Emacs text editing."
 date = 2019-09-17T12:53:00+01:00
-lastmod = 2019-09-23T16:38:22+01:00
+lastmod = 2019-09-24T13:07:27+01:00
 tags = ["Emacs", "Org-mode"]
 categories = ["TECH"]
 draft = false
@@ -13,6 +13,8 @@ line gets <span class="underline">too long</span> in typing window, Emacs provid
 
 
 ## Common approaches {#common-approaches}
+
+---
 
 Here is the link of technicalities of the solutions:
 

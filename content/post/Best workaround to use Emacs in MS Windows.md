@@ -2,13 +2,15 @@
 title = "Best workaround to use Emacs in MS Windows 【在 MS windows 中使用 Emacs 的最佳解决方案】"
 summary = "Experience Emacs with best workaround enviroment in windows."
 date = 2019-08-16T01:03:00+01:00
-lastmod = 2019-09-23T16:38:21+01:00
+lastmod = 2019-09-24T13:07:26+01:00
 tags = ["Emasc", "Msys2", "Windows10"]
 categories = ["TECH"]
 draft = false
 +++
 
 ## Background {#background}
+
+---
 
 Due to the working environment limitation, I occasionally have to use MS windows system (and therefore Emacs for Windows). But some similar users and I have constantly found cases where Emacs is significantly relying on \*unix system. So far, my experience is that compling Emacs in msys2 has been a best (maybe) workaround in this situation. If you this is relatable to you, you might want to give it a try:
 <https://chriszheng.science/2015/01/23/Guideline-for-building-GNU-Emacs-with-MSYS2-MinGW-w64/>
@@ -18,6 +20,8 @@ There has been ample discussion online, so I will be writting in Chinese. If you
 
 
 ## MSYS2 {#msys2}
+
+---
 
 MSYS2 是 MS-Windows 下编译自由/开源软件的一个环境，衍生自 Cygwin，也就是说它和 Cygwin 一样，编译出的程序不能脱离 Cygwin 环境运行(其实就是离不开那几个 DLL 文件)。但 MSYS2 有一个很牛的地方是它自带了 MinGW-w64，MinGW-w64 可以认为是 MinGW 的升级版本，编译出的程序是原生的 Windows 程序，最大的特点和名字一样，支持编译出 64 位的程序。目前 MSYS2 和 MinGW-w64 开发都很活跃，两者结合，既发挥了 MSYS2 对\*NIX 世界的兼容性，又能用 MinGW-w64 编译原生代码，很爽，自带的包很丰富，包管理采用 Arch Linux 用的 Pacman，非常的方便。
 
@@ -29,6 +33,8 @@ Msys2 的下载安装都很简单，参照管网指南操作即可。中文用�
 
 
 ## Compiling Emacs {#compiling-emacs}
+
+---
 
 _在 msys2 里面安装最简单的是使用 pacman -S Emacs，安装完的版本在 c:/msys2/usr/bin 里，dotfile 在 c:/msys2/home/user_.emacs.d 下方，我试图运行内置 function，正常，但是使用 dotfile 加载同样的 function 总显示加载错误。/
 
@@ -45,6 +51,8 @@ $ git config core.autocrlf false
 
 
 ## Advantages {#advantages}
+
+---
 
 跟以前使用的 Emacs for MS Win64 一样，emacs 配置文件还是默认在 C:/Users/AppData/Roaming/.emacs.d 中。大多数 package 放在本地 c:/msys2/home/user/.emacs.d/elpa/yourdir/以后使用 `(add-to-list 'exec-path "yourdir")` 即可正常调用。
 

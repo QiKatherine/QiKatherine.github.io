@@ -2,13 +2,14 @@
 title = "Installing Source Code Pro in Ubuntu and MS Windows plateform 2019 【2019 版 Souce Code Pro 字体安装指南】"
 summary = "Installing source code pro and trouble shooting."
 date = 2019-09-03T21:53:00+01:00
-lastmod = 2019-09-23T16:38:22+01:00
+lastmod = 2019-09-24T13:07:27+01:00
 tags = ["Ubuntu"]
 categories = ["TECH"]
 draft = false
 +++
 
-使用 Emacs 的时候，有时候会用到 Source Code Pro 字体，尤其是 Spacemacs 以它作为默认字体。未安装会造成 Emacs 启动时出现报错。可以使用以下方式安装 2019 年 2.03 版本字体。
+使用 Emacs 的时候，有时候会用到 Source Code Pro 字体，尤其是 Spacemacs 以它作为默认字体。未安装会造成 Emacs 启动时出现报错。可以使用以下方式安装 2019 年 2.03
+版本字体。
 
 
 ## MS Windows {#ms-windows}

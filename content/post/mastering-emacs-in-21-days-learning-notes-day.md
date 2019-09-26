@@ -2,13 +2,19 @@
 title = "Mastering emacs in 21 days learning notes - 1 【21 天学会 Emacs 笔记 - 1】"
 summary = "Learning notes about Emacs."
 date = 2019-08-25T23:51:00+01:00
-lastmod = 2019-09-23T16:38:22+01:00
+lastmod = 2019-09-24T13:07:27+01:00
 tags = ["Emacs"]
 categories = ["TECH"]
 draft = false
 +++
 
-This article is part of my learning notes of Mastering Emacs in 21 Day, which is a series of Chinese based tutorials post by [zilongshanren (子龙山人) - https://github.com/](https://github.com/zilongshanren) The official learning note is at here: [Master Emacs in 21 Days - http://book.emacs-china.org/](http://book.emacs-china.org/)  My notes extend the official notes with my personal learning experience. Since there has been ample discussion of using and learning Emacs in English community, my learning note is written in Chinese to benefit more addtional readers.
+This article is part of my learning notes of Mastering Emacs in 21 Day, which is
+a series of Chinese based tutorials post by [zilongshanren (子龙山人) -
+https://github.com/](https://github.com/zilongshanren) The official learning note is at here: [Master Emacs in 21
+Days - http://book.emacs-china.org/](http://book.emacs-china.org/) My notes extend the official notes with my
+personal learning experience. Since there has been ample discussion of using and
+learning Emacs in English community, my learning note is written in Chinese to
+benefit more addtional readers.
 
 这篇文章是我学习子龙山人老师的 spacemacs rock 系列笔记之一。在原视频配套的基础上我还做了一些扩展和补充，有的知识点还加了视频对应【集数-分钟】的时间点，以便迅速观看视频.
 
@@ -67,7 +73,7 @@ GitHub 备份，在初始化文件里加上一个系统类型判断函数，让�
 
 这个知识点目前看起来很简单，但是以后涉及到要去其它.el 文件层层加载，记得这个顺序性 load 的特质会帮助理解 Emacs 的加载机制。
 
-•在 Emacs 里命令按行顺序执行 A--C，如果遇到“call A 的前提是先要加载 B function”（但是 B 没有加载在 workspace 里的情况时），Emacs 会先走开，去 B.el 相关的文件 load B function，执行完再回来继续加载剩余的东西，然后再执行 C。因此相互依赖的 feature 有可能因为调用顺序没安排好而导致 initiliaze 出错，这样能解决。为了解决依赖顺序造成的潜在问题，Purcell 写了一个 after-load 函数，目的是把一些相互依赖的 feature 的加载顺序理顺，例如 feature A 依赖于 feature B，则可以写成(after-load 'B 'A)，这样如果错误地在 B 之前 require 了 A 也不会影响正常启动：
+• 在 Emacs 里命令按行顺序执行 A--C，如果遇到“call A 的前提是先要加载 B function”（但是 B 没有加载在 workspace 里的情况时），Emacs 会先走开，去 B.el 相关的文件 load B function，执行完再回来继续加载剩余的东西，然后再执行 C。因此相互依赖的 feature 有可能因为调用顺序没安排好而导致 initiliaze 出错，这样能解决。为了解决依赖顺序造成的潜在问题，Purcell 写了一个 after-load 函数，目的是把一些相互依赖的 feature 的加载顺序理顺，例如 feature A 依赖于 feature B，则可以写成(after-load 'B 'A)，这样如果错误地在 B 之前 require 了 A 也不会影响正常启动：
 
 {{< highlight emacs-lisp >}}
 (defmacro after-load (feature &rest body)
@@ -89,16 +95,20 @@ GitHub 备份，在初始化文件里加上一个系统类型判断函数，让�
 • major mode 里面还有一个重要的概念是 hook。一个 major mode（ _e.g.
 Emac-lisp-mode_ ）相当于一个 list，就是一些它自带的 function。但这里还可以有一串儿 minor mode 挂在上面。这个 major mode 开启默认所有 list 上的特性都会被自动加载。如果我们需要的设置没有，需要手动添加，有可能是通过 hook，一般对于每个特定的 pack
 如果使用 hook，GitHub 上有具体设置指南。例如 `(add-hook 'emacs-lisp-mode-hook
-'show-paren-mode)` . ![](./static/img/emacs 21 1-1.jpg)
+'show-paren-mode)` .
+![](/img/emacs 21 1-1.jpg)
 
 • Hook 就是一串特定的 functions: A hook is a Lisp variable which holds a list of functions, to be called on some well-defined occasion. 大部分 hook 都尽量是 normal 且一致的，方便全局调用，我们也会自己通过 add-hook 加 function 到 hook 上来满足特殊的需求。自行设计 hook list 要注意顺序问题，因为上文提到一串 function 是按顺序依次执行的，如果后面的会影响前面的，那么顺序自定义就很重要。相关阅读: [Hooks - GNU Emacs Manual - https://www.gnu.org/](https://www.gnu.org/software/emacs/manual/html%5Fnode/emacs/Hooks.html)
 
 • Emacs 操作系统很像一个大的状态机，储存着很多可修改的状态。Mode 调用和设置也是通过 function 修改 value 实现。Emacs 虽然因为没有变量空间而导致所有变量全局可见,但是因为 mode 的 default 设置，使得有些 value 只是 buffer local 的(aka mode 每个 buffer 都独立保留了一份 default 值)，如果需要在全局应用某些 mode，要注意上 hook 或者修改 global setting，注意查看每个安装文档的说明。
 
-• 如上文所说，让 mode 生效有三种方式（1）临时调用 M-x company-mode，可以反复修改 value，但有可能只修改了临时 buffer local value（2）直接修改 mode.el 脚本；都不如这种好：(3) 写好 mode 设置放在 init.el 里面让它在 Emacs 开启时设置好。【2-2'10】以 company-mode 为例讲解以上知识：mode 的种类（还有其他 state）开启还是关闭，本身是 value，每个 buffer 都有储存一份，所以 setq 只会修改本 buffer 的值，setq-default 才会修改全体 buffer 的值。只有当一个 value 生来就是全局变动的时候，setq 和 setq-default 才是一回事。set-key 也是类似，如下注意左右列的区别，尤其当想要的修改下次没生效，查看变量是否是 buffer local 很重要。例如以下区别：
+• 如上文所说，让 mode 生效有三种方式（1）临时调用 M-x company-mode，可以反复修改 value，但有可能只修改了临时 buffer local value（2）直接修改 mode.el 脚本；都不如这种好：(3) 写好 mode 设置放在 init.el 里面让它在 Emacs 开启时设置好。【2-2'10】以 company-mode 为例讲解以上知识：mode 的种类（还有其他 state）开启还是关闭，本身是 value，每个 buffer 都有储存一份，所以 setq 只会修改本 buffer 的值，
+setq-default 才会修改全体 buffer 的值。只有当一个 value 生来就是全局变动的时候，
+setq 和 setq-default 才是一回事。set-key 也是类似，如下注意左右列的区别，尤其当想要的修改下次没生效，查看变量是否是 buffer local 很重要。例如以下区别：
 
-| (company-mode t)        | (global-company-mode t)          |
+| local setting           | global setting                   |
 |-------------------------|----------------------------------|
+| (company-mode t)        | (global-company-mode t)          |
 | (setq cursor-type 'bar) | (setq-default  cursor-type 'bar) |
 | (set-key ..)            | (global-set-key …)               |
 
@@ -117,7 +127,7 @@ Emac-lisp-mode_ ）相当于一个 list，就是一些它自带的 function。�
 ### 4.1 Auto-load 【2-15’00】 {#4-dot-1-auto-load-2-15-00}
 
 • 装好后重新打开 Emacs，我们看到 init.el 文件第一行要求是
-`（package-initialize)` 意思是自动去 elpa 目录里找安装好的 package，挨个扫描，找到 package-autoload.el 文件执行，预加载一些函数名进 workspace。为什么会有再初始时就有加载 autoload 这一过程呢？
+`(package-initialize)` 意思是自动去 elpa 目录里找安装好的 package，挨个扫描，找到 package-autoload.el 文件执行，预加载一些函数名进 workspace。为什么会有再初始时就有加载 autoload 这一过程呢？
 
 • 请思考如下问题。如果没有 autoload，你可以在 init.el 加载时就 load 各种各样的脚本，使得 emacs 在启动时就把整个使用过程中可能用到的函数一次性准备好。但这样真的好么？
 autoload 告诉 emacs 某个地方有一个定义好的函数，并且告诉 emacs，先别加载，只要记住在调用这个函数时去哪里寻找它的定义即可。这样做的一个好处是，避免在启动 emacs 时因为执行过多代码而效率低下，比如启动慢，卡系统等。想象一下，如果你安装了大量的有关 python 开发的插件，而某次打开 emacs 只是希望写点日记，你肯定不希望这些插件在启动时就被加载，让你白白等上几秒，也不希望这些插件在你做文本编辑时抢占系统资源（内存，CPU 时间等）。所以，一个合理的配置应该是，当你打开某个 python 脚本，或者手动进入 python 的编辑模式时，才加载那些插件.
@@ -127,4 +137,4 @@ autoload 告诉 emacs 某个地方有一个定义好的函数，并且告诉 ema
 它执行过程如下，以 company 为例。在这个 package 安装好后 ，我们可以在.emacs.d/elpa 下看到 company 文件夹，包含了 company-xxxfunction.el 和一系列自解码.elc 二进制文件，这些即是 company-mode 的全部执行细节。Emacs 会自动遍历 company-20160325 里面所有文件，提取所有注释里有魔法语句；；;autoload 的内容，并根据这个注释自动生成一个一个的魔法语句块，全部存在 company-autoload.elc 文件里。例如一下魔法语句块就是根据第一行从 company.el 自动生成的：
 
 
-### 4.2 Non-autoload [] {#4-dot-2-non-autoload}
+### 4.2 Non-autoload[ ] {#4-dot-2-non-autoload}

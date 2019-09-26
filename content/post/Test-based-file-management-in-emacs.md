@@ -1,7 +1,8 @@
 +++
 title = "Text based file management in Emacs 【Emacs 文本文件管理】"
+summary = "Overview of text process tools in org-mode."
 date = 2019-09-22T23:56:00+01:00
-lastmod = 2019-09-23T16:38:22+01:00
+lastmod = 2019-09-24T13:07:28+01:00
 draft = false
 +++
 
@@ -36,6 +37,8 @@ Emacs org-mode meets different needs with:
 
 ## 1. Text search and classification {#1-dot-text-search-and-classification}
 
+---
+
 Softwares like Evernote or Onenote is excellent in most daily work. However, they also
 have glitches when there are a thousand files to manage, which adding together became the reason that I
 moved my text work to Emacs. For example, the most common way to manage files
@@ -65,6 +68,8 @@ searching `zilongshanren` in `~/.spacemacs.d/init.el` buffer.
 
 ## 2. Structure visualization {#2-dot-structure-visualization}
 
+---
+
 Org-mode seems to encourage or intentionally facilitate you organize text
 articles in ONE file. For example, all this website is written in one file with
 different categories to distinguish taxonomy. All the org-capture facilitated
@@ -79,6 +84,8 @@ Check this:
 
 ## 3. Knowledge graph {#3-dot-knowledge-graph}
 
+---
+
 This is for cases where you want lots of cross-references on files may be in
 different directories.
 [Semantic Synchrony, ultrafast video demo - YouTube - https://www.youtube.com/](https://www.youtube.com/watch?v=R2vX2oZmUUM&feature=youtu.be)
@@ -87,3 +94,5 @@ https://github.com/](https://github.com/synchrony/smsn/wiki/A-video-introduction
 
 
 ## 4. Anki {#4-dot-anki}
+
+---
