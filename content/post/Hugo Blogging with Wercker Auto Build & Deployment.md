@@ -2,10 +2,11 @@
 title = "Hugo Blogging with Wercker Auto Build & Deployment 【用 Wercker 自动部署网站】"
 summary = "Using Wercker to for automated website code build and deployment"
 date = 2019-07-26T01:02:00+01:00
-lastmod = 2019-09-24T13:07:26+01:00
+lastmod = 2019-09-30T00:37:32+01:00
 tags = ["Hugo", "Git", "Wercker", "Org-mode", "Emacs"]
 categories = ["TECH"]
 draft = false
+image = "img/111.jpg"
 +++
 
 The automated static website generators (e.g. Octopress, Hexo and Hugo) have made **website buiding and maintaining** way more relaxed than before. The workflow has been simplified to: write and save markdown -- preview on the localhost 1313 -- generate the ~/public (HTML) file -- push to a remote server (Github) -- backup source code.

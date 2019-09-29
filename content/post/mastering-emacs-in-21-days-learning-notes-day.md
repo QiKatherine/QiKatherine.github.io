@@ -2,10 +2,11 @@
 title = "Mastering emacs in 21 days learning notes - 1 【21 天学会 Emacs 笔记 - 1】"
 summary = "Learning notes about Emacs."
 date = 2019-08-25T23:51:00+01:00
-lastmod = 2019-09-24T13:07:27+01:00
+lastmod = 2019-09-30T00:37:32+01:00
 tags = ["Emacs"]
 categories = ["TECH"]
 draft = false
+image = "img/111.jpg"
 +++
 
 This article is part of my learning notes of Mastering Emacs in 21 Day, which is
@@ -106,7 +107,7 @@ Emac-lisp-mode_ ）相当于一个 list，就是一些它自带的 function。�
 setq-default 才会修改全体 buffer 的值。只有当一个 value 生来就是全局变动的时候，
 setq 和 setq-default 才是一回事。set-key 也是类似，如下注意左右列的区别，尤其当想要的修改下次没生效，查看变量是否是 buffer local 很重要。例如以下区别：
 
-| local setting           | global setting                   |
+| Local setting           | Global setting                   |
 |-------------------------|----------------------------------|
 | (company-mode t)        | (global-company-mode t)          |
 | (setq cursor-type 'bar) | (setq-default  cursor-type 'bar) |

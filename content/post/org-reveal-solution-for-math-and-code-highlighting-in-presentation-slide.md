@@ -2,10 +2,11 @@
 title = "Org-reveal: solution for math and code highlighting in presentation slide 【在 ppt 中展示代码高亮，数学公式的优秀解决方案】"
 summary = "Learning notes and trouble shooting for using org-reveal."
 date = 2019-08-23T22:50:00+01:00
-lastmod = 2019-09-24T13:07:27+01:00
+lastmod = 2019-09-30T00:37:32+01:00
 tags = ["Emacs", "Org-mode"]
 categories = ["TECH"]
 draft = false
+image = "img/111.jpg"
 +++
 
 I have used flash card for remembering new things for years. Before using software like org-drill or Anki, I was pretty much putting everything in slides, printing on papers and cutting it into a portable sized card and carried in my pocket. So I have been exploring an ultimate solution of perfect formatting for everything. This picture shows what I feel about slides making tools.

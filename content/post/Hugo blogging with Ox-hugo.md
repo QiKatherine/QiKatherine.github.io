@@ -1,10 +1,11 @@
 +++
 title = "Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】"
 summary = "My personal experience of blogging with Emacs/Spacemacs and plug-in ox-hugo, along with some explaination of Hugo's working structure."
-lastmod = 2019-09-24T13:07:25+01:00
+lastmod = 2019-09-30T00:37:32+01:00
 tags = ["Hugo", "Ox-hugo"]
 categories = ["TECH"]
 draft = false
+image = "img/111.jpg"
 +++
 
 There have been many good articles talking about using `ox-hugo` to aid

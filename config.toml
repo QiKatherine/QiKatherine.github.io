@@ -16,7 +16,7 @@ pygmentsStyle = 'dracula' #高亮主题
 home = ["HTML", "RSS", "Algolia"]
 
 [params]
-  header_image = "img/111.jpg"
+  header_image = "img/vivi.jpg"
   SEOTitle = "Katherine He Blog|何琪的博客"
   description = "Katherine He coder statistician econometrician machine learning"
   keyword = " "
@@ -74,12 +74,12 @@ home = ["HTML", "RSS", "Algolia"]
   #facebook      = "full profile url in facebook"
   #googleplus    = "full profile url in googleplus"
   #twitter       = "full profile url in twitter"
-  linkedin       = "https://www.linkedin.com/in/yourlinkedinid"
+  #linkedin       = "https://www.linkedin.com/in/yourlinkedinid"
   stackoverflow  = "https://stackoverflow.com/users/yourstackoverflowid"
   #instagram     = "full profile url in instagram"
   github         = "https://github.com/yourgithub"
   wechat         = "your wechat qr code image"
-#  medium         = "full profile url in medium"
+  #medium         = "full profile url in medium"
   #pinterest     = "full profile url in pinterest"
   #reddit        = "full profile url in reddit"
   #gitlab        = "full profile url in gitlab"
@@ -88,25 +88,13 @@ home = ["HTML", "RSS", "Algolia"]
   #git           = "full profile url for git user"
   
   [[params.friend_link]]
-  title = "Linda的博客"
-  href =  "https://zhaozhihan.com"
+  title = "Twitter @ 伯逸"
+  href =  "https://twitter.com/laowai121"
 
   [[params.bookmark_link]]
   title =  "Martin Fowler"
   href =  "https://martinfowler.com"
-  [[params.bookmark_link]]
-  title = "ServiceMesher"
-  href =  "http://www.servicemesher.com"
-  [[params.bookmark_link]]
-  title =  "Pxhere"
-  href = "https://pxhere.com"
-  [[params.bookmark_link]]
-  title = "unsplash"
-  href = "https://unsplash.com"
-  
-  [[params.addtional_menus]]
-  title =  "BOOKS"
-  href =  "/top/books/"
+
   [[params.addtional_menus]]
   title =  "ABOUT"
   href =  "/top/about/"

@@ -2,8 +2,9 @@
 title = "Text based file management in Emacs 【Emacs 文本文件管理】"
 summary = "Overview of text process tools in org-mode."
 date = 2019-09-22T23:56:00+01:00
-lastmod = 2019-09-24T13:07:28+01:00
+lastmod = 2019-09-30T00:37:33+01:00
 draft = false
+image = "img/111.jpg"
 +++
 
 People discuss the most efficient way text management methods for a number of reasons: someone wants to build a digitalized notebooks for new
@@ -52,9 +53,10 @@ After a long while of managing hundred notes, I noticed the most frequently used
 efficient) function is =global search =.  I still use categories and tags,but
 that's just to maintain my overview of the structure of all articles.
 
-I use `helm-ag`, the silver search which is a searcher reconstructed with C and it's SO FAST.
-The linux command line search tool speed ranks as: `ag > pt > ack > grep`. It is
-said that the ag search is 5-10 times faster than ack on average.
+I use `helm-ag`, the silver search which is a searcher reconstructed with C and
+it's SO FAST, especially in large files or codes with over 400,000 lines.
+The linux command line search tool speed ranks as: `ag > pt > ack > grep`.
+Acorrding to requent users, the `ag` search is 5-10 times faster than `ack` on average.
 
 This is my spacemacs config file, which is a big text file tree that I
 need to comb through constantly.
@@ -87,12 +89,18 @@ Check this:
 ---
 
 This is for cases where you want lots of cross-references on files may be in
-different directories.
+different directories:
+
 [Semantic Synchrony, ultrafast video demo - YouTube - https://www.youtube.com/](https://www.youtube.com/watch?v=R2vX2oZmUUM&feature=youtu.be)
-[A video introduction to Semantic Synchrony · synchrony/smsn Wiki -
+[
+A video introduction to Semantic Synchrony · synchrony/smsn Wiki -
 https://github.com/](https://github.com/synchrony/smsn/wiki/A-video-introduction-to-Semantic-Synchrony)
 
 
 ## 4. Anki {#4-dot-anki}
 
 ---
+
+<span class = "underline">baby</span>
+
+@@html:<span style="color:red"> TODO</span>

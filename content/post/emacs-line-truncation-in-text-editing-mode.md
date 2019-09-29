@@ -2,10 +2,11 @@
 title = "Overview: Emacs line truncation in text editing 【Emacs org 换行/对齐/排版  汇总指南】"
 summary = "Line visualization and navigation settings in Emacs text editing."
 date = 2019-09-17T12:53:00+01:00
-lastmod = 2019-09-24T13:07:27+01:00
+lastmod = 2019-09-30T00:37:33+01:00
 tags = ["Emacs", "Org-mode"]
 categories = ["TECH"]
 draft = false
+image = "img/111.jpg"
 +++
 
 The text line (with line number) in Emacs, is called `logical line` . When a logical

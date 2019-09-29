@@ -3,6 +3,7 @@
    #+hugo_auto_set_lastmod: t
    #+hugo_code_fence: nil  
    #+hugo_front_matter_key_replace: description>summary
+   #+hugo_custom_front_matter: image img/111.jpg
    
 * Blog
 ** DONE Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】 :@TECH:Hugo:Ox_hugo:
@@ -618,7 +619,8 @@ aspell release 0.60 or greater is required
 [[https://emacs.stackexchange.com/questions/41892/aspell-with-emacs-26-1-on-ms-windows/45752#45752][flyspell - aspell with emacs 26.1 on ms windows - Emacs Stack Exchange - https://emacs.stackexchange.com/]]
 
 The above discussion shows that by the time being of emacs 26 released, there was no
-binary aspell in windows OS, so the workaround was to use hunspell. Now the =final solution= has been provided by installing aspell with *Msys2*.
+binary aspell in windows OS, so the workaround was to use hunspell. Now the
+=final solution= has been provided by =installing aspell with *Msys2*=.
 
 更新 Emacs 以后发现 aspell 不能用了，调用 ~ispell-minor-mode~ 时一直收到以上报错，查
 看以上 stack exchange 的答案发现， 错误原因是 Emacs 26 以上的版本刚发布的时候 windows 还没有与
@@ -759,7 +761,7 @@ Emacs org-mode meets different needs with:
 
 • How to present in slides: Org-reveal
 
-• How to generate static website: Hugo + Ox-hugo
+• How to generate static website: Hugo + Ox-hugo 
 
 *** 1. Text search and classification
 -----
@@ -806,12 +808,13 @@ Check this:
 *** 3. Knowledge graph
 -----
 This is for cases where you want lots of cross-references on files may be in
-different directories.
+different directories:
+
 [[https://www.youtube.com/watch?v=R2vX2oZmUUM&feature=youtu.be][Semantic Synchrony, ultrafast video demo - YouTube - https://www.youtube.com/]]
-[[https://github.com/synchrony/smsn/wiki/A-video-introduction-to-Semantic-Synchrony][A video introduction to Semantic Synchrony · synchrony/smsn Wiki -
+[[https://github.com/synchrony/smsn/wiki/A-video-introduction-to-Semantic-Synchrony][
+A video introduction to Semantic Synchrony · synchrony/smsn Wiki -
 https://github.com/]]
 
 *** 4. Anki
 -----
-
-
+#+MACRO: color @@html:<span style="color:$1">$2</span>
