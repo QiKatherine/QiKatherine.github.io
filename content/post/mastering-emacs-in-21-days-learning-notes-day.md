@@ -2,7 +2,7 @@
 title = "Mastering emacs in 21 days learning notes - 1 【21 天学会 Emacs 笔记 - 1】"
 summary = "Learning notes about Emacs."
 date = 2019-08-25T23:51:00+01:00
-lastmod = 2019-09-30T00:37:32+01:00
+lastmod = 2019-09-30T23:58:12+01:00
 tags = ["Emacs"]
 categories = ["TECH"]
 draft = false
@@ -99,7 +99,7 @@ Emac-lisp-mode_ ）相当于一个 list，就是一些它自带的 function。�
 'show-paren-mode)` .
 ![](/img/emacs 21 1-1.jpg)
 
-• Hook 就是一串特定的 functions: A hook is a Lisp variable which holds a list of functions, to be called on some well-defined occasion. 大部分 hook 都尽量是 normal 且一致的，方便全局调用，我们也会自己通过 add-hook 加 function 到 hook 上来满足特殊的需求。自行设计 hook list 要注意顺序问题，因为上文提到一串 function 是按顺序依次执行的，如果后面的会影响前面的，那么顺序自定义就很重要。相关阅读: [Hooks - GNU Emacs Manual - https://www.gnu.org/](https://www.gnu.org/software/emacs/manual/html%5Fnode/emacs/Hooks.html)
+• Hook 就是一串特定的 functions: A hook is a Lisp variable which holds a list of functions, to be called on some well-defined occasion. 大部分 hook 都尽量是 normal 且一致的，方便全局调用，我们也会自己通过 add-hook 加 function 到 hook 上来满足特殊的需求。自行设计 hook list 要注意顺序问题，因为上文提到一串 function 是按顺序依次执行的，如果后面的会影响前面的，那么顺序自定义就很重要。相关阅读: [Hooks - GNU Emacs Manual - https://www.gnu.org/](https://www.gnu.org/software/emacs/manual/html%5Fnode/emacs/Hooks.hrequest json-mode all-the-icons-dired edit-indirecttml)
 
 • Emacs 操作系统很像一个大的状态机，储存着很多可修改的状态。Mode 调用和设置也是通过 function 修改 value 实现。Emacs 虽然因为没有变量空间而导致所有变量全局可见,但是因为 mode 的 default 设置，使得有些 value 只是 buffer local 的(aka mode 每个 buffer 都独立保留了一份 default 值)，如果需要在全局应用某些 mode，要注意上 hook 或者修改 global setting，注意查看每个安装文档的说明。
 

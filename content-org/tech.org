@@ -52,14 +52,14 @@ org file。网站 org 源码从 org markup 形式到 hugo section 的 front info
 [[https://raw.githubusercontent.com/kaushalmodi/ox-hugo/master/doc/ox-hugo-manual.org][Full website source file]]
 
 *** 1. Front matter 页首信息
-Hugo 本身其实支持直接把.org 文件渲染成 html 发布，但是许多人提到其实支持得不是很好。Hugo 支持最好的 markdown 语法类型是 blackfriday markdown。对很多 Emacs user 来说 org-mode 就像把有力的大锤，碰上跟写作沾边的任务不能抡一下是很遗憾的。所以可以使用这款非常棒的后端插件 ~ox-hugo~ 来支持 org-mode 写博文。它的解决方式是：把 org 文件转成 blackfriday markdown, 然后再生成 html 文件。首先我们详细看 ~ox-hugo~ 官网对其功能的解说：
+Hugo 本身其实支持直接把.org 文件渲染成 HTML 发布，但是许多人提到其实支持得不是很好。Hugo 支持最好的 markdown 语法类型是 blackfriday markdown。对很多 Emacs user 来说 org-mode 就像把有力的大锤，碰上跟写作沾边的任务不能抡一下是很遗憾的。所以可以使用这款非常棒的后端插件 ~ox-hugo~ 来支持 org-mode 写博文。它的解决方式是：把 org 文件转成 blackfriday markdown, 然后再生成 HTML 文件。首先我们详细看 ~ox-hugo~ 官网对其功能的解说：
 
 #+begin_quote
 According to the information documentation, ~ox-hugo~ is an Org exporter backend that exports Org to Hugo-compatible Markdown (Blackfriday) and also generates the front matter (in TOML or YAML format).
 #+end_quote 
 
 	
-简言之，我们主要使用 ~ox-hugo~ 做两件事（1）把 org 格式内容转换成 markdown 格式内容；（2）解析 org file 中的用 org 语法写 front-matter，生成 Hugo 要求语法的 front-matter，使得 Hugo 通过正确的信息生成的 html 。那么 front-matter 具体指什么呢？
+简言之，我们主要使用 ~ox-hugo~ 做两件事（1）把 org 格式内容转换成 markdown 格式内容；（2）解析 org file 中的用 org 语法写 front-matter，生成 Hugo 要求语法的 front-matter，使得 Hugo 通过正确的信息生成的 HTML 。那么 front-matter 具体指什么呢？
 
 
 
@@ -100,6 +100,7 @@ Hugo will automatically add front matter information at the top of the article l
 以 ~:properties:~ 这块为代表的代码就是 org 以自己的方式定义 meta
 information。~ox-hugo~ 会解析改写这个这些代码以生成 hugo 可以识别的 YAML 等 front matter.
 	
+*** TODO 
 Ox-hugo 一般要求至少要有 ~:EXPORT_FILE_NAME:~ 。我们需要通过这个命令告诉
 ox-hugo"有新的标题和内容需要去导出"。
 
@@ -110,7 +111,7 @@ ox-hugo"有新的标题和内容需要去导出"。
 org-mode 特色的命名方式设计的变量，类似的语法在其他 org 文章的管理信息中也可以
 看到。而 front-matter 这些变量
 在 markdown，网页 config file 等其它文件里都有。只是 ~:PROPERTIES:~ 这种表达形式
-是 ox-hugo 特色写法。换做 org 支持的另一种 projectile 导出 html 的 front matter 可能是这样:base-directory "~/Dropbox/org/blog/".
+是 ox-hugo 特色写法。换做 org 支持的另一种 projectile 导出 HTML 的 front matter 可能是这样:base-directory "~/Dropbox/org/blog/".
 
 
 *** 3. Content type
@@ -164,7 +165,9 @@ content
 [[/img/Hugo blogging with Ox-hugo 3.png]]
 
 *** 7. Heading management
-The official documentation as well as the attached youtube tutorials have provided great explaintation of how hugo translate metadata of _index.md files to the headings of html with Hugo heading management system.
+The official documentation as well as the attached youtube tutorials have
+provided great explaintation of how hugo translate metadata of _index.md files
+to the headings of HTML with Hugo heading management system.
 	
 建立一个有一篇文章的 post
 [[/img/Hugo blogging with Ox-hugo 4.png]]
@@ -182,7 +185,7 @@ The official documentation as well as the attached youtube tutorials have provid
 这段是 index 管理 page boundle 的良好功能的又一个展现:通过 taxonomy index pages 就能建立一系列分类页面,例如 tags and category,为分类页面单独建立管理 page 使拥有这些属性的文章被自右交叉引用,用户可以通过点击任何一个 tag 或者 categories 就能达到文章页面。在 org 写作里通过在 headings 添加实现，org 到 md 转化由 ~ox-hugo~ 完成，语法差别很细微。如下图，还是上文的源码，只是为文章添加了两种 categories，两种 tag:
 [[/img/Hugo blogging with Ox-hugo 7.png]]
 
-在源码的三篇文章里分类 update 和 reviews 被提到两次，标签 fear 和 herpes 也被提到两次。从生成的 html 来看，
+在源码的三篇文章里分类 update 和 reviews 被提到两次，标签 fear 和 herpes 也被提到两次。从生成的 HTML 来看，
 index.md 刚好与之对应：分类的 index page 提供了所有需要的分类（i.e. tags, categories）每个分类下还有 list page 显示所有与之相关的页面内容。导航就是这样实现建立的，使得我们能“实现不同分类间的交叉引用，点击任何一个入口进入文章”。
 
 ** DONE Hugo Blogging with Wercker Auto Build & Deployment 【用 Wercker 自动部署网站】 :@TECH:Hugo:Git:Wercker:Org_mode:Emacs:
@@ -361,7 +364,7 @@ The installation did three things (1)installing ox-reveal (2)installing reveal.j
 
 I add ox-reveal in the package list of spacemacs dotfile, reloading the dotfile but it did not installed. The author also mentioned that ox-reveal in MELPA maybe out of date. So alternatively, I downloaded the .el file and manually required it.
 
-There are also two ways of calling reveal.js as described by the readme. I am using the second where the source url was put in the config file. Notice there seems to be an old url(http://cdn.jsdelivr.net/reveal.js/3.0.0/) which does NOT work any more. If your exported html file is just an empty page with theme background, check if you are refering to the right url. The current source and config code is shown below:
+There are also two ways of calling reveal.js as described by the readme. I am using the second where the source url was put in the config file. Notice there seems to be an old url(http://cdn.jsdelivr.net/reveal.js/3.0.0/) which does NOT work any more. If your exported HTML file is just an empty page with theme background, check if you are refering to the right url. The current source and config code is shown below:
 
 
 #+begin_src emacs-lisp
@@ -491,7 +494,7 @@ Emac-lisp-mode/ ）相当于一个 list，就是一些它自带的 function。�
 'show-paren-mode)~ . 
 [[/img/emacs 21 1-1.jpg]]
 	
-• Hook 就是一串特定的 functions: A hook is a Lisp variable which holds a list of functions, to be called on some well-defined occasion. 大部分 hook 都尽量是 normal 且一致的，方便全局调用，我们也会自己通过 add-hook 加 function 到 hook 上来满足特殊的需求。自行设计 hook list 要注意顺序问题，因为上文提到一串 function 是按顺序依次执行的，如果后面的会影响前面的，那么顺序自定义就很重要。相关阅读: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html][Hooks - GNU Emacs Manual - https://www.gnu.org/]]
+• Hook 就是一串特定的 functions: A hook is a Lisp variable which holds a list of functions, to be called on some well-defined occasion. 大部分 hook 都尽量是 normal 且一致的，方便全局调用，我们也会自己通过 add-hook 加 function 到 hook 上来满足特殊的需求。自行设计 hook list 要注意顺序问题，因为上文提到一串 function 是按顺序依次执行的，如果后面的会影响前面的，那么顺序自定义就很重要。相关阅读: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.hrequest json-mode all-the-icons-dired edit-indirecttml][Hooks - GNU Emacs Manual - https://www.gnu.org/]]
 
 • Emacs 操作系统很像一个大的状态机，储存着很多可修改的状态。Mode 调用和设置也是通过 function 修改 value 实现。Emacs 虽然因为没有变量空间而导致所有变量全局可见,但是因为 mode 的 default 设置，使得有些 value 只是 buffer local 的(aka mode 每个 buffer 都独立保留了一份 default 值)，如果需要在全局应用某些 mode，要注意上 hook 或者修改 global setting，注意查看每个安装文档的说明。
 
@@ -675,7 +678,7 @@ line gets _too long_ in typing window, Emacs provides two distinguish solutions:
 -----
 Here is the link of technicalities of the solutions:
 
-[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Truncation.html][Truncation - GNU Emacs Lisp Reference Manual - https://www.gnu.org/]]
+[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Truncation.hrequest json-mode all-the-icons-dired edit-indirecttml][Truncation - GNU Emacs Lisp Reference Manual - https://www.gnu.org/]]
 
 I draw a more straightforward figure:
 [[/img/line operation 1.jpg]] 
@@ -803,7 +806,7 @@ In this case there are lots of software you can use to illustrate the in-file
 structure.
 
 Check this:
-[[http://ergoemacs.org/misc/mindmap_gantt_graphviz.html][Intro to Mindmap, Gantt Chart, Graphviz - http://ergoemacs.org/]] 
+[[http://ergoemacs.org/misc/mindmap_gantt_graphviz.hrequest json-mode all-the-icons-dired edit-indirecttml][Intro to Mindmap, Gantt Chart, Graphviz - http://ergoemacs.org/]] 
 
 *** 3. Knowledge graph
 -----
@@ -817,4 +820,86 @@ https://github.com/]]
 
 *** 4. Anki
 -----
-#+MACRO: color @@html:<span style="color:$1">$2</span>
+#+MACRO: color @@HTML:<span style="color:$1">$2</span>
+I have written a seperate article of Anki in this blog:
+
+
+** DONE Using Anki-editor to build flashcard in Org-mode 【用 Anki-editor 在 org-mode 中生成复杂记忆卡片】 :@TECH:windows:org_mode:Anki:
+   CLOSED: [2019-09-30 Mon 23:54]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: using-anki-editor-to-build-flashcard-in-org-mode
+   :END:
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2019-09-30 Mon 23:54]
+   :END:
+
+*** 1. Anki
+-----
+One of a major activity in my daily work is to learn new things. I have rely
+heavily on paper flashcard which gives me most flexibility on keeping tables, code, math
+functions etc. But the shortcoming is pretty obvious: there is no =scientific
+reviewing cycle=, and it's getting cumbersome to maintain and carry with.
+
+Then I dived into different softwares and discovered Anki has been exceled in
+every aspect that I could ever ask for. Let's see how Anki describe itself:
+
+#+begin_quote
+Anki is a program which makes remembering things easy. Because it's a lot more efficient than traditional study methods, you can either greatly decrease your time spent studying, or greatly increase the amount you learn.
+
+Anyone who needs to remember things in their daily life can benefit from Anki. Since it is content-agnostic and supports images, audio, videos and scientific markup (via LaTeX), the possibilities are endless.
+For example:
+
+• Learning a language
+• Studying for medical and law exams
+• Memorizing people's names and faces
+• Brushing up on geography
+• Mastering long poems
+• Even practicing guitar chords!
+#+end_quote
+
+However, importing complex content
+requires certain hacking of HTML. So the trick is: using org-mode with Emacs
+the org HTML export backend will export it to HTML. The Anki adds-on
+=AnkiConnect= will generate the ontent to flashcard. 
+
+[[https://apps.ankiweb.net/][Anki - powerful, intelligent flashcards - https://apps.ankiweb.net/]]
+
+*** 2. Installation
+-----
+The full installation link can be found from github repo:
+[[https://github.com/louietan/anki-editor][louietan/anki-editor: Emacs minor mode for making Anki cards with Org - https://github.com/]] 
+
+• Installing =AnkiConnect= in *Anki*: Tools -- adds-on -- Get Add-ons with code:2055492159.
+[[/img/anki.png]]
+
+• Installing =curl= in *MS Windows*:
+
+There are several ways of applying =curl= in windows: build-in curl, curl in
+Msys2, and scoop installed curl. The former two methods always have connecting issues
+in Emacs, so my way is to: =delete Msys2 curl and install with scoop.=
+
+• Installing =Anki-editor= in *Emacs*::
+ - Vanilla Emacs:
+#+begin_src 
+(use-package anki-editor
+  :ensure t)
+#+end_src
+ 
+ - Spacemacs:
+#+begin_src 
+dotspacemacs-additional-packages '(anki-editor)
+#+end_src
+
+*** Usage
+
+First of all, making sure Anki is =running all the time= so that Emacs can connect
+with it. =M-x anki-editor-mode= to enble minor-mode.
+[[/img/anki2.png]]
+Note: 
+=Error communicating with AnkiConnect using cURL: exited abnormally with code 2=
+means Emacs has trouble finding curl. Check if the path of curl has been added in exec-path.
+
+=Error communicating with AnkiConnect using cURL: exited abnormally with
+code 7= 
+means you need to run =Anki= before running Emacs command.
+

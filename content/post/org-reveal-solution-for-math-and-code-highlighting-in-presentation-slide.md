@@ -2,7 +2,7 @@
 title = "Org-reveal: solution for math and code highlighting in presentation slide 【在 ppt 中展示代码高亮，数学公式的优秀解决方案】"
 summary = "Learning notes and trouble shooting for using org-reveal."
 date = 2019-08-23T22:50:00+01:00
-lastmod = 2019-09-30T00:37:32+01:00
+lastmod = 2019-09-30T23:58:11+01:00
 tags = ["Emacs", "Org-mode"]
 categories = ["TECH"]
 draft = false
@@ -25,7 +25,7 @@ The installation did three things (1)installing ox-reveal (2)installing reveal.j
 
 I add ox-reveal in the package list of spacemacs dotfile, reloading the dotfile but it did not installed. The author also mentioned that ox-reveal in MELPA maybe out of date. So alternatively, I downloaded the .el file and manually required it.
 
-There are also two ways of calling reveal.js as described by the readme. I am using the second where the source url was put in the config file. Notice there seems to be an old url(<http://cdn.jsdelivr.net/reveal.js/3.0.0/>) which does NOT work any more. If your exported html file is just an empty page with theme background, check if you are refering to the right url. The current source and config code is shown below:
+There are also two ways of calling reveal.js as described by the readme. I am using the second where the source url was put in the config file. Notice there seems to be an old url(<http://cdn.jsdelivr.net/reveal.js/3.0.0/>) which does NOT work any more. If your exported HTML file is just an empty page with theme background, check if you are refering to the right url. The current source and config code is shown below:
 
 {{< highlight emacs-lisp >}}
 ;; Emacs

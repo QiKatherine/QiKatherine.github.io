@@ -1,7 +1,7 @@
 +++
 title = "Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】"
 summary = "My personal experience of blogging with Emacs/Spacemacs and plug-in ox-hugo, along with some explaination of Hugo's working structure."
-lastmod = 2019-09-30T00:37:32+01:00
+lastmod = 2019-09-30T23:58:11+01:00
 tags = ["Hugo", "Ox-hugo"]
 categories = ["TECH"]
 draft = false
@@ -43,11 +43,11 @@ org file。网站 org 源码从 org markup 形式到 hugo section 的 front info
 
 ## 1. Front matter 页首信息 {#1-dot-front-matter-页首信息}
 
-Hugo 本身其实支持直接把.org 文件渲染成 html 发布，但是许多人提到其实支持得不是很好。Hugo 支持最好的 markdown 语法类型是 blackfriday markdown。对很多 Emacs user 来说 org-mode 就像把有力的大锤，碰上跟写作沾边的任务不能抡一下是很遗憾的。所以可以使用这款非常棒的后端插件 `ox-hugo` 来支持 org-mode 写博文。它的解决方式是：把 org 文件转成 blackfriday markdown, 然后再生成 html 文件。首先我们详细看 `ox-hugo` 官网对其功能的解说：
+Hugo 本身其实支持直接把.org 文件渲染成 HTML 发布，但是许多人提到其实支持得不是很好。Hugo 支持最好的 markdown 语法类型是 blackfriday markdown。对很多 Emacs user 来说 org-mode 就像把有力的大锤，碰上跟写作沾边的任务不能抡一下是很遗憾的。所以可以使用这款非常棒的后端插件 `ox-hugo` 来支持 org-mode 写博文。它的解决方式是：把 org 文件转成 blackfriday markdown, 然后再生成 HTML 文件。首先我们详细看 `ox-hugo` 官网对其功能的解说：
 
 > According to the information documentation, `ox-hugo` is an Org exporter backend that exports Org to Hugo-compatible Markdown (Blackfriday) and also generates the front matter (in TOML or YAML format).
 
-简言之，我们主要使用 `ox-hugo` 做两件事（1）把 org 格式内容转换成 markdown 格式内容；（2）解析 org file 中的用 org 语法写 front-matter，生成 Hugo 要求语法的 front-matter，使得 Hugo 通过正确的信息生成的 html 。那么 front-matter 具体指什么呢？
+简言之，我们主要使用 `ox-hugo` 做两件事（1）把 org 格式内容转换成 markdown 格式内容；（2）解析 org file 中的用 org 语法写 front-matter，生成 Hugo 要求语法的 front-matter，使得 Hugo 通过正确的信息生成的 HTML 。那么 front-matter 具体指什么呢？
 
 Front matter give the information about the content, but NOT the information of content. It works as metadata to tell Hugo the general properties of the article. Hugo supports three types of front matter syntax: yaml, toml, json. Wheven you generate a new post/article/blog with
 
@@ -90,6 +90,9 @@ draft= true
 以 `:properties:` 这块为代表的代码就是 org 以自己的方式定义 meta
 information。~ox-hugo~ 会解析改写这个这些代码以生成 hugo 可以识别的 YAML 等 front matter.
 
+
+## <span class="org-todo todo TODO">TODO</span>  {#}
+
 Ox-hugo 一般要求至少要有 `:EXPORT_FILE_NAME:` 。我们需要通过这个命令告诉
 ox-hugo"有新的标题和内容需要去导出"。
 
@@ -99,7 +102,7 @@ ox-hugo"有新的标题和内容需要去导出"。
 接下来这个问题可能对多大多数前端 coder 和 Emacs 熟练手都不是问题，但是这两个段头部代码被我着实混淆了一阵：
 
 通用 Front matter 主管面向一个 article 内部的性质设置，例如写作作者，写作日期，写作 tag。Heading information 例如 `#+hugo_base_dir` 的概念局限于 `ox-hugo` 里，是遵从
-org-mode 特色的命名方式设计的变量，类似的语法在其他 org 文章的管理信息中也可以看到。而 front-matter 这些变量在 markdown，网页 config file 等其它文件里都有。只是 `:PROPERTIES:` 这种表达形式是 ox-hugo 特色写法。换做 org 支持的另一种 projectile 导出 html 的 front matter 可能是这样:base-directory "~/Dropbox/org/blog/".
+org-mode 特色的命名方式设计的变量，类似的语法在其他 org 文章的管理信息中也可以看到。而 front-matter 这些变量在 markdown，网页 config file 等其它文件里都有。只是 `:PROPERTIES:` 这种表达形式是 ox-hugo 特色写法。换做 org 支持的另一种 projectile 导出 HTML 的 front matter 可能是这样:base-directory "~/Dropbox/org/blog/".
 
 
 ## 3. Content type {#3-dot-content-type}
@@ -159,7 +162,9 @@ content
 
 ## 7. Heading management {#7-dot-heading-management}
 
-The official documentation as well as the attached youtube tutorials have provided great explaintation of how hugo translate metadata of \_index.md files to the headings of html with Hugo heading management system.
+The official documentation as well as the attached youtube tutorials have
+provided great explaintation of how hugo translate metadata of \_index.md files
+to the headings of HTML with Hugo heading management system.
 
 建立一个有一篇文章的 post
 ![](/img/Hugo blogging with Ox-hugo 4.png)
@@ -181,5 +186,5 @@ are placed inside the content directory inside the project root. With `ox-hugo`,
 这段是 index 管理 page boundle 的良好功能的又一个展现:通过 taxonomy index pages 就能建立一系列分类页面,例如 tags and category,为分类页面单独建立管理 page 使拥有这些属性的文章被自右交叉引用,用户可以通过点击任何一个 tag 或者 categories 就能达到文章页面。在 org 写作里通过在 headings 添加实现，org 到 md 转化由 `ox-hugo` 完成，语法差别很细微。如下图，还是上文的源码，只是为文章添加了两种 categories，两种 tag:
 ![](/img/Hugo blogging with Ox-hugo 7.png)
 
-在源码的三篇文章里分类 update 和 reviews 被提到两次，标签 fear 和 herpes 也被提到两次。从生成的 html 来看，
+在源码的三篇文章里分类 update 和 reviews 被提到两次，标签 fear 和 herpes 也被提到两次。从生成的 HTML 来看，
 index.md 刚好与之对应：分类的 index page 提供了所有需要的分类（i.e. tags, categories）每个分类下还有 list page 显示所有与之相关的页面内容。导航就是这样实现建立的，使得我们能“实现不同分类间的交叉引用，点击任何一个入口进入文章”。

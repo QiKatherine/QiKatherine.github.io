@@ -2,7 +2,7 @@
 title = "Text based file management in Emacs 【Emacs 文本文件管理】"
 summary = "Overview of text process tools in org-mode."
 date = 2019-09-22T23:56:00+01:00
-lastmod = 2019-09-30T00:37:33+01:00
+lastmod = 2019-09-30T23:58:12+01:00
 draft = false
 image = "img/111.jpg"
 +++
@@ -81,7 +81,7 @@ In this case there are lots of software you can use to illustrate the in-file
 structure.
 
 Check this:
-[Intro to Mindmap, Gantt Chart, Graphviz - http://ergoemacs.org/](http://ergoemacs.org/misc/mindmap%5Fgantt%5Fgraphviz.html)
+[Intro to Mindmap, Gantt Chart, Graphviz - http://ergoemacs.org/](http://ergoemacs.org/misc/mindmap%5Fgantt%5Fgraphviz.hrequest json-mode all-the-icons-dired edit-indirecttml)
 
 
 ## 3. Knowledge graph {#3-dot-knowledge-graph}
@@ -101,6 +101,4 @@ https://github.com/](https://github.com/synchrony/smsn/wiki/A-video-introduction
 
 ---
 
-<span class = "underline">baby</span>
-
-@@html:<span style="color:red"> TODO</span>
+I have written a seperate article of Anki in this blog:
