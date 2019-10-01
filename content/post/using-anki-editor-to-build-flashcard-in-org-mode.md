@@ -1,7 +1,7 @@
 +++
 title = "Using Anki-editor to build flashcard in Org-mode 【用 Anki-editor 在 org-mode 中生成复杂记忆卡片】"
 date = 2019-09-30T23:54:00+01:00
-lastmod = 2019-09-30T23:58:13+01:00
+lastmod = 2019-10-01T23:51:24+01:00
 tags = ["windows", "org-mode", "Anki"]
 categories = ["TECH"]
 draft = false
@@ -47,7 +47,8 @@ the org HTML export backend will export it to HTML. The Anki adds-on
 The full installation link can be found from github repo:
 [louietan/anki-editor: Emacs minor mode for making Anki cards with Org - https://github.com/](https://github.com/louietan/anki-editor)
 
-• Installing `AnkiConnect` in **Anki**: Tools -- adds-on -- Get Add-ons with code:2055492159.
+• Installing `AnkiConnect` in **Anki**: Tools -- adds-on -- Get Add-ons with
+code: 2055492159.
 ![](/img/anki.png)
 
 • Installing `curl` in **MS Windows**:
@@ -76,7 +77,9 @@ dotspacemacs-additional-packages '(anki-editor)
 {{< /highlight >}}
 
 
-## Usage {#usage}
+## 3. Usage {#3-dot-usage}
+
+---
 
 First of all, making sure Anki is `running all the time` so that Emacs can connect
 with it. `M-x anki-editor-mode` to enble minor-mode.

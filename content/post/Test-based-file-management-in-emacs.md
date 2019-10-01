@@ -2,52 +2,70 @@
 title = "Text based file management in Emacs 【Emacs 文本文件管理】"
 summary = "Overview of text process tools in org-mode."
 date = 2019-09-22T23:56:00+01:00
-lastmod = 2019-09-30T23:58:12+01:00
+lastmod = 2019-10-01T23:51:24+01:00
 draft = false
 image = "img/111.jpg"
 +++
 
-People discuss the most efficient way text management methods for a number of reasons: someone wants to build a digitalized notebooks for new
+People discuss the most efficient way text management methods for a number of reasons: someone wants to build a digitalized notebook for new
 knowledge; Someone wants to manage the increasing case files in office work;
-Someone wants to review thousands of articles they hoard on the internet. Either
-way, I call that 'text digesting system' and buckle up, I got MANY opinions on
-this topic.
+Someone wants to archive thousands of articles they hoard on the internet. Either
+way, I call that 'text digesting system' or 'personal wiki'. Buckle up, I got
+some strong opinions about this topic.
 
-I think we have all been struggling in choosing tools: some excel at
+I think we all have been struggling in choosing tools: some excel at
 supporting markdown, some are good at coding highlighting, some support
 real-time online collaboration or even text searching in images. If one has not used Emacs, I would probably
 recommend Evernote or Onenote. But if you're an Emacs user, this is the chance of
 tasting the one-for-all solution.
 
-Emacs org-mode meets different needs with:
+This image is an `irresponsible, persponal experiece based` summary of tool
+learning curve:
+![](/img/text.png)
 
-• How to take note: speech input in org-mode
+On **methdological** level, my argument of recommending is that Emacs is the tool
+which has the most potential to facilitate you to manage all level of text work:
+from a TODO shopping list, to a one-person wikipedia.
 
-• How to memorize knowledge: Anki + Anki-editor
+On **technical** level, Emacs org-mode meets different needs with all types of
+packages. For example:
 
-• How to classify: categories and tags
+• To take note speech: input in org-mode
 
-• How to search: helm-ag + regex
+• To memorize knowledge: Anki + Anki-editor
 
-• How to visualize structure: Knowledge Graph; Daft; NotDeft; etc.
+• To classify: categories and tags
 
-• How to present in slides: Org-reveal
+• To search: helm-ag + regex
 
-• How to generate static website: Hugo + Ox-hugo
+• To visualize structure: Knowledge Graph; Daft; NotDeft; etc.
+
+• To present in slides: Org-reveal
+
+• To generate static website: Hugo + Ox-hugo
 
 
 ## 1. Text search and classification {#1-dot-text-search-and-classification}
 
 ---
 
-Softwares like Evernote or Onenote is excellent in most daily work. However, they also
-have glitches when there are a thousand files to manage, which adding together became the reason that I
+Softwares like Evernote or Onenote is excellent in most daily work. Skepticism
+emerges in three common cases: 1). when there is increasing reptitive text
+processing work (e.g. using yasnippet). 2). when there is needs for higher level of efficiency (e.g.
+version control, regular expression based search). 3). when there is needs for
+variety exporation (e.g.HTML or Latex). These happens regardless of managing
+several files or more than a thousand file.
+
+ which adding together became the reason that I
 moved my text work to Emacs. For example, the most common way to manage files
 is using categories and tags (or tweaked as pages/binders/etc.) The limitation
 of using category is that you can only allocate an article ONCE (what about articles
 inherently belong to two or more categories?). The tags seem to
 help address this issue, and yet I noticed it's still not enough in practical
-work. My opinion is that: `the classification of an article should be better decided by the *whole article*,
+work. This is also the reason that people started using some other tools and
+switched back to Emacs in the end.
+
+My opinion is that: `the classification of an article should be better decided by the *whole article*,
 rather than several keywords.`
 After a long while of managing hundred notes, I noticed the most frequently used (and
 efficient) function is =global search =.  I still use categories and tags,but
