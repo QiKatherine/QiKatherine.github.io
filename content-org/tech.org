@@ -785,7 +785,6 @@ variety exporation (e.g.HTML or Latex). These happens regardless of managing
 several files or managing over a thousand files, which adds together became the reason that I
 moved my text work to Emacs. 
 
-*** 0. Overview
 For example, the most common way to manage files
 is using categories and tags (or tweaked as pages/binders/etc.) The limitation
 of using category is that you can only allocate an article ONCE (what about articles
@@ -922,4 +921,11 @@ means Emacs has trouble finding curl. Check if the path of curl has been added i
 =Error communicating with AnkiConnect using cURL: exited abnormally with
 code 7= 
 means you need to run =Anki= before running Emacs command.
+
+The author of Anki-editor has also provided the test cases to play with:
+
+https://raw.githubusercontent.com/louietan/anki-editor/master/examples.org
+
+Here are some cases that I generated:
+[[/img/anki3.png]]
 

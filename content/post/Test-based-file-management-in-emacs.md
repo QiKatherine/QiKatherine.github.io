@@ -2,7 +2,7 @@
 title = "Text based file management in Emacs 【Emacs 文本文件管理】"
 summary = "Overview of text process tools in org-mode."
 date = 2019-09-22T23:56:00+01:00
-lastmod = 2019-10-01T23:51:24+01:00
+lastmod = 2019-10-03T23:20:17+01:00
 draft = false
 image = "img/111.jpg"
 +++
@@ -54,10 +54,10 @@ emerges in three common cases: 1). when there is increasing reptitive text
 processing work (e.g. using yasnippet). 2). when there is needs for higher level of efficiency (e.g.
 version control, regular expression based search). 3). when there is needs for
 variety exporation (e.g.HTML or Latex). These happens regardless of managing
-several files or more than a thousand file.
+several files or managing over a thousand files, which adds together became the reason that I
+moved my text work to Emacs.
 
- which adding together became the reason that I
-moved my text work to Emacs. For example, the most common way to manage files
+For example, the most common way to manage files
 is using categories and tags (or tweaked as pages/binders/etc.) The limitation
 of using category is that you can only allocate an article ONCE (what about articles
 inherently belong to two or more categories?). The tags seem to

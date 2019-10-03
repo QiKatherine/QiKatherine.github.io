@@ -1,7 +1,7 @@
 +++
 title = "Using Anki-editor to build flashcard in Org-mode 【用 Anki-editor 在 org-mode 中生成复杂记忆卡片】"
 date = 2019-09-30T23:54:00+01:00
-lastmod = 2019-10-01T23:51:24+01:00
+lastmod = 2019-10-03T23:20:17+01:00
 tags = ["windows", "org-mode", "Anki"]
 categories = ["TECH"]
 draft = false
@@ -91,3 +91,10 @@ means Emacs has trouble finding curl. Check if the path of curl has been added i
 `Error communicating with AnkiConnect using cURL: exited abnormally with
 code 7`
 means you need to run `Anki` before running Emacs command.
+
+The author of Anki-editor has also provided the test cases to play with:
+
+<https://raw.githubusercontent.com/louietan/anki-editor/master/examples.org>
+
+Here are some cases that I generated:
+![](/img/anki3.png)
