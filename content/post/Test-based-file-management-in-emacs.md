@@ -2,7 +2,7 @@
 title = "Text based file management in Emacs 【Emacs 文本文件管理】"
 summary = "Overview of text process tools in org-mode."
 date = 2019-09-22T23:56:00+01:00
-lastmod = 2019-10-03T23:20:17+01:00
+lastmod = 2019-10-04T23:59:37+01:00
 draft = false
 image = "img/111.jpg"
 +++
@@ -43,6 +43,19 @@ packages. For example:
 • To present in slides: Org-reveal
 
 • To generate static website: Hugo + Ox-hugo
+
+
+## 0. General opinion {#0-dot-general-opinion}
+
+Albeit as many merits Emacs has as above, it is a tool which takes years to
+master, so I would NOT recommend converting to Emacs right after watching some
+killer demo. Instead, my general opinion about text work is keeping different stage of work in
+different places.
+
+Firstly, put speedy notes in out-of-boxes softwares in corresponding area
+(e.g. put text/snapshot/recordings in Onenote; put R code in Rstudio, put math
+paper in Lyx; draw figure in paint) Capturing ideas and finishing work at this
+stage is much more important than debugging Emacs. Secondly,
 
 
 ## 1. Text search and classification {#1-dot-text-search-and-classification}
