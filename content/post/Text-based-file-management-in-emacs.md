@@ -2,7 +2,7 @@
 title = "Text based file management in Emacs 【Emacs 文本文件管理】"
 summary = "Overview of text process tools in org-mode."
 date = 2019-09-22T23:56:00+01:00
-lastmod = 2019-10-04T23:59:37+01:00
+lastmod = 2019-10-08T00:09:04+01:00
 draft = false
 image = "img/111.jpg"
 +++
@@ -50,12 +50,15 @@ packages. For example:
 Albeit as many merits Emacs has as above, it is a tool which takes years to
 master, so I would NOT recommend converting to Emacs right after watching some
 killer demo. Instead, my general opinion about text work is keeping different stage of work in
-different places.
+different places, for non-proficient Emacers.
 
 Firstly, put speedy notes in out-of-boxes softwares in corresponding area
 (e.g. put text/snapshot/recordings in Onenote; put R code in Rstudio, put math
 paper in Lyx; draw figure in paint) Capturing ideas and finishing work at this
-stage is much more important than debugging Emacs. Secondly,
+stage is much more important than debugging Emacs. Secondly, constantly
+review the work you're managing and do this in Emacs. It will not only help you
+to know Emacs, to learn using different backend, but also facilitates you to
+extract your own perception out of the hoarded files collected.
 
 
 ## 1. Text search and classification {#1-dot-text-search-and-classification}

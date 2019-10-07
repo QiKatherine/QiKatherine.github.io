@@ -1,7 +1,8 @@
 +++
 title = "Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】"
 summary = "My personal experience of blogging with Emacs/Spacemacs and plug-in ox-hugo, along with some explaination of Hugo's working structure."
-lastmod = 2019-10-04T23:59:34+01:00
+date = 2019-07-16T01:03:00+01:00
+lastmod = 2019-10-08T00:09:01+01:00
 tags = ["Hugo", "Ox-hugo"]
 categories = ["TECH"]
 draft = false
@@ -26,7 +27,7 @@ Most content comes from the Hugo official documentation along with these article
 
 我放弃 Hexo，安装 Hugo 的最初目的还是想用它配合 Emacs-org-mode 来写博客记笔记。灵感来自[子龙山人](https://zilongshanren.com/post/move-from-hexo-to-hugo/)和[贤民](https://www.xianmin.org/post/ox-hugo/)两位老师的博客，具体的安装和使用心得二位已经介绍的非常详细，仔细读完会受益良多。本着不再重复造轮子的原则，这篇文章我想简单写写学习中遇到到有用的东西：Hugo 原生的结构设计；Hugo 与 `ox-hugo` 的对接原理；在 Emacs/Spacemacs 使用 ox-hugo 帮助我们在 org-mode 以极高的效率写博客并发表。
 
-在阅读本文之前，强烈推荐阅读开头推荐的三部分内容。本篇博客主要就是整理了加工了一些来自 Hugo 官网，和以上三篇文章的内容，并配以更直观的图片帮助理解。对我来说 ox-hugo+org-mode 最牛的地方的在于高度集成。org-mode 有一个优秀的原生功能是通 tags 等功能，用一个大文件+一二三四五级小标题就能管理一个文本文件树。具体到本文就是，通过一个文件管理整个网站的内容撰写。这是作者力荐的写作方式，也是他编写这个插件的主要初衷。比起各种单个文件组成的零散网站管理模式，这个结构更清晰，管理更容易，搜索 toggle 都十分方便。作者用 `ox-hugo` 的官网直接展示了样版：
+在阅读本文之前，强烈推荐阅读开头推荐的三部分内容。本篇博客主要就是整理了加工了一些来自 Hugo 官网，和以上三篇文章的内容，并配以更直观的图片帮助理解。对我来说 ox-hugo+org-mode 最牛的地方的在于高度集成 org-mode 有一个优秀的原生功能是通 tags 等功能，用一个大文件+一二三四五级小标题就能管理一个文本文件树。具体到本文就是，通过一个文件管理整个网站的内容撰写。这是作者力荐的写作方式，也是他编写这个插件的主要初衷。比起各种单个文件组成的零散网站管理模式，这个结构更清晰，管理更容易，搜索 toggle 都十分方便。作者用 `ox-hugo` 的官网直接展示了样版：
 [Why ox-hugo? — ox-hugo - Org to Hugo exporter - https://ox-hugo.scripter.co/](https://ox-hugo.scripter.co/doc/why-ox-hugo/)
 
 这样的结构配合上一些 Emacs 自带的 killer 功能例如 `writeroom-mode`,
@@ -35,6 +36,8 @@ Most content comes from the Hugo official documentation along with these article
 
 ## 0. Org markup syntax and killer reference card {#0-dot-org-markup-syntax-and-killer-reference-card}
 
+---
+
 在写了 7 篇文章以后，其实我还是 org-mode 语法记忆困难户。官网给了零星几个常见的语法参考，但是 org-mode 能定制格式花样的远不止于此。我在此给出一个终极解决方式：参考网站原文的
 org file。网站 org 源码从 org markup 形式到 hugo section 的 front information 都有涵盖，在网站看到想要的格式去原文直接搜索照搬即可：
 [Full website](https://ox-hugo.scripter.co/doc/hugo-section/)
@@ -42,6 +45,8 @@ org file。网站 org 源码从 org markup 形式到 hugo section 的 front info
 
 
 ## 1. Front matter 页首信息 {#1-dot-front-matter-页首信息}
+
+---
 
 Hugo 本身其实支持直接把.org 文件渲染成 HTML 发布，但是许多人提到其实支持得不是很好。Hugo 支持最好的 markdown 语法类型是 blackfriday markdown。对很多 Emacs user 来说 org-mode 就像把有力的大锤，碰上跟写作沾边的任务不能抡一下是很遗憾的。所以可以使用这款非常棒的后端插件 `ox-hugo` 来支持 org-mode 写博文。它的解决方式是：把 org 文件转成 blackfriday markdown, 然后再生成 HTML 文件。首先我们详细看 `ox-hugo` 官网对其功能的解说：
 
@@ -89,10 +94,6 @@ draft= true
 
 以 `:properties:` 这块为代表的代码就是 org 以自己的方式定义 meta
 information。~ox-hugo~ 会解析改写这个这些代码以生成 hugo 可以识别的 YAML 等 front matter.
-
-
-## <span class="org-todo todo TODO">TODO</span>  {#}
-
 Ox-hugo 一般要求至少要有 `:EXPORT_FILE_NAME:` 。我们需要通过这个命令告诉
 ox-hugo"有新的标题和内容需要去导出"。
 
@@ -104,8 +105,12 @@ ox-hugo"有新的标题和内容需要去导出"。
 通用 Front matter 主管面向一个 article 内部的性质设置，例如写作作者，写作日期，写作 tag。Heading information 例如 `#+hugo_base_dir` 的概念局限于 `ox-hugo` 里，是遵从
 org-mode 特色的命名方式设计的变量，类似的语法在其他 org 文章的管理信息中也可以看到。而 front-matter 这些变量在 markdown，网页 config file 等其它文件里都有。只是 `:PROPERTIES:` 这种表达形式是 ox-hugo 特色写法。换做 org 支持的另一种 projectile 导出 HTML 的 front matter 可能是这样:base-directory "~/Dropbox/org/blog/".
 
+---
+
 
 ## 3. Content type {#3-dot-content-type}
+
+---
 
 Content type 就是一系列不同的表达式样（layout），根据我们指定的不同的 section type 有不同表达式样法则，这里暂且把 section 翻译成一个网站下的不同栏目，例如 blog，photo，quote，post，about，tages 或者其它你想自定义的栏目。Hugo 通过 front-matter 支持这些不尽相同的 content type。
 
@@ -115,10 +120,13 @@ Hugo 认为每个栏目最好只做同一件事情，例如照片专栏只发发
 information/metadata information（即 front matter）即可，能迅速方便的修改一两个页面的 layout。如果不能满足需求，可用 hugo 提供的自定义设置 archetypes，按照 hugo 指定的结构组合方式，编写正确的\_index.md 文件拼接好一个网站的
 layout 即可。
 
-如果你没有指定表达式样，比如暂时不太在乎如何展示 photo 这个栏目，Hugo 有这么一个 default 设定：在 front matter 大部分信息缺乏的时候，通过每个文章存储 path 或者所在 section 猜出给这篇文章赋予什么 layout。这会让我们在迅速上手写作 blog 的时候非常省心。
+如果你没有指定表达式样，比如暂时不太在乎如何展示 photo 这个栏目，Hugo 有这么一个 default 设定：在 front matter 大部分信息缺乏的时候，通过每个文章存储
+path 或者所在 section 猜出给这篇文章赋予什么 layout。这会让我们在迅速上手写作 blog 的时候非常省心。
 
 
 ## 4. Page boundles {#4-dot-page-boundles}
+
+---
 
 Hugo 0.32 以上的版本，使用 page boundles 的模式来管理网页源和图，从父子结构分类的角度看，有两种：leaf 类页面和 branch 类页面。branch 类页面允许在其内部嵌套更深层次的页面，而 leaf 规定其不能再有子页面。
 
@@ -128,6 +136,8 @@ Content 文件夹在这里是 home page, 他的主要功能是 hosting“决定�
 
 
 ## 5. Section and nested section {#5-dot-section-and-nested-section}
+
+---
 
 Section 是一组页面的集合称呼，一般被放在 content 文件夹下面，就是上文提到的‘内容结构组织’的组成单元。从 default 设定来讲，content 下面的每个一级文件夹自成一个 root section。同时上面也提到 section 可以嵌套，即在一级文件夹下方再建二级 section 文件，构成一个更深层的 section。
 
@@ -147,6 +157,8 @@ content
 
 ## 6. Head information {#6-dot-head-information}
 
+---
+
 `ox-hugo` 对 org 文件存放位置并没有特定要求，但是其头部的 `#+hugo_base_dir:` 必须要被清晰的定义，因为这个地址告诉 `ox-hugo` 你的 root directory 在哪里，
 `ox-hugo` 就会在这个地址下的 content 里面生成转化的 md 文件。很多用户自定义
 `#+hugo_base_dir:` ..即是本 org 文件所在的 parent path.也有人定义
@@ -162,6 +174,8 @@ content
 
 ## 7. Heading management {#7-dot-heading-management}
 
+---
+
 The official documentation as well as the attached youtube tutorials have
 provided great explaintation of how hugo translate metadata of \_index.md files
 to the headings of HTML with Hugo heading management system.
@@ -175,13 +189,17 @@ to the headings of HTML with Hugo heading management system.
 
 ## 8. Tree and subtree writing {#8-dot-tree-and-subtree-writing}
 
+---
+
 In normal Hugo, individual pages written in markdown (or now in org-mode)
-are placed inside the content directory inside the project root. With `ox-hugo`, a single org-mode file can be used to generate all pages, posts, and any other content. This has some advantages in allowing usage of org-mode functionality, as well as re-use of content or property settings across pages.
+	are placed inside the content directory inside the project root. With `ox-hugo`, a single org-mode file can be used to generate all pages, posts, and any other content. This has some advantages in allowing usage of org-mode functionality, as well as re-use of content or property settings across pages.
 
 {{< figure src="/img/Hugo blogging with Ox-hugo 6.png" >}}
 
 
 ## 9. Taxonomies 分类型页面 {#9-dot-taxonomies-分类型页面}
+
+---
 
 这段是 index 管理 page boundle 的良好功能的又一个展现:通过 taxonomy index pages 就能建立一系列分类页面,例如 tags and category,为分类页面单独建立管理 page 使拥有这些属性的文章被自右交叉引用,用户可以通过点击任何一个 tag 或者 categories 就能达到文章页面。在 org 写作里通过在 headings 添加实现，org 到 md 转化由 `ox-hugo` 完成，语法差别很细微。如下图，还是上文的源码，只是为文章添加了两种 categories，两种 tag:
 ![](/img/Hugo blogging with Ox-hugo 7.png)
