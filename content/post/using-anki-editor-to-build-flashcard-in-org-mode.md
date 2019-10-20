@@ -1,7 +1,7 @@
 +++
 title = "Using Anki-editor to build flashcard in Org-mode 【用 Anki-editor 在 org-mode 中生成复杂记忆卡片】"
 date = 2019-09-30T23:54:00+01:00
-lastmod = 2019-10-15T02:42:11+01:00
+lastmod = 2019-10-20T16:15:42+01:00
 tags = ["windows", "org-mode", "Anki"]
 categories = ["TECH"]
 draft = false
