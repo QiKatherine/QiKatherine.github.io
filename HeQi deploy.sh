@@ -1,5 +1,5 @@
 #!/bin/bash
-cd "d:/Google drive local/Hugo/myblog/"
+cd "d:/Hugo/myblog/"
 
 # Add changes to git.
 git add .

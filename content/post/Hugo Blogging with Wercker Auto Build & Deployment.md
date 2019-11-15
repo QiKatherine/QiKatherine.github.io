@@ -2,7 +2,7 @@
 title = "Hugo Blogging with Wercker Auto Build & Deployment 【用 Wercker 自动部署网站】"
 summary = "Using Wercker to for automated website code build and deployment"
 date = 2019-07-26T01:02:00+01:00
-lastmod = 2019-10-20T16:15:40+01:00
+lastmod = 2019-11-15T16:13:00+00:00
 tags = ["Hugo", "Git", "Wercker", "Org-mode", "Emacs"]
 categories = ["TECH"]
 draft = false
@@ -19,7 +19,7 @@ Let's go back to the first issue. The Hugo official manual has given two way to 
 
 My answer to the second issue is using Wercker. It will automatically go to your source code repo and build the ~/public folder and deploy the website. So the process mentioned at the beginning of this article becomes even easier: write and save an article in markdown -- push the whole source code to the remote repo. This means you do NOT need to generate and deploy in the local terminal any more. Wercker does the work every time it detects a new push on the designated repo on the remote server. The script  wercker.yml (generated and pushed by you) will tell Wercker precisely how and where to build and deploy. There're also other popular continuous integration tools such as Travis CI, Jenkins which has advantages at different aspects such as free usage, commercial stability, running speed and etc. I choose to use wercker based on my needs.
 
-The Hugo instruction <https://gohugo.io/hosting-and-deployment/deployment-with-wercker/> is very detailed and well written, and you should be quite clear before the 'Configure Access' section. The Wercker has changed quite a bit in the generating wercker.yml part. You do NOT HAVE to search and choose boxes or steps to build and deploy. The default script contains the box information, and it can be modified unless you don't like it. The build and deploy part are generated separately in the workflow section (press ctrl and + to see the bigger picture) ![](D:/Hugo/myblog/static/img/Hugo blogging with werecker 1.png)
+The Hugo instruction <https://gohugo.io/hosting-and-deployment/deployment-with-wercker/> is very detailed and well written, and you should be quite clear before the 'Configure Access' section. The Wercker has changed quite a bit in the generating wercker.yml part. You do NOT HAVE to search and choose boxes or steps to build and deploy. The default script contains the box information, and it can be modified unless you don't like it. The build and deploy part are generated separately in the workflow section (press ctrl and + to see the bigger picture) ![](/img/Hugo blogging with werecker 1.png)
 
 Here is my wercker.yml:
 
