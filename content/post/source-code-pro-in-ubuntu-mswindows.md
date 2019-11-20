@@ -2,7 +2,7 @@
 title = "Installing Source Code Pro in Ubuntu and MS Windows plateform 2019 【2019 版 Souce Code Pro 字体安装指南】"
 summary = "Installing source code pro and trouble shooting."
 date = 2019-09-03T21:53:00+01:00
-lastmod = 2019-11-16T00:39:14+00:00
+lastmod = 2019-11-20T13:05:42+00:00
 tags = ["Ubuntu"]
 categories = ["TECH"]
 draft = false
