@@ -1015,3 +1015,16 @@ concern. This not only frees your mind of remembering the cut/copy operation,
 but also save your time for repetitive work.
 
 The alternative choices are =browse-kill-ring= and =counsel-kill-ring-pop=.
+** DONE Linear algebra note - Gilbert Strang                           :MATH:
+   CLOSED: [2019-11-19 Tue 23:58]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: Linear-algebra-gilbert-strang
+   :END:
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2019-11-19 Tue 23:58]
+   :END:
+
+This is my personal note of linear algebra. I will be continuously updating the
+pdf file. Due to the huge amount of work, I am doing it little by little
+everyday. It is hosted on github with latex source code:
+https://github.com/QiKatherine/Linear-algebra/blob/master/1.pdf
