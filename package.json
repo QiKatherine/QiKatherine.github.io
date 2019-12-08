@@ -1,0 +1,24 @@
+{
+  "name": "atomic-algolia",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "algolia": "0.0.0",
+    "atomic-algolia": "^0.3.17"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "algolia": "atomic-algolia"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QiKatherine/QiKatherine.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/QiKatherine/QiKatherine.github.io/issues"
+  },
+  "homepage": "https://github.com/QiKatherine/QiKatherine.github.io#readme"
+}

@@ -32,9 +32,9 @@ home = ["HTML", "RSS", "Algolia"]
 
   # algolia site search
   algolia_search = true
-  algolia_appId = ""
-  algolia_indexName = ""
-  algolia_apiKey = ""
+  algolia_appId = "SU6OXLBV9E"
+  algolia_indexName = "sheishe.xyz"
+  algolia_apiKey = "798275f7565e8b7437dae07c87e28f98"
 
   # Sidebar settings
   sidebar_about_description = "Data scientist. Academic coder. An Emacs hacker who is not so sure about the GNU ideology."

@@ -16,7 +16,7 @@
    :END:
 
 #+begin_description 
-My personal experience of blogging with Emacs/Spacemacs and plug-in ox-hugo, along with some explaination of Hugo's working structure.
+My personal experience of blogging with Emacs/Spacemacs and plug-in ox-hugo, along with some explanation of Hugo's working structure.
 #+end_description
 
 There have been many good articles talking about using ~ox-hugo~ to aid
@@ -133,9 +133,9 @@ org-mode 特色的命名方式设计的变量，类似的语法在其他 org 文
 	path 或者所在 section 猜出给这篇文章赋予什么 layout。这会让我们在迅速上手写
 	作 blog 的时候非常省心。
 
-*** 4. Page boundles
+*** 4. Page bundles
 -----
-	Hugo 0.32 以上的版本，使用 page boundles 的模式来管理网页源和图，从父子结构分类的角度看，有两种：leaf 类页面和 branch 类页面。branch 类页面允许在其内部嵌套更深层次的页面，而 leaf 规定其不能再有子页面。
+	Hugo 0.32 以上的版本，使用 page bundles 的模式来管理网页源和图，从父子结构分类的角度看，有两种：leaf 类页面和 branch 类页面。branch 类页面允许在其内部嵌套更深层次的页面，而 leaf 规定其不能再有子页面。
 	
 	任何一个叫 index 的页面文件都是 leaf 型，叫_index 的页面文件都是 branch 型。所以可见 org 文件里 index 的文件都会被输出成单页，没有子文件夹。最常见的 index 页面是下文会提到的分类里面的 categories 和 tags index pages，它们都是单页，除此之外多数时候我们会使用 branch 型。如图:
 [[/img/Hugo blogging with Ox-hugo 1.png
@@ -212,9 +212,9 @@ index.md 刚好与之对应：分类的 index page 提供了所有需要的分�
 Using Wercker to for automated website code build and deployment
 #+end_description
 
-The automated static website generators (e.g. Octopress, Hexo and Hugo) have made *website buiding and maintaining* way more relaxed than before. The workflow has been simplified to: write and save markdown -- preview on the localhost 1313 -- generate the ~/public (HTML) file -- push to a remote server (Github) -- backup source code. 
+The automated static website generators (e.g. Octopress, Hexo and Hugo) have made *website building and maintaining* way more relaxed than before. The workflow has been simplified to: write and save markdown -- preview on the localhost 1313 -- generate the ~/public (HTML) file -- push to a remote server (GitHub) -- backup source code. 
 
-If one considers all technicalities, there are still many questions worth discussing to make this process more efficient, such as (1) which is the best way to host HTML files and source code files (2) which is the better way to automize the procedure.
+If one considers all technicalities, there are still many questions worth discussing to make this process more efficient, such as (1) which is the best way to host HTML files and source code files (2) which is the better way to automate the procedure.
 
 I used to use Hexo where three things need to be tracked separately:  source code and ~/public file (both updated for every article), forked/cloned theme (updated according to theme author) and Hexo generator. I have to use git submodules to track everything. Soon, the hustle and page generation speed make me convert to Hugo. Hugo requires only a binary file to generate a website, with which the update cannot be more straightforward: you download a new .exe file and replace the old one. The updated theme can be manually merged as long as the site config.toml file is well preserved. 
 
@@ -222,7 +222,7 @@ Let's go back to the first issue. The Hugo official manual has given two way to 
 
 My answer to the second issue is using Wercker. It will automatically go to your source code repo and build the ~/public folder and deploy the website. So the process mentioned at the beginning of this article becomes even easier: write and save an article in markdown -- push the whole source code to the remote repo. This means you do NOT need to generate and deploy in the local terminal any more. Wercker does the work every time it detects a new push on the designated repo on the remote server. The script  wercker.yml (generated and pushed by you) will tell Wercker precisely how and where to build and deploy. There're also other popular continuous integration tools such as Travis CI, Jenkins which has advantages at different aspects such as free usage, commercial stability, running speed and etc. I choose to use wercker based on my needs.
 
-The Hugo instruction [[https://gohugo.io/hosting-and-deployment/deployment-with-wercker/]] is very detailed and well written, and you should be quite clear before the 'Configure Access' section. The Wercker has changed quite a bit in the generating wercker.yml part. You do NOT HAVE to search and choose boxes or steps to build and deploy. The default script contains the box information, and it can be modified unless you don't like it. The build and deploy part are generated separately in the workflow section (press ctrl and + to see the bigger picture) [[D:/Hugo/myblog/static/img/Hugo blogging with werecker 1.png]] 
+The Hugo instruction [[https://gohugo.io/hosting-and-deployment/deployment-with-wercker/]] is very detailed and well written, and you should be quite clear before the 'Configure Access' section. The Wercker has changed quite a bit in the generating wercker.yml part. You do NOT HAVE to search and choose boxes or steps to build and deploy. The default script contains the box information, and it can be modified unless you don't like it. The build and deploy part are generated separately in the workflow section (press CTRL and + to see the bigger picture) [[D:/Hugo/myblog/static/img/Hugo blogging with werecker 1.png]] 
 
 Here is my wercker.yml:
 
@@ -302,14 +302,14 @@ Happy hacking! :)
    :END:
 
 #+begin_description
-Experience Emacs with best workaround enviroment in windows.
+Experience Emacs with best workaround environment in windows.
 #+end_description
 
 *** Background 
 -----
-Due to the working environment limitation, I occasionally have to use MS windows system (and therefore Emacs for Windows). But some similar users and I have constantly found cases where Emacs is significantly relying on *unix system. So far, my experience is that compling Emacs in msys2 has been a best (maybe) workaround in this situation. If you this is relatable to you, you might want to give it a try:
+Due to the working environment limitation, I occasionally have to use MS windows system (and therefore Emacs for Windows). But some similar users and I have constantly found cases where Emacs is significantly relying on *unix system. So far, my experience is that compiling Emacs in msys2 has been a best (maybe) workaround in this situation. If you this is relatable to you, you might want to give it a try:
 https://chriszheng.science/2015/01/23/Guideline-for-building-GNU-Emacs-with-MSYS2-MinGW-w64/
-There has been ample discussion online, so I will be writting in Chinese. If you are interested in the trouble shootings below, try google translate. It will be fun :).
+There has been ample discussion online, so I will be writing in Chinese. If you are interested in the trouble shootings below, try google translate. It will be fun :).
 
 
 我因为工作的原因有时候不得不使用 Windows。Emacs for Windows，在这种情况下，已经是一个比较合适的选择了，我用了半年多对它各方面都还相对满意。但是总不时会发现，Emacs 里面还有很多严重依赖*Unix system 的操作。为了找到一劳永逸的办法（做梦），我尝试过 cygwin, mingw64 还做了一些功课，目前发现最好方式是，将整合到 msys2 里面使用，或者使用 msys2 编译的 Emacs。
@@ -364,7 +364,7 @@ Learning notes and trouble shooting for using org-reveal.
 I have used flash card for remembering new things for years. Before using software like org-drill or Anki, I was pretty much putting everything in slides, printing on papers and cutting it into a portable sized card and carried in my pocket. So I have been exploring an ultimate solution of perfect formatting for everything. This picture shows what I feel about slides making tools.
 [[../static/img/org-reveal.jpg]]
 
-I always thought math functions display tricky, but the Latex with Beamer has provided an adequately good template for most people. As a comparison, the code highlighting is tricker, especially for not-so-prevalent programming languages like Lisp. In order to adequately demonstrate code highlighting, sometimes people have to paster code in Notepad++ with designated formatting, then paste into MS word, then to MS powerpoint. Or take an alternative hustle to explore various online highlighting transformation tool. If you are looking for a long term hustles solution, then I think "Emacs/Spacemacs + Org-mode + org-reveal" makes an excellent tool for you.
+I always thought math functions display tricky, but the Latex with Beamer has provided an adequately good template for most people. As a comparison, the code highlighting is trickier, especially for not-so-prevalent programming languages like Lisp. In order to adequately demonstrate code highlighting, sometimes people have to paste code in Notepad++ with designated formatting, then paste into MS word, then to MS PowerPoint. Or take an alternative hustle to explore various online highlighting transformation tool. If you are looking for a long term hustles solution, then I think "Emacs/Spacemacs + Org-mode + org-reveal" makes an excellent tool for you.
 • [[https://github.com/yjwen/org-reveal/][yjwen/org-reveal: Exports Org-mode contents to Reveal.js HTML presentation. - https://github.com/]]
 • [[https://opensource.com/article/18/2/how-create-slides-emacs-org-mode-and-revealjs][How to create slides with Emacs Org mode and Reveal.js | Opensource.com]]
 • [[https://revealjs.com/?transition=fade#/][reveal.js – The HTML Presentation Framework - https://revealjs.com/]]
@@ -377,7 +377,7 @@ The installation did three things (1)installing ox-reveal (2)installing reveal.j
 
 I add ox-reveal in the package list of spacemacs dotfile, reloading the dotfile but it did not installed. The author also mentioned that ox-reveal in MELPA maybe out of date. So alternatively, I downloaded the .el file and manually required it.
 
-There are also two ways of calling reveal.js as described by the readme. I am using the second where the source url was put in the config file. Notice there seems to be an old url(http://cdn.jsdelivr.net/reveal.js/3.0.0/) which does NOT work any more. If your exported HTML file is just an empty page with theme background, check if you are refering to the right url. The current source and config code is shown below:
+There are also two ways of calling reveal.js as described by the readme. I am using the second where the source url was put in the config file. Notice there seems to be an old url(http://cdn.jsdelivr.net/reveal.js/3.0.0/) which does NOT work any more. If your exported HTML file is just an empty page with theme background, check if you are referring to the right url. The current source and config code is shown below:
 
 
 #+begin_src emacs-lisp
@@ -415,7 +415,7 @@ https://github.com/]] The official learning note is at here: [[http://book.emacs
 Days - http://book.emacs-china.org/]] My notes extend the official notes with my
 personal learning experience. Since there has been ample discussion of using and
 learning Emacs in English community, my learning note is written in Chinese to
-benefit more addtional readers.
+benefit more additional readers.
 
 这篇文章是我学习子龙山人老师的 spacemacs rock 系列笔记之一。在原视频配套的基础上
 我还做了一些扩展和补充，有的知识点还加了视频对应【集数-分钟】的时间点，以便迅速
@@ -525,7 +525,7 @@ setq 和 setq-default 才是一回事。set-key 也是类似，如下注意左�
 
 *** 4. 在 init.el 中安装 packages
 -----
-	• 裸机 Emacs 系统除了部分内置的功能，什么 cutomerized 设置都没有，因此我们手动安装想要 packages。第一次安装是从 option-manage packages 用 GUI 安装，等同于调用 M-x package-list-packages，但安装不仅是加载，系统同时自动同时在 init.el 生成 M-x package-list-packages list，以便以后在任何电脑上都可以自动复现。所以我们可以从 init.el 从命令的角度看看这是如何实现的。
+	• 裸机 Emacs 系统除了部分内置的功能，什么 customized 设置都没有，因此我们手动安装想要 packages。第一次安装是从 option-manage packages 用 GUI 安装，等同于调用 M-x package-list-packages，但安装不仅是加载，系统同时自动同时在 init.el 生成 M-x package-list-packages list，以便以后在任何电脑上都可以自动复现。所以我们可以从 init.el 从命令的角度看看这是如何实现的。
 	
 	• 以后我们也会通过在 init.el 里编写 packages list 来实现群体安装。
 	

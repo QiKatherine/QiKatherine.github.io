@@ -1,8 +1,8 @@
 +++
 title = "Best workaround to use Emacs in MS Windows 【在 MS windows 中使用 Emacs 的最佳解决方案】"
-summary = "Experience Emacs with best workaround enviroment in windows."
+summary = "Experience Emacs with best workaround environment in windows."
 date = 2019-08-16T01:03:00+01:00
-lastmod = 2019-11-20T13:05:42+00:00
+lastmod = 2019-12-02T21:21:51+00:00
 tags = ["Emasc", "Msys2", "Windows10"]
 categories = ["TECH"]
 draft = false
@@ -13,9 +13,9 @@ image = "img/111.jpg"
 
 ---
 
-Due to the working environment limitation, I occasionally have to use MS windows system (and therefore Emacs for Windows). But some similar users and I have constantly found cases where Emacs is significantly relying on \*unix system. So far, my experience is that compling Emacs in msys2 has been a best (maybe) workaround in this situation. If you this is relatable to you, you might want to give it a try:
+Due to the working environment limitation, I occasionally have to use MS windows system (and therefore Emacs for Windows). But some similar users and I have constantly found cases where Emacs is significantly relying on \*unix system. So far, my experience is that compiling Emacs in msys2 has been a best (maybe) workaround in this situation. If you this is relatable to you, you might want to give it a try:
 <https://chriszheng.science/2015/01/23/Guideline-for-building-GNU-Emacs-with-MSYS2-MinGW-w64/>
-There has been ample discussion online, so I will be writting in Chinese. If you are interested in the trouble shootings below, try google translate. It will be fun :).
+There has been ample discussion online, so I will be writing in Chinese. If you are interested in the trouble shootings below, try google translate. It will be fun :).
 
 我因为工作的原因有时候不得不使用 Windows。Emacs for Windows，在这种情况下，已经是一个比较合适的选择了，我用了半年多对它各方面都还相对满意。但是总不时会发现，Emacs 里面还有很多严重依赖\*Unix system 的操作。为了找到一劳永逸的办法（做梦），我尝试过 cygwin, mingw64 还做了一些功课，目前发现最好方式是，将整合到 msys2 里面使用，或者使用 msys2 编译的 Emacs。
 

@@ -1,15 +1,18 @@
-﻿I am a Ph.D. candidate in the interdisciplinary area of statistical/machine learning and econometric study.  The key challenge in any complex system learning is **problem identification** , which comes down to various types of causality inference and optimization work. I am particularly experienced in establishing theoretical statistical models and evaluating empirical econometric studies. My master's education equips me to design natural experiments and observational study with features such as time series, stochastic, probabilistic based models, etc.
+﻿Hello beautiful people! Thanks for being interested in finding out about me!
+
+I am a future rich people, standup comedy guru, rapper the extraordinaire... But somehow, I am currently doing a Ph.D. research in the interdisciplinary area of statistical/machine learning and econometric study.  (Well, we all have dreams right?)
 
 -----
-
+Here is something more about my study, referring to a series of keywords I did not expect when I was a kid:
+The key challenge in any complex system learning is **problem identification** , which comes down to various types of causality inference and optimization work. I am particularly experienced in establishing theoretical statistical models and evaluating empirical econometric studies. My years of school equips me to design natural experiments and observational study with features such as time series, stochastic, probabilistic based models, etc.
 #### Interests in Statistics
 As a statistical researcher, I'm into Bayesian learning and variable selection in classification issues. I used to explore the re-parameterized Bayesian model, such as spike & slab prior. These unusual model comes with good mathematical properties but difficult to evaluate analytically. To conquer the computational limitation, I used MCMC with the Metropolis-Hastings process to recover the asymptotic probability model. In this process, I began to develop interests in high-performance computation. 
 
 #### Interests in Econometrics
-As an economic researcher, my specialty lies in quantitative corporate finance study (a sub-area of financial economics). Based on this interest, I am currently undertaking the study of evaluation algorithms to help make risk-controlled and efficient investment decisions, in medium to big size data. Following this, I hope to establish financial indicators/systems to detect and, most importantly, predict investment/risk alert signals in daily information processing activities, which potentially can be beneficial to government sectors, the central bank, corporate governors, researchers, and other stakeholders.
+As an economic researcher, my speciality lies in quantitative corporate finance study (a sub-area of financial economics). Based on this interest, I am currently undertaking the study of evaluation algorithms to help make risk-controlled and efficient investment decisions, in medium to big size data. Following this, I hope to establish financial indicators/systems to detect and, most importantly, predict investment/risk alert signals in daily information processing activities, which potentially can be beneficial to government sectors, the central bank, corporate governors, researchers, and other stakeholders.
 
 #### Interests in semantic unit based programming
-My daily text based workflow is built on Emacs, which requires certain knowledge of Emacs-lisp hacking. The distinct features of semantic unit based programming got me interested.
+My daily text-based workflow is built on Emacs, which requires certain knowledge of Emacs-lisp hacking. The distinct features of semantic unit based programming got me interested.
 
 -----
 

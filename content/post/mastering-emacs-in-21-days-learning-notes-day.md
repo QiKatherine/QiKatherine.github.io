@@ -2,7 +2,7 @@
 title = "Mastering emacs in 21 days learning notes - 1 【21 天学会 Emacs 笔记 - 1】"
 summary = "Learning notes about Emacs."
 date = 2019-08-25T23:51:00+01:00
-lastmod = 2019-11-20T13:05:42+00:00
+lastmod = 2019-12-02T21:21:51+00:00
 tags = ["Emacs"]
 categories = ["TECH"]
 draft = false
@@ -15,7 +15,7 @@ https://github.com/](https://github.com/zilongshanren) The official learning not
 Days - http://book.emacs-china.org/](http://book.emacs-china.org/) My notes extend the official notes with my
 personal learning experience. Since there has been ample discussion of using and
 learning Emacs in English community, my learning note is written in Chinese to
-benefit more addtional readers.
+benefit more additional readers.
 
 这篇文章是我学习子龙山人老师的 spacemacs rock 系列笔记之一。在原视频配套的基础上我还做了一些扩展和补充，有的知识点还加了视频对应【集数-分钟】的时间点，以便迅速观看视频.
 
@@ -118,7 +118,7 @@ setq 和 setq-default 才是一回事。set-key 也是类似，如下注意左�
 
 ---
 
-• 裸机 Emacs 系统除了部分内置的功能，什么 cutomerized 设置都没有，因此我们手动安装想要 packages。第一次安装是从 option-manage packages 用 GUI 安装，等同于调用 M-x package-list-packages，但安装不仅是加载，系统同时自动同时在 init.el 生成 M-x package-list-packages list，以便以后在任何电脑上都可以自动复现。所以我们可以从 init.el 从命令的角度看看这是如何实现的。
+• 裸机 Emacs 系统除了部分内置的功能，什么 customized 设置都没有，因此我们手动安装想要 packages。第一次安装是从 option-manage packages 用 GUI 安装，等同于调用 M-x package-list-packages，但安装不仅是加载，系统同时自动同时在 init.el 生成 M-x package-list-packages list，以便以后在任何电脑上都可以自动复现。所以我们可以从 init.el 从命令的角度看看这是如何实现的。
 
 • 以后我们也会通过在 init.el 里编写 packages list 来实现群体安装。
 
