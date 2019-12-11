@@ -2,7 +2,7 @@
 title = "Mastering emacs in 21 days learning notes - 1 【21 天学会 Emacs 笔记 - 1】"
 summary = "Learning notes about Emacs."
 date = 2019-08-25T23:51:00+01:00
-lastmod = 2019-12-02T21:21:51+00:00
+lastmod = 2019-12-11T02:08:31+00:00
 tags = ["Emacs"]
 categories = ["TECH"]
 draft = false
@@ -111,7 +111,7 @@ setq 和 setq-default 才是一回事。set-key 也是类似，如下注意左�
 |-------------------------|----------------------------------|
 | (company-mode t)        | (global-company-mode t)          |
 | (setq cursor-type 'bar) | (setq-default  cursor-type 'bar) |
-| (set-key ..)            | (global-set-key …)               |
+| (set-key ..)            | (global-set-key …)              |
 
 
 ## 4. 在 init.el 中安装 packages {#4-dot-在-init-dot-el-中安装-packages}

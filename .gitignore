@@ -2,6 +2,4 @@
 themes/resources
 resources/
 node_modules
-package.json
-package-lock.json
-.env
+search/

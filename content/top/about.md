@@ -1,9 +1,13 @@
-﻿Hello beautiful people! Thanks for being interested in finding out about me!
+﻿My GitHub chart:
+![GitHub Chart](https://ghchart.rshah.org/QiKatherine)
 
-I am a future rich people, standup comedy guru, rapper the extraordinaire... But somehow, I am currently doing a Ph.D. research in the interdisciplinary area of statistical/machine learning and econometric study.  (Well, we all have dreams right?)
+Hello beautiful people! Thanks for being interested in finding out about me :).
+
+I am a future rich people, next generation Oscar Wilde (or Noël Coward) and therapeutic comedian. (Well, we all have dreams right?). But somehow, I am currently doing Ph.D. research in the area of statistical/machine learning and econometrics.  
 
 -----
-Here is something more about my study, referring to a series of keywords I did not expect when I was a kid:
+About my research (referring to some keywords I did not expect when I was a kid):
+
 The key challenge in any complex system learning is **problem identification** , which comes down to various types of causality inference and optimization work. I am particularly experienced in establishing theoretical statistical models and evaluating empirical econometric studies. My years of school equips me to design natural experiments and observational study with features such as time series, stochastic, probabilistic based models, etc.
 #### Interests in Statistics
 As a statistical researcher, I'm into Bayesian learning and variable selection in classification issues. I used to explore the re-parameterized Bayesian model, such as spike & slab prior. These unusual model comes with good mathematical properties but difficult to evaluate analytically. To conquer the computational limitation, I used MCMC with the Metropolis-Hastings process to recover the asymptotic probability model. In this process, I began to develop interests in high-performance computation. 
@@ -23,7 +27,7 @@ I participate in the Alan Turing Institute Data Study Group to gain experience i
 
 (2) **Counterfactual modeling in AI ethics** Collaborating with Accenture AI specialists, we propose quantifying AI fairness with 5 different proxies and implement a set of algorithms to detect the potential biases of current dataset to eliminate the disparate impact of unfair data, which is shown as a well-performed framework to help AI-related companies to improve their work to maintain fairness during data-based decision-making process under the upcoming GDPR, with research paper published publicly.
 
-(3) **Data fusion in cybersecurity** Collaborating with IC, Los Alamos National Laboratory, and The Heilbronn Institute for Mathematical Research to develop data science tools for improving enterprise cyber-security. My contribution is to apply unsupervised learning in unusual change detection in the 'blend-in attack' of information fusion research. 
+(3) **Data fusion in cybersecurity** Collaborating with Imperial College, Los Alamos National Laboratory, and The Heilbronn Institute for Mathematical Research to develop data science tools for improving enterprise cyber-security. My contribution is to apply unsupervised learning in unusual change detection in the 'blend-in attack' of information fusion research. 
 
 (4) **Cybernetics in trajectory prediction** Collaborating with National Air Traffic Services, we developed a series of machine learning/deep learning methods to predict air traffic trajectories (high-frequency time series data). My role is to help understand the linear dynamic control theory and Kalman filter. 
 
