@@ -2,7 +2,7 @@
 title = "Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】"
 summary = "My personal experience of blogging with Emacs/Spacemacs and plug-in ox-hugo, along with some explanation of Hugo's working structure."
 date = 2019-07-16T01:03:00+01:00
-lastmod = 2019-12-11T02:08:31+00:00
+lastmod = 2019-12-12T01:13:01+00:00
 tags = ["Hugo", "Ox-hugo"]
 categories = ["TECH"]
 draft = false
@@ -104,8 +104,6 @@ ox-hugo"有新的标题和内容需要去导出"。
 
 通用 Front matter 主管面向一个 article 内部的性质设置，例如写作作者，写作日期，写作 tag。Heading information 例如 `#+hugo_base_dir` 的概念局限于 `ox-hugo` 里，是遵从
 org-mode 特色的命名方式设计的变量，类似的语法在其他 org 文章的管理信息中也可以看到。而 front-matter 这些变量在 markdown，网页 config file 等其它文件里都有。只是 `:PROPERTIES:` 这种表达形式是 ox-hugo 特色写法。换做 org 支持的另一种 projectile 导出 HTML 的 front matter 可能是这样:base-directory "~/Dropbox/org/blog/".
-
----
 
 
 ## 3. Content type {#3-dot-content-type}
