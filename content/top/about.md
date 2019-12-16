@@ -3,7 +3,7 @@
 
 Hello beautiful people! Thanks for being interested in finding out about me :).
 
-I am a future rich people, next generation Oscar Wilde (or Noël Coward) and therapeutic comedian. (Well, we all have dreams right?). But somehow, I am currently doing Ph.D. research in the area of statistical/machine learning and econometrics.  
+I am a future poet, next generation Oscar Wilde (or Noël Coward) and comedian with healing power. (Well, we all have dreams right?). But somehow, I am currently doing Ph.D. research in the area of statistical/machine learning and econometrics.  
 
 -----
 About my research (referring to some keywords I did not expect when I was a kid):
