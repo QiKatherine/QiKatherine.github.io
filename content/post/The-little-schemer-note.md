@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note"
 date = 2019-12-10T23:20:00+00:00
-lastmod = 2019-12-12T01:13:03+00:00
+lastmod = 2019-12-19T14:43:05+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -27,10 +27,10 @@ enclosed by parenthesis is **list**.
 ---
 
 `(car argument)`: returns first s-expression among all the first-level
- s-expression within a list.
+ s-expression within a list. It can NOT work on empty list.
 
 `(cdr argument)`: returns the complement set of `(car argument)`, including
-the parenthesis.
+the parenthesis. It can return empty list but can NOT work on non-list input.
 
 `car/cdr` both take and output non-empty list. `cdr` cannot work on null list or
 atom. For `(han), han, ()` cdr can only work on the first.
@@ -50,7 +50,7 @@ atom. For `(han), han, ()` cdr can only work on the first.
  s-expression is either atom or list/pair, `(lat?)` use `(atom?)` as core function.
 
 {{< highlight scheme >}}
-; (lat? (Jack Sprat could eat no chicken fat)) -> T, for every element is atom.
+; (lat? (Jack Sprat could eat no chicken fat)) -> #t, for every element is atom.
 (define lat?
   (lambda (l)
     (cond
@@ -63,7 +63,7 @@ atom. For `(han), han, ()` cdr can only work on the first.
 argument2(non-empty list).
 
 {{< highlight scheme >}}
-; (member? meat (mashed potatoes and meat gravy)) -> T, for meat is in the list.
+; (member? meat (mashed potatoes and meat gravy)) -> #t, for meat is in the list.
 (define member?
   (lambda (a lat)
     (cond
@@ -153,6 +153,10 @@ occurs firstly is replaced by new atom.
           (cons (car lat) (subst new o1 o2 (cdr lat)))))))
 {{< /highlight >}}
 
+From now on, we use recursion more than once, in different predicates to achieve
+multiple assignments, or more complicated assignments. For example, putting a
+recursion in `(eq?)` predicate, in `(rember)` function enables us to go deeper,
+removing multiple occurred atoms.
 `(multirember a lat)`: removes all the occurrences of a in lat(list).
 `(multiinsertR new old lat)` and `(multiinsertL new old lat)`: insert new atom at the
 RIGHT/LEFT side of old atom for EVERY occurrence of old in lat(list).
@@ -193,7 +197,7 @@ RIGHT/LEFT side of old atom for EVERY occurrence of old in lat(list).
 of old atom in lat(list).
 
 {{< highlight scheme >}}
-; (multisubst x a (a b c d e a a b))  ; (x b c d e x x b)
+; (multisubst x a (a b c d e a a b)) -> (x b c d e x x b)
 define multisubst
   (lambda (new old lat)
     (cond
@@ -212,9 +216,12 @@ T. Generally applicable termination should be at finishing the last element.
 
 ## Chapter 4 Number Games {#chapter-4-number-games}
 
-In this section, we only consider _whole_ and _positive_ number. We are going to
-use addition 1 `(add1 argument)`, and subtraction 1 `(sub1 argument)` as building blocks to construct
-various number calculation algorithms.
+To start, we only consider _whole_ and _positive_ number. We are going to
+firstly build increment function `(add1 argument)`, and decrement function
+`(sub1 argument)`; then using them as fundamental blocks, we build addition
+`(o+)` and subtraction `(o-)`; again using addtion as building block, we build multiplication.
+It can be sensed that these recursive paradigm is exactly how we establish all more
+calculation algorithms.
 
 {{< highlight scheme >}}
 ;(add1 67) -> 68
@@ -238,14 +245,209 @@ various number calculation algorithms.
     (cond
       ((zero? m) n)
       (else (sub1 (o- n (sub1 m)))))))
+
+;(o* 5 3) -> 15
+(define o*
+  (lambda (n m)
+    (cond
+      ((zero? m) 0)
+      (else (o+ n (o* n (sub1 m)))))))
 {{< /highlight >}}
 
-**tup** is either an empty list, or it contains a number and a rest that is also a **tup**.
+Next we introduce new class tuple, _tup_. **tup** is either an empty list, or it contains a number and a rest that is also a **tup**.
 
-To enable natural termination on a list we use `(null? list)`; the natural termination on a
-tup we use `(null? tup)`; the natural recursion on a number we use `(zero? 0)`.
+Using tup as building block to create extent function is just as using list before.
+To enable _natural termination_ on a list we use `(null? list)` and on a number we
+use `(zero? 0)`. To enble the natural termination on a tup we use `(null? tup)`.
 
-To enable natural recursion on a list we use `(cdr argument)`; the natural recursion on a
+To enable _natural recursion_ on a list we use `(cdr argument)`; the natural recursion on a
 tup we use `(cdr argument)`; the natural recursion on a number we use `(sub1
 argument)`. These condition is reused as new argument in inner recursion as
 stated in The Fourth Commandment.
+
+For tup, we develop two functions for fun:
+
+{{< highlight scheme >}}
+;(addtup (3 5 2 8)) -> 18
+(define addtup
+  (lambda (tup)
+    (cond
+      ((null? tup) 0)
+      (else (o+ (car tup) (addtup (cdr tup)))))))
+
+;(tup+ (3 6 9 11 4) (8 5 2 0 7)) -> (11 11 11 11 11)
+(define tup+
+  (lambda (tup1 tup2)
+    (cond
+      ((null? tup1) tup2)
+      ((null? tup2) tup1)
+      (else
+        (cons (o+ (car tup1) (car tup2))
+              (tup+ (cdr tup1) (cdr tup2)))))))
+{{< /highlight >}}
+
+The second case shows case need more than one terminal conditions. Using `(and
+(null? tup1) (null? tup2))` is wrong when tup1 and tup2 have different length.
+In such case, we use multiple terminal conditions and it works not only to finish the recursion,
+but also to delivery the key result.
+
+Back to the number game, we continuous use the foundamental blocks to creat:
+
+{{< highlight scheme >}}
+;(o> 12 133) -> #f
+(define o>
+  (lambda (n m)
+    (cond
+      ((zero? n) #f)
+      ((zero? m) #t)
+      (else
+        (o> (sub1 n) (sub1 m))))))
+
+;(o< 4 6) -> #t
+(define o<
+  (lambda (n m)
+    (cond
+      ((zero? m) #f)
+      ((zero? n) #t)
+      (else
+        (o< (sub1 n) (sub1 m))))))
+
+;(o= 5 5) -> #t
+(define o=
+  (lambda (n m)
+    (cond
+      ((o> n m) #f)
+      ((o< n m) #f)
+      (else #t))))
+
+;(o^ 2 3) -> 8
+(define o^
+  (lambda (n m)
+    (cond
+      ((zero? m) 1)
+      (else (o* n (o^ n (sub1 m)))))))
+
+;(o/ 15 4) -> 3
+(define o/
+  (lambda (n m)
+    (cond
+      ((o< n m) 0)
+      (else (add1 (o/ (o- n m) m))))))
+{{< /highlight >}}
+
+In the `o> and o<` we can see again that terminate conditions not only terminate recursion,
+but also work in a carefully arranged order, to deliver the right results for
+function.
+
+{{< highlight scheme >}}
+;(olength (hotdogs with mustard sauerkraut and pickles)) -> 6
+(define olength
+  (lambda (lat)
+    (cond
+      ((null? lat) 0)
+      (else (add1 (olength (cdr lat)))))))
+
+;(pick 4 (lasagna spaghetti ravioli macaroni meatball)) -> macaroni
+(define pick
+  (lambda (n lat)
+    (cond
+      ((zero? (sub1 n)) (car lat))
+      (else
+        (pick (sub1 n) (cdr lat))))))
+
+;(rempick 3 (hotdogs with hot mustard)) -> (hotdogs with mustard)
+(define rempick
+  (lambda (n lat)
+    (cond
+      ((zero? (sub1 n)) (cdr lat))
+      (else
+        (cons (car lat) (rempick (sub1 n) (cdr lat)))))))
+{{< /highlight >}}
+
+and number
+
+{{< highlight scheme >}}
+(define no-nums
+  (lambda (lat)
+    (cond
+      ((null? lat) '())
+      ((number? (car lat)) (no-nums (cdr lat)))
+      (else
+        (cons (car lat) (no-nums (cdr lat)))))))
+
+; Example of no-nums
+;
+(no-nums '(5 pears 6 prunes 9 dates))       ; '(pears prunes dates)
+
+; The all-nums does the opposite of no-nums - returns a new lat with
+; only numbers
+;
+(define all-nums
+  (lambda (lat)
+    (cond
+      ((null? lat) '())
+      ((number? (car lat)) (cons (car lat) (all-nums (cdr lat))))
+      (else
+        (all-nums (cdr lat))))))
+
+; Example of all-nums
+;
+(all-nums '(5 pears 6 prunes 9 dates))       ; '(5 6 9)
+
+
+; The eqan? function determines whether two arguments are te same
+; It uses eq? for atoms and = for numbers
+;
+(define eqan?
+  (lambda (a1 a2)
+    (cond
+      ((and (number? a1) (number? a2)) (= a1 a2))
+      ((or  (number? a1) (number? a2)) #f)
+      (else
+        (eq? a1 a2)))))
+
+; Examples of eqan?
+;
+(eqan? 3 3)     ; #t
+(eqan? 3 4)     ; #f
+(eqan? 'a 'a)   ; #t
+(eqan? 'a 'b)   ; #f
+
+; The occur function counts the number of times an atom appears
+; in a list
+;
+(define occur
+  (lambda (a lat)
+    (cond
+      ((null? lat) 0)
+      ((eq? (car lat) a)
+       (add1 (occur a (cdr lat))))
+      (else
+        (occur a (cdr lat))))))
+
+; Example of occur
+;
+(occur 'x '(a b x x c d x))     ; 3
+(occur 'x '())                  ; 0
+
+; The one? function is true when n=1
+;
+(define one?
+  (lambda (n) (= n 1)))
+
+; Example of one?
+;
+(one? 5)        ; #f
+(one? 1)        ; #t
+
+(define rempick-one
+  (lambda (n lat)
+    (cond
+      ((one? n) (cdr lat))
+      (else
+        (cons (car lat) (rempick-one (sub1 n) (cdr lat)))))))
+
+; Example of rempick-one
+;
+(rempick-one 4 '(hotdogs with hot mustard))     ; '(hotdogs with mustard)
+{{< /highlight >}}
