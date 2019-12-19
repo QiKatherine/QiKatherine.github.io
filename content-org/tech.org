@@ -1176,6 +1176,10 @@ occurs firstly is replaced by new atom.
           (cons (car lat) (subst new o1 o2 (cdr lat)))))))
 #+end_src
 
+From now on, we use recursion more than once, in different predicates to achieve
+multiple assignments, or more complicated assignments. For example, putting a
+recursion in =(eq?)= predicate, in =(rember)= function enables us to go deeper,
+removing multiple occurred atoms.
 ~(multirember a lat)~: removes all the occurrences of a in lat(list).
 ~(multiinsertR new old lat)~ and ~(multiinsertL new old lat)~: insert new atom at the
 RIGHT/LEFT side of old atom for EVERY occurrence of old in lat(list).
