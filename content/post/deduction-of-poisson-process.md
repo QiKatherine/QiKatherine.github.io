@@ -1,7 +1,7 @@
 +++
 title = "Deduction of Poisson process 【泊松过程推导】"
 date = 2019-10-15T02:34:00+01:00
-lastmod = 2019-12-19T14:43:05+00:00
+lastmod = 2019-12-23T02:38:54+00:00
 tags = ["statistics", "stochastic-process", "probability"]
 categories = ["MATH"]
 draft = false

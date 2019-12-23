@@ -1,7 +1,7 @@
 +++
-title = "The Little Schemer speedy referring note"
+title = "The Little Schemer speedy referring note (1/3)"
 date = 2019-12-10T23:20:00+00:00
-lastmod = 2019-12-19T14:43:05+00:00
+lastmod = 2019-12-23T02:38:55+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -335,9 +335,10 @@ Back to the number game, we continuous use the foundamental blocks to creat:
       (else (add1 (o/ (o- n m) m))))))
 {{< /highlight >}}
 
-In the `o> and o<` we can see again that terminate conditions not only terminate recursion,
+In the `o> and o<` we can see again that the terminating conditions not only
+terminate recursions,
 but also work in a carefully arranged order, to deliver the right results for
-function.
+designated function.
 
 {{< highlight scheme >}}
 ;(olength (hotdogs with mustard sauerkraut and pickles)) -> 6
@@ -367,87 +368,52 @@ function.
 and number
 
 {{< highlight scheme >}}
+;(no-nums '(5 pears 6 prunes 9 dates)) -> (pears prunes dates)
 (define no-nums
-  (lambda (lat)
-    (cond
-      ((null? lat) '())
-      ((number? (car lat)) (no-nums (cdr lat)))
-      (else
-        (cons (car lat) (no-nums (cdr lat)))))))
+    (lambda (lat)
+      (cond
+        ((null? lat) '())
+        ((number? (car lat)) (no-nums (cdr lat)))
+        (else
+          (cons (car lat) (no-nums (cdr lat)))))))
 
-; Example of no-nums
-;
-(no-nums '(5 pears 6 prunes 9 dates))       ; '(pears prunes dates)
+;(all-nums '(5 pears 6 prunes 9 dates)) -> (5 6 9)
+  (define all-nums
+    (lambda (lat)
+      (cond
+        ((null? lat) '())
+        ((number? (car lat)) (cons (car lat) (all-nums (cdr lat))))
+        (else
+          (all-nums (cdr lat))))))
 
-; The all-nums does the opposite of no-nums - returns a new lat with
-; only numbers
-;
-(define all-nums
-  (lambda (lat)
-    (cond
-      ((null? lat) '())
-      ((number? (car lat)) (cons (car lat) (all-nums (cdr lat))))
-      (else
-        (all-nums (cdr lat))))))
+;(eqan? 'a 'a) -> #t
+  (define eqan?
+    (lambda (a1 a2)
+      (cond
+        ((and (number? a1) (number? a2)) (= a1 a2))
+        ((or  (number? a1) (number? a2)) #f)
+        (else
+          (eq? a1 a2)))))
 
-; Example of all-nums
-;
-(all-nums '(5 pears 6 prunes 9 dates))       ; '(5 6 9)
+;(occur 'x '(a b x x c d x)) -> 3
+  (define occur
+    (lambda (a lat)
+      (cond
+        ((null? lat) 0)
+        ((eq? (car lat) a)
+         (add1 (occur a (cdr lat))))
+        (else
+          (occur a (cdr lat))))))
 
-
-; The eqan? function determines whether two arguments are te same
-; It uses eq? for atoms and = for numbers
-;
-(define eqan?
-  (lambda (a1 a2)
-    (cond
-      ((and (number? a1) (number? a2)) (= a1 a2))
-      ((or  (number? a1) (number? a2)) #f)
-      (else
-        (eq? a1 a2)))))
-
-; Examples of eqan?
-;
-(eqan? 3 3)     ; #t
-(eqan? 3 4)     ; #f
-(eqan? 'a 'a)   ; #t
-(eqan? 'a 'b)   ; #f
-
-; The occur function counts the number of times an atom appears
-; in a list
-;
-(define occur
-  (lambda (a lat)
-    (cond
-      ((null? lat) 0)
-      ((eq? (car lat) a)
-       (add1 (occur a (cdr lat))))
-      (else
-        (occur a (cdr lat))))))
-
-; Example of occur
-;
-(occur 'x '(a b x x c d x))     ; 3
-(occur 'x '())                  ; 0
-
-; The one? function is true when n=1
-;
+;  (one? 5) -> #f
 (define one?
-  (lambda (n) (= n 1)))
+    (lambda (n) (= n 1)))
 
-; Example of one?
-;
-(one? 5)        ; #f
-(one? 1)        ; #t
-
+;(rempick-one 4 '(hotdogs with hot mustard)) -> '(hotdogs with mustard)
 (define rempick-one
-  (lambda (n lat)
-    (cond
-      ((one? n) (cdr lat))
-      (else
-        (cons (car lat) (rempick-one (sub1 n) (cdr lat)))))))
-
-; Example of rempick-one
-;
-(rempick-one 4 '(hotdogs with hot mustard))     ; '(hotdogs with mustard)
+    (lambda (n lat)
+      (cond
+        ((one? n) (cdr lat))
+        (else
+          (cons (car lat) (rempick-one (sub1 n) (cdr lat)))))))
 {{< /highlight >}}

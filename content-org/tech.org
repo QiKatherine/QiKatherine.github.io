@@ -1029,7 +1029,7 @@ everyday. It is hosted on github with latex source code:
 
 https://github.com/QiKatherine/Linear-algebra/blob/master/1.pdf
 
-** DONE The Little Schemer speedy referring note                     :@TECH:
+** DONE The Little Schemer speedy referring note (1/3)                :@TECH:
    CLOSED: [2019-12-10 ÖÜ¶þ 23:20]
    :PROPERTIES:
    :EXPORT_FILE_NAME: The-little-schemer-note
@@ -1352,9 +1352,10 @@ Back to the number game, we continuous use the foundamental blocks to creat:
       (else (add1 (o/ (o- n m) m))))))
 #+end_src
 
-In the ~o> and o<~ we can see again that terminate conditions not only terminate recursion,
+In the ~o> and o<~ we can see again that the terminating conditions not only
+terminate recursions,
 but also work in a carefully arranged order, to deliver the right results for
-function.
+designated function.
 
 #+begin_src scheme
 ;(olength (hotdogs with mustard sauerkraut and pickles)) -> 6
@@ -1383,87 +1384,201 @@ function.
 
 and number
 #+begin_src scheme
+;(no-nums '(5 pears 6 prunes 9 dates)) -> (pears prunes dates)
 (define no-nums
-  (lambda (lat)
-    (cond
-      ((null? lat) '())
-      ((number? (car lat)) (no-nums (cdr lat)))
-      (else
-        (cons (car lat) (no-nums (cdr lat)))))))
+    (lambda (lat)
+      (cond
+        ((null? lat) '())
+        ((number? (car lat)) (no-nums (cdr lat)))
+        (else
+          (cons (car lat) (no-nums (cdr lat)))))))
 
-; Example of no-nums
-;
-(no-nums '(5 pears 6 prunes 9 dates))       ; '(pears prunes dates)
+;(all-nums '(5 pears 6 prunes 9 dates)) -> (5 6 9)
+  (define all-nums
+    (lambda (lat)
+      (cond
+        ((null? lat) '())
+        ((number? (car lat)) (cons (car lat) (all-nums (cdr lat))))
+        (else
+          (all-nums (cdr lat))))))
 
-; The all-nums does the opposite of no-nums - returns a new lat with
-; only numbers
-;
-(define all-nums
-  (lambda (lat)
-    (cond
-      ((null? lat) '())
-      ((number? (car lat)) (cons (car lat) (all-nums (cdr lat))))
-      (else
-        (all-nums (cdr lat))))))
+;(eqan? 'a 'a) -> #t
+  (define eqan?
+    (lambda (a1 a2)
+      (cond
+        ((and (number? a1) (number? a2)) (= a1 a2))
+        ((or  (number? a1) (number? a2)) #f)
+        (else
+          (eq? a1 a2)))))
 
-; Example of all-nums
-;
-(all-nums '(5 pears 6 prunes 9 dates))       ; '(5 6 9)
+;(occur 'x '(a b x x c d x)) -> 3
+  (define occur
+    (lambda (a lat)
+      (cond
+        ((null? lat) 0)
+        ((eq? (car lat) a)
+         (add1 (occur a (cdr lat))))
+        (else
+          (occur a (cdr lat))))))
 
-
-; The eqan? function determines whether two arguments are te same
-; It uses eq? for atoms and = for numbers
-;
-(define eqan?
-  (lambda (a1 a2)
-    (cond
-      ((and (number? a1) (number? a2)) (= a1 a2))
-      ((or  (number? a1) (number? a2)) #f)
-      (else
-        (eq? a1 a2)))))
-
-; Examples of eqan?
-;
-(eqan? 3 3)     ; #t
-(eqan? 3 4)     ; #f
-(eqan? 'a 'a)   ; #t
-(eqan? 'a 'b)   ; #f
-
-; The occur function counts the number of times an atom appears
-; in a list
-;
-(define occur
-  (lambda (a lat)
-    (cond
-      ((null? lat) 0)
-      ((eq? (car lat) a)
-       (add1 (occur a (cdr lat))))
-      (else
-        (occur a (cdr lat))))))
-
-; Example of occur
-;
-(occur 'x '(a b x x c d x))     ; 3
-(occur 'x '())                  ; 0
-
-; The one? function is true when n=1
-;
+;  (one? 5) -> #f
 (define one?
-  (lambda (n) (= n 1)))
+    (lambda (n) (= n 1)))
 
-; Example of one?
-;
-(one? 5)        ; #f
-(one? 1)        ; #t
-
+;(rempick-one 4 '(hotdogs with hot mustard)) -> '(hotdogs with mustard)
 (define rempick-one
-  (lambda (n lat)
-    (cond
-      ((one? n) (cdr lat))
-      (else
-        (cons (car lat) (rempick-one (sub1 n) (cdr lat)))))))
+    (lambda (n lat)
+      (cond
+        ((one? n) (cdr lat))
+        (else
+          (cons (car lat) (rempick-one (sub1 n) (cdr lat)))))))
 
-; Example of rempick-one
-;
-(rempick-one 4 '(hotdogs with hot mustard))     ; '(hotdogs with mustard)
+#+end_src
+
+** DONE The Little Schemer speedy referring note (2/3)                :@TECH:
+   CLOSED: [2019-12-23 Mon 01:35]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: The-little-schemer-note-2-3
+   :END:
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2019-12-23 Mon 01:35]
+   :END:
+
+This is a quick reference note that I pull from the book The Little Schemer. The
+full detailed code can be found:
+
+[[https://github.com/pkrumins/the-little-schemer/blob/master/02-do-it-again.ss][the-little-schemer/02-do-it-again.ss at master · pkrumins/the-little-schemer]]
+
+*** Chapter 5 It's full of stars
+The starred function means that compared with the premature function we
+defined above, we need to further extend it to achieve higher level of
+mission, or to do the work more thoroughly. For example, =(rember a l)=
+removes multiple occurrences =a= as the first level s-expression of list =l=, whileas =(rember* a l)= 
+removes =a= as any level s-expressions.
+#+begin_src scheme
+; (rember* 
+;   'cup  
+;   '((coffee) cup ((tea) cup) (and (hick)) cup)) 
+; -> '((coffee) ((tea)) (and (hick)))
+(define rember*
+  (lambda (a l)
+    (cond
+      ((null? l) '())
+      ((atom? (car l))
+       (cond
+         ((eq? (car l) a)
+          (rember* a (cdr l)))
+         (else
+           (cons (car l) (rember* a (cdr l))))))
+      (else
+        (cons (rember* a (car l)) (rember* a (cdr l)))))))
+
+;(insertR*
+;  'roast
+;  'chuck
+;  '((how much (wood)) could ((a (wood) chuck)) (((chuck)))
+;    (if (a) ((wood chuck))) could chuck wood))
+; -> ((how much (wood)) could ((a (wood) chuck roast)) (((chuck roast)))
+(define insertR*
+  (lambda (new old l)
+    (cond
+      ((null? l) '())
+      ((atom? (car l))
+       (cond
+         ((eq? (car l) old)
+          (cons old (cons new (insertR* new old (cdr l)))))
+         (else
+           (cons (car l) (insertR* new old (cdr l))))))
+      (else
+        (cons (insertR* new old (car l)) (insertR* new old (cdr l)))))))
+
+;(insertL*
+;  'pecker
+;  'chuck
+;  '((how much (wood)) could ((a (wood) chuck)) (((chuck)))
+;    (if (a) ((wood chuck))) could chuck wood))
+; -> ((how much (wood)) could ((a (wood) chuck pecker)) (((chuck pecker)))
+;      (if (a) ((wood chuck pecker))) could chuck pecker wood)
+(define insertL*
+  (lambda (new old l)
+    (cond
+      ((null? l) '())
+      ((atom? (car l))
+       (cond
+         ((eq? (car l) old)
+          (cons new (cons old (insertL* new old (cdr l)))))
+         (else
+           (cons (car l) (insertL* new old (cdr l))))))
+      (else
+        (cons (insertL* new old (car l)) (insertL* new old (cdr l)))))))
+
+#+end_src
+
+#+begin_src scheme
+;(occur*
+;  'banana
+;  '((banana)
+;    (split ((((banana ice)))
+;            (cream (banana))
+;            sherbet))
+;    (banana)
+;    (bread)
+;    (banana brandy)))
+; -> 5
+(define occur*
+  (lambda (a l)
+    (cond
+      ((null? l) 0)
+      ((atom? (car l))
+       (cond
+         ((eq? (car l) a)
+          (add1 (occur* a (cdr l))))
+         (else
+           (occur* a (cdr l)))))
+      (else
+        (+ (occur* a (car l))
+           (occur* a (cdr l)))))))
+;(subst*
+;  'orange
+;  'banana
+;  '((banana)
+;    (split ((((banana ice)))
+;            (cream (banana))
+;            sherbet))
+;    (banana)
+;    (bread)
+;    (banana brandy)))
+; -> '((orange)
+;      (split ((((orange ice)))
+;              (cream (orange))
+;              sherbet))
+;      (orange)
+;      (bread)
+;      (orange brandy))
+(define subst*
+  (lambda (new old l)
+    (cond
+      ((null? l) '())
+      ((atom? (car l))
+       (cond
+         ((eq? (car l) old)
+          (cons new (subst* new old (cdr l))))
+         (else
+           (cons (car l) (subst* new old (cdr l))))))
+      (else
+        (cons (subst* new old (car l)) (subst* new old (cdr l)))))))
+
+;(member
+;  'chips
+;  '((potato) (chips ((with) fish) (chips)))) -> #t
+(define member*
+  (lambda (a l)
+    (cond
+      ((null? l) #f)
+      ((atom? (car l))
+       (or (eq? (car l) a)
+           (member* a (cdr l))))
+      (else
+        (or (member* a (car l))
+            (member* a (cdr l)))))))
 #+end_src
