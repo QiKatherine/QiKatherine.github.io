@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (2/3)"
 date = 2019-12-23T01:35:00+00:00
-lastmod = 2019-12-23T02:38:55+00:00
+lastmod = 2019-12-24T01:04:19+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -21,10 +21,11 @@ mission, or to do the work more thoroughly. For example, `(rember a l)`
 removes multiple occurrences `a` as the first level s-expression of list `l`, whileas `(rember* a l)`
 removes `a` as any level s-expressions.
 
+This is improved by changing one more condition with recusion and works
+similarly in the blow algorithms.
+
 {{< highlight scheme >}}
-; (rember*
-;   'cup
-;   '((coffee) cup ((tea) cup) (and (hick)) cup))
+; (rember* 'cup '((coffee) cup ((tea) cup) (and (hick)) cup))
 ; -> '((coffee) ((tea)) (and (hick)))
 (define rember*
   (lambda (a l)
@@ -39,11 +40,8 @@ removes `a` as any level s-expressions.
       (else
         (cons (rember* a (car l)) (rember* a (cdr l)))))))
 
-;(insertR*
-;  'roast
-;  'chuck
-;  '((how much (wood)) could ((a (wood) chuck)) (((chuck)))
-;    (if (a) ((wood chuck))) could chuck wood))
+;(insertR* 'roast 'chuck
+;  '((how much (wood)) could ((a (wood) chuck)) (((chuck))) (if (a) ((wood chuck))) could chuck wood))
 ; -> ((how much (wood)) could ((a (wood) chuck roast)) (((chuck roast)))
 (define insertR*
   (lambda (new old l)
@@ -58,13 +56,9 @@ removes `a` as any level s-expressions.
       (else
         (cons (insertR* new old (car l)) (insertR* new old (cdr l)))))))
 
-;(insertL*
-;  'pecker
-;  'chuck
-;  '((how much (wood)) could ((a (wood) chuck)) (((chuck)))
-;    (if (a) ((wood chuck))) could chuck wood))
-; -> ((how much (wood)) could ((a (wood) chuck pecker)) (((chuck pecker)))
-;      (if (a) ((wood chuck pecker))) could chuck pecker wood)
+;(insertL* 'pecker 'chuck
+;  '((how much (wood)) could ((a (wood) chuck)) (((chuck))) (if (a) ((wood chuck))) could chuck wood))
+; -> ((how much (wood)) could ((a (wood) chuck pecker)) (((chuck pecker))) (if (a) ((wood chuck pecker))) could chuck pecker wood)
 (define insertL*
   (lambda (new old l)
     (cond
@@ -80,15 +74,7 @@ removes `a` as any level s-expressions.
 {{< /highlight >}}
 
 {{< highlight scheme >}}
-;(occur*
-;  'banana
-;  '((banana)
-;    (split ((((banana ice)))
-;            (cream (banana))
-;            sherbet))
-;    (banana)
-;    (bread)
-;    (banana brandy)))
+;(occur* 'banana '((banana) (split ((((banana ice))) (cream (banana)) sherbet)) (banana) (bread) (banana brandy)))
 ; -> 5
 (define occur*
   (lambda (a l)
@@ -103,23 +89,10 @@ removes `a` as any level s-expressions.
       (else
         (+ (occur* a (car l))
            (occur* a (cdr l)))))))
-;(subst*
-;  'orange
-;  'banana
-;  '((banana)
-;    (split ((((banana ice)))
-;            (cream (banana))
-;            sherbet))
-;    (banana)
-;    (bread)
-;    (banana brandy)))
-; -> '((orange)
-;      (split ((((orange ice)))
-;              (cream (orange))
-;              sherbet))
-;      (orange)
-;      (bread)
-;      (orange brandy))
+
+;(subst* 'orange 'banana
+;  '((banana) (split ((((banana ice))) (cream (banana)) sherbet)) (banana) (bread) (banana brandy)))
+; -> '((orange) (split ((((orange ice))) (cream (orange)) sherbet)) (orange) (bread) (orange brandy))
 (define subst*
   (lambda (new old l)
     (cond
@@ -133,9 +106,7 @@ removes `a` as any level s-expressions.
       (else
         (cons (subst* new old (car l)) (subst* new old (cdr l)))))))
 
-;(member
-;  'chips
-;  '((potato) (chips ((with) fish) (chips)))) -> #t
+;(member 'chips '((potato) (chips ((with) fish) (chips)))) -> #t
 (define member*
   (lambda (a l)
     (cond
@@ -146,4 +117,62 @@ removes `a` as any level s-expressions.
       (else
         (or (member* a (car l))
             (member* a (cdr l)))))))
+
+;(leftmost '((potato) (chips ((with) fish) (chips)))) -> 'potato
+(define leftmost
+  (lambda (l)
+    (cond
+      ((atom? (car l)) (car l))
+      (else (leftmost (car l))))))
+{{< /highlight >}}
+
+{{< highlight scheme >}}
+;(eqlist? '(strawberry ice cream) '(strawberry ice cream)) -> #t
+(define eqlist?
+  (lambda (l1 l2)
+    (cond
+      ; case 1: l1 is empty, l2 is empty, atom, list
+      ((and (null? l1) (null? l2)) #t)
+      ((and (null? l1) (atom? (car l2))) #f)
+      ((null? l1) #f)
+      ; case 2: l1 is atom, l2 is empty, atom, list
+      ((and (atom? (car l1)) (null? l2)) #f)
+      ((and (atom? (car l1)) (atom? (car l2)))
+       (and (eq? (car l1) (car l2))
+            (eqlist? (cdr l1) (cdr l2))))
+      ((atom? (car l1)) #f)
+      ; case 3: l1 is a list, l2 is empty, atom, list
+      ((null? l2) #f)
+      ((atom? (car l2)) #f)
+      (else
+        (and (eqlist? (car l1) (car l2))
+             (eqlist? (cdr l1) (cdr l2)))))))
+
+;(eqlist2?  '(strawberry ice cream)  '(strawberry ice cream)) -> #t
+(define eqlist2?
+  (lambda (l1 l2)
+    (cond
+      ; case 1: l1 is empty, l2 is empty, atom, list
+      ((and (null? l1) (null? l2)) #t)
+      ((or (null? l1) (null? l2)) #f)
+      ; case 2: l1 is atom, l2 is empty, atom, list
+      ((and (atom? (car l1)) (atom? (car l2)))
+       (and (eq? (car l1) (car l2))
+            (eqlist2? (cdr l1) (cdr l2))))
+      ((or (atom? (car l1)) (atom? (car l2)))
+       #f)
+      ; case 3: l1 is a list, l2 is empty, atom, list
+      (else
+        (and (eqlist2? (car l1) (car l2))
+             (eqlist2? (cdr l1) (cdr l2)))))))
+
+;(eqlist3?  '(strawberry ice cream)  '(strawberry ice cream)) -> #t
+(define eqlist3?
+  (lambda (l1 l2)
+    (cond
+      ((and (null? l1) (null? l2)) #t)
+      ((or (null? l1) (null? l2)) #f)
+      (else
+        (and (equal2?? (car l1) (car l2))
+             (equal2?? (cdr l1) (cdr l2)))))))
 {{< /highlight >}}

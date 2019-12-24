@@ -2,7 +2,7 @@
 title = "Mastering emacs in 21 days learning notes - 1 【21 天学会 Emacs 笔记 - 1】"
 summary = "Learning notes about Emacs."
 date = 2019-08-25T23:51:00+01:00
-lastmod = 2019-12-23T02:38:53+00:00
+lastmod = 2019-12-24T01:04:17+00:00
 tags = ["Emacs"]
 categories = ["TECH"]
 draft = false

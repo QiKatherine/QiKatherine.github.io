@@ -1,7 +1,7 @@
 +++
 title = "Linear algebra note - Gilbert Strang"
 date = 2019-11-19T23:58:00+00:00
-lastmod = 2019-12-23T02:38:55+00:00
+lastmod = 2019-12-24T01:04:18+00:00
 categories = ["MATH"]
 draft = false
 image = "img/111.jpg"
