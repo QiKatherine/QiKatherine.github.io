@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (1/3)"
 date = 2019-12-10T23:20:00+00:00
-lastmod = 2019-12-24T01:04:18+00:00
+lastmod = 2019-12-26T02:25:29+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -13,7 +13,12 @@ full detailed code can be found:
 [the-little-schemer/02-do-it-again.ss at master · pkrumins/the-little-schemer](https://github.com/pkrumins/the-little-schemer/blob/master/02-do-it-again.ss)
 
 
-## Chapter 1-3 Do It Again and Again {#chapter-1-3-do-it-again-and-again}
+## Chapter 1 Toy {#chapter-1-toy}
+
+In this chapter, we list primitive conceptions and functions which will be
+used through the entire book:
+
+---
 
 **atom** is the smallest element, something NOT enclosed by pair of
 parenthesis: a string of digits/characters/numbers.
@@ -21,10 +26,8 @@ parenthesis: a string of digits/characters/numbers.
 **list** is something enclosed by pair of parenthesis: something can be nothing, can be
 atom, can be another list.
 
-**s-expression** describe both atom and list/pair. A series of s-expression
+**s-expression** can be any of :an atom; an (empty) list; a pair. A series of s-expression
 enclosed by parenthesis is **list**.
-
----
 
 `(car argument)`: returns first s-expression among all the first-level
  s-expression within a list. It can NOT work on empty list.
@@ -35,16 +38,29 @@ the parenthesis. It can return empty list but can NOT work on non-list input.
 `car/cdr` both take and output non-empty list. `cdr` cannot work on null list or
 atom. For `(han), han, ()` cdr can only work on the first.
 
-`(cons argument1 argument2)`: add arg1(s-exp) onto arg2(list), the output is
+`(cons argument1 argument2)`: add arg1 (s-exp) onto arg2 (list), the output is
  list.
 
 `(null? argument)`: returns T when the argument(list) is `(quote()), '() and ()` returns
  error when argument is `atom`; returns F for others.
 
-`(atom? argument)`: checks if the argument(any s-expression) is atom.
+`(atom? argument)`: checks if the argument (any s-expression) is atom.
 
-`(eq? argument1 argument2)`: returns T when arguments(atoms) are equal; returns
+`(eq? argument1 argument2)`: returns T when arguments (atoms) are equal; returns
  error when arguments are numerical or list; returns F for others.
+
+`(or argument1 argument2 ...)` checks predicate arguments one by one. It terminates
+whenever the first T is found and returns T, otherwise it returns F.
+
+`(and argument1 argument2 ...)` checks predicate arguments one by one. It terminates
+whenever the first F is found and returns F, otherwise it returns T.
+
+
+## Chapter 2 Do It Again and Again {#chapter-2-do-it-again-and-again}
+
+From chapter 2, we begin to build functions with primitive building blocks.
+
+---
 
 `(lat? argument)`: checks if every s-expression in a list is atom. Since the
  s-expression is either atom or list/pair, `(lat?)` use `(atom?)` as core function.
@@ -59,8 +75,8 @@ atom. For `(han), han, ()` cdr can only work on the first.
       (else #f))))
 {{< /highlight >}}
 
-`(member? argument1 argument2)`: checks if argument1(atom) is in
-argument2(non-empty list).
+ `(member? argument1 argument2)`: checks if the argument1 (an atom) is in
+the argument2 (a non-empty list).
 
 {{< highlight scheme >}}
 ; (member? meat (mashed potatoes and meat gravy)) -> #t, for meat is in the list.
@@ -72,8 +88,13 @@ argument2(non-empty list).
                 (member? a (cdr lat)))))))
 {{< /highlight >}}
 
-`(rember argument1 argument2)`: removes the first occurrence of argument1(atom) from
-argument2(non-empty list).
+
+## Chapter 3 Cons the Magnificent {#chapter-3-cons-the-magnificent}
+
+---
+
+ `(rember argument1 argument2)`: removes the first occurrence of the argument1 (an atom) from
+the argument2 (a non-empty list).
 
 {{< highlight scheme >}}
 ; (rember cup (coffee cup tea cup and hick cup)) -> (coffee tea cup and hick cup)
@@ -87,8 +108,8 @@ argument2(non-empty list).
 {{< /highlight >}}
 
 `(first argument)`: the argument is a non-empty list, possibly consists of more
-lists. The function returns the a list consists of all the first s-expressions within
-the first level lists in argument.
+lists. The function returns a list consists of all the first s-expressions within
+the first level argument lists.
 
 {{< highlight scheme >}}
 ; (firsts ((five plums) (four) (eleven green oranges))) -> (five four eleven)
@@ -100,8 +121,8 @@ the first level lists in argument.
         (cons (car (car l)) (firsts (cdr l)))))))
 {{< /highlight >}}
 
-`(insetR new old lat)` and `(insetL new old lat)`: insert the new atom at the
-RIGHT/LEFT side of the old atom in lat(list).
+`(insetR new old lat)` and `(insetL new old lat)`: insert the _new_ atom at the
+RIGHT/LEFT side of the _old_ atom in lat (a list).
 
 {{< highlight scheme >}}
 ; (insertR topping fudge (ice cream with fudge for dessert)) -> (ice cream with fudge topping for dessert)
@@ -125,9 +146,9 @@ RIGHT/LEFT side of the old atom in lat(list).
         (cons (car lat) (insertL new old (cdr lat)))))))
 {{< /highlight >}}
 
-`(subst new old lat)`: in lat(list), this function replaces old atom with new
+`(subst new old lat)`: in lat (a list), this function replaces old atom with new
 atom.
-`(subst2 new o1 o2 lat)`: in lat(list), this function checks o1 o2, whichever
+`(subst2 new o1 o2 lat)`: in lat (a list), this function checks o1 o2, whichever
 occurs firstly is replaced by new atom.
 
 {{< highlight scheme >}}
@@ -157,9 +178,9 @@ From now on, we use recursion more than once, in different predicates to achieve
 multiple assignments, or more complicated assignments. For example, putting a
 recursion in `(eq?)` predicate, in `(rember)` function enables us to go deeper,
 removing multiple occurred atoms.
-`(multirember a lat)`: removes all the occurrences of a in lat(list).
+`(multirember a lat)`: removes all the occurrences of a in lat (a list).
 `(multiinsertR new old lat)` and `(multiinsertL new old lat)`: insert new atom at the
-RIGHT/LEFT side of old atom for EVERY occurrence of old in lat(list).
+RIGHT/LEFT side of old atom for EVERY occurrence of old in lat (a list).
 
 {{< highlight scheme >}}
 ; (multirember cup (coffee cup tea cup and hick cup)) -> (coffee tea and hick)
@@ -194,7 +215,7 @@ RIGHT/LEFT side of old atom for EVERY occurrence of old in lat(list).
 {{< /highlight >}}
 
 `(multirsubst new old lat)`: replaces old atom with new atom for EVERY occurrence
-of old atom in lat(list).
+of old atom in lat (a list).
 
 {{< highlight scheme >}}
 ; (multisubst x a (a b c d e a a b)) -> (x b c d e x x b)
@@ -254,13 +275,13 @@ calculation algorithms.
       (else (o+ n (o* n (sub1 m)))))))
 {{< /highlight >}}
 
-Next we introduce new class tuple, _tup_. **tup** is either an empty list, or it contains a number and a rest that is also a **tup**.
+Next we introduce new class tuple (tup). **tup** is either an empty list, or it contains a number and a rest that is also a **tup**.
 
 Using tup as building block to create extent function is just as using list before.
-To enable _natural termination_ on a list we use `(null? list)` and on a number we
-use `(zero? 0)`. To enble the natural termination on a tup we use `(null? tup)`.
+To enable natural termination on a list we use `(null? list)` and on a number we
+use `(zero? 0)`. To enable the natural termination on a tup we use `(null? tup)`.
 
-To enable _natural recursion_ on a list we use `(cdr argument)`; the natural recursion on a
+To enable natural recursion on a list we use `(cdr argument)`; the natural recursion on a
 tup we use `(cdr argument)`; the natural recursion on a number we use `(sub1
 argument)`. These condition is reused as new argument in inner recursion as
 stated in The Fourth Commandment.

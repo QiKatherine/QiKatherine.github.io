@@ -839,7 +839,7 @@ This is my spacemacs config file, which is a big text file tree that I
 need to comb through constantly. 
 [[/img/searching2.png]]
 
-~M-x helm-ag ("path-to-file")~ enbles text search. Without path parameter, it
+~M-x helm-ag ("path-to-file")~ enables text search. Without path parameter, it
 searches all files under parent file of current buffer. For example,
 searching =zilongshanren= in =~/.spacemacs.d/init.el= buffer.  
 [[/img/searching3.png]]
@@ -942,7 +942,7 @@ dotspacemacs-additional-packages '(anki-editor)
 *** 3. Usage
 -----
 First of all, making sure Anki is =running all the time= so that Emacs can connect
-with it. =M-x anki-editor-mode= to enble minor-mode.
+with it. =M-x anki-editor-mode= to enable minor-mode.
 [[/img/anki2.png]]
 Note: 
 =Error communicating with AnkiConnect using cURL: exited abnormally with code 2=
@@ -1043,16 +1043,20 @@ full detailed code can be found:
 
 [[https://github.com/pkrumins/the-little-schemer/blob/master/02-do-it-again.ss][the-little-schemer/02-do-it-again.ss at master · pkrumins/the-little-schemer]]
 
-*** Chapter 1-3 Do It Again and Again
+*** Chapter 1 Toy
+
+ In this chapter, we list primitive conceptions and functions which will be
+ used through the entire book:
+-----
   *atom* is the smallest element, something NOT enclosed by pair of
   parenthesis: a string of digits/characters/numbers.
 
   *list* is something enclosed by pair of parenthesis: something can be nothing, can be
   atom, can be another list.
  
-  *s-expression* describe both atom and list/pair. A series of s-expression
+  *s-expression* can be any of :an atom; an (empty) list; a pair. A series of s-expression
   enclosed by parenthesis is *list*.
------
+
  ~(car argument)~: returns first s-expression among all the first-level
   s-expression within a list. It can NOT work on empty list.
 
@@ -1062,17 +1066,27 @@ full detailed code can be found:
   ~car/cdr~ both take and output non-empty list. ~cdr~ cannot work on null list or
   atom. For ~(han), han, ()~ cdr can only work on the first.
 
- ~(cons argument1 argument2)~: add arg1(s-exp) onto arg2(list), the output is
+ ~(cons argument1 argument2)~: add arg1 (s-exp) onto arg2 (list), the output is
   list.
 
  ~(null? argument)~: returns T when the argument(list) is ~(quote()), '() and ()~ returns
   error when argument is ~atom~; returns F for others.
  
- ~(atom? argument)~: checks if the argument(any s-expression) is atom.
+ ~(atom? argument)~: checks if the argument (any s-expression) is atom.
 
- ~(eq? argument1 argument2)~: returns T when arguments(atoms) are equal; returns
+ ~(eq? argument1 argument2)~: returns T when arguments (atoms) are equal; returns
   error when arguments are numerical or list; returns F for others.
 
+ ~(or argument1 argument2 ...)~ checks predicate arguments one by one. It terminates
+ whenever the first T is found and returns T, otherwise it returns F.
+
+ ~(and argument1 argument2 ...)~ checks predicate arguments one by one. It terminates
+ whenever the first F is found and returns F, otherwise it returns T.
+
+*** Chapter 2 Do It Again and Again
+
+From chapter 2, we begin to build functions with primitive building blocks.
+-----
  ~(lat? argument)~: checks if every s-expression in a list is atom. Since the
   s-expression is either atom or list/pair, ~(lat?)~ use ~(atom?)~ as core function.
 #+begin_src scheme
@@ -1085,8 +1099,8 @@ full detailed code can be found:
       (else #f))))
 #+end_src
 
- ~(member? argument1 argument2)~: checks if argument1(atom) is in
- argument2(non-empty list). 
+ ~(member? argument1 argument2)~: checks if the argument1 (an atom) is in
+the argument2 (a non-empty list). 
 #+begin_src scheme
 ; (member? meat (mashed potatoes and meat gravy)) -> #t, for meat is in the list.
 (define member?
@@ -1097,8 +1111,11 @@ full detailed code can be found:
                 (member? a (cdr lat)))))))
 #+end_src
 
- ~(rember argument1 argument2)~: removes the first occurrence of argument1(atom) from
- argument2(non-empty list).
+*** Chapter 3 Cons the Magnificent
+-----
+
+ ~(rember argument1 argument2)~: removes the first occurrence of the argument1 (an atom) from
+the argument2 (a non-empty list).
 #+begin_src scheme
 ; (rember cup (coffee cup tea cup and hick cup)) -> (coffee tea cup and hick cup)
 (define rember
@@ -1112,8 +1129,8 @@ full detailed code can be found:
 #+end_src
 
 ~(first argument)~: the argument is a non-empty list, possibly consists of more
-lists. The function returns the a list consists of all the first s-expressions within
-the first level lists in argument.
+lists. The function returns a list consists of all the first s-expressions within
+the first level argument lists.
 #+begin_src scheme
 ; (firsts ((five plums) (four) (eleven green oranges))) -> (five four eleven)
 (define firsts
@@ -1124,8 +1141,8 @@ the first level lists in argument.
         (cons (car (car l)) (firsts (cdr l)))))))
 #+end_src
 
-~(insetR new old lat)~ and ~(insetL new old lat)~: insert the new atom at the
-RIGHT/LEFT side of the old atom in lat(list).
+~(insetR new old lat)~ and ~(insetL new old lat)~: insert the /new/ atom at the
+RIGHT/LEFT side of the /old/ atom in lat (a list).
 #+begin_src scheme
 ; (insertR topping fudge (ice cream with fudge for dessert)) -> (ice cream with fudge topping for dessert)
 (define insertR
@@ -1148,9 +1165,9 @@ RIGHT/LEFT side of the old atom in lat(list).
         (cons (car lat) (insertL new old (cdr lat)))))))
 #+end_src
 
-~(subst new old lat)~: in lat(list), this function replaces old atom with new
+~(subst new old lat)~: in lat (a list), this function replaces old atom with new
 atom.
-~(subst2 new o1 o2 lat)~: in lat(list), this function checks o1 o2, whichever
+~(subst2 new o1 o2 lat)~: in lat (a list), this function checks o1 o2, whichever
 occurs firstly is replaced by new atom.
 
 #+begin_src scheme
@@ -1180,9 +1197,9 @@ From now on, we use recursion more than once, in different predicates to achieve
 multiple assignments, or more complicated assignments. For example, putting a
 recursion in =(eq?)= predicate, in =(rember)= function enables us to go deeper,
 removing multiple occurred atoms.
-~(multirember a lat)~: removes all the occurrences of a in lat(list).
+~(multirember a lat)~: removes all the occurrences of a in lat (a list).
 ~(multiinsertR new old lat)~ and ~(multiinsertL new old lat)~: insert new atom at the
-RIGHT/LEFT side of old atom for EVERY occurrence of old in lat(list).
+RIGHT/LEFT side of old atom for EVERY occurrence of old in lat (a list).
 #+begin_src scheme
 ; (multirember cup (coffee cup tea cup and hick cup)) -> (coffee tea and hick)
 (define multirember
@@ -1216,7 +1233,7 @@ RIGHT/LEFT side of old atom for EVERY occurrence of old in lat(list).
 #+end_src
 
 ~(multirsubst new old lat)~: replaces old atom with new atom for EVERY occurrence
-of old atom in lat(list).
+of old atom in lat (a list).
 #+begin_src scheme
 ; (multisubst x a (a b c d e a a b)) -> (x b c d e x x b)
 define multisubst
@@ -1273,13 +1290,13 @@ calculation algorithms.
       (else (o+ n (o* n (sub1 m)))))))
 #+end_src
 
-Next we introduce new class tuple, /tup/. *tup* is either an empty list, or it contains a number and a rest that is also a *tup*.
+Next we introduce new class tuple (tup). *tup* is either an empty list, or it contains a number and a rest that is also a *tup*.
 
 Using tup as building block to create extent function is just as using list before.
-To enable /natural termination/ on a list we use ~(null? list)~ and on a number we
-use ~(zero? 0)~. To enble the natural termination on a tup we use ~(null? tup)~.
+To enable natural termination on a list we use ~(null? list)~ and on a number we
+use ~(zero? 0)~. To enable the natural termination on a tup we use ~(null? tup)~.
 
-To enable /natural recursion/ on a list we use ~(cdr argument)~; the natural recursion on a
+To enable natural recursion on a list we use ~(cdr argument)~; the natural recursion on a
 tup we use ~(cdr argument)~; the natural recursion on a number we use ~(sub1
 argument)~. These condition is reused as new argument in inner recursion as
 stated in The Fourth Commandment.
@@ -1449,12 +1466,13 @@ full detailed code can be found:
 
 [[https://github.com/pkrumins/the-little-schemer/blob/master/02-do-it-again.ss][the-little-schemer/02-do-it-again.ss at master · pkrumins/the-little-schemer]]
 
-*** Chapter 5 It's full of stars
+*** Chapter 5 It's Full Of Stars
 The starred function means that compared with the premature function we
 defined above, we need to further extend it to achieve higher level of
 mission, or to do the work more thoroughly.
+-----
 
- For example, =(rember a l)= removes multiple occurrences =a= as the first level s-expression of list =l=, whileas =(rember* a l)= 
+For example, =(rember a l)= removes multiple occurrences =a= as the first level s-expression of list =l=, whileas =(rember* a l)= 
 removes =a= as any level s-expressions. This is improved by changing one more condition with recusion and works
 similarly in the blow algorithms.
 #+begin_src scheme
@@ -1507,6 +1525,7 @@ similarly in the blow algorithms.
 
 #+end_src
 
+Similarly, we re-write other functions mentioned before: 
 #+begin_src scheme
 ;(occur* 'banana '((banana) (split ((((banana ice))) (cream (banana)) sherbet)) (banana) (bread) (banana brandy)))
 ; -> 5
@@ -1551,7 +1570,17 @@ similarly in the blow algorithms.
       (else
         (or (member* a (car l))
             (member* a (cdr l)))))))
+#+end_src
 
+In the above starred functions, we asked three questions: *(1) Is the list null?
+(2) Is
+the =(car argument)= an atom? (3) Is the predicate =(eq?)= true?* Those questions enable a
+function to work on any cases with: empty list; atom /consed/ to a list; list
+/consed/ to a list. 
+
+The below function shows the a case where only ONE question is asked, and
+therefore it works only on limited types argument:
+#+begin_src scheme
 ;(leftmost '((potato) (chips ((with) fish) (chips)))) -> 'potato
 (define leftmost
   (lambda (l)
@@ -1559,28 +1588,40 @@ similarly in the blow algorithms.
       ((atom? (car l)) (car l))
       (else (leftmost (car l))))))
 #+end_src
+Theoritically, there were two questions checked above, but the null? and atom?
+is achieved in the same predicate: if the list is null, the =(atom? car(lat))=
+would also return F and the recursion in =(else)= will be excuted. This type of
+simplification will help us to improve functions into a pithy fashion. 
 
+For example, we use this function to check the equality of two lists. Based on
+the 3 questions we asked for operations in one list, two lists will generate
+3*3 = 9 predicates in permutation, and the =(eq?)= is happening when both of the
+arguments are atom:
 #+begin_src scheme
-;(eqlist? '(strawberry ice cream) '(strawberry ice cream)) -> #t
+;(eqlist? '(strawberry ice cream) '(strawberry ice cream)) -> #t 
 (define eqlist?
   (lambda (l1 l2)
     (cond
-      ; case 1: l1 is empty, l2 is empty, atom, list
+      ; case 1: l1 is empty, l2 is empty, atom, list 
       ((and (null? l1) (null? l2)) #t)
       ((and (null? l1) (atom? (car l2))) #f)
       ((null? l1) #f)
-      ; case 2: l1 is atom, l2 is empty, atom, list
+      ; case 2: l1 is atom, l2 is empty, atom, list 
       ((and (atom? (car l1)) (null? l2)) #f)
       ((and (atom? (car l1)) (atom? (car l2)))
        (and (eq? (car l1) (car l2))
             (eqlist? (cdr l1) (cdr l2))))
       ((atom? (car l1)) #f)
-      ; case 3: l1 is a list, l2 is empty, atom, list
+      ; case 3: l1 is a list, l2 is empty, atom, list 
       ((null? l2) #f)
       ((atom? (car l2)) #f)
       (else
         (and (eqlist? (car l1) (car l2))
              (eqlist? (cdr l1) (cdr l2)))))))
+#+end_src
+
+It's not quite pithy but there is room for improvement:
+#+begin_src scheme
 
 ;(eqlist2?  '(strawberry ice cream)  '(strawberry ice cream)) -> #t
 (define eqlist2?
@@ -1610,3 +1651,7 @@ similarly in the blow algorithms.
         (and (equal2?? (car l1) (car l2))
              (equal2?? (cdr l1) (cdr l2)))))))
 #+end_src
+
+After defining =(eqlist?)= to compare the equality of two lists, we can further
+improve =(rember)= to remove lists as argument, not just removing atoms like in the
+previous chapter.

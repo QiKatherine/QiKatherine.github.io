@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (2/3)"
 date = 2019-12-23T01:35:00+00:00
-lastmod = 2019-12-24T01:04:19+00:00
+lastmod = 2019-12-26T02:25:30+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -13,15 +13,16 @@ full detailed code can be found:
 [the-little-schemer/02-do-it-again.ss at master · pkrumins/the-little-schemer](https://github.com/pkrumins/the-little-schemer/blob/master/02-do-it-again.ss)
 
 
-## Chapter 5 It's full of stars {#chapter-5-it-s-full-of-stars}
+## Chapter 5 It's Full Of Stars {#chapter-5-it-s-full-of-stars}
 
 The starred function means that compared with the premature function we
 defined above, we need to further extend it to achieve higher level of
-mission, or to do the work more thoroughly. For example, `(rember a l)`
-removes multiple occurrences `a` as the first level s-expression of list `l`, whileas `(rember* a l)`
-removes `a` as any level s-expressions.
+mission, or to do the work more thoroughly.
 
-This is improved by changing one more condition with recusion and works
+---
+
+For example, `(rember a l)` removes multiple occurrences `a` as the first level s-expression of list `l`, whileas `(rember* a l)`
+removes `a` as any level s-expressions. This is improved by changing one more condition with recusion and works
 similarly in the blow algorithms.
 
 {{< highlight scheme >}}
@@ -73,6 +74,8 @@ similarly in the blow algorithms.
         (cons (insertL* new old (car l)) (insertL* new old (cdr l)))))))
 {{< /highlight >}}
 
+Similarly, we re-write other functions mentioned before:
+
 {{< highlight scheme >}}
 ;(occur* 'banana '((banana) (split ((((banana ice))) (cream (banana)) sherbet)) (banana) (bread) (banana brandy)))
 ; -> 5
@@ -117,7 +120,18 @@ similarly in the blow algorithms.
       (else
         (or (member* a (car l))
             (member* a (cdr l)))))))
+{{< /highlight >}}
 
+In the above starred functions, we asked three questions: **(1) Is the list null?
+(2) Is
+the `(car argument)` an atom? (3) Is the predicate `(eq?)` true?** Those questions enable a
+function to work on any cases with: empty list; atom _consed_ to a list; list
+_consed_ to a list.
+
+The below function shows the a case where only ONE question is asked, and
+therefore it works only on limited types argument:
+
+{{< highlight scheme >}}
 ;(leftmost '((potato) (chips ((with) fish) (chips)))) -> 'potato
 (define leftmost
   (lambda (l)
@@ -125,6 +139,16 @@ similarly in the blow algorithms.
       ((atom? (car l)) (car l))
       (else (leftmost (car l))))))
 {{< /highlight >}}
+
+Theoritically, there were two questions checked above, but the null? and atom?
+is achieved in the same predicate: if the list is null, the `(atom? car(lat))`
+would also return F and the recursion in `(else)` will be excuted. This type of
+simplification will help us to improve functions into a pithy fashion.
+
+For example, we use this function to check the equality of two lists. Based on
+the 3 questions we asked for operations in one list, two lists will generate
+3\*3 = 9 predicates in permutation, and the `(eq?)` is happening when both of the
+arguments are atom:
 
 {{< highlight scheme >}}
 ;(eqlist? '(strawberry ice cream) '(strawberry ice cream)) -> #t
@@ -147,6 +171,11 @@ similarly in the blow algorithms.
       (else
         (and (eqlist? (car l1) (car l2))
              (eqlist? (cdr l1) (cdr l2)))))))
+{{< /highlight >}}
+
+It's not quite pithy but there is room for improvement:
+
+{{< highlight scheme >}}
 
 ;(eqlist2?  '(strawberry ice cream)  '(strawberry ice cream)) -> #t
 (define eqlist2?
@@ -176,3 +205,7 @@ similarly in the blow algorithms.
         (and (equal2?? (car l1) (car l2))
              (equal2?? (cdr l1) (cdr l2)))))))
 {{< /highlight >}}
+
+After defining `(eqlist?)` to compare the equality of two lists, we can further
+improve `(rember)` to remove lists as argument, not just removing atoms like in the
+previous chapter.

@@ -1,7 +1,7 @@
 +++
 title = "Using Anki-editor to build flashcard in Org-mode 【用 Anki-editor 在 org-mode 中生成复杂记忆卡片】"
 date = 2019-09-30T23:54:00+01:00
-lastmod = 2019-12-24T01:04:18+00:00
+lastmod = 2019-12-26T02:25:29+00:00
 tags = ["windows", "org-mode", "Anki"]
 categories = ["TECH"]
 draft = false
@@ -82,7 +82,7 @@ dotspacemacs-additional-packages '(anki-editor)
 ---
 
 First of all, making sure Anki is `running all the time` so that Emacs can connect
-with it. `M-x anki-editor-mode` to enble minor-mode.
+with it. `M-x anki-editor-mode` to enable minor-mode.
 ![](/img/anki2.png)
 Note:
 `Error communicating with AnkiConnect using cURL: exited abnormally with code 2`

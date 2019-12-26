@@ -2,7 +2,7 @@
 title = "Text based file management in Emacs 【Emacs 文本文件管理】"
 summary = "Overview of text process tools in org-mode."
 date = 2019-09-22T23:56:00+01:00
-lastmod = 2019-12-24T01:04:18+00:00
+lastmod = 2019-12-26T02:25:28+00:00
 draft = false
 image = "img/111.jpg"
 +++
@@ -100,7 +100,7 @@ This is my spacemacs config file, which is a big text file tree that I
 need to comb through constantly.
 ![](/img/searching2.png)
 
-`M-x helm-ag ("path-to-file")` enbles text search. Without path parameter, it
+`M-x helm-ag ("path-to-file")` enables text search. Without path parameter, it
 searches all files under parent file of current buffer. For example,
 searching `zilongshanren` in `~/.spacemacs.d/init.el` buffer.
 ![](/img/searching3.png)
