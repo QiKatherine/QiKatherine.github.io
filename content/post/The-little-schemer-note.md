@@ -1,16 +1,22 @@
 +++
 title = "The Little Schemer speedy referring note (1/3)"
 date = 2019-12-10T23:20:00+00:00
-lastmod = 2019-12-26T02:25:29+00:00
+lastmod = 2019-12-31T02:07:27+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
 +++
 
 This is a quick reference note that I pull from the book The Little Schemer. The
-full detailed code can be found:
+full detailed code can be found in this repo:
 
 [the-little-schemer/02-do-it-again.ss at master · pkrumins/the-little-schemer](https://github.com/pkrumins/the-little-schemer/blob/master/02-do-it-again.ss)
+
+My recommendation of reading this book is that don't skip too much questions
+after the fifth chapter, as the functions getting more complex, you will find those
+questions are carefully asked to guide our thinking to improve into a better and better
+program. Meanwhile try to write functions with pens and papers before checking the
+answer, and often review them with quick scan of this article. I really enjoy this book, and hope you have much fun as I do :).
 
 
 ## Chapter 1 Toy {#chapter-1-toy}

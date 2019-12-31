@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (2/3)"
 date = 2019-12-23T01:35:00+00:00
-lastmod = 2019-12-26T02:25:30+00:00
+lastmod = 2019-12-31T02:07:27+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -15,15 +15,16 @@ full detailed code can be found:
 
 ## Chapter 5 It's Full Of Stars {#chapter-5-it-s-full-of-stars}
 
-The starred function means that compared with the premature function we
-defined above, we need to further extend it to achieve higher level of
-mission, or to do the work more thoroughly.
+The starred function family re-write the functions in previous chapters with a
+bit more recursions. The purpose is to achieve higher level of
+mission, or to make the work more thoroughly.
 
 ---
 
-For example, `(rember a l)` removes multiple occurrences `a` as the first level s-expression of list `l`, whileas `(rember* a l)`
-removes `a` as any level s-expressions. This is improved by changing one more condition with recusion and works
-similarly in the blow algorithms.
+For example, `(rember a l)` removes multiple occurrences `a` as the _first level_ s-expression of list `l`, whereas `(rember* a l)`
+removes `a` as _any level_ s-expressions. This is done by changing one more
+condition in the outer `(else)` by recusion. Similar works can be also achieved
+as insertR\*, insertL\*.
 
 {{< highlight scheme >}}
 ; (rember* 'cup '((coffee) cup ((tea) cup) (and (hick)) cup))
@@ -74,7 +75,7 @@ similarly in the blow algorithms.
         (cons (insertL* new old (car l)) (insertL* new old (cdr l)))))))
 {{< /highlight >}}
 
-Similarly, we re-write other functions mentioned before:
+Similarly, we re-write more other functions as:
 
 {{< highlight scheme >}}
 ;(occur* 'banana '((banana) (split ((((banana ice))) (cream (banana)) sherbet)) (banana) (bread) (banana brandy)))
@@ -122,13 +123,12 @@ Similarly, we re-write other functions mentioned before:
             (member* a (cdr l)))))))
 {{< /highlight >}}
 
-In the above starred functions, we asked three questions: **(1) Is the list null?
-(2) Is
-the `(car argument)` an atom? (3) Is the predicate `(eq?)` true?** Those questions enable a
+We notice that: in all the starred functions above, we always asked three questions: **(1) Is the list null?
+(2) If not, is the `(car argument)` an atom? (3) If yes, is the predicate `(eq?)` true?** Those questions enable a
 function to work on any cases with: empty list; atom _consed_ to a list; list
 _consed_ to a list.
 
-The below function shows the a case where only ONE question is asked, and
+As comparison, the below function shows a case where only ONE question is asked, and
 therefore it works only on limited types argument:
 
 {{< highlight scheme >}}
@@ -158,7 +158,7 @@ arguments are atom:
       ; case 1: l1 is empty, l2 is empty, atom, list
       ((and (null? l1) (null? l2)) #t)
       ((and (null? l1) (atom? (car l2))) #f)
-      ((null? l1) #f)
+      ((null? l1) #f); the above predicates have ruled out l2 is empty or list
       ; case 2: l1 is atom, l2 is empty, atom, list
       ((and (atom? (car l1)) (null? l2)) #f)
       ((and (atom? (car l1)) (atom? (car l2)))
@@ -173,11 +173,15 @@ arguments are atom:
              (eqlist? (cdr l1) (cdr l2)))))))
 {{< /highlight >}}
 
-It's not quite pithy but there is room for improvement:
+Notice that the deduction in comments happens because `(cond)` excutes the
+predicate one by one, meaning the second predicate gets to run only when the
+first predicate is #f, which gives us information for inference.
+
+It's not quite pithy, we can acutally merge some of the #f predicates together
+with `(or)`.
 
 {{< highlight scheme >}}
-
-;(eqlist2?  '(strawberry ice cream)  '(strawberry ice cream)) -> #t
+;(equal2?? '(a (b c)) '(a (b c))) -> #t
 (define eqlist2?
   (lambda (l1 l2)
     (cond
@@ -194,8 +198,12 @@ It's not quite pithy but there is room for improvement:
       (else
         (and (eqlist2? (car l1) (car l2))
              (eqlist2? (cdr l1) (cdr l2)))))))
+{{< /highlight >}}
 
-;(eqlist3?  '(strawberry ice cream)  '(strawberry ice cream)) -> #t
+{{< highlight scheme >}}
+;(eqlist3?
+;  '(beef ((sausage)) (and (soda)))
+;  '(beef ((salami)) (and (soda)))) -> #f
 (define eqlist3?
   (lambda (l1 l2)
     (cond
@@ -209,3 +217,297 @@ It's not quite pithy but there is room for improvement:
 After defining `(eqlist?)` to compare the equality of two lists, we can further
 improve `(rember)` to remove lists as argument, not just removing atoms like in the
 previous chapter.
+
+{{< highlight scheme >}}
+;(rember '(foo (bar (baz))) '(apples (foo (bar (baz))) oranges)) -> '(apples oranges)
+(define rember
+  (lambda (s l)
+    (cond
+      ((null? l) '())
+      ((equal2?? (car l) s) (cdr l))
+      (else (cons (car l) (rember s (cdr l)))))))
+{{< /highlight >}}
+
+So far, the content tells rules that `the first thing is to write all the operations
+for every predicate condition and make sure the program is right; and then to simplify it.`
+
+
+## Chapter 6 Shadows {#chapter-6-shadows}
+
+---
+
+Then we introduce some more of the number operations. `(numbered? argument)`
+return if the argument contains anything other than numbers and o+, o\* , ^. The
+function shows if aexp is not an atom, meaning the aexp consists of two
+sub-expression. It will check if both of the sub-expressions, i.e whether the
+element on the left of operator (o+ or o\* or o^) and the right element are both
+numbered?, and this process gets to run recursively again and again.
+
+{{< highlight scheme >}}
+;(numbered? '(5 ox (3 'foo 2))) -> #f
+(define numbered?
+  (lambda (aexp)
+    (cond
+      ((atom? aexp) (number? aexp))
+      ((eq? (car (cdr aexp)) 'o+)
+       (and (numbered? (car aexp))
+            (numbered? (car (cdr (cdr aexp))))))
+      ((eq? (car (cdr aexp)) 'ox)
+       (and (numbered? (car aexp))
+            (numbered? (car (cdr (cdr aexp))))))
+      ((eq? (car (cdr aexp)) 'o^)
+       (and (numbered? (car aexp))
+            (numbered? (car (cdr (cdr aexp))))))
+      (else #f))))
+
+;if we only input numeric expression, we can simplify as:
+(define numbered?
+  (lambda (aexp)
+    (cond
+      ((atom? aexp) (number? aexp))
+      (else
+        (and (numbered? (car aexp))
+             (numbered? (car (cdr (cdr aexp)))))))))
+{{< /highlight >}}
+
+The function `(value argument)` print the calculated value of a numberic
+expression: when the argument is a single atom, it prints itself; when the
+argument is conpound, meaning more sub-expressions joint by operator, it
+recursively runs until hits a single atom, and then the aggregate calculation is
+done from inside to outside. However, notice that the predicate changes according to the syntax
+setting of numeric expressions, taking addition as example:
+
+{{< highlight scheme >}}
+;(1 + 1) is written as:
+ ((eq? (car (cdr nexp)) 'o+)
+
+;(+ 1 1) is written as:
+ ((eq? (car nexp) 'o+)
+{{< /highlight >}}
+
+So the `(value)` can be written in two forms:
+
+{{< highlight scheme >}}
+;(value '(1 o+ (3 o^ 4))) ->82
+  (define value
+    (lambda exp)
+      (cond
+        ((atom? nexp) nexp)
+        ((eq? (car (cdr nexp)) 'o+)
+         (+ (value (car nexp))
+            (value (car (cdr (cdr nexp))))))
+        ((eq? (car (cdr nexp)) 'o*)
+         (* (value (car nexp))
+            (value (car (cdr (cdr nexp))))))
+        ((eq? (car (cdr nexp)) 'o^)
+         (expt (value (car nexp))
+               (value (car (cdr (cdr nexp))))))
+        (else #f))))
+
+;(value-prefix '(o+ 1 (o^ 3 4))) -> 82
+(define value-prefix
+    (lambda (nexp)
+      (cond
+        ((atom? nexp) nexp)
+        ((eq? (car nexp) 'o+)
+         (+ (value-prefix (car (cdr nexp)))
+            (value-prefix (car (cdr (cdr nexp))))))
+        ((eq? (car nexp) 'o*)
+         (* (value-prefix (car (cdr nexp)))
+            (value-prefix (car (cdr (cdr nexp))))))
+        ((eq? (car nexp) 'o^)
+         (expt (value-prefix (car (cdr nexp)))
+               (value-prefix (car (cdr (cdr nexp))))))
+        (else #f))))
+{{< /highlight >}}
+
+For this type of prefixed operator syntax, we can rewrite it with pre-defined
+1st and 2nd sub-expressions:
+
+{{< highlight scheme >}}
+(define 1st-sub-exp
+  (lambda (aexp)
+    (car aexp)))
+
+(define 2nd-sub-exp
+  (lambda (aexp)
+    (car (cdr (cdr aexp)))))
+
+(define operator
+  (lambda (aexp)
+    (car (cdr aexp))))
+
+(define value-prefix-helper
+  (lambda (nexp)
+    (cond
+      ((atom? nexp) nexp)
+      ((eq? (operator nexp) 'o+)
+       (+ (value-prefix (1st-sub-exp nexp))
+          (value-prefix (2nd-sub-exp nexp))))
+      ((eq? (car nexp) 'o*)
+       (* (value-prefix (1st-sub-exp nexp))
+          (value-prefix (2nd-sub-exp nexp))))
+      ((eq? (car nexp) 'o^)
+       (expt (value-prefix (1st-sub-exp nexp))
+             (value-prefix (2nd-sub-exp nexp))))
+      (else #f))))
+{{< /highlight >}}
+
+From this chapter we begin to **design different functions for different syntax
+setting functions**, we we know this work will not be limited to `(1 + 1) and (+1
+1)`. Actually, the syntactic/symbolic expression can be in any form, such as: if
+0 is written as `quote()`, then 4 can be written as `(() () () ()) or
+((((()))))`. Accordingly, the numberic operations can be written as:
+
+{{< highlight scheme >}}
+; sero? just like zero?
+(define sero?
+  (lambda (n)
+    (null? n)))
+
+; edd1 just like add1
+(define edd1
+  (lambda (n)
+    (cons '() n)))
+
+; zub1 just like sub1
+(define zub1
+  (lambda (n)
+    (cdr n)))
+
+; .+ just like o+
+;(.+ '(()) '(() ())) -> '(() () ())
+(define .+
+  (lambda (n m)
+    (cond
+      ((sero? m) n)
+      (else
+        (edd1 (.+ n (zub1 m)))))))
+
+; tat? just like lat?
+;(tat? '((()) (()()) (()()()))) -> #f
+(define tat?
+  (lambda (l)
+    (cond
+      ((null? l) #t)
+      ((atom? (car l))
+       (tat? (cdr l)))
+      (else #f))))
+{{< /highlight >}}
+
+
+## Chapter 7 Friend and Relations {#chapter-7-friend-and-relations}
+
+In this chapter, we see more examples of using the previously defined functions
+to develop more functions.
+
+**set** is a list consists of **non-repeated** atoms. The function `(set? argument)`
+ checks whether a list is a set. It can be written with `(member?)`:
+
+{{< highlight scheme >}}
+  (define member?
+    (lambda (a lat)
+      (cond
+        ((null? lat) #f)
+        (else (or (eq? (car lat) a)
+                  (member? a (cdr lat)))))))
+
+;(set? '(apple 3 pear 4 9 apple 3 4)) -> #f
+  (define set?
+    (lambda (lat)
+      (cond
+        ((null? lat) #t)
+        ((member? (car lat) (cdr lat)) #f)
+        (else
+          (set? (cdr lat))))))
+{{< /highlight >}}
+
+`(makeset argument)` make a new list by removing duplicated atoms in argument
+list. For a repeated atom in list, in order to retain the first occurrence while remove others, we use `(multirember)`:
+
+{{< highlight scheme >}}
+(define multirember
+  (lambda (a lat)
+    (cond
+      ((null? lat) '())
+      ((eq? (car lat) a)
+       (multirember a (cdr lat)))
+      (else
+        (cons (car lat) (multirember a (cdr lat)))))))
+
+;(makeset '(apple 3 pear 4 9 apple 3 4))
+(define makeset
+  (lambda (lat)
+    (cond
+      ((null? lat) '())
+      (else
+        (cons (car lat)
+              (makeset (multirember (car lat) (cdr lat))))))))
+{{< /highlight >}}
+
+`(subset? argument1 argument2)` checks whether argument1 is a subset of
+argument2. The other two check for equality and intersection respectively.
+Comparing the three algorithms, we can find how the different mathmatical
+functions can be achieved by manipulating the logical tools.
+
+{{< highlight scheme >}}
+; (subset? '(4 pounds of horseradish)
+; '(four pounds of chicken and 5 ounces of horseradish)) -> #f
+(define subset?
+    (lambda (set1 set2)
+      (cond
+        ((null? set1) #t)
+        (else (and (member? (car set1) set2)
+                   (subset? (cdr set1) set2))))))
+
+;(eqset? '(a b c) '(a b)) -> #f
+  (define eqset?
+    (lambda (set1 set2)
+      (and (subset? set1 set2)
+           (subset? set2 set1))))
+
+;(intersect? '(stewed tomatoes and macaroni) '(macaroni and cheese)) -> #t
+  (define intersect?
+    (lambda (set1 set2)
+      (cond
+        ((null? set1) #f)
+        (else (or (member? (car set1) set2)
+                  (intersect? (cdr set1) set2))))))
+{{< /highlight >}}
+
+The below functions do a bit more, they return intersection and union results as
+ **set** out of the arguments sets.
+
+{{< highlight scheme >}}
+;(intersect '(stewed tomatoes and macaroni) '(macaroni and cheese)) -> '(and macaroni)
+(define intersect
+  (lambda (set1 set2)
+    (cond
+      ((null? set1) '())
+      ((member? (car set1) set2)
+       (cons (car set1) (intersect (cdr set1) set2)))
+      (else
+        (intersect (cdr set1) set2)))))
+
+;(union '(stewed tomatoes and macaroni casserole) '(macaroni and cheese))
+; -> '(stewed tomatoes casserole macaroni and cheese)
+(define union
+  (lambda (set1 set2)
+    (cond
+      ((null? set1) set2)
+      ((member? (car set1) set2)
+       (union (cdr set1) set2))
+      (else (cons (car set1) (union (cdr set1) set2))))))
+{{< /highlight >}}
+
+{{< highlight scheme >}}
+;(xxx '(a b c) '(a b d e f)) -> '(c)
+(define xxx
+  (lambda (set1 set2)
+    (cond
+      ((null? set1) '())
+      ((member? (car set1) set2)
+       (xxx (cdr set1) set2))
+      (else
+        (cons (car set1) (xxx (cdr set1) set2))))))
+{{< /highlight >}}
