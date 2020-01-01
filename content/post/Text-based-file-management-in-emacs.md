@@ -2,7 +2,7 @@
 title = "Text based file management in Emacs 【Emacs 文本文件管理】"
 summary = "Overview of text process tools in org-mode."
 date = 2019-09-22T23:56:00+01:00
-lastmod = 2019-12-31T02:07:26+00:00
+lastmod = 2020-01-01T23:56:47+00:00
 draft = false
 image = "img/111.jpg"
 +++

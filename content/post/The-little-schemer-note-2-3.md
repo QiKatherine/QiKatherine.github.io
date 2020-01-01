@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (2/3)"
 date = 2019-12-23T01:35:00+00:00
-lastmod = 2019-12-31T02:07:27+00:00
+lastmod = 2020-01-01T23:56:49+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -21,10 +21,10 @@ mission, or to make the work more thoroughly.
 
 ---
 
-For example, `(rember a l)` removes multiple occurrences `a` as the _first level_ s-expression of list `l`, whereas `(rember* a l)`
+For example, `(rember a l)` removes multiple occurrences of `a` as the _first level_ s-expression of list `l`, whereas `(rember* a l)`
 removes `a` as _any level_ s-expressions. This is done by changing one more
-condition in the outer `(else)` by recusion. Similar works can be also achieved
-as insertR\*, insertL\*.
+condition in the outer `(else)` by recusion. We can also improve insertR\*,
+insertL\*, occur\*, subst\* and member\* in the same way.
 
 {{< highlight scheme >}}
 ; (rember* 'cup '((coffee) cup ((tea) cup) (and (hick)) cup))
@@ -73,11 +73,7 @@ as insertR\*, insertL\*.
            (cons (car l) (insertL* new old (cdr l))))))
       (else
         (cons (insertL* new old (car l)) (insertL* new old (cdr l)))))))
-{{< /highlight >}}
 
-Similarly, we re-write more other functions as:
-
-{{< highlight scheme >}}
 ;(occur* 'banana '((banana) (split ((((banana ice))) (cream (banana)) sherbet)) (banana) (bread) (banana brandy)))
 ; -> 5
 (define occur*
@@ -123,13 +119,15 @@ Similarly, we re-write more other functions as:
             (member* a (cdr l)))))))
 {{< /highlight >}}
 
-We notice that: in all the starred functions above, we always asked three questions: **(1) Is the list null?
-(2) If not, is the `(car argument)` an atom? (3) If yes, is the predicate `(eq?)` true?** Those questions enable a
+The starred functions require more predicates to consider all possibile
+situations. After observing the design pattern in the above functions, we
+would see that they all asked three fundamental questions: **(1) Is the list null?
+(2) If not, is the `(car argument)` an atom? (3) If yes, is the predicate
+`(eq?)` true?** It is these questions that enable a
 function to work on any cases with: empty list; atom _consed_ to a list; list
 _consed_ to a list.
 
-As comparison, the below function shows a case where only ONE question is asked, and
-therefore it works only on limited types argument:
+Let's see another function:
 
 {{< highlight scheme >}}
 ;(leftmost '((potato) (chips ((with) fish) (chips)))) -> 'potato
@@ -140,15 +138,17 @@ therefore it works only on limited types argument:
       (else (leftmost (car l))))))
 {{< /highlight >}}
 
-Theoritically, there were two questions checked above, but the null? and atom?
-is achieved in the same predicate: if the list is null, the `(atom? car(lat))`
-would also return F and the recursion in `(else)` will be excuted. This type of
+As comparison, this function shows a case where only ONE question is
+asked, therefore it works on less types of argument than the starred functions. But
+there is more: you may noticed that there were TWO questions checked above. The `(null?)` and `(atom?)`
+are achieved by one predicate with some self deducted logic: if the list is null, the `(atom? car(lat))`
+would also return F and the recursion in `(else)` will still be called. This type of
 simplification will help us to improve functions into a pithy fashion.
 
-For example, we use this function to check the equality of two lists. Based on
-the 3 questions we asked for operations in one list, two lists will generate
-3\*3 = 9 predicates in permutation, and the `(eq?)` is happening when both of the
-arguments are atom:
+For example, we write `(eqlist?)` to check the equality of two lists. Based on
+the 3 golden questions we asked for operating ONE list, designing two lists operation
+will require asking 3\*3 = 9 predicates (in permutation), and the `(eq?)` is happening when both of the
+arguments are atoms:
 
 {{< highlight scheme >}}
 ;(eqlist? '(strawberry ice cream) '(strawberry ice cream)) -> #t
@@ -171,17 +171,8 @@ arguments are atom:
       (else
         (and (eqlist? (car l1) (car l2))
              (eqlist? (cdr l1) (cdr l2)))))))
-{{< /highlight >}}
 
-Notice that the deduction in comments happens because `(cond)` excutes the
-predicate one by one, meaning the second predicate gets to run only when the
-first predicate is #f, which gives us information for inference.
-
-It's not quite pithy, we can acutally merge some of the #f predicates together
-with `(or)`.
-
-{{< highlight scheme >}}
-;(equal2?? '(a (b c)) '(a (b c))) -> #t
+;(equal2? '(a (b c)) '(a (b c))) -> #t
 (define eqlist2?
   (lambda (l1 l2)
     (cond
@@ -200,7 +191,25 @@ with `(or)`.
              (eqlist2? (cdr l1) (cdr l2)))))))
 {{< /highlight >}}
 
+Notice that the third predicate can be written as `(null? l1) #f)` because `(cond)` excutes the
+predicate one by one. Means that the second predicate gets to run **only when** the
+first predicate returns #f which gives us information for inference.  It's not
+quite pithy, so in the `(eqlist2?)` we merge some of the redundant #f predicates together
+with `(or)`.
+
+This can be further simplified by introducing an S-expression comparison
+function `(equal?)`, which itself can be written in the same way as `(eqlist2?)`.
+
 {{< highlight scheme >}}
+;(equal2?? '(a) '(a)) -> #t
+(define equal2??
+  (lambda (s1 s2)
+    (cond
+      ((and (atom? s1) (atom? s2))
+       (eq? s1 s2))
+      ((or (atom? s1) (atom? s2)) #f)
+      (else (eqlist? s1 s2)))))
+
 ;(eqlist3?
 ;  '(beef ((sausage)) (and (soda)))
 ;  '(beef ((salami)) (and (soda)))) -> #f
@@ -215,7 +224,7 @@ with `(or)`.
 {{< /highlight >}}
 
 After defining `(eqlist?)` to compare the equality of two lists, we can further
-improve `(rember)` to remove lists as argument, not just removing atoms like in the
+improve `(rember)` to remove **lists** as argument, not just removing atoms like in the
 previous chapter.
 
 {{< highlight scheme >}}
@@ -228,20 +237,17 @@ previous chapter.
       (else (cons (car l) (rember s (cdr l)))))))
 {{< /highlight >}}
 
-So far, the content tells rules that `the first thing is to write all the operations
-for every predicate condition and make sure the program is right; and then to simplify it.`
+This chapter establish rules to write a good functions `(1) the first thing is to write ALL the operations
+for every predicate condition; (2) make sure the algorith is correct; (3) then to simplify it.`
 
 
 ## Chapter 6 Shadows {#chapter-6-shadows}
 
 ---
 
-Then we introduce some more of the number operations. `(numbered? argument)`
-return if the argument contains anything other than numbers and o+, o\* , ^. The
-function shows if aexp is not an atom, meaning the aexp consists of two
-sub-expression. It will check if both of the sub-expressions, i.e whether the
-element on the left of operator (o+ or o\* or o^) and the right element are both
-numbered?, and this process gets to run recursively again and again.
+An arithmetic expression (aexp) is is either an atom or two arithmetic
+expression combined by o+, o\* , ^. `(numbered? argument)` return #f if the
+argument contains anything other than numbers and o+, o\* , ^.
 
 {{< highlight scheme >}}
 ;(numbered? '(5 ox (3 'foo 2))) -> #f
@@ -260,7 +266,7 @@ numbered?, and this process gets to run recursively again and again.
             (numbered? (car (cdr (cdr aexp))))))
       (else #f))))
 
-;if we only input numeric expression, we can simplify as:
+;if we are only allowed to input numeric expression, we can simplify as:
 (define numbered?
   (lambda (aexp)
     (cond
@@ -398,6 +404,8 @@ setting functions**, we we know this work will not be limited to `(1 + 1) and (+
 
 ## Chapter 7 Friend and Relations {#chapter-7-friend-and-relations}
 
+---
+
 In this chapter, we see more examples of using the previously defined functions
 to develop more functions.
 
@@ -445,10 +453,10 @@ list. For a repeated atom in list, in order to retain the first occurrence while
               (makeset (multirember (car lat) (cdr lat))))))))
 {{< /highlight >}}
 
-`(subset? argument1 argument2)` checks whether argument1 is a subset of
-argument2. The other two check for equality and intersection respectively.
-Comparing the three algorithms, we can find how the different mathmatical
-functions can be achieved by manipulating the logical tools.
+For sets, we can define some primary functions: `(subset? argument1 argument2)`
+checks whether argument1 is a subset of argument2. `(eqset?` and `(intersect?)` check for
+equality and intersection respectively. Comparing the three algorithms, we can
+find how the different mathmatical functions can be achieved by manipulating the logical tools.
 
 {{< highlight scheme >}}
 ; (subset? '(4 pounds of horseradish)
@@ -475,32 +483,30 @@ functions can be achieved by manipulating the logical tools.
                   (intersect? (cdr set1) set2))))))
 {{< /highlight >}}
 
-The below functions do a bit more, they return intersection and union results as
+The below functions do a bit more, they return intersection or union or difference results as
  **set** out of the arguments sets.
 
 {{< highlight scheme >}}
 ;(intersect '(stewed tomatoes and macaroni) '(macaroni and cheese)) -> '(and macaroni)
 (define intersect
   (lambda (set1 set2)
-    (cond
-      ((null? set1) '())
-      ((member? (car set1) set2)
-       (cons (car set1) (intersect (cdr set1) set2)))
-      (else
-        (intersect (cdr set1) set2)))))
+      (cond
+        ((null? set1) '())
+        ((member? (car set1) set2)
+         (cons (car set1) (intersect (cdr set1) set2)))
+        (else
+          (intersect (cdr set1) set2)))))
 
 ;(union '(stewed tomatoes and macaroni casserole) '(macaroni and cheese))
 ; -> '(stewed tomatoes casserole macaroni and cheese)
 (define union
-  (lambda (set1 set2)
-    (cond
-      ((null? set1) set2)
-      ((member? (car set1) set2)
-       (union (cdr set1) set2))
-      (else (cons (car set1) (union (cdr set1) set2))))))
-{{< /highlight >}}
+   (lambda (set1 set2)
+      (cond
+        ((null? set1) set2)
+        ((member? (car set1) set2)
+         (union (cdr set1) set2))
+        (else (cons (car set1) (union (cdr set1) set2))))))
 
-{{< highlight scheme >}}
 ;(xxx '(a b c) '(a b d e f)) -> '(c)
 (define xxx
   (lambda (set1 set2)
@@ -510,4 +516,40 @@ The below functions do a bit more, they return intersection and union results as
        (xxx (cdr set1) set2))
       (else
         (cons (car set1) (xxx (cdr set1) set2))))))
+
+;(intersectall '((a b c) (c a d e) (e f g h a b))) -> '(a)
+(define intersectall
+  (lambda (l-set)
+    (cond
+      ((null? (cdr l-set)) (car l-set))
+      (else
+        (intersect (car l-set) (intersectall (cdr l-set)))))))
+{{< /highlight >}}
+
+The **pair** is a list with only TWO s-expressions and the **rel** is a set of
+pairs. We use `(set?)` and `(firsts)` to define `(fun?)`, which is used to test
+whether `(firsts argument)` is a set.(i.e. whether a list consisting of all first
+element of first-level sub-expressions contains duplicated atom).
+
+{{< highlight scheme >}}
+(define set?
+      (lambda (lat)
+        (cond
+          ((null? lat) #t)
+          ((member? (car lat) (cdr lat)) #f)
+          (else
+            (set? (cdr lat)))))
+
+(define firsts
+  (lambda (l)
+    (cond
+      ((null? l) '())
+      (else
+        (cons (car (car l)) (firsts (cdr l))))))
+
+;(fun? '((4 3) (4 2) (7 6) (6 2) (3 4))) -> #f
+;(fun? '((8 3) (4 2) (7 6) (6 2) (3 4))) -> #t
+(define fun?
+  (lambda (rel)
+    (set? (firsts rel))))
 {{< /highlight >}}
