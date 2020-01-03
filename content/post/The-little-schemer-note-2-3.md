@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (2/3)"
 date = 2019-12-23T01:35:00+00:00
-lastmod = 2020-01-01T23:56:49+00:00
+lastmod = 2020-01-03T02:25:02+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -172,7 +172,7 @@ arguments are atoms:
         (and (eqlist? (car l1) (car l2))
              (eqlist? (cdr l1) (cdr l2)))))))
 
-;(equal2? '(a (b c)) '(a (b c))) -> #t
+;(eqlist2? '(a (b c)) '(a (b c))) -> #t
 (define eqlist2?
   (lambda (l1 l2)
     (cond
@@ -198,17 +198,17 @@ quite pithy, so in the `(eqlist2?)` we merge some of the redundant #f predicates
 with `(or)`.
 
 This can be further simplified by introducing an S-expression comparison
-function `(equal?)`, which itself can be written in the same way as `(eqlist2?)`.
+function `(equal?)`, which itself can be also written in the simplified way as `(eqlist2?)`.
 
 {{< highlight scheme >}}
-;(equal2?? '(a) '(a)) -> #t
-(define equal2??
+;(equal? '(a) '(a)) -> #t
+(define equal?
   (lambda (s1 s2)
     (cond
       ((and (atom? s1) (atom? s2))
        (eq? s1 s2))
       ((or (atom? s1) (atom? s2)) #f)
-      (else (eqlist? s1 s2)))))
+      (else (equal? s1 s2)))))
 
 ;(eqlist3?
 ;  '(beef ((sausage)) (and (soda)))
@@ -219,8 +219,8 @@ function `(equal?)`, which itself can be written in the same way as `(eqlist2?)`
       ((and (null? l1) (null? l2)) #t)
       ((or (null? l1) (null? l2)) #f)
       (else
-        (and (equal2?? (car l1) (car l2))
-             (equal2?? (cdr l1) (cdr l2)))))))
+        (and (equal? (car l1) (car l2))
+             (equal? (cdr l1) (cdr l2)))))))
 {{< /highlight >}}
 
 After defining `(eqlist?)` to compare the equality of two lists, we can further
@@ -552,4 +552,155 @@ element of first-level sub-expressions contains duplicated atom).
 (define fun?
   (lambda (rel)
     (set? (firsts rel))))
+{{< /highlight >}}
+
+A list of pairs in which no **first** element of any pair is the same as any other
+**first** element, is call a **finite function**; a list of pairs in which no **second**
+element of any pair is the same as any other **second** element, is call a
+**fullfun**.
+
+Think about how these two conceptions are connected. For example, we introduce
+`(revrel)` to switch each atoms for every pair within a list.
+
+{{< highlight scheme >}}
+;(revrel '((8 a) (pumpkin pie) (got sick))) -> '((a 8) (pie pumpkin) (sick got))
+(define revrel
+  (lambda (rel)
+    (cond
+      ((null? rel) '())
+      (else (cons (build (second (car rel))
+                         (first (car rel)))
+                  (revrel (cdr rel)))))))
+
+;introducing revpair to simplify revrel
+(define revpair
+  (lambda (p)
+    (build (second p) (first p))))
+
+(define revrel
+  (lambda (rel)
+    (cond
+      ((null? rel) '())
+      (else (cons (revpair (car rel)) (revrel (cdr rel)))))))
+{{< /highlight >}}
+
+Naturally, we could define `(seconds)` as we define `(firsts)` to develop
+`(fullfun?)` for detecting duplicated second atom.
+
+{{< highlight scheme >}}
+(define seconds
+  (lambda (l)
+    (cond
+      ((null? l) '())
+      (else
+        (cons (second (car l)) (seconds (cdr l)))))))
+
+;(fullfun? '((8 3) (4 2) (7 6) (6 2) (3 4))) -> #f
+;(fullfun? '((8 3) (4 8) (7 6) (6 2) (3 4))) -> #t
+(define fullfun?
+  (lambda (fun)
+    (set? (seconds fun))))
+{{< /highlight >}}
+
+But, with the help of `(revrel)`, we can define `(fullfun?)` in a better way.
+Let's call it `(one-to-one?)`:
+
+{{< highlight scheme >}}
+;(one-to-one? '((chocolate chip) (doughy cookie))) -> #t
+(define one-to-one?
+  (lambda (fun)
+    (fun? (revrel fun))))
+{{< /highlight >}}
+
+
+## Chapter 8 {#chapter-8}
+
+In the previous chapters, we've seen over and over that a function takes **list
+or atom** as input, and produces **list or atom** as output. We will see a function
+takes input and returns **functions** in this chapter.
+
+First of all:
+
+{{< highlight scheme >}}
+(lambda (a)
+ lambda (x)
+  (eq? x a)))
+
+;is a function which takes a as argument and returns the equality checking function
+
+(lambda (x)
+ (eq? x a))
+
+;this is called currying
+{{< /highlight >}}
+
+The curring can be applied with a familiar function defined by us:
+
+{{< highlight scheme >}}
+;((rember-f eq?) 2 '(1 2 3 4 5)) -> '(1 3 4 5)
+(define rember-f
+  (lambda (test?)
+    (lambda (a l)
+      (cond
+        ((null? l) '())
+        ((test? (car l) a) (cdr l))
+        (else
+          (cons (car l) ((rember-f test?) a (cdr l))))))))
+;((rember-f test?) a l) -- test? -> (equal? eqan? eqlist? eqpair?)
+{{< /highlight >}}
+
+The test? is an equivalent of a in the first example, i.e. a function working as
+an argument input in function rember-f. It returns a member-removing function
+as result.
+
+The final compound function = main functions (contains constant arguments)+ key vary function.
+
+Let it gets a bit more complex: we defined `(insertL)` and `(insertR)`, and the only
+ difference makes them two functions is the order we `cons` the _new_ and _old_
+ argument. This can be wrapped as a function argument
+
+{{< highlight scheme >}}
+;key vary functions
+(define seqL
+  (lambda (new old l)
+      (cons new (cons old l))))
+
+(define seqR
+  (lambda (new old l)
+      (cons old (cons new l))))
+
+;main function containing constant arguments
+(define insert-g
+  (lambda (seq)
+      (lambda (new old l)
+        (cond
+          ((null? l) '())
+          ((eq? (car l) old)
+           (seq new old (cdr l)))
+          (else
+            (cons (car l) ((insert-g seq) new old (cdr l))))))))
+
+;compound function
+(define insertL (insert-g seqL))
+
+(define insertR (insert-g seqR))
+{{< /highlight >}}
+
+The substitution function can also be rewritten:
+
+{{< highlight scheme >}}
+(define seqS
+  (lambda (new old l)
+    (cons new l)))
+
+(define subst-f
+  (lambda (new old l)
+    (cond
+      ((null? l) '())
+      ((eq? (car l) old)
+       (cons new (cdr l)))
+      (else
+        (cons (car l) (subst new old (cdr l)))))))
+
+(define subst (insert-g seqS))
 {{< /highlight >}}
