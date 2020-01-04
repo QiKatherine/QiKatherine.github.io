@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (2/3)"
 date = 2019-12-23T01:35:00+00:00
-lastmod = 2020-01-03T02:25:02+00:00
+lastmod = 2020-01-04T01:45:05+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -613,28 +613,26 @@ Let's call it `(one-to-one?)`:
 {{< /highlight >}}
 
 
-## Chapter 8 {#chapter-8}
+## Chapter 8 Lambda and the Ultimate {#chapter-8-lambda-and-the-ultimate}
 
 In the previous chapters, we've seen over and over that a function takes **list
-or atom** as input, and produces **list or atom** as output. We will see a function
-takes input and returns **functions** in this chapter.
+or atom** as input, and produces **list or atom** as output.In this chapter, we
+will see a function takes input and returns **functions**.
 
-First of all:
+Function 1 is a function which takes **a** as argument and returns the function 2 (an
+equality checking function) as output.
 
 {{< highlight scheme >}}
+;function 1:
 (lambda (a)
  lambda (x)
   (eq? x a)))
-
-;is a function which takes a as argument and returns the equality checking function
-
+;function 2:
 (lambda (x)
  (eq? x a))
-
-;this is called currying
 {{< /highlight >}}
 
-The curring can be applied with a familiar function defined by us:
+It's called currying. Let's apply it with a familiar function:
 
 {{< highlight scheme >}}
 ;((rember-f eq?) 2 '(1 2 3 4 5)) -> '(1 3 4 5)
@@ -646,21 +644,29 @@ The curring can be applied with a familiar function defined by us:
         ((test? (car l) a) (cdr l))
         (else
           (cons (car l) ((rember-f test?) a (cdr l))))))))
-;((rember-f test?) a l) -- test? -> (equal? eqan? eqlist? eqpair?)
+
+(define test?
+ (lambda (equal? eqan? eqlist? eqpair?)))
 {{< /highlight >}}
 
 The test? is an equivalent of a in the first example, i.e. a function working as
 an argument input in function rember-f. It returns a member-removing function
-as result.
+as result. We want to do this, because we find that in rember functions, whether
+we want to remove atom or list or pair or list, the only different part is the
+equality checking. It's natural that we want to isolate the variant part and
+write an invariant part.
 
-The final compound function = main functions (contains constant arguments)+ key vary function.
+The compound function = invariant functions (contains an abstract place
+holder) + variant function. This allows us to extend more functions efficiently.
+There are lots of commonly used building blocks in developing algorithms and with currying, we get to write much less repetitive code.
 
-Let it gets a bit more complex: we defined `(insertL)` and `(insertR)`, and the only
- difference makes them two functions is the order we `cons` the _new_ and _old_
- argument. This can be wrapped as a function argument
+For example, when defining `(insertL)` and `(insertR)`, we notice that the only
+difference is the order we `cons` the _new_ and _old_ argument, which can be
+isolated as another two small variant functions, and then combined to a main,
+invariant function:
 
 {{< highlight scheme >}}
-;key vary functions
+;variant functions
 (define seqL
   (lambda (new old l)
       (cons new (cons old l))))
@@ -669,7 +675,7 @@ Let it gets a bit more complex: we defined `(insertL)` and `(insertR)`, and the 
   (lambda (new old l)
       (cons old (cons new l))))
 
-;main function containing constant arguments
+;invariant function containing seq as an abstract place holder
 (define insert-g
   (lambda (seq)
       (lambda (new old l)
@@ -686,14 +692,12 @@ Let it gets a bit more complex: we defined `(insertL)` and `(insertR)`, and the 
 (define insertR (insert-g seqR))
 {{< /highlight >}}
 
-The substitution function can also be rewritten:
+The substitution function only differs in the same position, so it can be
+rewritten as:
 
 {{< highlight scheme >}}
-(define seqS
-  (lambda (new old l)
-    (cons new l)))
-
-(define subst-f
+;recap subst
+(define subst
   (lambda (new old l)
     (cond
       ((null? l) '())
@@ -702,5 +706,94 @@ The substitution function can also be rewritten:
       (else
         (cons (car l) (subst new old (cdr l)))))))
 
+;rewrite invariant function
+(define subst-f
+ (lambda (seq)
+  (lambda (new old l)
+    (cond
+      ((null? l) '())
+      ((eq? (car l) old)
+       (seq new old cdr(l)))
+      (else
+        (cons (car l) (subst-f new old (cdr l)))))))
+
+(define seqS
+  (lambda (new old l)
+    (cons new l)))
+
+;of course the subst-f is identical to insert-g, so we write as:
 (define subst (insert-g seqS))
+{{< /highlight >}}
+
+The `(rember)` function can be abstracted by `(insert-g)` too, but using variant
+function requires extra tweak, since the `(rember)` doesn't use arguments _new_:
+
+{{< highlight scheme >}}
+;invariant function with seqrem as place holder
+(define yyy
+  (lambda (a l)
+    ((insert-g seqrem) #f a l)))
+
+;variant function
+(define seqrem
+  (lambda (new old l)
+    l))
+
+;(yyy 'sausage '(pizza with sausage and bacon)) -> '(pizza with and bacon)
+{{< /highlight >}}
+
+Let's see a function with more and more isolated parts to decrease repetitive
+work in writting functions. In the `(value)`, we've used 1st-sub-ex and 2nd-sub-exp to write
+less _car_ and _cdr_,
+
+{{< highlight scheme >}}
+;value uses 1st-sub-exp
+(define 1st-sub-exp
+  (lambda (aexp)
+    (car (cdr aexp))))
+
+;value uses 2nd-sub-exp
+(define 2nd-sub-exp
+  (lambda (aexp)
+    (car (cdr (cdr aexp)))))
+
+;half abstracted function
+(define value
+  (lambda (nexp)
+    (cond
+      ((atom? nexp) nexp)
+      ((eq? (operator nexp) 'o+)
+       (+ (value-prefix (1st-sub-exp nexp))
+          (value (2nd-sub-exp nexp))))
+      ((eq? (car nexp) 'o*)
+       (* (value (1st-sub-exp nexp))
+          (value (2nd-sub-exp nexp))))
+      ((eq? (car nexp) 'o^)
+       (expt (value (1st-sub-exp nexp))
+             (value (2nd-sub-exp nexp))))
+      (else #f))))
+
+;keep abstract it with what we learned in this chapter
+(define atom-to-function
+  (lambda (atom)
+    (cond
+      ((eq? atom 'o+) +)
+      ((eq? atom 'o*) *)
+      ((eq? atom 'o^) expt)
+      (else #f))))
+
+;atom-to-function uses operator
+(define operator
+  (lambda (aexp)
+    (car aexp)))
+
+;(value '(o+ 1 (o^ 3 4))) -> 82
+(define value
+  (lambda (nexp)
+    (cond
+      ((atom? nexp) nexp)
+      (else
+        ((atom-to-function (operator nexp))
+         (value (1st-sub-exp nexp))
+         (value (2nd-sub-exp nexp)))))))
 {{< /highlight >}}
