@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (2/3)"
 date = 2019-12-23T01:35:00+00:00
-lastmod = 2020-01-04T01:45:05+00:00
+lastmod = 2020-01-05T23:56:52+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -245,7 +245,7 @@ for every predicate condition; (2) make sure the algorith is correct; (3) then t
 
 ---
 
-An arithmetic expression (aexp) is is either an atom or two arithmetic
+An arithmetic expression (aexp) is either an atom or two arithmetic
 expression combined by o+, o\* , ^. `(numbered? argument)` return #f if the
 argument contains anything other than numbers and o+, o\* , ^.
 
@@ -360,7 +360,7 @@ For this type of prefixed operator syntax, we can rewrite it with pre-defined
 {{< /highlight >}}
 
 From this chapter we begin to **design different functions for different syntax
-setting functions**, we we know this work will not be limited to `(1 + 1) and (+1
+setting functions**, we know this work will not be limited to `(1 + 1) and (+1
 1)`. Actually, the syntactic/symbolic expression can be in any form, such as: if
 0 is written as `quote()`, then 4 can be written as `(() () () ()) or
 ((((()))))`. Accordingly, the numberic operations can be written as:
@@ -617,25 +617,29 @@ Let's call it `(one-to-one?)`:
 
 In the previous chapters, we've seen over and over that a function takes **list
 or atom** as input, and produces **list or atom** as output.In this chapter, we
-will see a function takes input and returns **functions**.
+will see a function takes input and returns **functions**. Technically, a costant/atom
+is a function too, which takes itself as argument and returns itself.
 
-Function 1 is a function which takes **a** as argument and returns the function 2 (an
-equality checking function) as output.
+We might no longer spercify whether every input is an argument or an function. But
+it will always be beneficial to ask yourself, which functions has been
+previously defined, and how its default arguments are tweaked in developing the
+current function. For example, in nature function 1 is a function which takes `a` as argument and
+returns function 2 (an equality checking function) as output.
 
 {{< highlight scheme >}}
-;function 1:
+(define function1
 (lambda (a)
  lambda (x)
   (eq? x a)))
-;function 2:
+
+(define function2
 (lambda (x)
  (eq? x a))
 {{< /highlight >}}
 
-It's called currying. Let's apply it with a familiar function:
+It's called currying. Let's improve it a little with a familiar function:
 
 {{< highlight scheme >}}
-;((rember-f eq?) 2 '(1 2 3 4 5)) -> '(1 3 4 5)
 (define rember-f
   (lambda (test?)
     (lambda (a l)
@@ -645,20 +649,21 @@ It's called currying. Let's apply it with a familiar function:
         (else
           (cons (car l) ((rember-f test?) a (cdr l))))))))
 
-(define test?
- (lambda (equal? eqan? eqlist? eqpair?)))
+; the test? can be eq? equal? eqan? eqlist? eqpair?
+; depending on which type of member you plan to remove.
+;e.g. remove number: ((rember-f eq?) 2 '(1 2 3 4 5)) -> '(1 3 4 5)
 {{< /highlight >}}
 
-The test? is an equivalent of a in the first example, i.e. a function working as
-an argument input in function rember-f. It returns a member-removing function
-as result. We want to do this, because we find that in rember functions, whether
-we want to remove atom or list or pair or list, the only different part is the
-equality checking. It's natural that we want to isolate the variant part and
-write an invariant part.
+Notice that this is not a well defined function yet, since we have not
+specify the mapping relations. But it can lead us think that `test?` is an equivalent of `a` in the first
+example, i.e. a function `(test?)` works as an argument input in function
+`(rember-f)`, which together returns a member-removing function as result. This
+came because we can find that in `(rember)` function family, whether we want to remove atom
+or number or pair or list, the only different part is the equality checking.
 
-The compound function = invariant functions (contains an abstract place
-holder) + variant function. This allows us to extend more functions efficiently.
-There are lots of commonly used building blocks in developing algorithms and with currying, we get to write much less repetitive code.
+It's therefore natural that we want to deconstruct a compound function as
+invariant functions + variant function, which allows us to extend more functions efficiently.
+Because there are lots of commonly used building blocks in developing algorithms and with currying, we get to write much less repetitive code.
 
 For example, when defining `(insertL)` and `(insertR)`, we notice that the only
 difference is the order we `cons` the _new_ and _old_ argument, which can be
@@ -706,7 +711,12 @@ rewritten as:
       (else
         (cons (car l) (subst new old (cdr l)))))))
 
-;rewrite invariant function
+;firstly we define variant function
+(define seqS
+  (lambda (new old l)
+    (cons new l)))
+
+;rewrite invariant function accordingly
 (define subst-f
  (lambda (seq)
   (lambda (new old l)
@@ -717,11 +727,7 @@ rewritten as:
       (else
         (cons (car l) (subst-f new old (cdr l)))))))
 
-(define seqS
-  (lambda (new old l)
-    (cons new l)))
-
-;of course the subst-f is identical to insert-g, so we write as:
+;huh! the subst-f is identical to insert-g, so we can write as:
 (define subst (insert-g seqS))
 {{< /highlight >}}
 
@@ -744,7 +750,11 @@ function requires extra tweak, since the `(rember)` doesn't use arguments _new_:
 
 Let's see a function with more and more isolated parts to decrease repetitive
 work in writting functions. In the `(value)`, we've used 1st-sub-ex and 2nd-sub-exp to write
-less _car_ and _cdr_,
+less _car_ and _cdr_. Here we isolate two more parts `operator` to **locate** the
+calculation operator and `atom-to-function` to **match and export** the
+calculation operator. Notice that genetically the arguments are named as `aexp`
+and `atom` inside the functions, but when they are called in `(value-f)`, the
+arguments are tweaked with the arguments of `(value-f)`.
 
 {{< highlight scheme >}}
 ;value uses 1st-sub-exp
@@ -756,6 +766,11 @@ less _car_ and _cdr_,
 (define 2nd-sub-exp
   (lambda (aexp)
     (car (cdr (cdr aexp)))))
+
+;atom-to-function uses operator
+(define operator
+  (lambda (aexp)
+    (car aexp)))
 
 ;half abstracted function
 (define value
@@ -782,18 +797,105 @@ less _car_ and _cdr_,
       ((eq? atom 'o^) expt)
       (else #f))))
 
-;atom-to-function uses operator
-(define operator
-  (lambda (aexp)
-    (car aexp)))
-
-;(value '(o+ 1 (o^ 3 4))) -> 82
-(define value
+;(value-f '(o+ 1 (o^ 3 4))) -> 82
+(define value-f
   (lambda (nexp)
     (cond
       ((atom? nexp) nexp)
       (else
         ((atom-to-function (operator nexp))
-         (value (1st-sub-exp nexp))
-         (value (2nd-sub-exp nexp)))))))
+         (value-f (1st-sub-exp nexp))
+         (value-f (2nd-sub-exp nexp)))))))
+{{< /highlight >}}
+
+Here is a more complex one that has more than more layers of compound, not just
+compounding on arguments, but also contains recursion on arguments:
+
+{{< highlight scheme >}}
+(define multiremember&co
+ (lambda (a lat col)
+    (cond
+      ((null? lat)
+       (col '() '()))
+      ((eq? (car lat) a)
+       (multiremember&co a (cdr lat)
+       (lambda (newlat seen)
+         (col newlat (cons (car lat) seen)))))
+      (else
+        (multiremember&co a (cdr lat)
+                          (lambda (newlat seen)
+                            (col (cons (car lat) newlat) seen)))))))
+
+(define a-friend
+ (lambda (x y)
+  (null? y)))
+;(multiremember&co 'tuna '() a-friend) -> #t;
+;(multiremember&co 'tuna '(tuna) a-friend) -> #f
+;(multiremember&co 'tuna '(and tuna) a-friend) -> #f
+
+(define last-friend
+ (lambda (x y)
+  (length? x)))
+;(multiremember&co 'tuna (strawberries tuna and swordfish) last-friend) -> 3
+{{< /highlight >}}
+
+The question has been also discussed on SO: [recursion - Explain the
+continuation example on p.137 of The Little Schemer - Stack Overflow](https://stackoverflow.com/questions/7004636/explain-the-continuation-example-on-p-137-of-the-little-schemer)
+
+{{< highlight scheme >}}
+(define multiinsertLR
+  (lambda (new oldL oldR lat)
+    (cond
+      ((null? lat) '())
+      ((eq? (car lat) oldL)
+       (cons new
+             (cons oldL
+                   (multiinsertLR new oldL oldR (cdr lat)))))
+      ((eq? (car lat) oldR)
+       (cons oldR
+             (cons new
+                   (multiinsertLR new oldL oldR (cdr lat)))))
+      (else
+        (cons
+          (car lat)
+          (multiinsertLR new oldL oldR (cdr lat)))))))
+
+(define multiinsertLR&co
+  (lambda (new oldL oldR lat col)
+    (cond
+      ((null? lat)
+       (col '() 0 0))
+      ((eq? (car lat) oldL)
+       (multiinsertLR&co new oldL oldR (cdr lat)
+                         (lambda (newlat L R)
+                           (col (cons new (cons oldL newlat))
+                                (+ 1 L) R))))
+      ((eq? (car lat) oldR)
+       (multiinsertLR&co new oldL oldR (cdr lat)
+                         (lambda (newlat L R)
+                           (col (cons oldR (cons new newlat))
+                                L (+ 1 R)))))
+      (else
+        (multiinsertLR&co new oldL oldR (cdr lat)
+                          (lambda (newlat L R)
+                            (col (cons (car lat) newlat)
+                                 L R)))))))
+;some collectors
+(define col1
+  (lambda (lat L R)
+    lat))
+(define col2
+  (lambda (lat L R)
+    L))
+(define col3
+  (lambda (lat L R)
+    R))
+
+; Examples of multiinsertLR&co
+(multiinsertLR&co 'salty 'fish 'chips '(chips and fish or fish and chips)  col1)
+;-> '(chips salty and salty fish or salty fish and chips salty)
+(multiinsertLR&co  'salty  'fish  'chips  '(chips and fish or fish and chips)  col2)
+;-> 2
+(multiinsertLR&co  'salty 'fish 'chips '(chips and fish or fish and chips) col3)
+;-> 2
 {{< /highlight >}}

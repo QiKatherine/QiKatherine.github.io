@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (1/3)"
 date = 2019-12-10T23:20:00+00:00
-lastmod = 2020-01-04T01:45:05+00:00
+lastmod = 2020-01-05T23:56:51+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -235,7 +235,7 @@ define multisubst
         (cons (car lat) (multisubst new old (cdr lat)))))))
 {{< /highlight >}}
 
-The multi operation is genenally better designed. It can work with both single
+The multi operation is generally better designed. It can work with both single
 and multiple occurrences of old atoms, and terminate at until it's got null
 list. But the single operations terminate right when the first `(eq?)` returns
 T. Generally applicable termination should be at finishing the last element.

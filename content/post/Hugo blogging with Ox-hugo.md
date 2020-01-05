@@ -2,7 +2,7 @@
 title = "Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】"
 summary = "My personal experience of blogging with Emacs/Spacemacs and plug-in ox-hugo, along with some explanation of Hugo's working structure."
 date = 2019-07-16T01:03:00+01:00
-lastmod = 2020-01-04T01:45:03+00:00
+lastmod = 2020-01-05T23:56:49+00:00
 tags = ["Hugo", "Ox-hugo"]
 categories = ["TECH"]
 draft = false
@@ -54,7 +54,7 @@ Hugo 本身其实支持直接把.org 文件渲染成 HTML 发布，但是许多�
 
 简言之，我们主要使用 `ox-hugo` 做两件事（1）把 org 格式内容转换成 markdown 格式内容；（2）解析 org file 中的用 org 语法写 front-matter，生成 Hugo 要求语法的 front-matter，使得 Hugo 通过正确的信息生成的 HTML 。那么 front-matter 具体指什么呢？
 
-Front matter give the information about the content, but NOT the information of content. It works as metadata to tell Hugo the general properties of the article. Hugo supports three types of front matter syntax: yaml, toml, json. Wheven you generate a new post/article/blog with
+Front matter give the information about the content, but NOT the information of content. It works as metadata to tell Hugo the general properties of the article. Hugo supports three types of front matter syntax: yaml, toml, json. Whenever you generate a new post/article/blog with
 
 {{< highlight nil >}}
 $ hugo new site posts
@@ -118,7 +118,7 @@ Hugo 认为每个栏目最好只做同一件事情，例如照片专栏只发发
 information/metadata information（即 front matter）即可，能迅速方便的修改一两个页面的 layout。如果不能满足需求，可用 hugo 提供的自定义设置 archetypes，按照 hugo 指定的结构组合方式，编写正确的\_index.md 文件拼接好一个网站的
 layout 即可。
 
-如果你没有指定表达式样，比如暂时不太在乎如何展示 photo 这个栏目，Hugo 有这么一个 default 设定：在 front matter 大部分信息缺乏的时候，通过每个文章存储
+	如果你没有指定表达式样，比如暂时不太在乎如何展示 photo 这个栏目，Hugo 有这么一个 default 设定：在 front matter 大部分信息缺乏的时候，通过每个文章存储
 path 或者所在 section 猜出给这篇文章赋予什么 layout。这会让我们在迅速上手写作 blog 的时候非常省心。
 
 
