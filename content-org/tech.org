@@ -1061,8 +1061,8 @@ answer, and often review them with quick scan of this article. I really enjoy th
   *list* is something enclosed by pair of parenthesis: something can be nothing, can be
   atom, can be another list.
  
-  *s-expression* can be any of :an atom; an (empty) list; a pair. A series of s-expression
-  enclosed by parenthesis is *list*.
+  *s-expression* can be an atom, or an expression of the form (x y) where x and
+  y are s-expressions. It's essentially a binary tree.
 
  ~(car argument)~: returns first s-expression among all the first-level
   s-expression within a list. It can NOT work on empty list.
@@ -1096,6 +1096,11 @@ From chapter 2, we begin to build functions with primitive building blocks.
  ~(lat? argument)~: checks if every s-expression in a list is atom. Since the
   s-expression is either atom or list/pair, ~(lat?)~ use ~(atom?)~ as core function.
 #+begin_src scheme
+;define atom? as primitive function first:
+(define atom?
+ (lambda (x)
+    (and (not (pair? x)) (not (null? x))))) 
+
 ; (lat? (Jack Sprat could eat no chicken fat)) -> #t, for every element is atom.
 (define lat?
   (lambda (l)
@@ -1457,20 +1462,6 @@ and number
           (cons (car lat) (rempick-one (sub1 n) (cdr lat)))))))
 
 #+end_src
-
-** DONE The Little Schemer speedy referring note (2/3)                :@TECH:
-   CLOSED: [2019-12-23 Mon 01:35]
-   :PROPERTIES:
-   :EXPORT_FILE_NAME: The-little-schemer-note-2-3
-   :END:
-   :LOGBOOK:
-   - State "DONE"       from "TODO"       [2019-12-23 Mon 01:35]
-   :END:
-
-This is a quick reference note that I pull from the book The Little Schemer. The
-full detailed code can be found:
-
-[[https://github.com/pkrumins/the-little-schemer/blob/master/02-do-it-again.ss][the-little-schemer/02-do-it-again.ss at master · pkrumins/the-little-schemer]]
 
 *** Chapter 5 It's Full Of Stars
 The starred function family re-write the functions in previous chapters with a
@@ -1840,6 +1831,22 @@ setting functions*, we know this work will not be limited to =(1 + 1) and (+1
        (tat? (cdr l)))
       (else #f))))
 #+end_src
+
+
+** DONE The Little Schemer speedy referring note (2/3)                :@TECH:
+   CLOSED: [2019-12-23 Mon 01:35]
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: The-little-schemer-note-2-3
+   :END:
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2019-12-23 Mon 01:35]
+   :END:
+
+This is a quick reference note that I pull from the book The Little Schemer. The
+full detailed code can be found:
+
+[[https://github.com/pkrumins/the-little-schemer/blob/master/02-do-it-again.ss][the-little-schemer/02-do-it-again.ss at master · pkrumins/the-little-schemer]]
+
 
 *** Chapter 7 Friend and Relations
 -----
@@ -2230,8 +2237,8 @@ arguments are tweaked with the arguments of =(value-f)=.
          (value-f (2nd-sub-exp nexp)))))))
 #+end_src
 
-Here is a more complex one that has more than more layers of compound, not just
-compounding on arguments, but also contains recursion on arguments:
+Here is another compound function containing more layers of abstractions, which
+doesn't only call other functions, but also contains recursions on multiple conditions:
 #+begin_src scheme
 (define multiremember&co
  (lambda (a lat col)
@@ -2252,8 +2259,20 @@ compounding on arguments, but also contains recursion on arguments:
   (null? y)))
 ;(multiremember&co 'tuna '() a-friend) -> #t;
 ;(multiremember&co 'tuna '(tuna) a-friend) -> #f
-;(multiremember&co 'tuna '(and tuna) a-friend) -> #f
 
+;(multiremember&co 'tuna '(and tuna) a-friend) -> #f
+;in the final recursion, it gets us:
+;a=tuna
+;lat='()
+;col=
+;((lambda (newlat1 seen1)
+;   ((lambda (newlat2 seen2)
+;      (list newlat2 (cons 'foo seen2)))
+;    (cons 'bar newlat1)
+;    seen1))
+; '() '())
+
+;define a different continuation
 (define last-friend
  (lambda (x y)
   (length? x)))
@@ -2318,4 +2337,191 @@ continuation example on p.137 of The Little Schemer - Stack Overflow]]
 ;-> 2
 (multiinsertLR&co  'salty 'fish 'chips '(chips and fish or fish and chips) col3)
 ;-> 2
+#+end_src
+
+#+begin_src scheme
+;(evens-only* '((9 1 2 8) 3 10 ((9 9) 7 6) 2)) -> '((2 8) 10 (() 6) 2)
+(define evens-only*
+  (lambda (l)
+    (cond
+      ((null? l) '())
+      ((atom? (car l))
+       (cond
+         ((even? (car l))
+          (cons (car l)
+                (evens-only* (cdr l))))
+         (else
+           (evens-only* (cdr l)))))
+      (else
+        (cons (evens-only* (car l))
+              (evens-only* (cdr l)))))))
+
+;define *&co function
+(define evens-only*&co
+  (lambda (l col)
+    (cond
+      ((null? l)
+       (col '() 1 0))
+      ((atom? (car l))
+       (cond
+         ((even? (car l))
+          (evens-only*&co (cdr l)
+                          (lambda (newl p s)
+                            (col (cons (car l) newl) (* (car l) p) s))))
+         (else
+           (evens-only*&co (cdr l)
+                           (lambda (newl p s)
+                             (col newl p (+ (car l) s)))))))
+      (else
+        (evens-only*&co (car l)
+                        (lambda (al ap as)
+                          (evens-only*&co (cdr l)
+                                          (lambda (dl dp ds)
+                                            (col (cons al dl)
+                                                 (* ap dp)
+                                                 (+ as ds))))))))))
+(define evens-friend
+  (lambda (e p s)
+    e))
+
+;(evens-only*&co '((9 1 2 8) 3 10 ((9 9) 7 6) 2) evens-friend)
+; -> '((2 8) 10 (() 6) 2)
+#+end_src
+** DONE The Little Schemer speedy referring note (3/3)                :@TECH:
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: The-little-schemer-note-3-3
+   :END:
+   :LOGBOOK:
+   - State "DONE"       from "DONE"       [2020-01-06 Mon 01:56]
+   :END:
+
+*** Chapter 9 and Again and Again and Again
+The key thing of writing recursion is making sure the function works in meaningful
+direction with =termination condition=. That's the basic requirement for any
+function: it takes in an argument and produces an output accordingly.
+For example, the =(pick)= will return the n-th
+element in lat. The =(keep-looking)= calls =(pick)= to see if =a= is equal to
+the random atom in lat (assuming the numbers in lat is random).
+#+begin_src scheme
+;pick return n-th element in lat:
+(define pick
+  (lambda (n lat)
+    (cond
+      ((zero? (sub1 n)) (car lat))
+      (else
+        (pick (sub1 n) (cdr lat))))))
+
+(define keep-looking
+  (lambda (a sorn lat)
+    (cond
+      ((number? sorn)
+       (keep-looking a (pick sorn lat) lat))
+      (else (eq? sorn a )))))
+
+(define looking
+  (lambda (a lat)
+    (keep-looking a (pick 1 lat) lat)))
+
+; Example of looking
+(looking 'caviar '(6 2 4 caviar 5 7 3))         ; #t
+(looking 'caviar '(6 2 grits caviar 5 7 3))     ; #f
+#+end_src
+From the examples we can find that the ='caviar= is the 4th element in the
+first example, and the list contains 4. So running it is very likely to hit the
+termination condition. But in second example the ='caviar= is the 4th element whereas no 4
+is contained in the list, so the recursion will run without stop, which is
+called *partial function* as opposed to *total function* defined by us previously. 
+
+Let's see another example. We've defined *pair* is a list containing two
+s-expressions. The =shift= takes a pair whose first component is a pair and builds a pair by shifting the second part of the first component into
+the second component.
+#+begin_src scheme
+(define first
+  (lambda (p)
+    (car p)))
+
+(define second
+  (lambda (p)
+    (car (cdr p))))
+
+(define build
+  (lambda (s1 s2)
+    (cons s1 (cons s2 '()))))
+
+;(shift '((a b) c)) -> '(a (b c))
+;(shift '((a b) (c d))) -> '(a (b (c d)))
+(define shift
+  (lambda (pair)
+    (build (first (first pair))
+      (build (second (first pair))
+        (second pair)))))
+
+(define a-pair?
+  (lambda (x)
+    (cond
+      ((atom? x) #f)
+      ((null? x) #f)
+      ((null? (cdr x)) #f)
+      ((null? (cdr (cdr x))) #t)
+      (else #f))))
+
+(define align
+  (lambda (pora)
+    (cond
+      ((atom? pora) pora)
+      ((a-pair? (first pora))
+       (align (shift pora)))
+      (else (build (first pora)
+              (align (second pora)))))))
+
+#+end_src
+Based on =shift= we further creat =align=. Don't rush to run the function. We notice something wrong in the
+ second predicate where =shift= is called as argument. The seventh commandment emphasize
+ that recursion should happen on the subparts that are *of the same nature*:
+ either on the sublists of a list; or on the subexpressions of an arithmetic
+ expression. But the =align= as well as =(keep-looking)= all creat new argument
+ in recursion that is *not part* of the original argument, which will not make
+ argument recursion get smaller or closer to any finishing line.
+
+So we define two different ways to measure the mass of the first component. The
+=(length*)= measures every atom with same weight, whereas the =(weight*)= puts
+twice as much weight to the first component. 
+#+begin_src scheme
+(define length*
+  (lambda (pora)
+    (cond
+      ((atom? pora) 1)
+      (else
+        (+ (length* (first pora))
+           (length* (second pora)))))))
+;(length* '((a b) c)) -> 3
+;(length* '(a (b c)) -> 3
+
+(define weight*
+  (lambda (pora)
+    (cond
+      ((atom? pora) 1)
+      (else
+        (+ (* (weight* (first pora)) 2)
+           (weight* (second pora)))))))
+;(weight* '((a b) c)) -> 7
+;(weight* '(a (b c)) -> 5
+
+(define revpair
+  (lambda (p)
+    (build (second p) (first p))))  
+
+(define shuffle
+  (lambda (pora)
+    (cond
+      ((atom? pora) pora)
+      ((a-pair? (first pora))
+       (shuffle (revpair pora)))
+      (else
+        (build (first pora)
+          (shuffle (second pora)))))))
+
+(shuffle '(a (b c)))        ; '(a (b c))
+(shuffle '(a b))            ; '(a b)
+(shuffle '((a b) (c d)))    ; infinite swap pora  Ctrl + c  to break and input q to exit
 #+end_src
