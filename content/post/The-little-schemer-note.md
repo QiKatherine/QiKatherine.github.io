@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (1/3)"
 date = 2019-12-10T23:20:00+00:00
-lastmod = 2020-01-08T23:55:56+00:00
+lastmod = 2020-01-10T23:45:15+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -676,7 +676,7 @@ previous chapter.
 {{< /highlight >}}
 
 This chapter establish rules to write a good functions `(1) the first thing is to write ALL the operations
-for every predicate condition; (2) make sure the algorith is correct; (3) then to simplify it.`
+for every predicate condition; (2) make sure the algorithm is correct; (3) then to simplify it.`
 
 
 ## Chapter 6 Shadows {#chapter-6-shadows}

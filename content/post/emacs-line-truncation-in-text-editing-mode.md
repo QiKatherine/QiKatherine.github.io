@@ -2,7 +2,7 @@
 title = "Overview: Emacs line truncation in text editing 【Emacs org 换行/对齐/排版  汇总指南】"
 summary = "Line visualization and navigation settings in Emacs text editing."
 date = 2019-09-17T12:53:00+01:00
-lastmod = 2020-01-08T23:55:54+00:00
+lastmod = 2020-01-10T23:45:13+00:00
 tags = ["Emacs", "Org-mode"]
 categories = ["TECH"]
 draft = false
