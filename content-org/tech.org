@@ -2051,15 +2051,12 @@ Let's call it =(one-to-one?)=:
 *** Chapter 8 Lambda and the Ultimate
 
 In the previous chapters, we've seen over and over that a function takes *list
-or atom* as input, and produces *list or atom* as output.In this chapter, we
-will see a function takes input and returns *functions*. Technically, a costant/atom
-is a function too, which takes itself as argument and returns itself. 
-
-We might no longer spercify whether every input is an argument or an function. But
-it will always be beneficial to ask yourself, which functions has been
-previously defined, and how its default arguments are tweaked in developing the
-current function. For example, in nature function 1 is a function which takes =a= as argument and
-returns function 2 (an equality checking function) as output.
+or atom* as input and returns *list or atom* as output. In this chapter, we
+will be learning how to write a function that takes input and returns
+*functions*. Technically, a digit/atom is a function too, which takes itself as
+argument and returns itself. Taking an naive example, the function1 is a
+functional projection which takes =a= (a constant function) as argument and
+returns function2 (equivelent in concept) as output. It's called currying. 
 #+begin_src scheme
 (define function1
 (lambda (a)
@@ -2071,7 +2068,12 @@ returns function 2 (an equality checking function) as output.
  (eq? x a))
 #+end_src
 
-It's called currying. Let's improve it a little with a familiar function:
+But the functional projection is sometimes more confusing when there are
+recursions involved in multiple stages, especially we will no longer spercify
+whether every input is an argument or an function. Therefore it will always be beneficial to ask yourself, which functions has been
+previously defined, and how its default arguments are tweaked in developing the
+current function. 
+Let's improve it a little with a familiar function:
 #+begin_src scheme
 (define rember-f
   (lambda (test?)
@@ -2635,7 +2637,7 @@ with less than one element:
       (add1 (length0 (cdr l))))
 
 ;length<=1
-(lambda (l)
+(lambda (l)  ;read more details below if you don't understand here            
   (cond
     ((null? l) 0)
     (else
@@ -2644,8 +2646,8 @@ with less than one element:
            (cond
              ((null? l) 0)
              (else
-               (add1 (eternity (cdr l)))))); l=cdr(l) below
-         (cdr l))))));the cdr(l) is for l in the above line.
+               (add1 (eternity (cdr l))))))
+         (cdr l))))))
 #+end_src
 [[/img/length1.png]]
 
@@ -2688,7 +2690,26 @@ length0 and length1 are there only for demonstration purpose).
                      (else
                        (add1 (eternity (cdr l))))))
                (cdr l))))))
-      (cdr l)))))) 
+      (cdr l))))))
+
+;let's give distinguished names to arguments in every layer
+(lambda (l2)  ;assume l2 = '(b c)
+  (cond
+    ((null? l2) 0)
+    (else
+      (add1
+        ((lambda(l1)  ;then l1 <- cdr(l2) = '(c)
+           (cond
+             ((null? l1) 0)
+             (else
+               (add1 
+                ((lambda(l0)  ;then l0 <- cdr(l1) = '( )
+                 (cond
+                   ((null? l0) 0)  ;so here returns 0, and terminates
+                     (else
+                       (add1 (eternity (cdr l0))))))
+               (cdr l1))))))
+      (cdr l2))))))  
 #+end_src
 The above functions show repetitive content along with the length of input list,
 mainly in calling =(length)= part, so we can write a function to capture the
@@ -2716,7 +2737,9 @@ This need is particularly necessary because one can imagine there is going to be
         (else (add1 (g (cdr l)))))))
   eternity))
 #+end_src
-The repetitions decrease by reducing the  but not pithy enough, we further simplify it:
+The repetitions decrease but not pithy enough, and we can further simplify it.
+Since we observe that the length testing part is highly similar, therefore we
+call it =(mk-length)=.
 #+begin_src scheme
 ;define make length
 (lambda (mk-length)

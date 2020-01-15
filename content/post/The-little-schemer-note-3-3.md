@@ -1,6 +1,6 @@
 +++
 title = "The Little Schemer speedy referring note (3/3)"
-lastmod = 2020-01-10T23:45:17+00:00
+lastmod = 2020-01-15T16:37:01+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -268,7 +268,7 @@ with less than one element:
       (add1 (length0 (cdr l))))
 
 ;length<=1
-(lambda (l)
+(lambda (l)  ;read more details below if you don't understand here
   (cond
     ((null? l) 0)
     (else
@@ -277,8 +277,8 @@ with less than one element:
            (cond
              ((null? l) 0)
              (else
-               (add1 (eternity (cdr l)))))); l=cdr(l) below
-         (cdr l))))));the cdr(l) is for l in the above line.
+               (add1 (eternity (cdr l))))))
+         (cdr l))))))
 {{< /highlight >}}
 
 {{< figure src="/img/length1.png" >}}
@@ -324,6 +324,25 @@ length0 and length1 are there only for demonstration purpose).
                        (add1 (eternity (cdr l))))))
                (cdr l))))))
       (cdr l))))))
+
+;let's give distinguished names to arguments in every layer
+(lambda (l2)  ;assume l2 = '(b c)
+  (cond
+    ((null? l2) 0)
+    (else
+      (add1
+        ((lambda(l1)  ;then l1 <- cdr(l2) = '(c)
+           (cond
+             ((null? l1) 0)
+             (else
+               (add1
+                ((lambda(l0)  ;then l0 <- cdr(l1) = '( )
+                 (cond
+                   ((null? l0) 0)  ;so here returns 0, and terminates
+                     (else
+                       (add1 (eternity (cdr l0))))))
+               (cdr l1))))))
+      (cdr l2))))))
 {{< /highlight >}}
 
 The above functions show repetitive content along with the length of input list,
@@ -354,7 +373,9 @@ This need is particularly necessary because one can imagine there is going to be
   eternity))
 {{< /highlight >}}
 
-The repetitions decrease by reducing the  but not pithy enough, we further simplify it:
+The repetitions decrease but not pithy enough, and we can further simplify it.
+Since we observe that the length testing part is highly similar, therefore we
+call it `(mk-length)`.
 
 {{< highlight scheme >}}
 ;define make length

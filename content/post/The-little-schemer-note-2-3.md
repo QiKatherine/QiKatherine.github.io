@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (2/3)"
 date = 2019-12-23T01:35:00+00:00
-lastmod = 2020-01-10T23:45:16+00:00
+lastmod = 2020-01-15T16:37:01+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -227,15 +227,12 @@ Let's call it `(one-to-one?)`:
 ## Chapter 8 Lambda and the Ultimate {#chapter-8-lambda-and-the-ultimate}
 
 In the previous chapters, we've seen over and over that a function takes **list
-or atom** as input, and produces **list or atom** as output.In this chapter, we
-will see a function takes input and returns **functions**. Technically, a costant/atom
-is a function too, which takes itself as argument and returns itself.
-
-We might no longer spercify whether every input is an argument or an function. But
-it will always be beneficial to ask yourself, which functions has been
-previously defined, and how its default arguments are tweaked in developing the
-current function. For example, in nature function 1 is a function which takes `a` as argument and
-returns function 2 (an equality checking function) as output.
+or atom** as input and returns **list or atom** as output. In this chapter, we
+will be learning how to write a function that takes input and returns
+**functions**. Technically, a digit/atom is a function too, which takes itself as
+argument and returns itself. Taking an naive example, the function1 is a
+functional projection which takes `a` (a constant function) as argument and
+returns function2 (equivelent in concept) as output. It's called currying.
 
 {{< highlight scheme >}}
 (define function1
@@ -248,7 +245,12 @@ returns function 2 (an equality checking function) as output.
  (eq? x a))
 {{< /highlight >}}
 
-It's called currying. Let's improve it a little with a familiar function:
+But the functional projection is sometimes more confusing when there are
+recursions involved in multiple stages, especially we will no longer spercify
+whether every input is an argument or an function. Therefore it will always be beneficial to ask yourself, which functions has been
+previously defined, and how its default arguments are tweaked in developing the
+current function.
+Let's improve it a little with a familiar function:
 
 {{< highlight scheme >}}
 (define rember-f
