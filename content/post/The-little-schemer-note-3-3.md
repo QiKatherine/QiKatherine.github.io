@@ -1,6 +1,6 @@
 +++
 title = "The Little Schemer speedy referring note (3/3)"
-lastmod = 2020-01-15T16:37:01+00:00
+lastmod = 2020-02-12T22:19:34+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -254,7 +254,7 @@ with less than one element:
 
 {{< highlight scheme >}}
 ;length<=0
-   (lambda (l)
+(lambda (l)
     (cond
       ((null? l) 0)
       (else
@@ -265,7 +265,7 @@ with less than one element:
   (cond
     ((null? l) 0)
     (else
-      (add1 (length0 (cdr l))))
+      (add1 (length0 (cdr l))))))
 
 ;length<=1
 (lambda (l)  ;read more details below if you don't understand here
@@ -371,16 +371,70 @@ This need is particularly necessary because one can imagine there is going to be
         ((null? l) 0)
         (else (add1 (g (cdr l)))))))
   eternity))
+
+;length<=2
+((lambda (length)
+  (lambda(l)
+   (cond)
+       ((null? l) 0)
+       (else (add1 (length (cdr l)))))))
+ ((lambda (length)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1 (length (cdr l)))))))
+ ((lambda (length)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1 (length (cdr l)))))))
+  eternity)))
 {{< /highlight >}}
 
 The repetitions decrease but not pithy enough, and we can further simplify it.
 Since we observe that the length testing part is highly similar, therefore we
-call it `(mk-length)`.
+call it `(mk-length)`, the length functions can be therefore written as:
+
+{{< highlight scheme >}}
+;length<=0
+((lambda (mk-length)
+  (mk-length eternity))
+ (lambda (length)
+  (lambda(l)
+   (cond
+ ((null? l) 0)
+  (else (add1 (length (cdr l))))))))
+
+;length<=1
+((lambda (mk-length)
+ (mk-length
+ (mk-length eternity)))
+ (lambda (length)
+  (lambda(l)
+   (cond
+ ((null? l) 0)
+  (else (add1 (length (cdr l))))))))
+
+;length<=2
+((lambda (mk-length)
+  (mk-length
+   (mk-length
+    (mk-length eternity))))
+ (lambda (length)
+  (lambda(l)
+   (cond
+ ((null? l) 0)
+  (else (add1 (length (cdr l))))))))
+{{< /highlight >}}
+
+The above function of length measuring seems can be used upon any function, coz
+it is never got invoked. It doesn't really matter if we call `(eternity)`, or
+even itself `(mk-length)`. Therefore we try further abstract it with this thoughts:
 
 {{< highlight scheme >}}
 ;define make length
 (lambda (mk-length)
-  (mk-length eternity))
+  (mk-length mk-length))
 
 ; rewrite length<=1
 ((lambda (mk-length)

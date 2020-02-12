@@ -2623,7 +2623,7 @@ recursion and cause failure by giving no answer. This is essentially how the =(l
 with less than one element: 
 #+begin_src scheme
 ;length<=0
-   (lambda (l)
+(lambda (l)
     (cond
       ((null? l) 0)
       (else
@@ -2634,7 +2634,7 @@ with less than one element:
   (cond
     ((null? l) 0)
     (else
-      (add1 (length0 (cdr l))))
+      (add1 (length0 (cdr l))))))
 
 ;length<=1
 (lambda (l)  ;read more details below if you don't understand here            
@@ -2736,14 +2736,67 @@ This need is particularly necessary because one can imagine there is going to be
         ((null? l) 0)
         (else (add1 (g (cdr l)))))))
   eternity))
+
+;length<=2
+((lambda (length)
+  (lambda(l)
+   (cond)
+       ((null? l) 0)
+       (else (add1 (length (cdr l)))))))
+ ((lambda (length)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1 (length (cdr l)))))))
+ ((lambda (length)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1 (length (cdr l)))))))
+  eternity)))
 #+end_src
 The repetitions decrease but not pithy enough, and we can further simplify it.
 Since we observe that the length testing part is highly similar, therefore we
-call it =(mk-length)=.
+call it =(mk-length)=, the length functions can be therefore written as:
+#+begin_src scheme
+;length<=0
+((lambda (mk-length)
+  (mk-length eternity))
+ (lambda (length)
+  (lambda(l)
+   (cond
+ ((null? l) 0)
+  (else (add1 (length (cdr l))))))))
+
+;length<=1
+((lambda (mk-length)
+ (mk-length
+ (mk-length eternity)))
+ (lambda (length)
+  (lambda(l)
+   (cond
+ ((null? l) 0)
+  (else (add1 (length (cdr l))))))))
+
+;length<=2
+((lambda (mk-length)
+  (mk-length
+   (mk-length
+    (mk-length eternity))))
+ (lambda (length)
+  (lambda(l)
+   (cond
+ ((null? l) 0)
+  (else (add1 (length (cdr l))))))))
+#+end_src
+
+The above function of length measuring seems can be used upon any function, coz
+it is never got invoked. It doesn't really matter if we call =(eternity)=, or
+even itself =(mk-length)=. Therefore we try further abstract it with this thoughts:
 #+begin_src scheme
 ;define make length
 (lambda (mk-length)
-  (mk-length eternity))
+  (mk-length mk-length))
 
 ; rewrite length<=1
 ((lambda (mk-length)
