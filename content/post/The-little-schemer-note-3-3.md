@@ -1,6 +1,6 @@
 +++
 title = "The Little Schemer speedy referring note (3/3)"
-lastmod = 2020-02-12T22:19:34+00:00
+lastmod = 2020-02-14T00:27:13+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -170,7 +170,7 @@ itself has to be a total function. Then we try compounding it with `(length)` an
   (lambda (lat)
     (cond
       ((null? lat) 0)
-      (else (add1 (length (cdr lat)))))))
+      (else (add1 (length (cdr lat)))))
 
 (define will-stop?
   (lambda (x)
@@ -427,16 +427,23 @@ call it `(mk-length)`, the length functions can be therefore written as:
   (else (add1 (length (cdr l))))))))
 {{< /highlight >}}
 
-The above function of length measuring seems can be used upon any function, coz
-it is never got invoked. It doesn't really matter if we call `(eternity)`, or
+The above function of length measuring seems can be used upon any function, since
+it was never really got invoked. So it doesn't really matter if we call `(eternity)`, or
 even itself `(mk-length)`. Therefore we try further abstract it with this thoughts:
 
 {{< highlight scheme >}}
-;define make length
-(lambda (mk-length)
-  (mk-length mk-length))
+; length<=0
+((lambda (mk-length)
+   (mk-length mk-length))
+ (lambda (length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else
+         (add1 (length (cdr l))))))))
 
-; rewrite length<=1
+; since it doesn't really matter what to name the inner argument
+; we rewrite length<=0
 ((lambda (mk-length)
    (mk-length mk-length))
  (lambda (mk-length)
@@ -444,6 +451,82 @@ even itself `(mk-length)`. Therefore we try further abstract it with this though
      (cond
        ((null? l) 0)
        (else
-         (add1
-           ((mk-length eternity) (cdr l))))))))
+         (add1 (mk-length (cdr l))))))))
+
+;use length<=0 to achieve length<=1
+(((lambda (mk-length)
+   (mk-length mk-length))
+ (lambda (mk-length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else
+         (add1 ((mk-length eternity) (cdr l)))))))))
+{{< /highlight >}}
+
+The last part in above shows: since the `(eternity)` is now substituted by the
+`(mk-length)`, we can add one more workable layer on `(length0)`. This is achievable by calling the inner most
+function `(mk-length)` with another argument of `(eternity)`.
+
+The exercise in page 166 is:
+
+{{< highlight scheme >}}
+; step0
+(((lambda (mk-length)
+    (mk-length mk-length))
+  (lambda (mk-length)
+    (lambda (l)
+      (cond
+       ((null? l) 0)
+       (else
+        (add1
+         ((mk-length mk-length)
+          (cdr l))))))))
+ (list 'a 'b 'c)
+
+; step1
+(((lambda (mk-length)
+    (lambda (l)
+      (cond
+       ((null? l) 0)
+       (else
+        (add1
+         ((mk-length mk-length)
+          (cdr l)))))))
+  (lambda (mk-length)
+    (lambda (l)
+      (cond
+       ((null? l) 0)
+       (else
+        (add1
+         ((mk-length mk-length)
+          (cdr l))))))))
+ (list 'a 'b 'c))
+
+; step2
+((lambda (l)
+   (cond
+    ((null? l) 0)
+    (else
+     (add1
+      (((lambda (mk-length)
+          (lambda (l)
+            (cond
+             ((null? l) 0)
+             (else
+              (add1
+               ((mk-length
+                 mk-length)
+                (cdr l)))))))
+        (lambda (mk-length)
+          (lambda (l)
+            (cond
+             ((null? l) 0)
+             (else
+              (add1
+               ((mk-length
+                 mk-length)
+                (cdr l))))))))
+       (cdr l))))))
+ (list 'a 'b 'c))
 {{< /highlight >}}
