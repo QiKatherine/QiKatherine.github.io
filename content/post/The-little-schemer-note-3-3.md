@@ -1,10 +1,27 @@
 +++
 title = "The Little Schemer speedy referring note (3/3)"
-lastmod = 2020-02-14T00:27:13+00:00
+lastmod = 2020-02-17T00:13:09+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
 +++
+
+The former chapters can be easily understood from reading the code without
+counting parenthesis. **However from this chapter, it is highly recommended to
+download Drracket and use a stepper to run all the recurions.** For example, the
+stepper make the answer of `soegaard` very straightforward:
+
+[scheme - Y combinator discussion in "The Little Schemer" - Stack Overflow](https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer?noredirect=1&lq=1)
+
+This chapter introduces the idea of Y combinator based on recursion. We've seen
+that recursion is a function calling itself during defining itself, but when the
+function is just an lambda expression without name, what do we do?
+
+The Y combinator provides a solution by designing an high order function, which
+is a function that takes a function as an argument and returns a function.
+Taking factorial as an example, we deduce a function G where G(factorial)=factorial.
+Let's learn how to deduce step by step.
+
 
 ## Chapter 9 and Again and Again and Again {#chapter-9-and-again-and-again-and-again}
 
@@ -346,9 +363,13 @@ length0 and length1 are there only for demonstration purpose).
 {{< /highlight >}}
 
 The above functions show repetitive content along with the length of input list,
-mainly in calling `(length)` part, so we can write a function to capture the
-pattern. If we can define length abstractly, we can call it to simplify the reptitive procedure.
-This need is particularly necessary because one can imagine there is going to be many algorithms having similar repetitions as `(length<=n)`.
+mainly in calling `(length)` part. Normally, we would write and save as a named
+function for calling in the future. **But, if we don't save it,but directly
+address it within other function, or even address itself,  How do we do that?**
+
+If we can define length abstractly, we can call it to simplify the reptitive procedure.
+This need is particularly necessary when there is going to be many algorithms
+having similar repetitions as `(length<=n)`. So firstly we give (lambda l) a name:
 
 {{< highlight scheme >}}
 ;length<=0
@@ -482,7 +503,7 @@ The exercise in page 166 is:
         (add1
          ((mk-length mk-length)
           (cdr l))))))))
- (list 'a 'b 'c)
+ (list 'a 'b 'c))
 
 ; step1
 (((lambda (mk-length)
@@ -529,4 +550,27 @@ The exercise in page 166 is:
                 (cdr l))))))))
        (cdr l))))))
  (list 'a 'b 'c))
+
+; step4
+(cond
+ ((null? (list 'a 'b 'c)) 0)
+ (else
+  (add1
+   (((lambda (mk-length)
+       (lambda (l)
+         (cond
+          ((null? l) 0)
+          (else
+           (add1
+            ((mk-length mk-length)
+             (cdr l)))))))
+     (lambda (mk-length)
+       (lambda (l)
+         (cond
+          ((null? l) 0)
+          (else
+           (add1
+            ((mk-length mk-length)
+             (cdr l))))))))
+    (cdr (list 'a 'b 'c))))))
 {{< /highlight >}}

@@ -1038,6 +1038,11 @@ https://github.com/QiKatherine/Linear-algebra/blob/master/1.pdf
    - State "DONE"       from "TODO"       [2019-12-10 ÖÜ¶þ 23:20]
    :END:
 
+The Little Schemer uses a very easy way, introducing the nature of recursion,
+continuation and Y combinator with only several simple building blocks. You might
+have been so used to writing and calling functions with formal name, this book
+will show you how complex procedure can be reformed by lambda expressions.
+
 This is a quick reference note that I pull from the book The Little Schemer. The
 full detailed code can be found in this repo:
 
@@ -1046,10 +1051,12 @@ full detailed code can be found in this repo:
 
 My recommendation of reading this book is that don't skip too much questions
 after the fifth chapter, as the functions getting more complex, you will find those
-questions are carefully asked to guide our thinking to improve into a better and better
-program. Meanwhile try to write functions with pens and papers before checking the
+questions from the dialogue are carefully asked, in order to guide us to gradually write a better program. Meanwhile try to write functions with pens and papers before checking the
 answer, and often review them with quick scan of this article. I really enjoy this book, and hope you have much fun as I do :).
 
+From some point, you probably need to read "Fibonacci times" in every chapter to fully
+understand but keep going, you won't regret it.
+ 
 *** Chapter 1 Toy
 
  In this chapter, we list primitive conceptions and functions which will be
@@ -2396,6 +2403,22 @@ continuation example on p.137 of The Little Schemer - Stack Overflow]]
    - State "DONE"       from "DONE"       [2020-01-06 Mon 01:56]
    :END:
 
+The former chapters can be easily understood from reading the code without
+counting parenthesis. *However from this chapter, it is highly recommended to
+download Drracket and use a stepper to run all the recurions.* For example, the
+stepper make the answer of =soegaard= very straightforward:
+
+[[https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer?noredirect=1&lq=1][scheme - Y combinator discussion in "The Little Schemer" - Stack Overflow]]
+
+This chapter introduces the idea of Y combinator based on recursion. We've seen
+that recursion is a function calling itself during defining itself, but when the
+function is just an lambda expression without name, what do we do?
+
+The Y combinator provides a solution by designing an high order function, which
+is a function that takes a function as an argument and returns a function.
+Taking factorial as an example, we deduce a function G where G(factorial)=factorial.
+Let's learn how to deduce step by step.
+ 
 *** Chapter 9 and Again and Again and Again
 The key of writing recursion is making sure there is =termination condition=.
 That's the basic requirement for function in both computation and mathmatics
@@ -2712,9 +2735,13 @@ length0 and length1 are there only for demonstration purpose).
       (cdr l2))))))  
 #+end_src
 The above functions show repetitive content along with the length of input list,
-mainly in calling =(length)= part, so we can write a function to capture the
-pattern. If we can define length abstractly, we can call it to simplify the reptitive procedure.
-This need is particularly necessary because one can imagine there is going to be many algorithms having similar repetitions as =(length<=n)=.
+mainly in calling =(length)= part. Normally, we would write and save as a named
+function for calling in the future. *But, if we don't save it,but directly
+address it within other function, or even address itself,  How do we do that?* 
+
+If we can define length abstractly, we can call it to simplify the reptitive procedure.
+This need is particularly necessary when there is going to be many algorithms
+having similar repetitions as =(length<=n)=. So firstly we give (lambda l) a name:
 #+begin_src scheme
 ;length<=0
 ((lambda (length)
@@ -2829,7 +2856,7 @@ The last part in above shows: since the =(eternity)= is now substituted by the
 =(mk-length)=, we can add one more workable layer on =(length0)=. This is achievable by calling the inner most
 function =(mk-length)= with another argument of =(eternity)=.
 
-The exercise in page 166 is: 
+The exercise in page 166 is:
 #+begin_src scheme
 ; step0
 (((lambda (mk-length)
@@ -2842,7 +2869,7 @@ The exercise in page 166 is:
         (add1
          ((mk-length mk-length)
           (cdr l))))))))
- (list 'a 'b 'c)
+ (list 'a 'b 'c))
 
 ; step1
 (((lambda (mk-length)
@@ -2889,4 +2916,43 @@ The exercise in page 166 is:
                 (cdr l))))))))
        (cdr l))))))
  (list 'a 'b 'c))
+
+; step4
+(cond
+ ((null? (list 'a 'b 'c)) 0)
+ (else
+  (add1
+   (((lambda (mk-length)
+       (lambda (l)
+         (cond
+          ((null? l) 0)
+          (else
+           (add1
+            ((mk-length mk-length)
+             (cdr l)))))))
+     (lambda (mk-length)
+       (lambda (l)
+         (cond
+          ((null? l) 0)
+          (else
+           (add1
+            ((mk-length mk-length)
+             (cdr l))))))))
+    (cdr (list 'a 'b 'c))))))
 #+end_src
+
+#+begin_export scheme
+(define (map f xs)
+  (if (empty? xs) '()
+      (cons (f (first xs)) (map f (rest xs)))))
+(map (λ (x) (+ x 1)) '(1 2 3))
+
+(define (map-k f xs k)
+  (if (empty? xs) (k '())
+      (f (first xs) (λ (v) (map-k f (rest xs)
+                                  (λ (rest-v) (k (cons v rest-v))))))))
+(map-k (λ (x k) (k (+ x 1))) '(1 2 3) (λ (x) x))
+
+
+#+end_export
+
