@@ -1,6 +1,6 @@
 +++
 title = "The Little Schemer speedy referring note (3/3)"
-lastmod = 2020-02-17T00:13:09+00:00
+lastmod = 2020-02-18T00:37:59+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -226,9 +226,13 @@ function we can describe but can not define. So be careful when using the recurs
 
 ---
 
-From now on, we start to get used to removing `define function-name)` and use lambda
+From now on, we start to learn to remove `(define function-name)` and use lambda
 expression to directly refer to a function. This allows us to save time when we
-want to quickly define something without permanently store it in official environment. The below two functions are identical:
+want to quickly define something without permanently store it in official
+environment.
+
+To start, try understand the below two functions are identical, and try writing a
+named funtion in lambda expression yourself.
 
 {{< highlight scheme >}}
 (define length
@@ -245,8 +249,8 @@ want to quickly define something without permanently store it in official enviro
       (add1 (length (cdr l))))))
 {{< /highlight >}}
 
-It's easy to get confused when there are more layers of lambda expressions involved in a
-function/recursion.It's helpful to think whether the lambda expressions is being
+It's absolutely normal to get confused when there are more layers of lambda expressions involved in a
+function/recursion. It helps to think whether the lambda expressions is being
 merely defined or being defined and called, i.e. counting the parenthesis very
 carefully. The difference between defining and calling is that calling a function has arguments involved:
 
@@ -262,11 +266,15 @@ carefully. The difference between defining and calling is that calling a functio
     arguments-for-f)
 {{< /highlight >}}
 
-The below function change `(length)` a little by calling `(eternity)`
-instead of `(length)` in its recursion. This makes the function only works
-on **null input**, since it will terminate in the `(null?)` predicate without calling the partial
+As you read more, you will understand
+the below example is carefully selected: it achieves a simple job at a time; applying
+it on itself is achieving a simple job on a achieved job; when repeating calling itself,
+it can achieve a almost infinite job loop.
+
+In addition, the function change `(length)` a little by calling `(eternity)`
+instead of `(length)` in its recursion. This makes the function only works on **null input**, since it will terminate in the `(null?)` predicate without calling the partial
 `(eternity)`, otherwise any non-null input will trigger the infinite
-recursion and cause failure by giving no answer. This is essentially how the `(length<=0)` can only determine the length of the empty list. With it, we can further develop an `(length<=1)` which measures the length of list
+recursion and cause failure by giving no answer. This is essentially how the `(length<=0)` can **only** determine the length of the empty list. With it, we can further develop an `(length<=1)` which measures the length of list
 with less than one element:
 
 {{< highlight scheme >}}
@@ -301,7 +309,7 @@ with less than one element:
 {{< figure src="/img/length1.png" >}}
 
 Recursively we can develop `(length<=2)` below. Notice these
-three functions are identical. (We've actually dumped `(define ...)`, the
+three functions are identical. (here we start dumping `(define ...)`, referring the
 length0 and length1 are there only for demonstration purpose).
 
 {{< highlight scheme >}}
@@ -362,14 +370,20 @@ length0 and length1 are there only for demonstration purpose).
       (cdr l2))))))
 {{< /highlight >}}
 
-The above functions show repetitive content along with the length of input list,
-mainly in calling `(length)` part. Normally, we would write and save as a named
-function for calling in the future. **But, if we don't save it,but directly
-address it within other function, or even address itself,  How do we do that?**
+The above functions show repetitive content, aka the `(length)` part is being
+called over and over, working on a shorter and shorter argument. Normally, we would write and save as a named
+function for calling in the future. **But, if we don't save it, instead we want to directly
+address it within other function, or even address itself. How do we do that?**
+You may have realized the motivation of this question, addressing itself withing itself
+is exactly the nature of recursion.
 
 If we can define length abstractly, we can call it to simplify the reptitive procedure.
 This need is particularly necessary when there is going to be many algorithms
-having similar repetitions as `(length<=n)`. So firstly we give (lambda l) a name:
+having similar repetitions as `(length<=n)`.
+
+First we deal with the first question, separating `(eternity)` by calling it
+from argument, see in length<=0. Then we deal the second question, separating
+length0 as "g calling eternity", addressing it through f.
 
 {{< highlight scheme >}}
 ;length<=0
@@ -448,8 +462,8 @@ call it `(mk-length)`, the length functions can be therefore written as:
   (else (add1 (length (cdr l))))))))
 {{< /highlight >}}
 
-The above function of length measuring seems can be used upon any function, since
-it was never really got invoked. So it doesn't really matter if we call `(eternity)`, or
+In the length 0, the actual working part is `((null? l) 0)` and the `(else)` predicate
+was never really got invoked. So in that predicate it doesn't really matter if we call `(eternity)`, or
 even itself `(mk-length)`. Therefore we try further abstract it with this thoughts:
 
 {{< highlight scheme >}}
@@ -489,7 +503,11 @@ The last part in above shows: since the `(eternity)` is now substituted by the
 `(mk-length)`, we can add one more workable layer on `(length0)`. This is achievable by calling the inner most
 function `(mk-length)` with another argument of `(eternity)`.
 
-The exercise in page 166 is:
+The exercise in page 166 will help you on how it works. The instruction can be
+found in the answer of `soegaard` :
+[scheme - Y combinator discussion in "The Little Schemer" - Stack Overflow](https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer?noredirect=1&lq=1)
+
+When running it with stepper in DrRacket, there are 27 steps for a case `(l is (' a b c))`, I only demonstrate 4 steps here
 
 {{< highlight scheme >}}
 ; step0

@@ -2606,9 +2606,13 @@ evaluate =(eternity (quote()))=, which never stops. And this time, it logically
 goes against the hypothesis again. This makes the =(will-stop?)= a
 function we can describe but can not define. So be careful when using the recursion.
 -----
-From now on, we start to get used to removing =define function-name)= and use lambda
+From now on, we start to learn to remove =(define function-name)= and use lambda
 expression to directly refer to a function. This allows us to save time when we
-want to quickly define something without permanently store it in official environment. The below two functions are identical:
+want to quickly define something without permanently store it in official
+environment. 
+
+To start, try understand the below two functions are identical, and try writing a
+named funtion in lambda expression yourself.
 #+begin_src scheme
 (define length
  (lambda (l)
@@ -2623,8 +2627,8 @@ want to quickly define something without permanently store it in official enviro
     (else
       (add1 (length (cdr l))))))
 #+end_src
-It's easy to get confused when there are more layers of lambda expressions involved in a
-function/recursion.It's helpful to think whether the lambda expressions is being
+It's absolutely normal to get confused when there are more layers of lambda expressions involved in a
+function/recursion. It helps to think whether the lambda expressions is being
 merely defined or being defined and called, i.e. counting the parenthesis very
 carefully. The difference between defining and calling is that calling a function has arguments involved:
 #+begin_src scheme
@@ -2638,11 +2642,15 @@ carefully. The difference between defining and calling is that calling a functio
   (lambda (g)...))
     arguments-for-f)
 #+end_src
-The below function change =(length)= a little by calling =(eternity)=
-instead of =(length)= in its recursion. This makes the function only works
-on *null input*, since it will terminate in the =(null?)= predicate without calling the partial
+As you read more, you will understand
+the below example is carefully selected: it achieves a simple job at a time; applying
+it on itself is achieving a simple job on a achieved job; when repeating calling itself,
+it can achieve a almost infinite job loop.
+
+In addition, the function change =(length)= a little by calling =(eternity)=
+instead of =(length)= in its recursion. This makes the function only works on *null input*, since it will terminate in the =(null?)= predicate without calling the partial
 =(eternity)=, otherwise any non-null input will trigger the infinite
-recursion and cause failure by giving no answer. This is essentially how the =(length<=0)= can only determine the length of the empty list. With it, we can further develop an =(length<=1)= which measures the length of list
+recursion and cause failure by giving no answer. This is essentially how the =(length<=0)= can *only* determine the length of the empty list. With it, we can further develop an =(length<=1)= which measures the length of list
 with less than one element: 
 #+begin_src scheme
 ;length<=0
@@ -2675,7 +2683,7 @@ with less than one element:
 [[/img/length1.png]]
 
 Recursively we can develop =(length<=2)= below. Notice these
-three functions are identical. (We've actually dumped =(define ...)=, the
+three functions are identical. (here we start dumping =(define ...)=, referring the
 length0 and length1 are there only for demonstration purpose).
 #+begin_src scheme
 ;length<=2
@@ -2734,14 +2742,20 @@ length0 and length1 are there only for demonstration purpose).
                (cdr l1))))))
       (cdr l2))))))  
 #+end_src
-The above functions show repetitive content along with the length of input list,
-mainly in calling =(length)= part. Normally, we would write and save as a named
-function for calling in the future. *But, if we don't save it,but directly
-address it within other function, or even address itself,  How do we do that?* 
+The above functions show repetitive content, aka the =(length)= part is being
+called over and over, working on a shorter and shorter argument. Normally, we would write and save as a named
+function for calling in the future. *But, if we don't save it, instead we want to directly
+address it within other function, or even address itself. How do we do that?*
+You may have realized the motivation of this question, addressing itself withing itself
+is exactly the nature of recursion. 
 
 If we can define length abstractly, we can call it to simplify the reptitive procedure.
 This need is particularly necessary when there is going to be many algorithms
-having similar repetitions as =(length<=n)=. So firstly we give (lambda l) a name:
+having similar repetitions as =(length<=n)=.
+
+First we deal with the first question, separating =(eternity)= by calling it
+from argument, see in length<=0. Then we deal the second question, separating
+length0 as "g calling eternity", addressing it through f.
 #+begin_src scheme
 ;length<=0
 ((lambda (length)
@@ -2817,8 +2831,8 @@ call it =(mk-length)=, the length functions can be therefore written as:
   (else (add1 (length (cdr l))))))))
 #+end_src
 
-The above function of length measuring seems can be used upon any function, since
-it was never really got invoked. So it doesn't really matter if we call =(eternity)=, or
+In the length 0, the actual working part is =((null? l) 0)= and the =(else)= predicate
+was never really got invoked. So in that predicate it doesn't really matter if we call =(eternity)=, or
 even itself =(mk-length)=. Therefore we try further abstract it with this thoughts:
 #+begin_src scheme
 ; length<=0
@@ -2856,7 +2870,11 @@ The last part in above shows: since the =(eternity)= is now substituted by the
 =(mk-length)=, we can add one more workable layer on =(length0)=. This is achievable by calling the inner most
 function =(mk-length)= with another argument of =(eternity)=.
 
-The exercise in page 166 is:
+The exercise in page 166 will help you on how it works. The instruction can be
+found in the answer of =soegaard= :
+[[https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer?noredirect=1&lq=1][scheme - Y combinator discussion in "The Little Schemer" - Stack Overflow]]
+
+When running it with stepper in DrRacket, there are 27 steps for a case =(l is (' a b c))=, I only demonstrate 4 steps here
 #+begin_src scheme
 ; step0
 (((lambda (mk-length)
