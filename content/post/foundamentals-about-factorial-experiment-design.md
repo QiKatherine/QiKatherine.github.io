@@ -1,7 +1,7 @@
 +++
 title = "Migrating habituated cut copy and paste into Emacs"
 date = 2019-11-14T11:40:00+00:00
-lastmod = 2020-02-18T00:37:58+00:00
+lastmod = 2020-02-19T23:07:49+00:00
 tags = ["Emacs", "Spacemacs"]
 categories = ["TECH"]
 draft = false

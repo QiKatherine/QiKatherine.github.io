@@ -1,6 +1,6 @@
 +++
 title = "The Little Schemer speedy referring note (3/3)"
-lastmod = 2020-02-18T00:37:59+00:00
+lastmod = 2020-02-19T23:07:50+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -507,88 +507,10 @@ The exercise in page 166 will help you on how it works. The instruction can be
 found in the answer of `soegaard` :
 [scheme - Y combinator discussion in "The Little Schemer" - Stack Overflow](https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer?noredirect=1&lq=1)
 
-When running it with stepper in DrRacket, there are 27 steps for a case `(l is (' a b c))`, I only demonstrate 4 steps here
+When running it with stepper in DrRacket, there are 13 steps for a case when `l is
+(' a)`, I only demonstrate major steps here
+![](/img/little.png)
 
 {{< highlight scheme >}}
-; step0
-(((lambda (mk-length)
-    (mk-length mk-length))
-  (lambda (mk-length)
-    (lambda (l)
-      (cond
-       ((null? l) 0)
-       (else
-        (add1
-         ((mk-length mk-length)
-          (cdr l))))))))
- (list 'a 'b 'c))
 
-; step1
-(((lambda (mk-length)
-    (lambda (l)
-      (cond
-       ((null? l) 0)
-       (else
-        (add1
-         ((mk-length mk-length)
-          (cdr l)))))))
-  (lambda (mk-length)
-    (lambda (l)
-      (cond
-       ((null? l) 0)
-       (else
-        (add1
-         ((mk-length mk-length)
-          (cdr l))))))))
- (list 'a 'b 'c))
-
-; step2
-((lambda (l)
-   (cond
-    ((null? l) 0)
-    (else
-     (add1
-      (((lambda (mk-length)
-          (lambda (l)
-            (cond
-             ((null? l) 0)
-             (else
-              (add1
-               ((mk-length
-                 mk-length)
-                (cdr l)))))))
-        (lambda (mk-length)
-          (lambda (l)
-            (cond
-             ((null? l) 0)
-             (else
-              (add1
-               ((mk-length
-                 mk-length)
-                (cdr l))))))))
-       (cdr l))))))
- (list 'a 'b 'c))
-
-; step4
-(cond
- ((null? (list 'a 'b 'c)) 0)
- (else
-  (add1
-   (((lambda (mk-length)
-       (lambda (l)
-         (cond
-          ((null? l) 0)
-          (else
-           (add1
-            ((mk-length mk-length)
-             (cdr l)))))))
-     (lambda (mk-length)
-       (lambda (l)
-         (cond
-          ((null? l) 0)
-          (else
-           (add1
-            ((mk-length mk-length)
-             (cdr l))))))))
-    (cdr (list 'a 'b 'c))))))
 {{< /highlight >}}

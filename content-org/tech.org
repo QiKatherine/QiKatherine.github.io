@@ -2874,89 +2874,12 @@ The exercise in page 166 will help you on how it works. The instruction can be
 found in the answer of =soegaard= :
 [[https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer?noredirect=1&lq=1][scheme - Y combinator discussion in "The Little Schemer" - Stack Overflow]]
 
-When running it with stepper in DrRacket, there are 27 steps for a case =(l is (' a b c))=, I only demonstrate 4 steps here
+When running it with stepper in DrRacket, there are 27 steps for a case =(l is
+(' a b c))=, I only demonstrate 4 steps here
+[[../static/img/little.png]]
+
 #+begin_src scheme
-; step0
-(((lambda (mk-length)
-    (mk-length mk-length))
-  (lambda (mk-length)
-    (lambda (l)
-      (cond
-       ((null? l) 0)
-       (else
-        (add1
-         ((mk-length mk-length)
-          (cdr l))))))))
- (list 'a 'b 'c))
 
-; step1
-(((lambda (mk-length)
-    (lambda (l)
-      (cond
-       ((null? l) 0)
-       (else
-        (add1
-         ((mk-length mk-length)
-          (cdr l)))))))
-  (lambda (mk-length)
-    (lambda (l)
-      (cond
-       ((null? l) 0)
-       (else
-        (add1
-         ((mk-length mk-length)
-          (cdr l))))))))
- (list 'a 'b 'c))
-
-; step2
-((lambda (l)
-   (cond
-    ((null? l) 0)
-    (else
-     (add1
-      (((lambda (mk-length)
-          (lambda (l)
-            (cond
-             ((null? l) 0)
-             (else
-              (add1
-               ((mk-length
-                 mk-length)
-                (cdr l)))))))
-        (lambda (mk-length)
-          (lambda (l)
-            (cond
-             ((null? l) 0)
-             (else
-              (add1
-               ((mk-length
-                 mk-length)
-                (cdr l))))))))
-       (cdr l))))))
- (list 'a 'b 'c))
-
-; step4
-(cond
- ((null? (list 'a 'b 'c)) 0)
- (else
-  (add1
-   (((lambda (mk-length)
-       (lambda (l)
-         (cond
-          ((null? l) 0)
-          (else
-           (add1
-            ((mk-length mk-length)
-             (cdr l)))))))
-     (lambda (mk-length)
-       (lambda (l)
-         (cond
-          ((null? l) 0)
-          (else
-           (add1
-            ((mk-length mk-length)
-             (cdr l))))))))
-    (cdr (list 'a 'b 'c))))))
 #+end_src
 
 #+begin_export scheme
