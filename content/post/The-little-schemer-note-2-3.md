@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (2/3)"
 date = 2019-12-23T01:35:00+00:00
-lastmod = 2020-02-19T23:07:50+00:00
+lastmod = 2020-02-23T23:19:28+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -230,19 +230,19 @@ In the previous chapters, we've seen over and over that a function takes **list
 or atom** as input and returns **list or atom** as output. In this chapter, we
 will be learning how to write a function that takes input and returns
 **functions**. Technically, a digit/atom is a function too, which takes itself as
-argument and returns itself. Taking an naive example, the function1 is a
+argument and returns itself. Taking an naive example, the `(eq?-f)` is a
 functional projection which takes `a` (a constant function) as argument and
-returns function2 (equivelent in concept) as output. It's called currying.
+returns `(eq?-a)` (equivelent in concept) as output. It's called currying.
 
 {{< highlight scheme >}}
-(define function1
-(lambda (a)
- lambda (x)
-  (eq? x a)))
+(define eq?-f)
+ (lambda (a)
+   (lambda (x)
+    (eq? x a))))
 
-(define function2
-(lambda (x)
- (eq? x a))
+(define eq?-a
+ (lambda (x)
+  (eq? x a))
 {{< /highlight >}}
 
 But the functional projection is sometimes more confusing when there are
@@ -344,8 +344,10 @@ rewritten as:
 (define subst (insert-g seqS))
 {{< /highlight >}}
 
-The `(rember)` function can be abstracted by `(insert-g)` too, but using variant
-function requires extra tweak, since the `(rember)` doesn't use arguments _new_:
+The `(rember)` function can be achieved by `(insert-g)` too, but it requires
+extra tweak, since the `(rember)` doesn't use arguments _new_. The `(seqrem)`
+function replaces the old seq's job: it neither cons on left nor right, but only
+retains the third argument, aka `(cdr l)`.
 
 {{< highlight scheme >}}
 ;invariant function with seqrem as place holder
@@ -353,11 +355,19 @@ function requires extra tweak, since the `(rember)` doesn't use arguments _new_:
   (lambda (a l)
     ((insert-g seqrem) #f a l)))
 
-;variant function
+(define insert-g
+  (lambda (seq)
+      (lambda (new old l)
+        (cond
+          ((null? l) '())
+          ((eq? (car l) old)
+           (seq new old (cdr l)))
+          (else
+            (cons (car l) ((insert-g seq) new old (cdr l))))))))
+
 (define seqrem
   (lambda (new old l)
     l))
-
 ;(yyy 'sausage '(pizza with sausage and bacon)) -> '(pizza with and bacon)
 {{< /highlight >}}
 

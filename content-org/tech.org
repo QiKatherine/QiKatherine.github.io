@@ -2061,18 +2061,18 @@ In the previous chapters, we've seen over and over that a function takes *list
 or atom* as input and returns *list or atom* as output. In this chapter, we
 will be learning how to write a function that takes input and returns
 *functions*. Technically, a digit/atom is a function too, which takes itself as
-argument and returns itself. Taking an naive example, the function1 is a
+argument and returns itself. Taking an naive example, the =(eq?-f)= is a
 functional projection which takes =a= (a constant function) as argument and
-returns function2 (equivelent in concept) as output. It's called currying. 
+returns =(eq?-a)= (equivelent in concept) as output. It's called currying. 
 #+begin_src scheme
-(define function1
-(lambda (a)
- lambda (x)
-  (eq? x a)))
+(define eq?-f)
+ (lambda (a)
+   (lambda (x)
+    (eq? x a))))
 
-(define function2
-(lambda (x)
- (eq? x a))
+(define eq?-a
+ (lambda (x)
+  (eq? x a))
 #+end_src
 
 But the functional projection is sometimes more confusing when there are
@@ -2170,19 +2170,29 @@ rewritten as:
 (define subst (insert-g seqS))
 #+end_src
 
-The =(rember)= function can be abstracted by =(insert-g)= too, but using variant
-function requires extra tweak, since the =(rember)= doesn't use arguments /new/:
+The =(rember)= function can be achieved by =(insert-g)= too, but it requires
+extra tweak, since the =(rember)= doesn't use arguments /new/. The =(seqrem)=
+function replaces the old seq's job: it neither cons on left nor right, but only
+retains the third argument, aka =(cdr l)=. 
 #+begin_src scheme
 ;invariant function with seqrem as place holder
 (define yyy
   (lambda (a l)
     ((insert-g seqrem) #f a l)))
 
-;variant function
+(define insert-g
+  (lambda (seq)
+      (lambda (new old l)
+        (cond
+          ((null? l) '())
+          ((eq? (car l) old)
+           (seq new old (cdr l)))
+          (else
+            (cons (car l) ((insert-g seq) new old (cdr l))))))))
+
 (define seqrem
   (lambda (new old l)
     l))
-
 ;(yyy 'sausage '(pizza with sausage and bacon)) -> '(pizza with and bacon)
 #+end_src
 
@@ -2642,10 +2652,16 @@ carefully. The difference between defining and calling is that calling a functio
   (lambda (g)...))
     arguments-for-f)
 #+end_src
+A more general case of calling with defining in lambda expression is called the
+omega combinator. It has shape in the below picture and more information can be
+found at [[https://en.wikipedia.org/wiki/Lambda_calculus#Standard_terms][Lambda calculus - Wikipedia]]
+[[../static/img/little2.png]]
+
+
 As you read more, you will understand
 the below example is carefully selected: it achieves a simple job at a time; applying
 it on itself is achieving a simple job on a achieved job; when repeating calling itself,
-it can achieve a almost infinite job loop.
+it can achieve a almost infinite loop.
 
 In addition, the function change =(length)= a little by calling =(eternity)=
 instead of =(length)= in its recursion. This makes the function only works on *null input*, since it will terminate in the =(null?)= predicate without calling the partial
@@ -2875,25 +2891,38 @@ found in the answer of =soegaard= :
 [[https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer?noredirect=1&lq=1][scheme - Y combinator discussion in "The Little Schemer" - Stack Overflow]]
 
 When running it with stepper in DrRacket, there are 27 steps for a case =(l is
-(' a b c))=, I only demonstrate 4 steps here
+(' a b c))=, I only demonstrate 4 steps here (press ctrl and + to see the enlarged image)
+
 [[../static/img/little.png]]
-
+You can try to play with longer list, such as this:
 #+begin_src scheme
-
+(((lambda (mk-length)
+    (mk-length mk-length))
+  (lambda (mk-length)
+    (lambda (l)
+      (cond
+        ((null? l) 0 )
+        (else (add1
+               ((mk-length mk-length)
+                (cdr l))))))))
+ '(a b c))
 #+end_src
+You would realize that this is just more recurrences of that "bear in mind"
+picture, aka calling =(mk-length mk-length)= one more time before applying a
+shorter candidate list, until the =(cdr l)= runs out of atom. In the end, the null
+list becomes the termination condition, without triggering it, we will go stack overflow by calling
+=(mk-length mk-length)= infinitely.
 
+After undertanding the above code, the author finanlly gets to reform this
+procedure in to Y combinator, a function without defining name and so pithy that
+can be called repetitively by itself as many times as we want.
+
+If you find it confusing, read this preview of omega combinator in the first
+answer of this post:[[https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer/11864862#11864862][scheme - Y combinator discussion in "The Little Schemer" -
+Stack Overflow]]
+
+ 
 #+begin_export scheme
-(define (map f xs)
-  (if (empty? xs) '()
-      (cons (f (first xs)) (map f (rest xs)))))
-(map (λ (x) (+ x 1)) '(1 2 3))
-
-(define (map-k f xs k)
-  (if (empty? xs) (k '())
-      (f (first xs) (λ (v) (map-k f (rest xs)
-                                  (λ (rest-v) (k (cons v rest-v))))))))
-(map-k (λ (x k) (k (+ x 1))) '(1 2 3) (λ (x) x))
-
 
 #+end_export
 

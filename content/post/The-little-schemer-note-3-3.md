@@ -1,6 +1,6 @@
 +++
 title = "The Little Schemer speedy referring note (3/3)"
-lastmod = 2020-02-19T23:07:50+00:00
+lastmod = 2020-02-23T23:19:28+00:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -266,10 +266,15 @@ carefully. The difference between defining and calling is that calling a functio
     arguments-for-f)
 {{< /highlight >}}
 
+A more general case of calling with defining in lambda expression is called the
+omega combinator. It has shape in the below picture and more information can be
+found at [Lambda calculus - Wikipedia](https://en.wikipedia.org/wiki/Lambda%5Fcalculus#Standard%5Fterms)
+![](/img/little2.png)
+
 As you read more, you will understand
 the below example is carefully selected: it achieves a simple job at a time; applying
 it on itself is achieving a simple job on a achieved job; when repeating calling itself,
-it can achieve a almost infinite job loop.
+it can achieve a almost infinite loop.
 
 In addition, the function change `(length)` a little by calling `(eternity)`
 instead of `(length)` in its recursion. This makes the function only works on **null input**, since it will terminate in the `(null?)` predicate without calling the partial
@@ -507,10 +512,35 @@ The exercise in page 166 will help you on how it works. The instruction can be
 found in the answer of `soegaard` :
 [scheme - Y combinator discussion in "The Little Schemer" - Stack Overflow](https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer?noredirect=1&lq=1)
 
-When running it with stepper in DrRacket, there are 13 steps for a case when `l is
-(' a)`, I only demonstrate major steps here
+When running it with stepper in DrRacket, there are 27 steps for a case `(l is
+(' a b c))`, I only demonstrate 4 steps here (press ctrl and + to see the enlarged image)
+
 ![](/img/little.png)
+You can try to play with longer list, such as this:
 
 {{< highlight scheme >}}
-
+(((lambda (mk-length)
+    (mk-length mk-length))
+  (lambda (mk-length)
+    (lambda (l)
+      (cond
+        ((null? l) 0 )
+        (else (add1
+               ((mk-length mk-length)
+                (cdr l))))))))
+ '(a b c))
 {{< /highlight >}}
+
+You would realize that this is just more recurrences of that "bear in mind"
+picture, aka calling `(mk-length mk-length)` one more time before applying a
+shorter candidate list, until the `(cdr l)` runs out of atom. In the end, the null
+list becomes the termination condition, without triggering it, we will go stack overflow by calling
+`(mk-length mk-length)` infinitely.
+
+After undertanding the above code, the author finanlly gets to reform this
+procedure in to Y combinator, a function without defining name and so pithy that
+can be called repetitively by itself as many times as we want.
+
+If you find it confusing, read this preview of omega combinator in the first
+answer of this post:[scheme - Y combinator discussion in "The Little Schemer" -
+Stack Overflow](https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer/11864862#11864862)
