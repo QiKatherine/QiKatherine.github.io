@@ -2429,7 +2429,7 @@ is a function that takes a function as an argument and returns a function.
 Taking factorial as an example, we deduce a function G where G(factorial)=factorial.
 Let's learn how to deduce step by step.
  
-*** Chapter 9 and Again and Again and Again
+*** TODO Chapter 9 and Again and Again and Again
 The key of writing recursion is making sure there is =termination condition=.
 That's the basic requirement for function in both computation and mathmatics
 area: a function is a mapping procedure which takes in an argument and produces
@@ -2925,4 +2925,20 @@ Stack Overflow]]
 #+begin_export scheme
 
 #+end_export
+** DONE Detailed key proof of ANOVA test: SST=SSE+SSB      :@MATH:statistics:
+   CLOSED: [2020-03-09 Mon 00:07]
+   :PROPERTIES:
+:EXPORT_FILE_NAME: dd
+:END:
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2020-03-09 Mon 00:07]
+   :END:
 
+When I review the prove of the most foundamental knowledge of ANOVA test, I
+notice that the notation is not quite consistent across different materials,
+especially for non-balanced dataset expression. Some of the prove of SST=SSE+SSB
+is missing steps or gets too complex in polynomial expansions. So here I provide
+a note with full proof with consistent notations.
+[[/img/anova1.jpg]]
+
+[[/img/anova2.jpg]]
