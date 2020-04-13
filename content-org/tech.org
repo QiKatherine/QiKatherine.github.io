@@ -2936,7 +2936,7 @@ Stack Overflow]]
 
 *** Background
 Note: the aim of this article is to provide a detailed proof of ANOVA foundation with full notation,
-not to explain ANOVA. More explaintation can be found in the Youtube link.
+not to explain ANOVA. More explaintation can be found in the Youtube link.A
 
 The ANOVA test is to use (rigorous mathmatical based) calculation to infer
 whether there are differences in performance/data for different groups/treatment.
@@ -2966,5 +2966,76 @@ So here I provide a note with full proof with consistent notations.
 [[/img/anova1.jpg]]
 *** SST = SSB + SSE
 [[/img/anova2.jpg]]
+** TODO Mathmatical similarity: measurements of distance in machine learning :@MATH:statistics: 
+   :PROPERTIES:
+   :EXPORT_FILE_NAME:
+   :END:
+ The core purpose of classification or causuality inference is differential
+ diagnose, based the data we have. For example, in the behavioural
+ classification, age, gender, nationality consist of a person's demographic file
+ which can be seen as a point in a three dimentional plot. But how to draw a
+ line that discriminately tells one person from its neighbour points requires lots
+ of personal judgement. Sometimes, we want the numbers precisely represent the
+ position of each point, but in more case, we deliberately use alternative ways
+ to discreminate them. There are different type of way to mathmatically define
+ these distances, but what makes a measurement great?
 
+One of a common thought is that, two close points should be 
 
+On the other hand, using one set of system for variables might not always be
+ideal. For example, we want to use two 
+** DONE Building personal website with Hugo
+   CLOSED: [2020-04-13 Mon 22:57]
+   :PROPERTIES:
+:EXPORT_FILE_NAME: building-personal-website-with-hugo
+:END:
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2020-04-13 Mon 22:57]
+   :END:
+This is a minimum todo list for one to use a static website generator to build a
+personal website. The are a number of them such as Jekyll, Hexo, Octopress, World press,
+Hugo, etc. I have tried all of the above and personally prefer Hugo for speed and
+flexibility and compatibility with my Emacs. 
+
+If you are interested in building a personal wiki, academic profile, home
+cooking recipe album, small business official website, building and managing a
+website by these types of generator facilitates you with most flexibility with the
+minimum cost. 
+
+By most flexibility, I mean you can change the look of your website any time
+with a number of fantastic designs, and upload articles/photo whenever you want.
+Check out the hundreds of themes Hugo:
+[[https://themes.gohugo.io/][Complete List | Hugo Themes]]
+
+By minimum expenditure, I mean zero cost, unless you want to get a customized
+website name like /awesome.ai/ or rent some cloud based services to boost up
+your website.  
+
+To do:
+
+*** 1. Register a GitHub account and install local terminal.
+[[https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners][An Intro to Git and GitHub for Beginners (Tutorial)]]
+
+This is where you host your website for others to visit with the minimum cost. Purchasing personal server/VPS, using Gitlab or other cloud based service has its own benefit, but requires some more work or expenditure. 
+
+Installing local terminal to push your local edited website content to remote
+server. For example, if you are using Windows, install git bash from: [[https://gitforwindows.org/][Git for Windows]] 
+
+*** 2. Download Hugo executable and installment. 
+Everything you need to know is here, for all types of operating systems:
+[[https://gohugo.io/getting-started/installing/][Install Hugo | Hugo]]
+
+If you are a proficient command line user of Linux/macOS, =(homebrew)= it!
+
+If you are a windows user and not sure which one to follow, the video in above
+link should be sufficient. The download link he talks about is in *Less-technical Users* section. But make sure you update the environment variable. This
+is where your git bash could find the Hugo binary and access to it.
+[[https://docs.oracle.com/en/database/oracle/r-enterprise/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html#GUID-DD6F9982-60D5-48F6-8270-A27EC53807D0][Create and Modify Environment Variables on Windows]]
+
+*** 3. Download a Hugo theme.
+You could take your time browse the Hugo theme shop and choose a theme according
+to your need. There are demos, which are real websites people build with the
+corresponding theme. Don't just look the front page, make sure you like the
+structure, navigation style and everything since there are so many options!
+
+You can change easily later if you want different things every now and then. 
