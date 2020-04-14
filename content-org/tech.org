@@ -3012,6 +3012,8 @@ website name like /awesome.ai/ or rent some cloud based services to boost up
 your website.  
 
 To do:
+The process can be roughly showed in this pic:
+[[/img/hugo.png]]
 
 *** 1. Register a GitHub account and install local terminal.
 [[https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners][An Intro to Git and GitHub for Beginners (Tutorial)]]
@@ -3020,6 +3022,10 @@ This is where you host your website for others to visit with the minimum cost. P
 
 Installing local terminal to push your local edited website content to remote
 server. For example, if you are using Windows, install git bash from: [[https://gitforwindows.org/][Git for Windows]] 
+
+/You don't have to learn all the git command unless you want to contribute to software/theme development. Building website do not refer those information. Only minimum
+experience with command is sufficient./
+
 
 *** 2. Download Hugo executable and installment. 
 Everything you need to know is here, for all types of operating systems:
@@ -3032,10 +3038,37 @@ link should be sufficient. The download link he talks about is in *Less-technica
 is where your git bash could find the Hugo binary and access to it.
 [[https://docs.oracle.com/en/database/oracle/r-enterprise/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html#GUID-DD6F9982-60D5-48F6-8270-A27EC53807D0][Create and Modify Environment Variables on Windows]]
 
-*** 3. Download a Hugo theme.
+*** 3. Download and implement a Hugo theme.
 You could take your time browse the Hugo theme shop and choose a theme according
-to your need. There are demos, which are real websites people build with the
+to your needs. There are demos, which are real websites that people build with the
 corresponding theme. Don't just look the front page, make sure you like the
 structure, navigation style and everything since there are so many options!
 
 You can change easily later if you want different things every now and then. 
+
+Step by Step instructions to download and implement a theme:
+[[https://www.youtube.com/watch?v=L34JL_3Jkyc][Installing & Using Themes | Hugo - Static Site Generator | Tutorial 5 - YouTube]]
+Notice that he is using a macOS, if you are using Windows, the command line tool
+he is using, is the Git bash in your environment.
+
+To rewrite the great theme template to your website, all you need to do is modifying
+the template information in *config.toml* file. For example, section two of this
+article gives an instruction of changing config.toml in theme casper [[https://brent-li.github.io/post/build-personal-site-with-hugo/][][[https://brent-li.github.io/post/build-personal-site-with-hugchange themes]].
+
+*** 4. Adding articles and local test
+By the end of the third step, you should have a nice empty website in your name
+with your photo. More you can do is adding articles. The article are all saved
+in post folder, where you could initiate with:
+#+begin_src shell
+cd myblog
+hugo new post/name-of-new-article.md
+#+end_src
+
+
+
+*** 5. Pushing work to remote server.
+
+
+*** 6. More to do 
+So far the minimum work that makes a sustainable website is done. Of course
+there are more work to escalate the efficiency and fun.  
