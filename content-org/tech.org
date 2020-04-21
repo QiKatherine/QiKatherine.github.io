@@ -19,13 +19,13 @@
 My personal experience of blogging with Emacs/Spacemacs and plug-in ox-hugo, along with some explanation of Hugo's working structure.
 #+end_description
 
-There have been many good articles talking about using ~ox-hugo~ to aid
-efficient blog writing in Emacs/Spacemacs. I read these articles carefully
+There have been many good articles talking about using ~ox-hugo~ to help with
+efficient blog-writing in Emacs/Spacemacs. I read these articles carefully
 several times and feel pretty confident using ox-hugo, so I would strongly
 recommend you give them a look:
 
 [[/img/Hugo blogging with Ox-hugo 8.png]]
-This is true for many cases, but no, not for Hugo or ~ox-hugo~. They are amazing official documentation! (Mr.Kaushal I know you occasionally search ~ox-hugo~ related articles in all different languages. If you happen to read this, thank you!)
+This is true for many cases, but no, not for Hugo or ~ox-hugo~. Ox-hugo has an amazing official documentation! (Mr.Kaushal I know you occasionally search ~ox-hugo~ related articles in all different languages. If you happen to read this, thank you!)
 
 • [[https://ox-hugo.scripter.co/][ox-hugo official documentation]] is very well written. The author carefully demonstrates not only all basics of using ~ox-hugo~, but also some killer choices to improvise. 
 
@@ -33,7 +33,11 @@ This is true for many cases, but no, not for Hugo or ~ox-hugo~. They are amazing
 
 • [[https://www.kengrimes.com/ox-hugo-tutorial/][Ken's ox-hugo tutorial]] is the source of some of my sections mentioned below, which you can see the snapshots are directly from Ken's blog. I re-edit it to help understand the logic of the section tree. 
  
-Most content comes from the Hugo official documentation along with these articles. I noticed that there had been quite a few Chinese articles talking about Hugo and ~ox-hugo~, so I am writing this in Chinese.
+The content of this article comes from the Hugo official documentation along
+with the above articles. I am writing in Chinese because I noticed that there
+haven't been many Chinese articles talking about Hugo and ~ox-hugo~. If you are
+proficient English readers, the official documentation and links above should be more than
+enough to get things done.
 
 我放弃 Hexo，安装 Hugo 的最初目的还是想用它配合 Emacs-org-mode 来写博客记笔记。灵感来自[[https://zilongshanren.com/post/move-from-hexo-to-hugo/][子龙山人]]和[[https://www.xianmin.org/post/ox-hugo/][贤民]]两位老师的博客，具体的安装和使用心得二位已经介绍的非常详细，仔细读完会受益良多。本着不再重复造轮子的原则，这篇文章我想简单写写学习中遇到到有用的东西：Hugo 原生的结构设计；Hugo 与 ~ox-hugo~ 的对接原理；在 Emacs/Spacemacs 使用 ox-hugo 帮助我们在 org-mode 以极高的效率写博客并发表。
 
@@ -46,10 +50,11 @@ Most content comes from the Hugo official documentation along with these article
 
 *** 0. Org markup syntax and killer reference card
 -----
-在写了 7 篇文章以后，其实我还是 org-mode 语法记忆困难户。官网给了零星几个常见的语法
+我对 org-mode 语法细节记忆仍然感觉十分困难。官网给了零星几个常见的语法
 参考，但是 org-mode 能定制格式花样的远不止于此。我在此给出一个终极解决方式：参考网站原文的
 org file。网站 org 源码从 org markup 形式到 hugo section 的 front information 都有涵盖，在网站
 看到想要的格式去原文直接搜索照搬即可：
+Most efficient way to use org syntax is digging source samples from the official website:
 [[https://ox-hugo.scripter.co/doc/hugo-section/][Full website]]
 [[https://raw.githubusercontent.com/kaushalmodi/ox-hugo/master/doc/ox-hugo-manual.org][Full website source file]]
 
@@ -113,7 +118,6 @@ org-mode 特色的命名方式设计的变量，类似的语法在其他 org 文
 看到。而 front-matter 这些变量
 在 markdown，网页 config file 等其它文件里都有。只是 ~:PROPERTIES:~ 这种表达形式
 是 ox-hugo 特色写法。换做 org 支持的另一种 projectile 导出 HTML 的 front matter 可能是这样:base-directory "~/Dropbox/org/blog/".
-
 
 *** 3. Content type
 -----
@@ -2976,14 +2980,15 @@ So here I provide a note with full proof with consistent notations.
  which can be seen as a point in a three dimentional plot. But how to draw a
  line that discriminately tells one person from its neighbour points requires lots
  of personal judgement. Sometimes, we want the numbers precisely represent the
- position of each point, but in more case, we deliberately use alternative ways
- to discreminate them. There are different type of way to mathmatically define
+ position of each point, but in more case, we choose special metrics or extra
+ transformation in order to better discriminate the data. There are different type of way to mathmatically define
  these distances, but what makes a measurement great?
 
 One of a common thought is that, two close points should be 
 
 On the other hand, using one set of system for variables might not always be
 ideal. For example, we want to use two 
+
 ** DONE Building personal website with Hugo in one hour :@TECH:
    CLOSED: [2020-04-13 Mon 22:57]
    :PROPERTIES:
@@ -3033,7 +3038,6 @@ server. For example, if you are using Windows, install git bash from: [[https://
 
 /You don't have to learn all the git command unless you want to contribute to software/theme development. Building website do not refer those information. Only minimum
 experience with command is sufficient./
-
 
 *** 2. Download Hugo executable and installment. 
 Everything you need to know is here, for all types of operating systems:
@@ -3142,3 +3146,6 @@ plug-in can help achieve.
 (6). Search Engine Optimization
 
 (7). Redevelopment of website theme
+
+(8). Emacs users with ox-hugo
+

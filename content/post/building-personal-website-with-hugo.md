@@ -1,7 +1,7 @@
 +++
 title = "Building personal website with Hugo in one hour"
 date = 2020-04-13T22:57:00+01:00
-lastmod = 2020-04-19T02:48:21+01:00
+lastmod = 2020-04-22T00:06:06+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -125,8 +125,8 @@ git push -u origin master
 
 Unless you want to giving version control, not only for your website, but also for the
 source code. Then you are gonna have to do some work because there are many ways
-to achieve. I personally use two branches (dev for source code, and master for /public) to manage because I prefer to keep
-things intact.
+to achieve. I personally use two branches (dev for source code, and master for
+/public) to manage because I prefer to keep codes intact with non-bloat management.
 
 
 ## 6. More to do {#6-dot-more-to-do}
@@ -158,6 +158,7 @@ Chinese instruction:
 [Hugo中使用Google Analytics · 零壹軒·笔记](https://note.qidong.name/2017/07/05/google-analytics-in-hugo/)
 
 (3). Adding Disqus for visitor to comments
+
 The website we generate is static website, which means generally the interactive
 operations like searching/chatting/commenting is not supported. But there are
 plug-in can help achieve.
@@ -169,3 +170,5 @@ plug-in can help achieve.
 (6). Search Engine Optimization
 
 (7). Redevelopment of website theme
+
+(8). Emacs users with ox-hugo

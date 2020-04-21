@@ -2,20 +2,20 @@
 title = "Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】"
 summary = "My personal experience of blogging with Emacs/Spacemacs and plug-in ox-hugo, along with some explanation of Hugo's working structure."
 date = 2019-07-16T01:03:00+01:00
-lastmod = 2020-04-19T02:48:18+01:00
+lastmod = 2020-04-22T00:06:03+01:00
 tags = ["Hugo", "Ox-hugo"]
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
 +++
 
-There have been many good articles talking about using `ox-hugo` to aid
-efficient blog writing in Emacs/Spacemacs. I read these articles carefully
+There have been many good articles talking about using `ox-hugo` to help with
+efficient blog-writing in Emacs/Spacemacs. I read these articles carefully
 several times and feel pretty confident using ox-hugo, so I would strongly
 recommend you give them a look:
 
 ![](/img/Hugo blogging with Ox-hugo 8.png)
-This is true for many cases, but no, not for Hugo or `ox-hugo`. They are amazing official documentation! (Mr.Kaushal I know you occasionally search `ox-hugo` related articles in all different languages. If you happen to read this, thank you!)
+This is true for many cases, but no, not for Hugo or `ox-hugo`. Ox-hugo has an amazing official documentation! (Mr.Kaushal I know you occasionally search `ox-hugo` related articles in all different languages. If you happen to read this, thank you!)
 
 • [ox-hugo official documentation](https://ox-hugo.scripter.co/) is very well written. The author carefully demonstrates not only all basics of using `ox-hugo`, but also some killer choices to improvise.
 
@@ -23,7 +23,11 @@ This is true for many cases, but no, not for Hugo or `ox-hugo`. They are amazing
 
 • [Ken's ox-hugo tutorial](https://www.kengrimes.com/ox-hugo-tutorial/) is the source of some of my sections mentioned below, which you can see the snapshots are directly from Ken's blog. I re-edit it to help understand the logic of the section tree.
 
-Most content comes from the Hugo official documentation along with these articles. I noticed that there had been quite a few Chinese articles talking about Hugo and `ox-hugo`, so I am writing this in Chinese.
+The content of this article comes from the Hugo official documentation along
+with the above articles. I am writing in Chinese because I noticed that there
+haven't been many Chinese articles talking about Hugo and `ox-hugo`. If you are
+proficient English readers, the official documentation and links above should be more than
+enough to get things done.
 
 我放弃 Hexo，安装 Hugo 的最初目的还是想用它配合 Emacs-org-mode 来写博客记笔记。灵感来自[子龙山人](https://zilongshanren.com/post/move-from-hexo-to-hugo/)和[贤民](https://www.xianmin.org/post/ox-hugo/)两位老师的博客，具体的安装和使用心得二位已经介绍的非常详细，仔细读完会受益良多。本着不再重复造轮子的原则，这篇文章我想简单写写学习中遇到到有用的东西：Hugo 原生的结构设计；Hugo 与 `ox-hugo` 的对接原理；在 Emacs/Spacemacs 使用 ox-hugo 帮助我们在 org-mode 以极高的效率写博客并发表。
 
@@ -38,8 +42,9 @@ Most content comes from the Hugo official documentation along with these article
 
 ---
 
-在写了 7 篇文章以后，其实我还是 org-mode 语法记忆困难户。官网给了零星几个常见的语法参考，但是 org-mode 能定制格式花样的远不止于此。我在此给出一个终极解决方式：参考网站原文的
+我对 org-mode 语法细节记忆仍然感觉十分困难。官网给了零星几个常见的语法参考，但是 org-mode 能定制格式花样的远不止于此。我在此给出一个终极解决方式：参考网站原文的
 org file。网站 org 源码从 org markup 形式到 hugo section 的 front information 都有涵盖，在网站看到想要的格式去原文直接搜索照搬即可：
+Most efficient way to use org syntax is digging source samples from the official website:
 [Full website](https://ox-hugo.scripter.co/doc/hugo-section/)
 [Full website source file](https://raw.githubusercontent.com/kaushalmodi/ox-hugo/master/doc/ox-hugo-manual.org)
 
