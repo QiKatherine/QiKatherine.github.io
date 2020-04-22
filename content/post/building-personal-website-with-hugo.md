@@ -1,7 +1,7 @@
 +++
 title = "Building personal website with Hugo in one hour"
 date = 2020-04-13T22:57:00+01:00
-lastmod = 2020-04-22T00:06:06+01:00
+lastmod = 2020-04-22T03:27:23+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -79,9 +79,15 @@ Step by Step instructions to download and implement a theme:
 Notice that he is using a macOS, if you are using Windows, the command line tool
 he is using, is the Git bash in your environment.
 
-To rewrite the great theme template to your website, all you need to do is modifying
-the template information in **config.toml** file. For example, section two of this
-article gives an instruction of changing config.toml in theme casper [用Hugo搭建个人网站 · 李子峰的Github Page](https://brent-li.github.io/post/build-personal-site-with-hugo/)
+If you are happy with the way domo site looks like, the easiest way is just to copy `(content, static,
+config.toml)` from `themes/your-theme/(exampleSite)` and paste them with replacement to
+home file. To rewrite the great theme template to your website, all you need to do is modifying
+the template information in **config.toml** file.
+
+Example of themes:
+Casper [用Hugo搭建个人网站 · 李子峰的Github Page](https://brent-li.github.io/post/build-personal-site-with-hugo/)
+
+LeaveIt <https://mogeko.me/2018/018/>
 
 
 ## 4. Adding articles and local test {#4-dot-adding-articles-and-local-test}
