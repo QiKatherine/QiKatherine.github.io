@@ -876,7 +876,7 @@ https://github.com/]]
 #+MACRO: color @@HTML:<span style="color:$1">$2</span>
 I have written a seperate article of Anki in this blog:
 
-** DONE Using Anki-editor to build flashcard in Org-mode 【用 Anki-editor 在 org-mode 中生成复杂记忆卡片】 :@TECH:windows:org_mode:Anki:
+** DONE Using Anki-editor to build flashcard in Emacs Org-mode 【用 Anki-editor 在 Emacs Org-mode 中生成复杂记忆卡片】 :@TECH:windows:org_mode:Anki:Emacs:
    CLOSED: [2019-09-30 Mon 23:54]
    :PROPERTIES:
    :EXPORT_FILE_NAME: using-anki-editor-to-build-flashcard-in-org-mode
