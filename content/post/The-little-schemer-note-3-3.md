@@ -1,6 +1,6 @@
 +++
 title = "The Little Schemer speedy referring note (3/3)"
-lastmod = 2020-04-22T03:27:23+01:00
+lastmod = 2020-05-11T02:03:25+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -23,7 +23,7 @@ Taking factorial as an example, we deduce a function G where G(factorial)=factor
 Let's learn how to deduce step by step.
 
 
-## <span class="org-todo todo TODO">TODO</span> Chapter 9 and Again and Again and Again {#chapter-9-and-again-and-again-and-again}
+## Chapter 9 and Again and Again and Again {#chapter-9-and-again-and-again-and-again}
 
 The key of writing recursion is making sure there is `termination condition`.
 That's the basic requirement for function in both computation and mathmatics

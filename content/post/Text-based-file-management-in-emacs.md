@@ -2,7 +2,7 @@
 title = "Text based file management in Emacs 【Emacs 文本文件管理】"
 summary = "Overview of text process tools in org-mode."
 date = 2019-09-22T23:56:00+01:00
-lastmod = 2020-04-22T03:27:21+01:00
+lastmod = 2020-05-11T02:03:17+01:00
 draft = false
 image = "img/111.jpg"
 +++
@@ -119,7 +119,7 @@ In this case there are lots of software you can use to illustrate the in-file
 structure.
 
 Check this:
-[Intro to Mindmap, Gantt Chart, Graphviz - http://ergoemacs.org/](http://ergoemacs.org/misc/mindmap%5Fgantt%5Fgraphviz.hrequest json-mode all-the-icons-dired edit-indirecttml)
+[Intro to Mindmap, Gantt Chart, Graphviz - http://ergoemacs.org/](http://ergoemacs.org/misc/mindmap%5Fgantt%5Fgraphviz.hrequest%20json-mode%20all-the-icons-dired%20edit-indirecttml)
 
 
 ## 3. Knowledge graph {#3-dot-knowledge-graph}

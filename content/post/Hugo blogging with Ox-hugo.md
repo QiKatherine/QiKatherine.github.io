@@ -2,7 +2,7 @@
 title = "Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】"
 summary = "My personal experience of blogging with Emacs/Spacemacs and plug-in ox-hugo, along with some explanation of Hugo's working structure."
 date = 2019-07-16T01:03:00+01:00
-lastmod = 2020-04-22T03:27:20+01:00
+lastmod = 2020-05-11T02:03:07+01:00
 tags = ["Hugo", "Ox-hugo"]
 categories = ["TECH"]
 draft = false
@@ -35,15 +35,18 @@ enough to get things done.
 [Why ox-hugo? — ox-hugo - Org to Hugo exporter - https://ox-hugo.scripter.co/](https://ox-hugo.scripter.co/doc/why-ox-hugo/)
 
 这样的结构配合上一些 Emacs 自带的 killer 功能例如 `writeroom-mode`,
-`org-tree-to-indent-buffer` , `predictive` 英文补全, `org-capture` 一键捕获，能瞬间让写作如虎添翼。
+`org-tree-to-indent-buffer` , `predictive` 英文补全, `org-capture` 一键捕获，能瞬
+间让写作如虎添翼。
 
 
 ## 0. Org markup syntax and killer reference card {#0-dot-org-markup-syntax-and-killer-reference-card}
 
 ---
 
-我对 org-mode 语法细节记忆仍然感觉十分困难。官网给了零星几个常见的语法参考，但是 org-mode 能定制格式花样的远不止于此。我在此给出一个终极解决方式：参考网站原文的
-org file。网站 org 源码从 org markup 形式到 hugo section 的 front information 都有涵盖，在网站看到想要的格式去原文直接搜索照搬即可：
+我对 org-mode 语法细节记忆仍然感觉十分困难。官网给了零星几个常见的语法
+参考，但是 org-mode 能定制格式花样的远不止于此。我在此给出一个终极解决方式：参考网站原文的
+org file。网站 org 源码从 org markup 形式到 hugo section 的 front information 都有涵盖，在网站
+看到想要的格式去原文直接搜索照搬即可：
 Most efficient way to use org syntax is digging source samples from the official website:
 [Full website](https://ox-hugo.scripter.co/doc/hugo-section/)
 [Full website source file](https://raw.githubusercontent.com/kaushalmodi/ox-hugo/master/doc/ox-hugo-manual.org)
@@ -108,7 +111,10 @@ ox-hugo"有新的标题和内容需要去导出"。
 接下来这个问题可能对多大多数前端 coder 和 Emacs 熟练手都不是问题，但是这两个段头部代码被我着实混淆了一阵：
 
 通用 Front matter 主管面向一个 article 内部的性质设置，例如写作作者，写作日期，写作 tag。Heading information 例如 `#+hugo_base_dir` 的概念局限于 `ox-hugo` 里，是遵从
-org-mode 特色的命名方式设计的变量，类似的语法在其他 org 文章的管理信息中也可以看到。而 front-matter 这些变量在 markdown，网页 config file 等其它文件里都有。只是 `:PROPERTIES:` 这种表达形式是 ox-hugo 特色写法。换做 org 支持的另一种 projectile 导出 HTML 的 front matter 可能是这样:base-directory "~/Dropbox/org/blog/".
+org-mode 特色的命名方式设计的变量，类似的语法在其他 org 文章的管理信息中也可以
+看到。而 front-matter 这些变量
+在 markdown，网页 config file 等其它文件里都有。只是 `:PROPERTIES:` 这种表达形式
+是 ox-hugo 特色写法。换做 org 支持的另一种 projectile 导出 HTML 的 front matter 可能是这样:base-directory "~/Dropbox/org/blog/".
 
 
 ## 3. Content type {#3-dot-content-type}
@@ -120,11 +126,15 @@ Content type 就是一系列不同的表达式样（layout），根据我们指�
 Hugo 认为每个栏目最好只做同一件事情，例如照片专栏只发发照片，post 专栏集中发文章。所以除非我们自定义，hugo 指定每个栏目的子单元都会自动继承一些此专栏 pre-defined 的特性，这样能最大限度的重复使用一个定义好的栏目，同时尽量减小‘config 每个栏目’工作。
 
 设定 content type: 只需在源文件的头部引用 hugo 提供的 heading
-information/metadata information（即 front matter）即可，能迅速方便的修改一两个页面的 layout。如果不能满足需求，可用 hugo 提供的自定义设置 archetypes，按照 hugo 指定的结构组合方式，编写正确的\_index.md 文件拼接好一个网站的
+information/metadata information（即 front matter）即可，能迅速方便的修改一
+两个页面的 layout。如果不能满足需求，可用 hugo 提供的自定义设置 archetypes，
+按照 hugo 指定的结构组合方式，编写正确的\_index.md 文件拼接好一个网站的
 layout 即可。
 
-	如果你没有指定表达式样，比如暂时不太在乎如何展示 photo 这个栏目，Hugo 有这么一个 default 设定：在 front matter 大部分信息缺乏的时候，通过每个文章存储
-path 或者所在 section 猜出给这篇文章赋予什么 layout。这会让我们在迅速上手写作 blog 的时候非常省心。
+	如果你没有指定表达式样，比如暂时不太在乎如何展示 photo 这个栏目，Hugo 有这么
+	一个 default 设定：在 front matter 大部分信息缺乏的时候，通过每个文章存储
+path 或者所在 section 猜出给这篇文章赋予什么 layout。这会让我们在迅速上手写
+	作 blog 的时候非常省心。
 
 
 ## 4. Page bundles {#4-dot-page-bundles}
@@ -162,10 +172,12 @@ content
 
 ---
 
-`ox-hugo` 对 org 文件存放位置并没有特定要求，但是其头部的 `#+hugo_base_dir:` 必须要被清晰的定义，因为这个地址告诉 `ox-hugo` 你的 root directory 在哪里，
+`ox-hugo` 对 org 文件存放位置并没有特定要求，但是其头部的 `#+hugo_base_dir:` 必
+须要被清晰的定义，因为这个地址告诉 `ox-hugo` 你的 root directory 在哪里，
 `ox-hugo` 就会在这个地址下的 content 里面生成转化的 md 文件。很多用户自定义
 `#+hugo_base_dir:` ..即是本 org 文件所在的 parent path.也有人定义
-`#+hugo_base_dir:` .代表 path 与现在的 org 文件同文件夹，如果 root directory 是跟现在 org 文件同文件夹，c-c c-e H A 导出 markdown 文件的结果就是这样：
+`#+hugo_base_dir:` .代表 path 与现在的 org 文件同文件夹，如果 root directory 是
+跟现在 org 文件同文件夹，c-c c-e H A 导出 markdown 文件的结果就是这样：
 ![](/img/Hugo blogging with Ox-hugo 2.png)
 
 仔细体会以下示例：以 root 目录 c:\hugo\myblog\\为例：

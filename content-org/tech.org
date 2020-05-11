@@ -399,7 +399,7 @@ There are also two ways of calling reveal.js as described by the readme. I am us
   (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js")))
 #+end_src
 
-** DONE Mastering emacs in 21 days learning notes - 1 【21 天学会 Emacs 笔记 - 1】 :@TECH:Emacs:
+** DONE Essentials in vanilla Emacs 【Vanilla Emacs 精华简介】  :@TECH:Emacs:
    CLOSED: [2019-08-25 Sun 23:51]
    :PROPERTIES:
    :EXPORT_FILE_NAME: mastering-emacs-in-21-days-learning-notes-day
@@ -449,7 +449,7 @@ package 安装只有才加载检查发现没有 package 时候才会发生。
 	
 • 光标放在最后一个反括号的末尾，按 C-x C-e，是执行一行命令 on the fly，作用等同于 M-x 命令 回车。
 
-*** 2. 新建 init.el【26’50】
+*** 2. 新建 init.el
 -----
 • 初始 hacking：
 Emacs 像一个状态机，即使还没 config init.el, 裸机 Emacs 也加载了许多 build-in
@@ -515,7 +515,8 @@ Emac-lisp-mode/ ）相当于一个 list，就是一些它自带的 function。�
 • Emacs 操作系统很像一个大的状态机，储存着很多可修改的状态。Mode 调用和设置也是通过 function 修改 value 实现。Emacs 虽然因为没有变量空间而导致所有变量全局可见,但是因为 mode 的 default 设置，使得有些 value 只是 buffer local 的(aka mode 每个 buffer 都独立保留了一份 default 值)，如果需要在全局应用某些 mode，要注意上 hook 或者修改 global setting，注意查看每个安装文档的说明。
 
 • 如上文所说，让 mode 生效有三种方式（1）临时调用 M-x company-mode，可以反复修改 value，但有可能只修改了临时 buffer local value（2）直接修改 mode.el 脚本；都不如这种好：(3) 写好 mode 设置放在 init.el 里面让它在 Emacs 开启时设置好。
-【2-2'10】以 company-mode 为例讲解以上知识：mode 的种类（还有其他 state）开启还
+
+以 company-mode 为例讲解以上知识：mode 的种类（还有其他 state）开启还
 是关闭，本身是 value，每个 buffer 都有储存一份，所以 setq 只会修改本 buffer 的值，
 setq-default 才会修改全体 buffer 的值。只有当一个 value 生来就是全局变动的时候，
 setq 和 setq-default 才是一回事。set-key 也是类似，如下注意左右列的区别，尤其当
@@ -534,7 +535,7 @@ setq 和 setq-default 才是一回事。set-key 也是类似，如下注意左�
 	
 	• 默认 packages 都装在.emacs.d/elpa 目录下面，即所有有关这个 package 的文件都下载到一个文件夹下面，以供 emacs load【注意这个跟.emacs.d/lisp 文件不要混淆】。
 
-**** 4.1 Auto-load 【2-15’00】
+**** 4.1 Auto-load 
     • 装好后重新打开 Emacs，我们看到 init.el 文件第一行要求是
 	~(package-initialize)~ 意思是自动去 elpa 目录里找安装好的 package，挨个扫描，找到 package-autoload.el 文件执行，预加载一些函数名进 workspace。为什么会有再初始时就有加载 autoload 这一过程呢？
 	
@@ -549,7 +550,7 @@ setq 和 setq-default 才是一回事。set-key 也是类似，如下注意左�
 
 
 
-**** 4.2 Non-autoload[ ]
+**** 4.2 Non-autoload
 
 ** DONE Installing Source Code Pro in Ubuntu and MS Windows platform 2019 【2019 版 Source Code Pro 字体安装指南】 :@TECH:Ubuntu:
    CLOSED: [2019-09-03 Tue 21:53]
@@ -2433,7 +2434,7 @@ is a function that takes a function as an argument and returns a function.
 Taking factorial as an example, we deduce a function G where G(factorial)=factorial.
 Let's learn how to deduce step by step.
  
-*** TODO Chapter 9 and Again and Again and Again
+*** Chapter 9 and Again and Again and Again
 The key of writing recursion is making sure there is =termination condition=.
 That's the basic requirement for function in both computation and mathmatics
 area: a function is a mapping procedure which takes in an argument and produces
@@ -2925,10 +2926,6 @@ If you find it confusing, read this preview of omega combinator in the first
 answer of this post:[[https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer/11864862#11864862][scheme - Y combinator discussion in "The Little Schemer" -
 Stack Overflow]]
 
- 
-#+begin_export scheme
-
-#+end_export
 ** DONE Detailed key proof of ANOVA test: SST=SSE+SSB      :@MATH:statistics:
    CLOSED: [2020-03-09 Mon 00:07]
    :PROPERTIES:
@@ -3153,4 +3150,25 @@ plug-in can help achieve.
 (7). Redevelopment of website theme
 
 (8). Emacs users with ox-hugo
+** TODO Why setting new keybinding sometimes is not replacing in Emacs
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: why-setting-new-keybinding-sometimes-is-not-replacing-in-emacs
+   :END:
+
+Many people have been thinking about setting new keybindings when they find the traditional Emacs have many rather unconventional short cut keys.  
+
+** TODO Emacs dotfile loading mechanism in Windows system
+   :PROPERTIES:
+   :EXPORT_FILE_NAME: emacs-dotfile-loading-mechanism-in-windows-system
+   :END:
+
+This post is about =(default directory)=.
+
+As one may notice that calling Emacs from different places might not always be the same. The default dotfile in Windows nowadays is at =("c:/Users/YOU/AppData/Roaming/.spacemacs.d/")= Clicking runemacs.exe or calling from Command line Prompt, it can automatically load dotfile (e.g. theme, spacemacs). Whileas calling from Msys or Mingw git bash, it loads vanilla Emacs. Although when you run =(echo %HOMEPATH%)= in Powershell Prompt, or run =(echo $HOME)= in git bash, they all return the same HOME as =("c:/Users/YOU")=.
+
+Why is git bash not recognizing the dotfile? (And powershell prompt knows to find dotfile not at HOME)
+
+This is because Emacs for Windows has its own setting coping =(default-directory)=. When being called by git bash, Emacs inherits =(default-directory)= from git bash of =("c:/Users/YOU")=. But when being called from runemacs.exe and you didn't specify default-directory (by right-click icon - properties - start-in), Emacs didn't have place to inherit so it uses build-in default-directory, which is =("c:/Users/YOU/AppData/Roaming/")=. This can be verified by launching Emacs from different places and calling =(c-h v)=.
+
+This is also the reason that calling Emacs from different places and launching =(c-x c-f)=, the directories are different. Of course, you can always reset the default working directory in dotfile as in answer from here: [[https://stackoverflow.com/questions/60464/changing-the-default-folder-in-emacs][customization - Changing the default folder in Emacs - Stack Overflow]]
 

@@ -21,6 +21,7 @@ As an economic researcher, my speciality lies in quantitative corporate finance 
 #### Interests in bottom-up OS configuration. 
 
 My daily research workflow has a high requirement for working environment. An academic work involves several things at the same time: Latex writing, multi-language programming running, syntax highlighting, embedded slides making. So my workflow is built on Emacs, which requires certain knowledge of Emacs-lisp hacking and functional programming. A highly customerized operating system with some specialized hardware has been my friend all this time.
+
 -----
 
 #### Publication as Data Scientist

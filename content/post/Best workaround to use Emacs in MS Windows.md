@@ -2,7 +2,7 @@
 title = "Best workaround to use Emacs in MS Windows 【在 MS windows 中使用 Emacs 的最佳解决方案】"
 summary = "Experience Emacs with best workaround environment in windows."
 date = 2019-08-16T01:03:00+01:00
-lastmod = 2020-04-22T03:27:20+01:00
+lastmod = 2020-05-11T02:03:09+01:00
 tags = ["Emasc", "Msys2", "Windows10"]
 categories = ["TECH"]
 draft = false
@@ -57,4 +57,5 @@ $ git config core.autocrlf false
 
 跟以前使用的 Emacs for MS Win64 一样，emacs 配置文件还是默认在 C:/Users/AppData/Roaming/.emacs.d 中。大多数 package 放在本地 c:/msys2/home/user/.emacs.d/elpa/yourdir/以后使用 `(add-to-list 'exec-path "yourdir")` 即可正常调用。
 
-但是我感觉从运行速度来讲，msys2 compiled Emacs 比 Emacs for Win64 `快很多` 。所以在 win 中使用 Emacs，虽然也有 WSL 或者 VM based 的解决方案，但是 msys2（在许多人看来）仍然是一个在 win 环境中使用类 unix 系统的优秀途径，希望未来能研究编译过的 emacs 在 msys2 提供的类 unix 系统里是否和其他 libraries 有更好的互动。
+但是我感觉从运行速度来讲，msys2 compiled Emacs 比 Emacs for Win64 `快很多` 。所以在 win 中使用 Emacs，虽然也有 WSL 或者 VM based 的解决
+方案，但是 msys2（在许多人看来）仍然是一个在 win 环境中使用类 unix 系统的优秀途径，希望未来能研究编译过的 emacs 在 msys2 提供的类 unix 系统里是否和其他 libraries 有更好的互动。

@@ -2,7 +2,7 @@
 title = "Overview: Emacs line truncation in text editing 【Emacs org 换行/对齐/排版  汇总指南】"
 summary = "Line visualization and navigation settings in Emacs text editing."
 date = 2019-09-17T12:53:00+01:00
-lastmod = 2020-04-22T03:27:21+01:00
+lastmod = 2020-05-11T02:03:15+01:00
 tags = ["Emacs", "Org-mode"]
 categories = ["TECH"]
 draft = false
@@ -19,7 +19,7 @@ line gets <span class="underline">too long</span> in typing window, Emacs provid
 
 Here is the link of technicalities of the solutions:
 
-[Truncation - GNU Emacs Lisp Reference Manual - https://www.gnu.org/](https://www.gnu.org/software/emacs/manual/html%5Fnode/elisp/Truncation.hrequest json-mode all-the-icons-dired edit-indirecttml)
+[Truncation - GNU Emacs Lisp Reference Manual - https://www.gnu.org/](https://www.gnu.org/software/emacs/manual/html%5Fnode/elisp/Truncation.hrequest%20json-mode%20all-the-icons-dired%20edit-indirecttml)
 
 I draw a more straightforward figure:
 ![](/img/line operation 1.jpg)
