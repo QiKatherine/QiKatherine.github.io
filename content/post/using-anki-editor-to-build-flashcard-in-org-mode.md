@@ -1,7 +1,7 @@
 +++
 title = "Using Anki-editor to build flashcard in Emacs Org-mode 【用 Anki-editor 在 Emacs Org-mode 中生成复杂记忆卡片】"
 date = 2019-09-30T23:54:00+01:00
-lastmod = 2020-05-11T02:03:18+01:00
+lastmod = 2020-05-11T02:29:15+01:00
 tags = ["windows", "org-mode", "Anki", "Emacs"]
 categories = ["TECH"]
 draft = false
