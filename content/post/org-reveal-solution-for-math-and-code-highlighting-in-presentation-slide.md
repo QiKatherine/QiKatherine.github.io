@@ -2,7 +2,7 @@
 title = "Org-reveal: solution for math and code highlighting in presentation slide 【在 ppt 中展示代码高亮，数学公式的优秀解决方案】"
 summary = "Learning notes and trouble shooting for using org-reveal."
 date = 2019-08-23T22:50:00+01:00
-lastmod = 2020-05-11T02:29:08+01:00
+lastmod = 2020-05-14T21:09:18+01:00
 tags = ["Emacs", "Org-mode"]
 categories = ["TECH"]
 draft = false
@@ -29,16 +29,17 @@ There are also two ways of calling reveal.js as described by the readme. I am us
 
 {{< highlight emacs-lisp >}}
 ;; Emacs
-(require 'ox-reveal)
-(setq Org-Reveal-root "file:///path-to-reveal.js")
-(setq Org-Reveal-title-slide nil)
+  ;; Emacs
+  (require 'ox-reveal)
+  (setq Org-Reveal-root "file:///path-to-reveal.js")
+  (setq Org-Reveal-title-slide nil)
 
 
-;; Spacemacs/Using use-package
-(defun yourname/post-init-ox-reveal ()
-  (use-package ox-reveal
-    :ensure t
-  (setq org-enable-github-support t)
-  (setq org-enable-reveal-js-support t)
-  (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js")))
+  ;; Spacemacs/Using use-package
+  (defun yourname/post-init-ox-reveal ()
+    (use-package ox-reveal
+      :ensure t
+    (setq org-enable-github-support t)
+    (setq org-enable-reveal-js-support t)
+    (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js")))
 {{< /highlight >}}

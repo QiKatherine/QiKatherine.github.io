@@ -2,7 +2,7 @@
 title = "Essentials in vanilla Emacs 【Vanilla Emacs 精华简介】"
 summary = "Learning notes about Emacs."
 date = 2019-08-25T23:51:00+01:00
-lastmod = 2020-05-11T02:29:09+01:00
+lastmod = 2020-05-14T21:09:18+01:00
 tags = ["Emacs"]
 categories = ["TECH"]
 draft = false
@@ -17,27 +17,19 @@ personal learning experience. Since there has been ample discussion of using and
 learning Emacs in English community, my learning note is written in Chinese to
 benefit more additional readers.
 
-这篇文章是我学习子龙山人老师的 spacemacs rock 系列笔记之一。在原视频配套的基础上
-我还做了一些扩展和补充，有的知识点还加了视频对应【集数-分钟】的时间点，以便迅速
-观看视频.
+这篇文章是我学习子龙山人老师的 spacemacs rock 系列笔记之一。在原视频配套的基础上我还做了一些扩展和补充，有的知识点还加了视频对应【集数-分钟】的时间点，以便迅速观看视频.
 
 
 ## 1. 基本知识 {#1-dot-基本知识}
 
 ---
 
-• Emacs 相当于一个 elisp based 的操作系统。这个操作系统的原理是，每次 Emacs 启动
-过程就相当于一系列功能通过 loading files(代码块)的实现。在每次使用前，成百上千的
+• Emacs 相当于一个 elisp based 的操作系统。这个操作系统的原理是，每次 Emacs 启动过程就相当于一系列功能通过 loading files(代码块)的实现。在每次使用前，成百上千的
 functions 被加载到 workspace 中(其中一些带着 default 参数) ，等待被调用，或者被
-custermize。因此所有的设置，架构都可以通过调 function portal 修改成想要的 value；
-或者在原有的 value/function 的基础上，继续开发一系列指令来增进，比如我们自己编写
-的各种自定义函数。连整个 emacs 的启动都可以概括为一句话：加载一系列脚本。只不过
-这些脚本有的是内置的（built in），有的来自安装的插件包，有的是我们自己写的。配置
+custermize。因此所有的设置，架构都可以通过调 function portal 修改成想要的 value；或者在原有的 value/function 的基础上，继续开发一系列指令来增进，比如我们自己编写的各种自定义函数。连整个 emacs 的启动都可以概括为一句话：加载一系列脚本。只不过这些脚本有的是内置的（built in），有的来自安装的插件包，有的是我们自己写的。配置
 emacs 归根结底是在配置各种各样的脚本。
 
-• 首次加载一个配置复杂/成熟的 Emacs（例如 spacemacs 或 Purcell 的 Emacs），会耗
-费比较长的时间，因为需要依次安装所有 cofig.el 中提到过的 packages。在经过首次配
-置之后的时间里，每次启动 Emacs 的 loading file 主要以加载和更新为主，而极少数
+• 首次加载一个配置复杂/成熟的 Emacs（例如 spacemacs 或 Purcell 的 Emacs），会耗费比较长的时间，因为需要依次安装所有 cofig.el 中提到过的 packages。在经过首次配置之后的时间里，每次启动 Emacs 的 loading file 主要以加载和更新为主，而极少数
 package 安装只有才加载检查发现没有 package 时候才会发生。
 
 • loading 的文件主要是.elc 文件，是经过编译的.el 文件的二进制形式，加载更快。但平日的修改是在更容易阅读的.el 文件上进行的，所以如果你手动修改完.el 文件，一定要记得编译以便 Emacs 自动执行，For example with Emacs-Lisp you do:
@@ -57,34 +49,28 @@ package 安装只有才加载检查发现没有 package 时候才会发生。
 
 • 初始 hacking：
 Emacs 像一个状态机，即使还没 config init.el, 裸机 Emacs 也加载了许多 build-in
-functions 以确保能被基本使用。所有的状态在 default value 下运行。在这种情况下，
-可以通过 M-x 调用已有的命令来做到修改设置，但是所有临时设置的东西关掉后都会被删
-除，还原成默认值，被称为 `临时改动` 。还有一种就是直接去 el/.elc 的脚本里修改代
-码 hard coding modify，有很多坏处。比如，每次更新插件，都要自己回去重新修改，被
-称为 `永久改动` 。
+functions 以确保能被基本使用。所有的状态在 default value 下运行。在这种情况下，可以通过 M-x 调用已有的命令来做到修改设置，但是所有临时设置的东西关掉后都会被删除，还原成默认值，被称为 `临时改动` 。还有一种就是直接去 el/.elc 的脚本里修改代码 hard coding modify，有很多坏处。比如，每次更新插件，都要自己回去重新修改，被称为 `永久改动` 。
 
-• 初始化设置：
-所以更好的选择是不动原脚本，通过预加载修改达到目的，也就是手动写一份 init.el 的意义。为了使得 emacs 每次打开都有最佳设置，我们在 C:\Users\AppData\Roaming\\.emacs.d\\文件下新建了 init.el 的 elisp 文件，来写想要的配置。因为 Emacs 默认设置打开时，会自动寻找 home 目录的.emacs.d\\文件下下面 init.el 文件来执行：（1）如果找得到，每次开启 Emacs 都先重新执行一遍我们的 config，以达到预加载我想要的全部舒适配置；（2）如果其不存在 init.el，Emacs 还是原始裸机也能用；（3）如果 init.el 代码有错没加载成，也是裸机（后面使用 usepackage 来管理初始加载，可以避免这种“因为一点小错误”使得整个初始加载都失败”的问题）。
+• 初始化设置：所以更好的选择是不动原脚本，通过预加载修改达到目的，也就是手动写一份 init.el 的意义。为了使得 emacs 每次打开都有最佳设置，我们在 C:\Users\AppData\Roaming\\.emacs.d\\文件下新建了 init.el 的 elisp 文件，来写想要的配置。因为 Emacs 默认设置打开时，会自动寻找 home 目录的.emacs.d\\文件下下面 init.el 文件来执行：（1）如果找得到，每次开启 Emacs 都先重新执行一遍我们的 config，以达到预加载我想要的全部舒适配置；（2）如果其不存在 init.el，Emacs 还是原始裸机也能用；（3）如果 init.el 代码有错没加载成，也是裸机（后面使用 usepackage 来管理初始加载，可以避免这种“因为一点小错误”使得整个初始加载都失败”的问题）。
 	`注意：** 如果希望把配置放在 ~/.emacs.d/init.el 文件中，那么需要手工删除 ~/.emacs 文件。`
 
 • 使用 init.el 管理 personalized config 额外的好处是，init.el 文件还可以在
-GitHub 备份，在初始化文件里加上一个系统类型判断函数，让我们在任何地方的的不同主流
-系统都可以自由使用。甚至，不用修改别人电脑里有的 Emacs 配置，用 U 盘就能在一个 Emacs 里使用不同的 config。
+GitHub 备份，在初始化文件里加上一个系统类型判断函数，让我们在任何地方的的不同主流系统都可以自由使用。甚至，不用修改别人电脑里有的 Emacs 配置，用 U 盘就能在一个 Emacs 里使用不同的 config。
 
-• Emacs 的命令执行是按顺序来的，这个顺序既只文件也只内部命令。各种 function 一个
-一个的被调用 （也就是 load/require），一行完成后再进行下一行。例如，只保存第 1 个命令，下次打开 Emacs 显示字体为 16pt；保存 1.2 命令，在 1 之上 load open-init-file 命令去 workspace；保存 1.2.3 命令，在 12 之上还能使得我们通过按 f2 真正调用这个 open-init-file:
+• Emacs 的命令执行是按顺序来的，这个顺序既只文件也只内部命令。各种 function 一个一个的被调用 （也就是 load/require），一行完成后再进行下一行。例如，只保存第 1 个命令，下次打开 Emacs 显示字体为 16pt；保存 1.2 命令，在 1 之上 load open-init-file 命令去 workspace；保存 1.2.3 命令，在 12 之上还能使得我们通过按 f2 真正调用这个 open-init-file:
 
 {{< highlight emacs-lisp >}}
 ;; 更改显示字体大小 16pt
-(set-face-attribute 'default nil :height 160)                   ---- 1
+  ;; 更改显示字体大小 16pt
+  (set-face-attribute 'default nil :height 160)                   ---- 1
 
-;; 快速打开配置文件
-(defun open-init-file()
-  (interactive)
-  (find-file "~/.emacs.d/init.el"))                             ---- 2
+  ;; 快速打开配置文件
+  (defun open-init-file()
+    (interactive)
+    (find-file "~/.emacs.d/init.el"))                             ---- 2
 
-;; 这一行代码，将函数 open-init-file 绑定到 <f2> 键上
-(global-set-key (kbd "<f2>") 'open-init-file)                   ---- 3
+  ;; 这一行代码，将函数 open-init-file 绑定到 <f2> 键上
+  (global-set-key (kbd "<f2>") 'open-init-file)                   ---- 3
 {{< /highlight >}}
 
 这个知识点目前看起来很简单，但是以后涉及到要去其它.el 文件层层加载，记得这个顺序性 load 的特质会帮助理解 Emacs 的加载机制。
@@ -93,10 +79,11 @@ GitHub 备份，在初始化文件里加上一个系统类型判断函数，让�
 
 {{< highlight emacs-lisp >}}
 (defmacro after-load (feature &rest body)
-  "After FEATURE is loaded, evaluate BODY."
-  (declare (indent defun))
-  `(eval-after-load ,feature
-     '(progn ,@body)))
+  (defmacro after-load (feature &rest body)
+    "After FEATURE is loaded, evaluate BODY."
+    (declare (indent defun))
+    `(eval-after-load ,feature
+       '(progn ,@body)))
 {{< /highlight >}}
 
 
@@ -109,9 +96,7 @@ GitHub 备份，在初始化文件里加上一个系统类型判断函数，让�
 【查看 minor mode】简单来说就是，一种文件类型同时只能存在一种 major mode 但是它可以同时激活一种或多种 minor mode。鼠标放在 powerline 可以显示一些 minor mode 信息，如果你希望知道当前的模式全部信息，可以使用 `C-h m` 来显示当前所有开启 的全部 minor mode 的信息。（你如果发现已经设置过的 mode 没开，可能因为没有设置成 global 的）。
 
 • major mode 里面还有一个重要的概念是 hook。一个 major mode（ _e.g.
-Emac-lisp-mode_ ）相当于一个 list，就是一些它自带的 function。但这里还可以有一串
-儿 minor mode 挂在上面。这个 major mode 开启默认所有 list 上的特性都会被自动加载。
-如果我们需要的设置没有，需要手动添加，有可能是通过 hook，一般对于每个特定的 pack
+Emac-lisp-mode_ ）相当于一个 list，就是一些它自带的 function。但这里还可以有一串儿 minor mode 挂在上面。这个 major mode 开启默认所有 list 上的特性都会被自动加载。如果我们需要的设置没有，需要手动添加，有可能是通过 hook，一般对于每个特定的 pack
 如果使用 hook，GitHub 上有具体设置指南。例如 `(add-hook 'emacs-lisp-mode-hook
 'show-paren-mode)` .
 ![](/img/emacs 21 1-1.jpg)
@@ -122,11 +107,9 @@ Emac-lisp-mode_ ）相当于一个 list，就是一些它自带的 function。�
 
 • 如上文所说，让 mode 生效有三种方式（1）临时调用 M-x company-mode，可以反复修改 value，但有可能只修改了临时 buffer local value（2）直接修改 mode.el 脚本；都不如这种好：(3) 写好 mode 设置放在 init.el 里面让它在 Emacs 开启时设置好。
 
-以 company-mode 为例讲解以上知识：mode 的种类（还有其他 state）开启还
-是关闭，本身是 value，每个 buffer 都有储存一份，所以 setq 只会修改本 buffer 的值，
+以 company-mode 为例讲解以上知识：mode 的种类（还有其他 state）开启还是关闭，本身是 value，每个 buffer 都有储存一份，所以 setq 只会修改本 buffer 的值，
 setq-default 才会修改全体 buffer 的值。只有当一个 value 生来就是全局变动的时候，
-setq 和 setq-default 才是一回事。set-key 也是类似，如下注意左右列的区别，尤其当
-想要的修改下次没生效，查看变量是否是 buffer local 很重要。例如以下区别：
+setq 和 setq-default 才是一回事。set-key 也是类似，如下注意左右列的区别，尤其当想要的修改下次没生效，查看变量是否是 buffer local 很重要。例如以下区别：
 
 | Local setting           | Global setting                   |
 |-------------------------|----------------------------------|
@@ -156,9 +139,7 @@ autoload 告诉 emacs 某个地方有一个定义好的函数，并且告诉 ema
 
 • autoload 定义的函数都可以直接调用，而不需要 require，like company-mode。所以 autoload 行为的意义用一个简单的概括是：“只注册函数名而不定义函数本身”。
 
-它执行过程如下，以 company 为例。在这个 package 安装好后 ，我们可以在.emacs.d/elpa 下看
-到 company 文件夹，包含了 company-xxxfunction.el 和一系列自解码.elc 二进制文件，这些
-即是 company-mode 的全部执行细节。Emacs 会自动遍历 company-20160325 里面所有文件，提取所有注释里有魔法语句；；;autoload 的内容，并根据这个注释自动生成一个一个的魔法语句块，全部存在 company-autoload.elc 文件里。例如一下魔法语句块就是根据第一行从 company.el 自动生成的：
+它执行过程如下，以 company 为例。在这个 package 安装好后 ，我们可以在.emacs.d/elpa 下看到 company 文件夹，包含了 company-xxxfunction.el 和一系列自解码.elc 二进制文件，这些即是 company-mode 的全部执行细节。Emacs 会自动遍历 company-20160325 里面所有文件，提取所有注释里有魔法语句；；;autoload 的内容，并根据这个注释自动生成一个一个的魔法语句块，全部存在 company-autoload.elc 文件里。例如一下魔法语句块就是根据第一行从 company.el 自动生成的：
 
 
 ### 4.2 Non-autoload {#4-dot-2-non-autoload}

@@ -2,33 +2,20 @@
 title = "Text based file management in Emacs 【Emacs 文本文件管理】"
 summary = "Overview of text process tools in org-mode."
 date = 2019-09-22T23:56:00+01:00
-lastmod = 2020-05-11T02:29:13+01:00
+lastmod = 2020-05-14T21:09:19+01:00
 draft = false
 image = "img/111.jpg"
 +++
 
-People discuss the most efficient way text management methods for a number of reasons: someone wants to build a digitalized notebook for new
-knowledge; Someone wants to manage the increasing case files in office work;
-Someone wants to archive thousands of articles they hoard on the internet. Either
-way, I call that 'text digesting system' or 'personal wiki'. Buckle up, I got
-some strong opinions about this topic.
+People discuss the most efficient way to manage text files for several reasons: apart from programming, someone wants to build a digitalized notebook for new knowledge; Someone wants to manage the increasing case files in office work; Someone wants to archive thousands of articles they hoard on the internet. Either way, I call that 'text digesting system' or 'personal wiki'. Buckle up, I got some strong opinions about this topic.
 
-I think we all have been struggling in choosing tools: some excel at
-supporting markdown, some are good at coding highlighting, some support
-real-time online collaboration or even text searching in images. If one has not used Emacs, I would probably
-recommend Evernote or Onenote. But if you're an Emacs user, this is the chance of
-tasting the one-for-all solution.
+I think we all have been struggling in choosing tools: some excel at supporting markdown (pycharm, Rstudio), some are good at coding highlighting (VS code, Notepad++), some support real-time online collaboration (Overleaf, Github) or even text searching in images (MS Onenote, Goodnotes in Apple). If one has not used Emacs, I would probably recommend Evernote or Onenote. But if you are an Emacs user, this is the chance of tasting the one-for-all solution.
 
-This image is an `irresponsible, persponal experiece based` summary of tool
-learning curve:
-![](/img/text.png)
+Caveat: this image is an `extremly personal experience based` summary of the tool learning curve: ![](/img/text.png)
 
-On **methdological** level, my argument of recommending is that Emacs is the tool
-which has the most potential to facilitate you to manage all level of text work:
-from a TODO shopping list, to a one-person wikipedia.
+On **methodological** level, my argument of recommending is that Emacs is the tool which has the most potential to facilitate you to manage all level of text work: from a TODO shopping list to a one-person Wikipedia.
 
-On **technical** level, Emacs org-mode meets different needs with all types of
-packages. For example:
+On **technical** level, Emacs org-mode meets different needs with all types of packages. For example:
 
 • To take note speech: input in org-mode
 
@@ -140,3 +127,5 @@ https://github.com/](https://github.com/synchrony/smsn/wiki/A-video-introduction
 ---
 
 I have written a seperate article of Anki in this blog:
+[Using
+Anki-editor to build flashcard in Emacs Org-mode](https://sheishe.xyz/post/using-anki-editor-to-build-flashcard-in-org-mode/)

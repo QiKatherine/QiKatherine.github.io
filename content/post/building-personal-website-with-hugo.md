@@ -1,7 +1,7 @@
 +++
 title = "Building personal website with Hugo in one hour"
 date = 2020-04-13T22:57:00+01:00
-lastmod = 2020-05-11T02:29:25+01:00
+lastmod = 2020-05-14T21:09:21+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -98,13 +98,15 @@ in post folder, where you could initiate with:
 
 {{< highlight nil >}}
 cd myblog
-hugo new post/name-of-new-article.md
+  cd myblog
+  hugo new post/name-of-new-article.md
 {{< /highlight >}}
 
 You can always preview it in local host:
 
 {{< highlight nil >}}
 hugo server themename
+  hugo server themename
 {{< /highlight >}}
 
 Open web browser input `(http://localhost:1313)` to preview. Input `(ctrl-c)` in
@@ -117,16 +119,18 @@ Make sure you generate html files into /public file first:
 
 {{< highlight nil >}}
 hugo -t themename
+  hugo -t themename
 {{< /highlight >}}
 
 Push everything generate in /public file to `(XX.github.io)` repository.
 
 {{< highlight nil >}}
 git init
-git add .
-git commit -m "Initial commit."
-git remote add origin git@github.com:Brent-Li/brent-li.github.io.git
-git push -u origin master
+  git init
+  git add .
+  git commit -m "Initial commit."
+  git remote add origin git@github.com:Brent-Li/brent-li.github.io.git
+  git push -u origin master
 {{< /highlight >}}
 
 Unless you want to giving version control, not only for your website, but also for the
@@ -173,8 +177,15 @@ plug-in can help achieve.
 
 (5). Auto deployment
 
+There are many automated deployment tools online, I use Werecker and I wrote an
+article about the details:
+[Hugo Blogging with Wercker Auto Build & Deployment 【用 Wercker 自动部署网站】-Katherine He Blog|何琪的博客](http://localhost:1313/post/hugo-blogging-with-wercker-auto-build-deployment/)
+
 (6). Search Engine Optimization
 
 (7). Redevelopment of website theme
 
 (8). Emacs users with ox-hugo
+
+I have written an article about this in another post:
+[Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】-Katherine He Blog|何琪的博客](https://sheishe.xyz/post/hugo-blogging-with-ox-hugo/)

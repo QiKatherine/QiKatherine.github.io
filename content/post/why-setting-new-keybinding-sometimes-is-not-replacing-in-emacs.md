@@ -1,6 +1,6 @@
 +++
 title = "Why setting new keybinding sometimes is not replacing in Emacs"
-lastmod = 2020-05-11T02:29:26+01:00
+lastmod = 2020-05-14T21:09:21+01:00
 draft = true
 image = "img/111.jpg"
 +++

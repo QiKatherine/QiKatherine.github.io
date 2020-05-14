@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (2/3)"
 date = 2019-12-23T01:35:00+00:00
-lastmod = 2020-05-11T02:29:21+01:00
+lastmod = 2020-05-14T21:09:20+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -24,21 +24,22 @@ to develop more functions.
  checks whether a list is a set. It can be written with `(member?)`:
 
 {{< highlight scheme >}}
-  (define member?
-    (lambda (a lat)
-      (cond
-        ((null? lat) #f)
-        (else (or (eq? (car lat) a)
-                  (member? a (cdr lat)))))))
+(define member?
+   (define member?
+     (lambda (a lat)
+       (cond
+         ((null? lat) #f)
+         (else (or (eq? (car lat) a)
+                   (member? a (cdr lat)))))))
 
-;(set? '(apple 3 pear 4 9 apple 3 4)) -> #f
-  (define set?
-    (lambda (lat)
-      (cond
-        ((null? lat) #t)
-        ((member? (car lat) (cdr lat)) #f)
-        (else
-          (set? (cdr lat))))))
+ ;(set? '(apple 3 pear 4 9 apple 3 4)) -> #f
+   (define set?
+     (lambda (lat)
+       (cond
+         ((null? lat) #t)
+         ((member? (car lat) (cdr lat)) #f)
+         (else
+           (set? (cdr lat))))))
 {{< /highlight >}}
 
 `(makeset argument)` make a new list by removing duplicated atoms in argument
@@ -46,22 +47,23 @@ list. For a repeated atom in list, in order to retain the first occurrence while
 
 {{< highlight scheme >}}
 (define multirember
-  (lambda (a lat)
-    (cond
-      ((null? lat) '())
-      ((eq? (car lat) a)
-       (multirember a (cdr lat)))
-      (else
-        (cons (car lat) (multirember a (cdr lat)))))))
+  (define multirember
+    (lambda (a lat)
+      (cond
+        ((null? lat) '())
+        ((eq? (car lat) a)
+         (multirember a (cdr lat)))
+        (else
+          (cons (car lat) (multirember a (cdr lat)))))))
 
-;(makeset '(apple 3 pear 4 9 apple 3 4))
-(define makeset
-  (lambda (lat)
-    (cond
-      ((null? lat) '())
-      (else
-        (cons (car lat)
-              (makeset (multirember (car lat) (cdr lat))))))))
+  ;(makeset '(apple 3 pear 4 9 apple 3 4))
+  (define makeset
+    (lambda (lat)
+      (cond
+        ((null? lat) '())
+        (else
+          (cons (car lat)
+                (makeset (multirember (car lat) (cdr lat))))))))
 {{< /highlight >}}
 
 For sets, we can define some primary functions: `(subset? argument1 argument2)`
@@ -71,27 +73,28 @@ find how the different mathmatical functions can be achieved by manipulating the
 
 {{< highlight scheme >}}
 ; (subset? '(4 pounds of horseradish)
-; '(four pounds of chicken and 5 ounces of horseradish)) -> #f
-(define subset?
-    (lambda (set1 set2)
-      (cond
-        ((null? set1) #t)
-        (else (and (member? (car set1) set2)
-                   (subset? (cdr set1) set2))))))
+  ; (subset? '(4 pounds of horseradish)
+  ; '(four pounds of chicken and 5 ounces of horseradish)) -> #f
+  (define subset?
+      (lambda (set1 set2)
+        (cond
+          ((null? set1) #t)
+          (else (and (member? (car set1) set2)
+                     (subset? (cdr set1) set2))))))
 
-;(eqset? '(a b c) '(a b)) -> #f
-  (define eqset?
-    (lambda (set1 set2)
-      (and (subset? set1 set2)
-           (subset? set2 set1))))
+  ;(eqset? '(a b c) '(a b)) -> #f
+    (define eqset?
+      (lambda (set1 set2)
+        (and (subset? set1 set2)
+             (subset? set2 set1))))
 
-;(intersect? '(stewed tomatoes and macaroni) '(macaroni and cheese)) -> #t
-  (define intersect?
-    (lambda (set1 set2)
-      (cond
-        ((null? set1) #f)
-        (else (or (member? (car set1) set2)
-                  (intersect? (cdr set1) set2))))))
+  ;(intersect? '(stewed tomatoes and macaroni) '(macaroni and cheese)) -> #t
+    (define intersect?
+      (lambda (set1 set2)
+        (cond
+          ((null? set1) #f)
+          (else (or (member? (car set1) set2)
+                    (intersect? (cdr set1) set2))))))
 {{< /highlight >}}
 
 The below functions do a bit more, they return intersection or union or difference results as
@@ -99,42 +102,43 @@ The below functions do a bit more, they return intersection or union or differen
 
 {{< highlight scheme >}}
 ;(intersect '(stewed tomatoes and macaroni) '(macaroni and cheese)) -> '(and macaroni)
-(define intersect
-  (lambda (set1 set2)
+  ;(intersect '(stewed tomatoes and macaroni) '(macaroni and cheese)) -> '(and macaroni)
+  (define intersect
+    (lambda (set1 set2)
+        (cond
+          ((null? set1) '())
+          ((member? (car set1) set2)
+           (cons (car set1) (intersect (cdr set1) set2)))
+          (else
+            (intersect (cdr set1) set2)))))
+
+  ;(union '(stewed tomatoes and macaroni casserole) '(macaroni and cheese))
+  ; -> '(stewed tomatoes casserole macaroni and cheese)
+  (define union
+     (lambda (set1 set2)
+        (cond
+          ((null? set1) set2)
+          ((member? (car set1) set2)
+           (union (cdr set1) set2))
+          (else (cons (car set1) (union (cdr set1) set2))))))
+
+  ;(xxx '(a b c) '(a b d e f)) -> '(c)
+  (define xxx
+    (lambda (set1 set2)
       (cond
         ((null? set1) '())
         ((member? (car set1) set2)
-         (cons (car set1) (intersect (cdr set1) set2)))
+         (xxx (cdr set1) set2))
         (else
-          (intersect (cdr set1) set2)))))
+          (cons (car set1) (xxx (cdr set1) set2))))))
 
-;(union '(stewed tomatoes and macaroni casserole) '(macaroni and cheese))
-; -> '(stewed tomatoes casserole macaroni and cheese)
-(define union
-   (lambda (set1 set2)
+  ;(intersectall '((a b c) (c a d e) (e f g h a b))) -> '(a)
+  (define intersectall
+    (lambda (l-set)
       (cond
-        ((null? set1) set2)
-        ((member? (car set1) set2)
-         (union (cdr set1) set2))
-        (else (cons (car set1) (union (cdr set1) set2))))))
-
-;(xxx '(a b c) '(a b d e f)) -> '(c)
-(define xxx
-  (lambda (set1 set2)
-    (cond
-      ((null? set1) '())
-      ((member? (car set1) set2)
-       (xxx (cdr set1) set2))
-      (else
-        (cons (car set1) (xxx (cdr set1) set2))))))
-
-;(intersectall '((a b c) (c a d e) (e f g h a b))) -> '(a)
-(define intersectall
-  (lambda (l-set)
-    (cond
-      ((null? (cdr l-set)) (car l-set))
-      (else
-        (intersect (car l-set) (intersectall (cdr l-set)))))))
+        ((null? (cdr l-set)) (car l-set))
+        (else
+          (intersect (car l-set) (intersectall (cdr l-set)))))))
 {{< /highlight >}}
 
 The **pair** is a list with only TWO s-expressions and the **rel** is a set of
@@ -144,25 +148,26 @@ element of first-level sub-expressions contains duplicated atom).
 
 {{< highlight scheme >}}
 (define set?
-      (lambda (lat)
-        (cond
-          ((null? lat) #t)
-          ((member? (car lat) (cdr lat)) #f)
-          (else
-            (set? (cdr lat)))))
+  (define set?
+        (lambda (lat)
+          (cond
+            ((null? lat) #t)
+            ((member? (car lat) (cdr lat)) #f)
+            (else
+              (set? (cdr lat)))))
 
-(define firsts
-  (lambda (l)
-    (cond
-      ((null? l) '())
-      (else
-        (cons (car (car l)) (firsts (cdr l))))))
+  (define firsts
+    (lambda (l)
+      (cond
+        ((null? l) '())
+        (else
+          (cons (car (car l)) (firsts (cdr l))))))
 
-;(fun? '((4 3) (4 2) (7 6) (6 2) (3 4))) -> #f
-;(fun? '((8 3) (4 2) (7 6) (6 2) (3 4))) -> #t
-(define fun?
-  (lambda (rel)
-    (set? (firsts rel))))
+  ;(fun? '((4 3) (4 2) (7 6) (6 2) (3 4))) -> #f
+  ;(fun? '((8 3) (4 2) (7 6) (6 2) (3 4))) -> #t
+  (define fun?
+    (lambda (rel)
+      (set? (firsts rel))))
 {{< /highlight >}}
 
 A list of pairs in which no **first** element of any pair is the same as any other
@@ -175,24 +180,25 @@ Think about how these two conceptions are connected. For example, we introduce
 
 {{< highlight scheme >}}
 ;(revrel '((8 a) (pumpkin pie) (got sick))) -> '((a 8) (pie pumpkin) (sick got))
-(define revrel
-  (lambda (rel)
-    (cond
-      ((null? rel) '())
-      (else (cons (build (second (car rel))
-                         (first (car rel)))
-                  (revrel (cdr rel)))))))
+  ;(revrel '((8 a) (pumpkin pie) (got sick))) -> '((a 8) (pie pumpkin) (sick got))
+  (define revrel
+    (lambda (rel)
+      (cond
+        ((null? rel) '())
+        (else (cons (build (second (car rel))
+                           (first (car rel)))
+                    (revrel (cdr rel)))))))
 
-;introducing revpair to simplify revrel
-(define revpair
-  (lambda (p)
-    (build (second p) (first p))))
+  ;introducing revpair to simplify revrel
+  (define revpair
+    (lambda (p)
+      (build (second p) (first p))))
 
-(define revrel
-  (lambda (rel)
-    (cond
-      ((null? rel) '())
-      (else (cons (revpair (car rel)) (revrel (cdr rel)))))))
+  (define revrel
+    (lambda (rel)
+      (cond
+        ((null? rel) '())
+        (else (cons (revpair (car rel)) (revrel (cdr rel)))))))
 {{< /highlight >}}
 
 Naturally, we could define `(seconds)` as we define `(firsts)` to develop
@@ -200,17 +206,18 @@ Naturally, we could define `(seconds)` as we define `(firsts)` to develop
 
 {{< highlight scheme >}}
 (define seconds
-  (lambda (l)
-    (cond
-      ((null? l) '())
-      (else
-        (cons (second (car l)) (seconds (cdr l)))))))
+  (define seconds
+    (lambda (l)
+      (cond
+        ((null? l) '())
+        (else
+          (cons (second (car l)) (seconds (cdr l)))))))
 
-;(fullfun? '((8 3) (4 2) (7 6) (6 2) (3 4))) -> #f
-;(fullfun? '((8 3) (4 8) (7 6) (6 2) (3 4))) -> #t
-(define fullfun?
-  (lambda (fun)
-    (set? (seconds fun))))
+  ;(fullfun? '((8 3) (4 2) (7 6) (6 2) (3 4))) -> #f
+  ;(fullfun? '((8 3) (4 8) (7 6) (6 2) (3 4))) -> #t
+  (define fullfun?
+    (lambda (fun)
+      (set? (seconds fun))))
 {{< /highlight >}}
 
 But, with the help of `(revrel)`, we can define `(fullfun?)` in a better way.
@@ -218,9 +225,10 @@ Let's call it `(one-to-one?)`:
 
 {{< highlight scheme >}}
 ;(one-to-one? '((chocolate chip) (doughy cookie))) -> #t
-(define one-to-one?
-  (lambda (fun)
-    (fun? (revrel fun))))
+  ;(one-to-one? '((chocolate chip) (doughy cookie))) -> #t
+  (define one-to-one?
+    (lambda (fun)
+      (fun? (revrel fun))))
 {{< /highlight >}}
 
 
@@ -236,13 +244,14 @@ returns `(eq?-a)` (equivelent in concept) as output. It's called currying.
 
 {{< highlight scheme >}}
 (define eq?-f)
- (lambda (a)
-   (lambda (x)
-    (eq? x a))))
+  (define eq?-f)
+   (lambda (a)
+     (lambda (x)
+      (eq? x a))))
 
-(define eq?-a
- (lambda (x)
-  (eq? x a))
+  (define eq?-a
+   (lambda (x)
+    (eq? x a))
 {{< /highlight >}}
 
 But the functional projection is sometimes more confusing when there are
@@ -254,17 +263,18 @@ Let's improve it a little with a familiar function:
 
 {{< highlight scheme >}}
 (define rember-f
-  (lambda (test?)
-    (lambda (a l)
-      (cond
-        ((null? l) '())
-        ((test? (car l) a) (cdr l))
-        (else
-          (cons (car l) ((rember-f test?) a (cdr l))))))))
+  (define rember-f
+    (lambda (test?)
+      (lambda (a l)
+        (cond
+          ((null? l) '())
+          ((test? (car l) a) (cdr l))
+          (else
+            (cons (car l) ((rember-f test?) a (cdr l))))))))
 
-; the test? can be eq? equal? eqan? eqlist? eqpair?
-; depending on which type of member you plan to remove.
-;e.g. remove number: ((rember-f eq?) 2 '(1 2 3 4 5)) -> '(1 3 4 5)
+  ; the test? can be eq? equal? eqan? eqlist? eqpair?
+  ; depending on which type of member you plan to remove.
+  ;e.g. remove number: ((rember-f eq?) 2 '(1 2 3 4 5)) -> '(1 3 4 5)
 {{< /highlight >}}
 
 Notice that this is not a well defined function yet, since we have not
@@ -285,29 +295,30 @@ invariant function:
 
 {{< highlight scheme >}}
 ;variant functions
-(define seqL
-  (lambda (new old l)
-      (cons new (cons old l))))
+  ;variant functions
+  (define seqL
+    (lambda (new old l)
+        (cons new (cons old l))))
 
-(define seqR
-  (lambda (new old l)
-      (cons old (cons new l))))
+  (define seqR
+    (lambda (new old l)
+        (cons old (cons new l))))
 
-;invariant function containing seq as an abstract place holder
-(define insert-g
-  (lambda (seq)
-      (lambda (new old l)
-        (cond
-          ((null? l) '())
-          ((eq? (car l) old)
-           (seq new old (cdr l)))
-          (else
-            (cons (car l) ((insert-g seq) new old (cdr l))))))))
+  ;invariant function containing seq as an abstract place holder
+  (define insert-g
+    (lambda (seq)
+        (lambda (new old l)
+          (cond
+            ((null? l) '())
+            ((eq? (car l) old)
+             (seq new old (cdr l)))
+            (else
+              (cons (car l) ((insert-g seq) new old (cdr l))))))))
 
-;compound function
-(define insertL (insert-g seqL))
+  ;compound function
+  (define insertL (insert-g seqL))
 
-(define insertR (insert-g seqR))
+  (define insertR (insert-g seqR))
 {{< /highlight >}}
 
 The substitution function only differs in the same position, so it can be
@@ -315,33 +326,34 @@ rewritten as:
 
 {{< highlight scheme >}}
 ;recap subst
-(define subst
-  (lambda (new old l)
-    (cond
-      ((null? l) '())
-      ((eq? (car l) old)
-       (cons new (cdr l)))
-      (else
-        (cons (car l) (subst new old (cdr l)))))))
+  ;recap subst
+  (define subst
+    (lambda (new old l)
+      (cond
+        ((null? l) '())
+        ((eq? (car l) old)
+         (cons new (cdr l)))
+        (else
+          (cons (car l) (subst new old (cdr l)))))))
 
-;firstly we define variant function
-(define seqS
-  (lambda (new old l)
-    (cons new l)))
+  ;firstly we define variant function
+  (define seqS
+    (lambda (new old l)
+      (cons new l)))
 
-;rewrite invariant function accordingly
-(define subst-f
- (lambda (seq)
-  (lambda (new old l)
-    (cond
-      ((null? l) '())
-      ((eq? (car l) old)
-       (seq new old cdr(l)))
-      (else
-        (cons (car l) (subst-f new old (cdr l)))))))
+  ;rewrite invariant function accordingly
+  (define subst-f
+   (lambda (seq)
+    (lambda (new old l)
+      (cond
+        ((null? l) '())
+        ((eq? (car l) old)
+         (seq new old cdr(l)))
+        (else
+          (cons (car l) (subst-f new old (cdr l)))))))
 
-;huh! the subst-f is identical to insert-g, so we can write as:
-(define subst (insert-g seqS))
+  ;huh! the subst-f is identical to insert-g, so we can write as:
+  (define subst (insert-g seqS))
 {{< /highlight >}}
 
 The `(rember)` function can be achieved by `(insert-g)` too, but it requires
@@ -351,24 +363,25 @@ retains the third argument, aka `(cdr l)`.
 
 {{< highlight scheme >}}
 ;invariant function with seqrem as place holder
-(define yyy
-  (lambda (a l)
-    ((insert-g seqrem) #f a l)))
+  ;invariant function with seqrem as place holder
+  (define yyy
+    (lambda (a l)
+      ((insert-g seqrem) #f a l)))
 
-(define insert-g
-  (lambda (seq)
-      (lambda (new old l)
-        (cond
-          ((null? l) '())
-          ((eq? (car l) old)
-           (seq new old (cdr l)))
-          (else
-            (cons (car l) ((insert-g seq) new old (cdr l))))))))
+  (define insert-g
+    (lambda (seq)
+        (lambda (new old l)
+          (cond
+            ((null? l) '())
+            ((eq? (car l) old)
+             (seq new old (cdr l)))
+            (else
+              (cons (car l) ((insert-g seq) new old (cdr l))))))))
 
-(define seqrem
-  (lambda (new old l)
-    l))
-;(yyy 'sausage '(pizza with sausage and bacon)) -> '(pizza with and bacon)
+  (define seqrem
+    (lambda (new old l)
+      l))
+  ;(yyy 'sausage '(pizza with sausage and bacon)) -> '(pizza with and bacon)
 {{< /highlight >}}
 
 Let's see a function with more and more isolated parts to decrease repetitive
@@ -381,54 +394,55 @@ arguments are tweaked with the arguments of `(value-f)`.
 
 {{< highlight scheme >}}
 ;value uses 1st-sub-exp
-(define 1st-sub-exp
-  (lambda (aexp)
-    (car (cdr aexp))))
+  ;value uses 1st-sub-exp
+  (define 1st-sub-exp
+    (lambda (aexp)
+      (car (cdr aexp))))
 
-;value uses 2nd-sub-exp
-(define 2nd-sub-exp
-  (lambda (aexp)
-    (car (cdr (cdr aexp)))))
+  ;value uses 2nd-sub-exp
+  (define 2nd-sub-exp
+    (lambda (aexp)
+      (car (cdr (cdr aexp)))))
 
-;atom-to-function uses operator
-(define operator
-  (lambda (aexp)
-    (car aexp)))
+  ;atom-to-function uses operator
+  (define operator
+    (lambda (aexp)
+      (car aexp)))
 
-;half abstracted function
-(define value
-  (lambda (nexp)
-    (cond
-      ((atom? nexp) nexp)
-      ((eq? (operator nexp) 'o+)
-       (+ (value-prefix (1st-sub-exp nexp))
-          (value (2nd-sub-exp nexp))))
-      ((eq? (car nexp) 'o*)
-       (* (value (1st-sub-exp nexp))
-          (value (2nd-sub-exp nexp))))
-      ((eq? (car nexp) 'o^)
-       (expt (value (1st-sub-exp nexp))
-             (value (2nd-sub-exp nexp))))
-      (else #f))))
+  ;half abstracted function
+  (define value
+    (lambda (nexp)
+      (cond
+        ((atom? nexp) nexp)
+        ((eq? (operator nexp) 'o+)
+         (+ (value-prefix (1st-sub-exp nexp))
+            (value (2nd-sub-exp nexp))))
+        ((eq? (car nexp) 'o*)
+         (* (value (1st-sub-exp nexp))
+            (value (2nd-sub-exp nexp))))
+        ((eq? (car nexp) 'o^)
+         (expt (value (1st-sub-exp nexp))
+               (value (2nd-sub-exp nexp))))
+        (else #f))))
 
-;keep abstract it with what we learned in this chapter
-(define atom-to-function
-  (lambda (atom)
-    (cond
-      ((eq? atom 'o+) +)
-      ((eq? atom 'o*) *)
-      ((eq? atom 'o^) expt)
-      (else #f))))
+  ;keep abstract it with what we learned in this chapter
+  (define atom-to-function
+    (lambda (atom)
+      (cond
+        ((eq? atom 'o+) +)
+        ((eq? atom 'o*) *)
+        ((eq? atom 'o^) expt)
+        (else #f))))
 
-;(value-f '(o+ 1 (o^ 3 4))) -> 82
-(define value-f
-  (lambda (nexp)
-    (cond
-      ((atom? nexp) nexp)
-      (else
-        ((atom-to-function (operator nexp))
-         (value-f (1st-sub-exp nexp))
-         (value-f (2nd-sub-exp nexp)))))))
+  ;(value-f '(o+ 1 (o^ 3 4))) -> 82
+  (define value-f
+    (lambda (nexp)
+      (cond
+        ((atom? nexp) nexp)
+        (else
+          ((atom-to-function (operator nexp))
+           (value-f (1st-sub-exp nexp))
+           (value-f (2nd-sub-exp nexp)))))))
 {{< /highlight >}}
 
 Here is another compound function containing more layers of abstractions, which
@@ -436,42 +450,43 @@ doesn't only call other functions, but also contains recursions on multiple cond
 
 {{< highlight scheme >}}
 (define multiremember&co
- (lambda (a lat col)
-    (cond
-      ((null? lat)
-       (col '() '()))
-      ((eq? (car lat) a)
-       (multiremember&co a (cdr lat)
-       (lambda (newlat seen)
-         (col newlat (cons (car lat) seen)))))
-      (else
-        (multiremember&co a (cdr lat)
-                          (lambda (newlat seen)
-                            (col (cons (car lat) newlat) seen)))))))
+  (define multiremember&co
+   (lambda (a lat col)
+      (cond
+        ((null? lat)
+         (col '() '()))
+        ((eq? (car lat) a)
+         (multiremember&co a (cdr lat)
+         (lambda (newlat seen)
+           (col newlat (cons (car lat) seen)))))
+        (else
+          (multiremember&co a (cdr lat)
+                            (lambda (newlat seen)
+                              (col (cons (car lat) newlat) seen)))))))
 
-(define a-friend
- (lambda (x y)
-  (null? y)))
-;(multiremember&co 'tuna '() a-friend) -> #t;
-;(multiremember&co 'tuna '(tuna) a-friend) -> #f
+  (define a-friend
+   (lambda (x y)
+    (null? y)))
+  ;(multiremember&co 'tuna '() a-friend) -> #t;
+  ;(multiremember&co 'tuna '(tuna) a-friend) -> #f
 
-;(multiremember&co 'tuna '(and tuna) a-friend) -> #f
-;in the final recursion, it gets us:
-;a=tuna
-;lat='()
-;col=
-;((lambda (newlat1 seen1)
-;   ((lambda (newlat2 seen2)
-;      (list newlat2 (cons 'foo seen2)))
-;    (cons 'bar newlat1)
-;    seen1))
-; '() '())
+  ;(multiremember&co 'tuna '(and tuna) a-friend) -> #f
+  ;in the final recursion, it gets us:
+  ;a=tuna
+  ;lat='()
+  ;col=
+  ;((lambda (newlat1 seen1)
+  ;   ((lambda (newlat2 seen2)
+  ;      (list newlat2 (cons 'foo seen2)))
+  ;    (cons 'bar newlat1)
+  ;    seen1))
+  ; '() '())
 
-;define a different continuation
-(define last-friend
- (lambda (x y)
-  (length? x)))
-;(multiremember&co 'tuna (strawberries tuna and swordfish) last-friend) -> 3
+  ;define a different continuation
+  (define last-friend
+   (lambda (x y)
+    (length? x)))
+  ;(multiremember&co 'tuna (strawberries tuna and swordfish) last-friend) -> 3
 {{< /highlight >}}
 
 The question has been also discussed on SO: [recursion - Explain the
@@ -479,107 +494,109 @@ continuation example on p.137 of The Little Schemer - Stack Overflow](https://st
 
 {{< highlight scheme >}}
 (define multiinsertLR
-  (lambda (new oldL oldR lat)
-    (cond
-      ((null? lat) '())
-      ((eq? (car lat) oldL)
-       (cons new
-             (cons oldL
-                   (multiinsertLR new oldL oldR (cdr lat)))))
-      ((eq? (car lat) oldR)
-       (cons oldR
-             (cons new
-                   (multiinsertLR new oldL oldR (cdr lat)))))
-      (else
-        (cons
-          (car lat)
-          (multiinsertLR new oldL oldR (cdr lat)))))))
+  (define multiinsertLR
+    (lambda (new oldL oldR lat)
+      (cond
+        ((null? lat) '())
+        ((eq? (car lat) oldL)
+         (cons new
+               (cons oldL
+                     (multiinsertLR new oldL oldR (cdr lat)))))
+        ((eq? (car lat) oldR)
+         (cons oldR
+               (cons new
+                     (multiinsertLR new oldL oldR (cdr lat)))))
+        (else
+          (cons
+            (car lat)
+            (multiinsertLR new oldL oldR (cdr lat)))))))
 
-(define multiinsertLR&co
-  (lambda (new oldL oldR lat col)
-    (cond
-      ((null? lat)
-       (col '() 0 0))
-      ((eq? (car lat) oldL)
-       (multiinsertLR&co new oldL oldR (cdr lat)
-                         (lambda (newlat L R)
-                           (col (cons new (cons oldL newlat))
-                                (+ 1 L) R))))
-      ((eq? (car lat) oldR)
-       (multiinsertLR&co new oldL oldR (cdr lat)
-                         (lambda (newlat L R)
-                           (col (cons oldR (cons new newlat))
-                                L (+ 1 R)))))
-      (else
-        (multiinsertLR&co new oldL oldR (cdr lat)
-                          (lambda (newlat L R)
-                            (col (cons (car lat) newlat)
-                                 L R)))))))
-;some collectors
-(define col1
-  (lambda (lat L R)
-    lat))
-(define col2
-  (lambda (lat L R)
-    L))
-(define col3
-  (lambda (lat L R)
-    R))
+  (define multiinsertLR&co
+    (lambda (new oldL oldR lat col)
+      (cond
+        ((null? lat)
+         (col '() 0 0))
+        ((eq? (car lat) oldL)
+         (multiinsertLR&co new oldL oldR (cdr lat)
+                           (lambda (newlat L R)
+                             (col (cons new (cons oldL newlat))
+                                  (+ 1 L) R))))
+        ((eq? (car lat) oldR)
+         (multiinsertLR&co new oldL oldR (cdr lat)
+                           (lambda (newlat L R)
+                             (col (cons oldR (cons new newlat))
+                                  L (+ 1 R)))))
+        (else
+          (multiinsertLR&co new oldL oldR (cdr lat)
+                            (lambda (newlat L R)
+                              (col (cons (car lat) newlat)
+                                   L R)))))))
+  ;some collectors
+  (define col1
+    (lambda (lat L R)
+      lat))
+  (define col2
+    (lambda (lat L R)
+      L))
+  (define col3
+    (lambda (lat L R)
+      R))
 
-; Examples of multiinsertLR&co
-(multiinsertLR&co 'salty 'fish 'chips '(chips and fish or fish and chips)  col1)
-;-> '(chips salty and salty fish or salty fish and chips salty)
-(multiinsertLR&co  'salty  'fish  'chips  '(chips and fish or fish and chips)  col2)
-;-> 2
-(multiinsertLR&co  'salty 'fish 'chips '(chips and fish or fish and chips) col3)
-;-> 2
+  ; Examples of multiinsertLR&co
+  (multiinsertLR&co 'salty 'fish 'chips '(chips and fish or fish and chips)  col1)
+  ;-> '(chips salty and salty fish or salty fish and chips salty)
+  (multiinsertLR&co  'salty  'fish  'chips  '(chips and fish or fish and chips)  col2)
+  ;-> 2
+  (multiinsertLR&co  'salty 'fish 'chips '(chips and fish or fish and chips) col3)
+  ;-> 2
 {{< /highlight >}}
 
 {{< highlight scheme >}}
 ;(evens-only* '((9 1 2 8) 3 10 ((9 9) 7 6) 2)) -> '((2 8) 10 (() 6) 2)
-(define evens-only*
-  (lambda (l)
-    (cond
-      ((null? l) '())
-      ((atom? (car l))
-       (cond
-         ((even? (car l))
-          (cons (car l)
-                (evens-only* (cdr l))))
-         (else
-           (evens-only* (cdr l)))))
-      (else
-        (cons (evens-only* (car l))
-              (evens-only* (cdr l)))))))
+  ;(evens-only* '((9 1 2 8) 3 10 ((9 9) 7 6) 2)) -> '((2 8) 10 (() 6) 2)
+  (define evens-only*
+    (lambda (l)
+      (cond
+        ((null? l) '())
+        ((atom? (car l))
+         (cond
+           ((even? (car l))
+            (cons (car l)
+                  (evens-only* (cdr l))))
+           (else
+             (evens-only* (cdr l)))))
+        (else
+          (cons (evens-only* (car l))
+                (evens-only* (cdr l)))))))
 
-;define *&co function
-(define evens-only*&co
-  (lambda (l col)
-    (cond
-      ((null? l)
-       (col '() 1 0))
-      ((atom? (car l))
-       (cond
-         ((even? (car l))
-          (evens-only*&co (cdr l)
-                          (lambda (newl p s)
-                            (col (cons (car l) newl) (* (car l) p) s))))
-         (else
-           (evens-only*&co (cdr l)
-                           (lambda (newl p s)
-                             (col newl p (+ (car l) s)))))))
-      (else
-        (evens-only*&co (car l)
-                        (lambda (al ap as)
-                          (evens-only*&co (cdr l)
-                                          (lambda (dl dp ds)
-                                            (col (cons al dl)
-                                                 (* ap dp)
-                                                 (+ as ds))))))))))
-(define evens-friend
-  (lambda (e p s)
-    e))
+  ;define *&co function
+  (define evens-only*&co
+    (lambda (l col)
+      (cond
+        ((null? l)
+         (col '() 1 0))
+        ((atom? (car l))
+         (cond
+           ((even? (car l))
+            (evens-only*&co (cdr l)
+                            (lambda (newl p s)
+                              (col (cons (car l) newl) (* (car l) p) s))))
+           (else
+             (evens-only*&co (cdr l)
+                             (lambda (newl p s)
+                               (col newl p (+ (car l) s)))))))
+        (else
+          (evens-only*&co (car l)
+                          (lambda (al ap as)
+                            (evens-only*&co (cdr l)
+                                            (lambda (dl dp ds)
+                                              (col (cons al dl)
+                                                   (* ap dp)
+                                                   (+ as ds))))))))))
+  (define evens-friend
+    (lambda (e p s)
+      e))
 
-;(evens-only*&co '((9 1 2 8) 3 10 ((9 9) 7 6) 2) evens-friend)
-; -> '((2 8) 10 (() 6) 2)
+  ;(evens-only*&co '((9 1 2 8) 3 10 ((9 9) 7 6) 2) evens-friend)
+  ; -> '((2 8) 10 (() 6) 2)
 {{< /highlight >}}

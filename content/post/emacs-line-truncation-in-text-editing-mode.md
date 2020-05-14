@@ -2,7 +2,7 @@
 title = "Overview: Emacs line truncation in text editing 【Emacs org 换行/对齐/排版  汇总指南】"
 summary = "Line visualization and navigation settings in Emacs text editing."
 date = 2019-09-17T12:53:00+01:00
-lastmod = 2020-05-11T02:29:12+01:00
+lastmod = 2020-05-14T21:09:19+01:00
 tags = ["Emacs", "Org-mode"]
 categories = ["TECH"]
 draft = false
@@ -56,14 +56,15 @@ This may help you decide your configuration:
 
 {{< highlight emacs-lisp >}}
 ;; unfill paragraph: the opposite of fill-paragraph
-(defun y:unfill-paragraph-or-region (&optional region)
-  "Takes a multi-line paragraph and makes it into a single line of text."
-  (interactive (progn (barf-if-buffer-read-only) '(t)))
-  (let ((fill-column (point-max))
-        ;; This would override `fill-column' if it's an integer.
-        (emacs-lisp-docstring-fill-column t))
-    (fill-paragraph nil region)))
-(define-key global-map "\M-Q" 'y:unfill-paragraph-or-region)
+  ;; unfill paragraph: the opposite of fill-paragraph
+  (defun y:unfill-paragraph-or-region (&optional region)
+    "Takes a multi-line paragraph and makes it into a single line of text."
+    (interactive (progn (barf-if-buffer-read-only) '(t)))
+    (let ((fill-column (point-max))
+          ;; This would override `fill-column' if it's an integer.
+          (emacs-lisp-docstring-fill-column t))
+      (fill-paragraph nil region)))
+  (define-key global-map "\M-Q" 'y:unfill-paragraph-or-region)
 {{< /highlight >}}
 
 • More helpful packages about line breaking：

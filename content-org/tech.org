@@ -19,29 +19,37 @@
 My personal experience of blogging with Emacs/Spacemacs and plug-in ox-hugo, along with some explanation of Hugo's working structure.
 #+end_description
 
-There have been many good articles talking about using ~ox-hugo~ to help with
-efficient blog-writing in Emacs/Spacemacs. I read these articles carefully
-several times and feel pretty confident using ox-hugo, so I would strongly
-recommend you give them a look:
+There have been many excellent articles talking about using ~ox-hugo~ to help with efficient blog-writing in Emacs/Spacemacs. I read these articles carefully several times and feel pretty confident using ox-hugo, so I would strongly recommend you give them a look:
 
-[[/img/Hugo blogging with Ox-hugo 8.png]]
-This is true for many cases, but no, not for Hugo or ~ox-hugo~. Ox-hugo has an amazing official documentation! (Mr.Kaushal I know you occasionally search ~ox-hugo~ related articles in all different languages. If you happen to read this, thank you!)
+[[/img/Hugo blogging with Ox-hugo 8.png]] This is true for many cases, but no, not for Hugo or ~ox-hugo~. Ox-hugo has fantastic official documentation! (Mr.Kaushal I know you occasionally search ~ox-hugo~ related articles in all different languages. If you happen to read this, thank you!)
 
-• [[https://ox-hugo.scripter.co/][ox-hugo official documentation]] is very well written. The author carefully demonstrates not only all basics of using ~ox-hugo~, but also some killer choices to improvise. 
+• [[https://ox-hugo.scripter.co/][ox-hugo official documentation]] is very well written. The author carefully demonstrates not only the basics of using ~ox-hugo~, but also some killer choices to improvise.
 
 • [[https://gtpedrosa.github.io/blog/using-org-mode-and-ox-hugo-to-replace-markdown-in-hugo-workflow][USING ORG MODE AND OX-HUGO TO REPLACE MARKDOWN IN HUGO WORKFLOW]] and the three other articles mentioned are very helpful to me too.
 
-• [[https://www.kengrimes.com/ox-hugo-tutorial/][Ken's ox-hugo tutorial]] is the source of some of my sections mentioned below, which you can see the snapshots are directly from Ken's blog. I re-edit it to help understand the logic of the section tree. 
+• [[https://www.kengrimes.com/ox-hugo-tutorial/][Ken's ox-hugo tutorial]] is the source of some of my sections mentioned below, which you can see the snapshots are directly from Ken's blog. I re-edit it to help understand the logic of the section tree.
  
-The content of this article comes from the Hugo official documentation along
-with the above articles. I am writing in Chinese because I noticed that there
-haven't been many Chinese articles talking about Hugo and ~ox-hugo~. If you are
-proficient English readers, the official documentation and links above should be more than
-enough to get things done.
+The content of this article comes from the Hugo official documentation along with the above articles. I am writing in Chinese because I noticed that there have not been many Chinese articles talking about Hugo and ~ox-hugo~. If you are proficient in English reading, the official documentation and links above should be more than enough to get things done.
 
-我放弃 Hexo，安装 Hugo 的最初目的还是想用它配合 Emacs-org-mode 来写博客记笔记。灵感来自[[https://zilongshanren.com/post/move-from-hexo-to-hugo/][子龙山人]]和[[https://www.xianmin.org/post/ox-hugo/][贤民]]两位老师的博客，具体的安装和使用心得二位已经介绍的非常详细，仔细读完会受益良多。本着不再重复造轮子的原则，这篇文章我想简单写写学习中遇到到有用的东西：Hugo 原生的结构设计；Hugo 与 ~ox-hugo~ 的对接原理；在 Emacs/Spacemacs 使用 ox-hugo 帮助我们在 org-mode 以极高的效率写博客并发表。
 
-在阅读本文之前，强烈推荐阅读开头推荐的三部分内容。本篇博客主要就是整理了加工了一些来自 Hugo 官网，和以上三篇文章的内容，并配以更直观的图片帮助理解。对我来说 ox-hugo+org-mode 最牛的地方的在于高度集成 org-mode 有一个优秀的原生功能是通 tags 等功能，用一个大文件+一二三四五级小标题就能管理一个文本文件树。具体到本文就是，通过一个文件管理整个网站的内容撰写。这是作者力荐的写作方式，也是他编写这个插件的主要初衷。比起各种单个文件组成的零散网站管理模式，这个结构更清晰，管理更容易，搜索 toggle 都十分方便。作者用 ~ox-hugo~ 的官网直接展示了样版：
+我放弃 Hexo，安装 Hugo 的最初目的，是因为 Hugo 的 Emacs 插件支持非常好。我的所有文本
+工作都用 Emacs 在管理，有了 Ox-hugo 这种插件就可以配合 Emacs-org-mode 来无缝衔接博客
+记笔记。配置灵感来自[[https://zilongshanren.com/post/move-from-hexo-to-hugo/][子龙山人]]和[[https://www.xianmin.org/post/ox-hugo/][贤民]]两位老师的博客，具体的安装和使用心得二位已经介
+绍的非常详细，仔细读完会受益良多。
+
+本着不再重复造轮子的原则，这篇文章我想简单写写学习中遇到到有用的东西：Hugo 原生
+的结构设计；Hugo 与 ~ox-hugo~ 的对接原理；在 Emacs/Spacemacs 使用 Ox-hugo 帮助我们在 org-mode 以极高的效率写博客并发表。在阅读本文之前，强烈推荐阅读开头推荐的三部分内容。本篇文章主要就是整理了加工了一
+些来自 Hugo 官网，和以上三篇文章的内容，并配以更直观的图片帮助理解。
+
+Emacs Org-mode 有
+一个优秀的原生功能是，可以用一个大文件加上多级别小标题，就能很方便的管理（包括编
+写，搜索，透视等等）一个超大型的文本文件树。对我来说
+Ox-hugo 最牛的地方的在于, 它把 org-mode 原生的强大功集成到网站编写里来。也就是说，
+我们也可以通过一个文件管理整个网站的内容撰写。这是 Ox-hugo 这个插件的作者力荐的
+写作方式，也是他编写这个插件的主要初衷。比起各种单个文件组成的零散网站的文本管理
+模式，一个文件树的结构更清晰，管理更容易。作者用 ~ox-hugo~ 的官网直接展示了一个
+大型文件网站的样版：
+
 [[https://ox-hugo.scripter.co/doc/why-ox-hugo/][Why ox-hugo? — ox-hugo - Org to Hugo exporter - https://ox-hugo.scripter.co/]]
 
 这样的结构配合上一些 Emacs 自带的 killer 功能例如 ~writeroom-mode~,
@@ -50,17 +58,25 @@ enough to get things done.
 
 *** 0. Org markup syntax and killer reference card
 -----
-我对 org-mode 语法细节记忆仍然感觉十分困难。官网给了零星几个常见的语法
-参考，但是 org-mode 能定制格式花样的远不止于此。我在此给出一个终极解决方式：参考网站原文的
-org file。网站 org 源码从 org markup 形式到 hugo section 的 front information 都有涵盖，在网站
-看到想要的格式去原文直接搜索照搬即可：
-Most efficient way to use org syntax is digging source samples from the official website:
+我一直都很难记住 org-mode 所有语法细节。官网给了零星几个常见的语法
+参考，但是 org-mode 能定制格式花样的远不止于此。所以当 org-mode 写作记不起语
+法的时候，我给出一个终极解决方式：参考这个网站原文的 org file。网站 org 源码从
+org markup 形式到 hugo section 的 front information 都有涵盖，在网站
+看到想要的格式去原文直接搜索照搬即可。
+
+Most efficient way to use org syntax is digging source samples from the official
+website:
+
 [[https://ox-hugo.scripter.co/doc/hugo-section/][Full website]]
+
 [[https://raw.githubusercontent.com/kaushalmodi/ox-hugo/master/doc/ox-hugo-manual.org][Full website source file]]
 
 *** 1. Front matter 页首信息
 -----
-Hugo 本身其实支持直接把.org 文件渲染成 HTML 发布，但是许多人提到其实支持得不是很好。Hugo 支持最好的 markdown 语法类型是 blackfriday markdown。对很多 Emacs user 来说 org-mode 就像把有力的大锤，碰上跟写作沾边的任务不能抡一下是很遗憾的。所以可以使用这款非常棒的后端插件 ~ox-hugo~ 来支持 org-mode 写博文。它的解决方式是：把 org 文件转成 blackfriday markdown, 然后再生成 HTML 文件。首先我们详细看 ~ox-hugo~ 官网对其功能的解说：
+Hugo 本身其实支持直接把.org 文件渲染成 HTML 发布，但是许多人提到其实支持得不是很
+好。Hugo 支持最好的 markdown 语法类型是 blackfriday markdown。对很多 Emacs user
+来说 org-mode 就像把有力的大锤，碰上跟写作沾边的任务不能抡一下是很遗憾的。所以就
+有了这款非常棒的后端插件 ~ox-hugo~ 来支持 org-mode 写博文。它的解决方式是：把 org 文件转成 blackfriday markdown, 然后再生成 HTML 文件。首先我们详细看 ~ox-hugo~ 官网对其功能的解说：
 
 #+begin_quote
 According to the information documentation, ~ox-hugo~ is an Org exporter backend that exports Org to Hugo-compatible Markdown (Blackfriday) and also generates the front matter (in TOML or YAML format).
@@ -96,7 +112,8 @@ Hugo will automatically add front matter information at the top of the article l
     }
 #+end_src
 	
-所以想用 org 进行 blog 写作，也需要定义自己的 front matter. 但是 org file 里 front matter 语法如下
+所以想用 org 进行写作，也需要定义自己的 front matter. 但是 org 语法里 front
+matter 定义如下
 #+begin_src lisp
 :PROPERTIES:
 :EXPORT_FILE_NAME: ox-hugo-tutorial
@@ -106,35 +123,36 @@ Hugo will automatically add front matter information at the top of the article l
 #+end_src
 
 以 ~:properties:~ 这块为代表的代码就是 org 以自己的方式定义 meta
-information。~ox-hugo~ 会解析改写这个这些代码以生成 hugo 可以识别的 YAML 等 front matter.
+information。=(ox-hugo)= 会解析改写这个这些代码以生成 hugo 可以识别的 YAML 等 front matter.
 Ox-hugo 一般要求至少要有 ~:EXPORT_FILE_NAME:~ 。我们需要通过这个命令告诉
-ox-hugo"有新的标题和内容需要去导出"。
+ox-hugo “有新的标题和内容需要去导出”。
 
 *** 2. Don't get confused 易混淆的概念
 接下来这个问题可能对多大多数前端 coder 和 Emacs 熟练手都不是问题，但是这两个段头部代码被我着实混淆了一阵：
 	
 通用 Front matter 主管面向一个 article 内部的性质设置，例如写作作者，写作日期，写作 tag。Heading information 例如 ~#+hugo_base_dir~ 的概念局限于 ~ox-hugo~ 里，是遵从
 org-mode 特色的命名方式设计的变量，类似的语法在其他 org 文章的管理信息中也可以
-看到。而 front-matter 这些变量
-在 markdown，网页 config file 等其它文件里都有。只是 ~:PROPERTIES:~ 这种表达形式
-是 ox-hugo 特色写法。换做 org 支持的另一种 projectile 导出 HTML 的 front matter 可能是这样:base-directory "~/Dropbox/org/blog/".
+看到。
+
+而 front-matter 这些变量
+在 markdown，网页配置等其它文件里都有。只是 ~:PROPERTIES:~ 这种表达形式
+是 ox-hugo 特色写法。换做 org 支持的另一种 projectile 导出 HTML 的 front matter
+可能是这样: =（base-directory "~/Dropbox/org/blog/")=.
 
 *** 3. Content type
 -----
-	Content type 就是一系列不同的表达式样（layout），根据我们指定的不同的 section type 有不同表达式样法则，这里暂且把 section 翻译成一个网站下的不同栏目，例如 blog，photo，quote，post，about，tages 或者其它你想自定义的栏目。Hugo 通过 front-matter 支持这些不尽相同的 content type。
+Content type 就是一系列不同的表达式样（layout），根据我们指定的不同的 section type 有不同表达式样法则，这里暂且把 section 翻译成一个网站下的不同栏目，例如 blog，photo，quote，post，about，tages 或者其它你想自定义的栏目。Hugo 通过 front-matter 支持这些不尽相同的 content type。
 	
-	Hugo 认为每个栏目最好只做同一件事情，例如照片专栏只发发照片，post 专栏集中发文章。所以除非我们自定义，hugo 指定每个栏目的子单元都会自动继承一些此专栏 pre-defined 的特性，这样能最大限度的重复使用一个定义好的栏目，同时尽量减小‘config 每个栏目’工作。
+Hugo 认为每个栏目最好只做同一件事情，例如照片专栏只发发照片，post 专栏集中发文章。所以除非我们自定义，hugo 指定每个栏目的子单元都会自动继承一些此专栏 pre-defined 的特性，这样能最大限度的重复使用一个定义好的栏目，同时尽量减小‘config 每个栏目’工作。
 	
-	设定 content type: 只需在源文件的头部引用 hugo 提供的 heading
-	information/metadata information（即 front matter）即可，能迅速方便的修改一
-	两个页面的 layout。如果不能满足需求，可用 hugo 提供的自定义设置 archetypes，
-	按照 hugo 指定的结构组合方式，编写正确的_index.md 文件拼接好一个网站的
-	layout 即可。 
+设定 content type: 只需在源文件的头部引用 hugo 提供的 front matter 即可，能迅速方便的修改一
+两个页面的版式。如果不能满足需求，可用 hugo 提供的自定义设置 archetypes，
+按照 hugo 指定的结构组合方式，编写正确的_index.md 文件拼接好一个网站的
+layout 即可。 
 	
-	如果你没有指定表达式样，比如暂时不太在乎如何展示 photo 这个栏目，Hugo 有这么
-	一个 default 设定：在 front matter 大部分信息缺乏的时候，通过每个文章存储
+如果你没有指定表达式样，比如暂时不太在乎如何展示 photo 这个栏目，Hugo 有一个默认设定：在 front matter 大部分信息缺乏的时候，通过每个文章存储
 path 或者所在 section 猜出给这篇文章赋予什么 layout。这会让我们在迅速上手写
-	作 blog 的时候非常省心。
+作 blog 的时候非常省心。
 
 *** 4. Page bundles
 -----
@@ -147,7 +165,7 @@ path 或者所在 section 猜出给这篇文章赋予什么 layout。这会让�
 
 *** 5. Section and nested section
 -----	
-Section 是一组页面的集合称呼，一般被放在 content 文件夹下面，就是上文提到的‘内容结构组织’的组成单元。从 default 设定来讲，content 下面的每个一级文件夹自成一个 root section。同时上面也提到 section 可以嵌套，即在一级文件夹下方再建二级 section 文件，构成一个更深层的 section。
+Section 是一组页面的合集称呼，一般被放在 content 文件夹下面，就是上文提到的‘内容结构组织’的组成单元。从 default 设定来讲，content 下面的每个一级文件夹自成一个 root section。同时上面也提到 section 可以嵌套，即在一级文件夹下方再建二级 section 文件，构成一个更深层的 section。
     
 	
 	那么问题来了，hugo 是如何知道 nested section 呢? 答案是：通过文件夹里要有_index.md 文件指定结构的设定。依此原理可以构建三级四级更深的 section 目录。 为了确保每一级网页都能被导览正确的链接到，每个最底层的文件夹里都要至少包含一个有内容文件，例如_index.md.
@@ -215,17 +233,17 @@ index.md 刚好与之对应：分类的 index page 提供了所有需要的分�
 Using Wercker to for automated website code build and deployment
 #+end_description
 
-The automated static website generators (e.g. Octopress, Hexo and Hugo) have made *website building and maintaining* way more relaxed than before. The workflow has been simplified to: write and save markdown -- preview on the localhost 1313 -- generate the ~/public (HTML) file -- push to a remote server (GitHub) -- backup source code. 
+The automated static website generators (e.g., Octopress, Hexo, and Hugo) have made *website building and maintaining* way more relaxed than before. The workflow has been simplified to: write and save markdown -- preview on the localhost 1313 -- generate the ~/public (HTML) file -- push to a remote server (GitHub) -- backup source code.
 
-If one considers all technicalities, there are still many questions worth discussing to make this process more efficient, such as (1) which is the best way to host HTML files and source code files (2) which is the better way to automate the procedure.
+If one considers all technicalities, there are still many questions worth discussing to make this process more efficient, such as (1) which is the best way to host HTML files and source code files (2), which is the better way to automate the procedure.
 
-I used to use Hexo where three things need to be tracked separately:  source code and ~/public file (both updated for every article), forked/cloned theme (updated according to theme author) and Hexo generator. I have to use git submodules to track everything. Soon, the hustle and page generation speed make me convert to Hugo. Hugo requires only a binary file to generate a website, with which the update cannot be more straightforward: you download a new .exe file and replace the old one. The updated theme can be manually merged as long as the site config.toml file is well preserved. 
+I used to use Hexo where three things need to be tracked separately: source code and ~/public file (both updated for every article), forked/cloned theme (updated according to theme author), and Hexo generator. I have to use git submodules to track everything. Soon, the hustle and page generation speed make me convert to Hugo. Hugo requires only a binary file to generate a website, with which the update cannot be more straightforward: you download a new .exe file and replace the old one. The updated theme can be manually merged as long as the site config.toml file is well preserved.
 
-Let's go back to the first issue. The Hugo official manual has given two way to publish ~/public file: (1) using Master branch of user.github.io to host /doc (instead of public) folder, which is the easiest one to me; (2) using gh-pages and the advantage of this method is that allows you to have another branch hosting source code in the same repo. I fail to generate /doc file somehow, but it gives me a chance to try Wercker, which surprisingly allows me to achieve the first method with the same advantages of the second method. Long story short, now I am using the Master branch of user.github.io to host ~/public file and dev branch to host source file.
+Let's go back to the first issue. The Hugo official manual has given two way to publish ~/public file: (1) using Master branch of user.github.io to host /doc (instead of public) folder, which is the easiest one to me; (2) using gh-pages and the advantage of this method is that allows you to have another branch hosting source code in the same repo. I fail to generate /doc file somehow, but it gives me a chance to try Wercker, which surprisingly allows me to achieve the first method with the same advantages as the second method. Long story short, now I am using the Master branch of user.github.io to host ~/public file and dev branch to host source file.
 
-My answer to the second issue is using Wercker. It will automatically go to your source code repo and build the ~/public folder and deploy the website. So the process mentioned at the beginning of this article becomes even easier: write and save an article in markdown -- push the whole source code to the remote repo. This means you do NOT need to generate and deploy in the local terminal any more. Wercker does the work every time it detects a new push on the designated repo on the remote server. The script  wercker.yml (generated and pushed by you) will tell Wercker precisely how and where to build and deploy. There're also other popular continuous integration tools such as Travis CI, Jenkins which has advantages at different aspects such as free usage, commercial stability, running speed and etc. I choose to use wercker based on my needs.
+My answer to the second issue is using Wercker. It will automatically go to your source code repo and build the ~/public folder and deploy the website. So the process mentioned at the beginning of this article becomes even easier: write and save an article in markdown -- push the full source code to the remote repo. This means you do NOT need to generate and deploy in the local terminal anymore. Wercker does the work every time it detects a new push on the designated repo on the remote server. The script wercker.yml (generated and pushed by you) will tell Wercker precisely how and where to build and deploy. There are also other popular continuous integration tools such as Travis CI, Jenkins, which has advantages at different aspects such as free usage, commercial stability, running speed and etc. I choose to use wercker based on my needs.
 
-The Hugo instruction [[https://gohugo.io/hosting-and-deployment/deployment-with-wercker/]] is very detailed and well written, and you should be quite clear before the 'Configure Access' section. The Wercker has changed quite a bit in the generating wercker.yml part. You do NOT HAVE to search and choose boxes or steps to build and deploy. The default script contains the box information, and it can be modified unless you don't like it. The build and deploy part are generated separately in the workflow section (press CTRL and + to see the bigger picture) [[D:/Hugo/myblog/static/img/Hugo blogging with werecker 1.png]] 
+The Hugo instruction [[https://gohugo.io/hosting-and-deployment/deployment-with-wercker/]] is very detailed and well written, and you should be quite clear before the 'Configure Access' section. The Wercker has changed quite a bit in the generating wercker.yml part. You do NOT HAVE to search and choose boxes or steps to build and deploy. The default script contains the box information, and it can be modified unless you don't like it. The build and deploy part are generated separately in the workflow section (press CTRL and + to see the bigger picture) [[D:/Hugo/myblog/static/img/Hugo blogging with werecker 1.png]]
 
 Here is my wercker.yml:
 
@@ -273,7 +291,7 @@ Notice the name 'build' and 'deploy' in the workflow above need to be the same w
 
 You can also add a local deploy.sh to make source code push easier too:
 
-#+begin_src bash
+#+begin_src 
   #!/bin/bash
   cd ~/Hugo/myblog/
 
@@ -289,7 +307,6 @@ You can also add a local deploy.sh to make source code push easier too:
 
   # Push source and build repos.
   git push origin -u dev
-
 #+end_src
 
 Happy hacking! :)
@@ -755,42 +772,29 @@ This may help you decide your configuration:
 Overview of text process tools in org-mode.
 #+end_description
 
-People discuss the most efficient way text management methods for a number of reasons: someone wants to build a digitalized notebook for new
-knowledge; Someone wants to manage the increasing case files in office work;
-Someone wants to archive thousands of articles they hoard on the internet. Either
-way, I call that 'text digesting system' or 'personal wiki'. Buckle up, I got
-some strong opinions about this topic. 
+People discuss the most efficient way to manage text files for several reasons: apart from programming, someone wants to build a digitalized notebook for new knowledge; Someone wants to manage the increasing case files in office work; Someone wants to archive thousands of articles they hoard on the internet. Either way, I call that 'text digesting system' or 'personal wiki'. Buckle up, I got some strong opinions about this topic.
 
-I think we all have been struggling in choosing tools: some excel at
-supporting markdown, some are good at coding highlighting, some support
-real-time online collaboration or even text searching in images. If one has not used Emacs, I would probably
-recommend Evernote or Onenote. But if you're an Emacs user, this is the chance of
-tasting the one-for-all solution.
+I think we all have been struggling in choosing tools: some excel at supporting markdown (pycharm, Rstudio), some are good at coding highlighting (VS code, Notepad++), some support real-time online collaboration (Overleaf, Github) or even text searching in images (MS Onenote, Goodnotes in Apple). If one has not used Emacs, I would probably recommend Evernote or Onenote. But if you are an Emacs user, this is the chance of tasting the one-for-all solution.
 
-This image is an =irresponsible, persponal experiece based= summary of tool
-learning curve:
-[[/img/text.png]]
+Caveat: this image is an =extremly personal experience based= summary of the tool learning curve: [[/img/text.png]]
 
-On *methdological* level, my argument of recommending is that Emacs is the tool
-which has the most potential to facilitate you to manage all level of text work:
-from a TODO shopping list, to a one-person wikipedia.
+On *methodological* level, my argument of recommending is that Emacs is the tool which has the most potential to facilitate you to manage all level of text work: from a TODO shopping list to a one-person Wikipedia.
 
-On *technical* level, Emacs org-mode meets different needs with all types of
-packages. For example:
+On *technical* level, Emacs org-mode meets different needs with all types of packages. For example:
 
 • To take note speech: input in org-mode
 
 • To memorize knowledge: Anki + Anki-editor
 
 • To classify: categories and tags
-
+ 
 • To search: helm-ag + regex
 
 • To visualize structure: Knowledge Graph; Daft; NotDeft; etc.
 
 • To present in slides: Org-reveal
 
-• To generate static website: Hugo + Ox-hugo 
+• To generate static website: Hugo + Ox-hugo
 
 *** 0. General opinion
 Although as many merits mentioned above, Emacs is a tool which takes years to
@@ -874,8 +878,9 @@ https://github.com/]]
 
 *** 4. Anki
 -----
-#+MACRO: color @@HTML:<span style="color:$1">$2</span>
 I have written a seperate article of Anki in this blog:
+[[https://sheishe.xyz/post/using-anki-editor-to-build-flashcard-in-org-mode/][Using
+Anki-editor to build flashcard in Emacs Org-mode]]
 
 ** DONE Using Anki-editor to build flashcard in Emacs Org-mode 【用 Anki-editor 在 Emacs Org-mode 中生成复杂记忆卡片】 :@TECH:windows:org_mode:Anki:Emacs:
    CLOSED: [2019-09-30 Mon 23:54]
@@ -2411,9 +2416,11 @@ continuation example on p.137 of The Little Schemer - Stack Overflow]]
 ; -> '((2 8) 10 (() 6) 2)
 #+end_src
 ** DONE The Little Schemer speedy referring note (3/3)                :@TECH:
+   CLOSED: [2020-01-06 Mon 17:44] 
    :PROPERTIES:
    :EXPORT_FILE_NAME: The-little-schemer-note-3-3
    :END:
+   - State "TODO"       from "DONE"       [2020-01-06 Mon 17:44]
    :LOGBOOK:
    - State "DONE"       from "DONE"       [2020-01-06 Mon 01:56]
    :END:
@@ -3145,11 +3152,19 @@ plug-in can help achieve.
 
 (5). Auto deployment
 
+There are many automated deployment tools online, I use Werecker and I wrote an
+article about the details:
+[[http://localhost:1313/post/hugo-blogging-with-wercker-auto-build-deployment/][Hugo Blogging with Wercker Auto Build & Deployment 【用 Wercker 自动部署网站】-Katherine He Blog|何琪的博客]]
+
 (6). Search Engine Optimization
 
 (7). Redevelopment of website theme
 
 (8). Emacs users with ox-hugo
+
+I have written an article about this in another post:
+[[https://sheishe.xyz/post/hugo-blogging-with-ox-hugo/][Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】-Katherine He Blog|何琪的博客]]
+
 ** TODO Why setting new keybinding sometimes is not replacing in Emacs
    :PROPERTIES:
    :EXPORT_FILE_NAME: why-setting-new-keybinding-sometimes-is-not-replacing-in-emacs
@@ -3157,9 +3172,13 @@ plug-in can help achieve.
 
 Many people have been thinking about setting new keybindings when they find the traditional Emacs have many rather unconventional short cut keys.  
 
-** TODO Emacs dotfile loading mechanism in Windows system
+** DONE Emacs dotfile loading mechanism in Windows system
+   CLOSED: [2020-05-11 Mon 02:29]
    :PROPERTIES:
    :EXPORT_FILE_NAME: emacs-dotfile-loading-mechanism-in-windows-system
+   :END:
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2020-05-11 Mon 02:29]
    :END:
 
 This post is about =(default directory)=.
