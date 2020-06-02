@@ -1,13 +1,11 @@
 +++
 title = "The Little Schemer speedy referring note (3/3)"
 date = 2020-01-06T17:44:00+00:00
-lastmod = 2020-05-14T21:09:20+01:00
+lastmod = 2020-06-02T17:08:38+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
 +++
-
--   State "TODO"       from "DONE"       <span class="timestamp-wrapper"><span class="timestamp">[2020-01-06 Mon 17:44]</span></span>
 
 The former chapters can be easily understood from reading the code without
 counting parenthesis. **However from this chapter, it is highly recommended to
@@ -37,28 +35,27 @@ Here is an example of failed design: the `(keep-looking)` calls `(pick)` to see 
 
 {{< highlight scheme >}}
 ;pick return n-th element in lat:
-  ;pick return n-th element in lat:
-  (define pick
-    (lambda (n lat)
-      (cond
-        ((zero? (sub1 n)) (car lat))
-        (else
-          (pick (sub1 n) (cdr lat))))))
+(define pick
+  (lambda (n lat)
+    (cond
+      ((zero? (sub1 n)) (car lat))
+      (else
+        (pick (sub1 n) (cdr lat))))))
 
-  (define keep-looking
-    (lambda (a sorn lat)
-      (cond
-        ((number? sorn)
-         (keep-looking a (pick sorn lat) lat))
-        (else (eq? sorn a )))))
+(define keep-looking
+  (lambda (a sorn lat)
+    (cond
+      ((number? sorn)
+       (keep-looking a (pick sorn lat) lat))
+      (else (eq? sorn a )))))
 
-  (define looking
-    (lambda (a lat)
-      (keep-looking a (pick 1 lat) lat)))
+(define looking
+  (lambda (a lat)
+    (keep-looking a (pick 1 lat) lat)))
 
-  ; Example of looking
-  (looking 'caviar '(6 2 4 caviar 5 7 3))         ; #t
-  (looking 'caviar '(6 2 grits caviar 5 7 3))     ; #f
+; Example of looking
+(looking 'caviar '(6 2 4 caviar 5 7 3))         ; #t
+(looking 'caviar '(6 2 grits caviar 5 7 3))     ; #f
 {{< /highlight >}}
 
 In the first test case we can find that, the `'caviar` is the 4th element in the
@@ -74,43 +71,42 @@ the second component.
 
 {{< highlight scheme >}}
 (define first
-  (define first
-    (lambda (p)
-      (car p)))
+  (lambda (p)
+    (car p)))
 
-  (define second
-    (lambda (p)
-      (car (cdr p))))
+(define second
+  (lambda (p)
+    (car (cdr p))))
 
-  (define build
-    (lambda (s1 s2)
-      (cons s1 (cons s2 '()))))
+(define build
+  (lambda (s1 s2)
+    (cons s1 (cons s2 '()))))
 
-  ;(shift '((a b) c)) -> '(a (b c))
-  ;(shift '((a b) (c d))) -> '(a (b (c d)))
-  (define shift
-    (lambda (pair)
-      (build (first (first pair))
-        (build (second (first pair))
-          (second pair)))))
+;(shift '((a b) c)) -> '(a (b c))
+;(shift '((a b) (c d))) -> '(a (b (c d)))
+(define shift
+  (lambda (pair)
+    (build (first (first pair))
+      (build (second (first pair))
+        (second pair)))))
 
-  (define a-pair?
-    (lambda (x)
-      (cond
-        ((atom? x) #f)
-        ((null? x) #f)
-        ((null? (cdr x)) #f)
-        ((null? (cdr (cdr x))) #t)
-        (else #f))))
+(define a-pair?
+  (lambda (x)
+    (cond
+      ((atom? x) #f)
+      ((null? x) #f)
+      ((null? (cdr x)) #f)
+      ((null? (cdr (cdr x))) #t)
+      (else #f))))
 
-  (define align
-    (lambda (pora)
-      (cond
-        ((atom? pora) pora)
-        ((a-pair? (first pora))
-         (align (shift pora))) ;******alarming
-        (else (build (first pora)
-                (align (second pora)))))))
+(define align
+  (lambda (pora)
+    (cond
+      ((atom? pora) pora)
+      ((a-pair? (first pora))
+       (align (shift pora))) ;******alarming
+      (else (build (first pora)
+              (align (second pora)))))))
 {{< /highlight >}}
 
 Based on `(shift)` we further creat `(align)`. Don't rush to run the function. Remember the seventh commandment emphasizes "**recursion should happen on the subparts that are of the same nature:
@@ -126,24 +122,23 @@ makes any input with form of `((a b) (c d))` trapped in infinite item swapping l
 
 {{< highlight scheme >}}
 ;(revpair '((a b) (c d))) -> ((c d) (a b))
-  ;(revpair '((a b) (c d))) -> ((c d) (a b))
-  (define revpair
-    (lambda (p)
-      (build (second p) (first p))))
+(define revpair
+  (lambda (p)
+    (build (second p) (first p))))
 
-  (define shuffle
-    (lambda (pora)
-      (cond
-        ((atom? pora) pora)
-        ((a-pair? (first pora))
-         (shuffle (revpair pora)))
-        (else
-          (build (first pora)
-            (shuffle (second pora)))))))
+(define shuffle
+  (lambda (pora)
+    (cond
+      ((atom? pora) pora)
+      ((a-pair? (first pora))
+       (shuffle (revpair pora)))
+      (else
+        (build (first pora)
+          (shuffle (second pora)))))))
 
-  (shuffle '(a (b c)))        ; '(a (b c))
-  (shuffle '(a b))            ; '(a b)
-  (shuffle '((a b) (c d)))    ; infinite swap pora  Ctrl + c  to break and input q to exit
+(shuffle '(a (b c)))        ; '(a (b c))
+(shuffle '(a b))            ; '(a b)
+(shuffle '((a b) (c d)))    ; infinite swap pora  Ctrl + c  to break and input q to exit
 {{< /highlight >}}
 
 ---
@@ -154,25 +149,24 @@ atom with same weight, whereas the `(weight*)` puts twice as much weight to the 
 
 {{< highlight scheme >}}
 (define length*
-  (define length*
-    (lambda (pora)
-      (cond
-        ((atom? pora) 1)
-        (else
-          (+ (length* (first pora))
-             (length* (second pora)))))))
-  ;(length* '((a b) c)) -> 3
-  ;(length* '(a (b c)) -> 3
+  (lambda (pora)
+    (cond
+      ((atom? pora) 1)
+      (else
+        (+ (length* (first pora))
+           (length* (second pora)))))))
+;(length* '((a b) c)) -> 3
+;(length* '(a (b c)) -> 3
 
-  (define weight*
-    (lambda (pora)
-      (cond
-        ((atom? pora) 1)
-        (else
-          (+ (* (weight* (first pora)) 2)
-             (weight* (second pora)))))))
-  ;(weight* '((a b) c)) -> 7
-  ;(weight* '(a (b c)) -> 5
+(define weight*
+  (lambda (pora)
+    (cond
+      ((atom? pora) 1)
+      (else
+        (+ (* (weight* (first pora)) 2)
+           (weight* (second pora)))))))
+;(weight* '((a b) c)) -> 7
+;(weight* '(a (b c)) -> 5
 {{< /highlight >}}
 
 ---
@@ -187,27 +181,26 @@ itself has to be a total function. Then we try compounding it with `(length)` an
 
 {{< highlight scheme >}}
 (define will-stop?
-  (define will-stop?
-   (lambda (f))
-  ...)
+ (lambda (f))
+...)
 
-  (define length
-    (lambda (lat)
-      (cond
-        ((null? lat) 0)
-        (else (add1 (length (cdr lat)))))
+(define length
+  (lambda (lat)
+    (cond
+      ((null? lat) 0)
+      (else (add1 (length (cdr lat)))))
 
-  (define will-stop?
-    (lambda (x)
-      (length x)))
+(define will-stop?
+  (lambda (x)
+    (length x)))
 
-  (define eternity
-    (lambda (x)
-      (eternity x)))
+(define eternity
+  (lambda (x)
+    (eternity x)))
 
-  (define will-stop?
-    (lambda (x)
-      (eternity x)))
+(define will-stop?
+  (lambda (x)
+    (eternity x)))
 {{< /highlight >}}
 
 The `(length)` stops when the input is `'()`, so the `(will-stop?)` returns #t.
@@ -217,10 +210,9 @@ to build. Let's see another tool function:
 
 {{< highlight scheme >}}
 (define last-try
-  (define last-try
-   (lambda (x)
-    (and (will-stop? last-try)
-      (eternity x))))
+ (lambda (x)
+  (and (will-stop? last-try)
+    (eternity x))))
 {{< /highlight >}}
 
 In order to test if ths is a right function, we input `()` and that requires
@@ -245,18 +237,17 @@ named funtion in lambda expression yourself.
 
 {{< highlight scheme >}}
 (define length
-  (define length
-   (lambda (l)
-    (cond
-      ((null? l) 0)
-      (else
-        (add1 (length (cdr l)))))))
+ (lambda (l)
+  (cond
+    ((null? l) 0)
+    (else
+      (add1 (length (cdr l)))))))
 
-  (lambda (l)
-    (cond
-      ((null? l) 0)
-      (else
-        (add1 (length (cdr l))))))
+(lambda (l)
+  (cond
+    ((null? l) 0)
+    (else
+      (add1 (length (cdr l))))))
 {{< /highlight >}}
 
 It's absolutely normal to get confused when there are more layers of lambda expressions involved in a
@@ -267,15 +258,13 @@ carefully. The difference between defining and calling is that calling a functio
 {{< highlight scheme >}}
 ;defining
 (lambda (f)
-  ;defining
-  (lambda (f)
-    (lambda (g)...)
-  )
+  (lambda (g)...)
+)
 
-  ;calling(f) with defining(g)
-  ((lambda (f)
-    (lambda (g)...))
-      arguments-for-f)
+;calling(f) with defining(g)
+((lambda (f)
+  (lambda (g)...))
+    arguments-for-f)
 {{< /highlight >}}
 
 A more general case of calling with defining in lambda expression is called the
@@ -297,32 +286,30 @@ with less than one element:
 {{< highlight scheme >}}
 ;length<=0
 (lambda (l)
-  ;length<=0
-  (lambda (l)
-      (cond
-        ((null? l) 0)
-        (else
-          (add1 (eternity (cdr l))))))
-
-  ;length<=1
-  (lambda (l)
     (cond
       ((null? l) 0)
       (else
-        (add1 (length0 (cdr l))))))
+        (add1 (eternity (cdr l))))))
 
-  ;length<=1
-  (lambda (l)  ;read more details below if you don't understand here
-    (cond
-      ((null? l) 0)
-      (else
-        (add1
-          ((lambda(l)
-             (cond
-               ((null? l) 0)
-               (else
-                 (add1 (eternity (cdr l))))))
-           (cdr l))))))
+;length<=1
+(lambda (l)
+  (cond
+    ((null? l) 0)
+    (else
+      (add1 (length0 (cdr l))))))
+
+;length<=1
+(lambda (l)  ;read more details below if you don't understand here
+  (cond
+    ((null? l) 0)
+    (else
+      (add1
+        ((lambda(l)
+           (cond
+             ((null? l) 0)
+             (else
+               (add1 (eternity (cdr l))))))
+         (cdr l))))))
 {{< /highlight >}}
 
 {{< figure src="/img/length1.png" >}}
@@ -334,61 +321,59 @@ length0 and length1 are there only for demonstration purpose).
 {{< highlight scheme >}}
 ;length<=2
 (lambda (l)
-  ;length<=2
-  (lambda (l)
-    (cond
-      ((null? l) 0)
-      (else
-        (add1 (length1 (cdr l))))))
+  (cond
+    ((null? l) 0)
+    (else
+      (add1 (length1 (cdr l))))))
 
-  (lambda (l)
-    (cond
-      ((null? l) 0)
-      (else
-        (add1
-          ((lambda(l)
-             (cond
-               ((null? l) 0)
-               (else
-                 (add1 (length0 (cdr l))))))
-           (cdr l))))))
+(lambda (l)
+  (cond
+    ((null? l) 0)
+    (else
+      (add1
+        ((lambda(l)
+           (cond
+             ((null? l) 0)
+             (else
+               (add1 (length0 (cdr l))))))
+         (cdr l))))))
 
-  (lambda (l)
-    (cond
-      ((null? l) 0)
-      (else
-        (add1
-          ((lambda(l)
-             (cond
-               ((null? l) 0)
-               (else
-                 (add1
-                  ((lambda(l)
-                   (cond
-                     ((null? l) 0)
-                       (else
-                         (add1 (eternity (cdr l))))))
-                 (cdr l))))))
-        (cdr l))))))
+(lambda (l)
+  (cond
+    ((null? l) 0)
+    (else
+      (add1
+        ((lambda(l)
+           (cond
+             ((null? l) 0)
+             (else
+               (add1
+                ((lambda(l)
+                 (cond
+                   ((null? l) 0)
+                     (else
+                       (add1 (eternity (cdr l))))))
+               (cdr l))))))
+      (cdr l))))))
 
-  ;let's give distinguished names to arguments in every layer
-  (lambda (l2)  ;assume l2 = '(b c)
-    (cond
-      ((null? l2) 0)
-      (else
-        (add1
-          ((lambda(l1)  ;then l1 <- cdr(l2) = '(c)
-             (cond
-               ((null? l1) 0)
-               (else
-                 (add1
-                  ((lambda(l0)  ;then l0 <- cdr(l1) = '( )
-                   (cond
-                     ((null? l0) 0)  ;so here returns 0, and terminates
-                       (else
-                         (add1 (eternity (cdr l0))))))
-                 (cdr l1))))))
-        (cdr l2))))))
+;let's give distinguished names to arguments in every layer
+(lambda (l2)  ;assume l2 = '(b c)
+  (cond
+    ((null? l2) 0)
+    (else
+      (add1
+        ((lambda(l1)  ;then l1 <- cdr(l2) = '(c)
+           (cond
+             ((null? l1) 0)
+             (else
+               (add1
+                ((lambda(l0)  ;then l0 <- cdr(l1) = '( )
+                 (cond
+                   ((null? l0) 0)  ;so here returns 0, and terminates
+                     (else
+                       (add1 (eternity (cdr l0))))))
+               (cdr l1))))))
+      (cdr l2))))))
 {{< /highlight >}}
 
 The above functions show repetitive content, aka the `(length)` part is being
@@ -409,44 +394,42 @@ length0 as "g calling eternity", addressing it through f.
 {{< highlight scheme >}}
 ;length<=0
 ((lambda (length)
-  ;length<=0
-  ((lambda (length)
-     (lambda (l)
-       (cond
-         ((null? l) 0)
-         (else (add1 (length (cdr l)))))))
-   eternity)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (add1 (length (cdr l)))))))
+ eternity)
 
-  ;length<=1
-  ((lambda (f)
-     (lambda (l)
-       (cond
-         ((null? l) 0)
-         (else (add1 (f (cdr l)))))))
-   ((lambda (g)
-      (lambda (l)
-        (cond
-          ((null? l) 0)
-          (else (add1 (g (cdr l)))))))
-    eternity))
+;length<=1
+((lambda (f)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (add1 (f (cdr l)))))))
+ ((lambda (g)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1 (g (cdr l)))))))
+  eternity))
 
-  ;length<=2
-  ((lambda (length)
-    (lambda(l)
-     (cond)
-         ((null? l) 0)
-         (else (add1 (length (cdr l)))))))
-   ((lambda (length)
-      (lambda (l)
-        (cond
-          ((null? l) 0)
-          (else (add1 (length (cdr l)))))))
-   ((lambda (length)
-      (lambda (l)
-        (cond
-          ((null? l) 0)
-          (else (add1 (length (cdr l)))))))
-    eternity)))
+;length<=2
+((lambda (length)
+  (lambda(l)
+   (cond)
+       ((null? l) 0)
+       (else (add1 (length (cdr l)))))))
+ ((lambda (length)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1 (length (cdr l)))))))
+ ((lambda (length)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1 (length (cdr l)))))))
+  eternity)))
 {{< /highlight >}}
 
 The repetitions decrease but not pithy enough, and we can further simplify it.
@@ -456,35 +439,33 @@ call it `(mk-length)`, the length functions can be therefore written as:
 {{< highlight scheme >}}
 ;length<=0
 ((lambda (mk-length)
-  ;length<=0
-  ((lambda (mk-length)
-    (mk-length eternity))
-   (lambda (length)
-    (lambda(l)
-     (cond
-   ((null? l) 0)
-    (else (add1 (length (cdr l))))))))
+  (mk-length eternity))
+ (lambda (length)
+  (lambda(l)
+   (cond
+ ((null? l) 0)
+  (else (add1 (length (cdr l))))))))
 
-  ;length<=1
-  ((lambda (mk-length)
+;length<=1
+((lambda (mk-length)
+ (mk-length
+ (mk-length eternity)))
+ (lambda (length)
+  (lambda(l)
+   (cond
+ ((null? l) 0)
+  (else (add1 (length (cdr l))))))))
+
+;length<=2
+((lambda (mk-length)
+  (mk-length
    (mk-length
-   (mk-length eternity)))
-   (lambda (length)
-    (lambda(l)
-     (cond
-   ((null? l) 0)
-    (else (add1 (length (cdr l))))))))
-
-  ;length<=2
-  ((lambda (mk-length)
-    (mk-length
-     (mk-length
-      (mk-length eternity))))
-   (lambda (length)
-    (lambda(l)
-     (cond
-   ((null? l) 0)
-    (else (add1 (length (cdr l))))))))
+    (mk-length eternity))))
+ (lambda (length)
+  (lambda(l)
+   (cond
+ ((null? l) 0)
+  (else (add1 (length (cdr l))))))))
 {{< /highlight >}}
 
 In the length 0, the actual working part is `((null? l) 0)` and the `(else)` predicate
@@ -493,36 +474,35 @@ even itself `(mk-length)`. Therefore we try further abstract it with this though
 
 {{< highlight scheme >}}
 ; length<=0
-  ; length<=0
-  ((lambda (mk-length)
-     (mk-length mk-length))
-   (lambda (length)
-     (lambda (l)
-       (cond
-         ((null? l) 0)
-         (else
-           (add1 (length (cdr l))))))))
+((lambda (mk-length)
+   (mk-length mk-length))
+ (lambda (length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else
+         (add1 (length (cdr l))))))))
 
-  ; since it doesn't really matter what to name the inner argument
-  ; we rewrite length<=0
-  ((lambda (mk-length)
-     (mk-length mk-length))
-   (lambda (mk-length)
-     (lambda (l)
-       (cond
-         ((null? l) 0)
-         (else
-           (add1 (mk-length (cdr l))))))))
+; since it doesn't really matter what to name the inner argument
+; we rewrite length<=0
+((lambda (mk-length)
+   (mk-length mk-length))
+ (lambda (mk-length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else
+         (add1 (mk-length (cdr l))))))))
 
-  ;use length<=0 to achieve length<=1
-  (((lambda (mk-length)
-     (mk-length mk-length))
-   (lambda (mk-length)
-     (lambda (l)
-       (cond
-         ((null? l) 0)
-         (else
-           (add1 ((mk-length eternity) (cdr l)))))))))
+;use length<=0 to achieve length<=1
+(((lambda (mk-length)
+   (mk-length mk-length))
+ (lambda (mk-length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else
+         (add1 ((mk-length eternity) (cdr l)))))))))
 {{< /highlight >}}
 
 The last part in above shows: since the `(eternity)` is now substituted by the
@@ -541,16 +521,15 @@ You can try to play with longer list, such as this:
 
 {{< highlight scheme >}}
 (((lambda (mk-length)
-  (((lambda (mk-length)
-      (mk-length mk-length))
-    (lambda (mk-length)
-      (lambda (l)
-        (cond
-          ((null? l) 0 )
-          (else (add1
-                 ((mk-length mk-length)
-                  (cdr l))))))))
-   '(a b c))
+    (mk-length mk-length))
+  (lambda (mk-length)
+    (lambda (l)
+      (cond
+        ((null? l) 0 )
+        (else (add1
+               ((mk-length mk-length)
+                (cdr l))))))))
+ '(a b c))
 {{< /highlight >}}
 
 You would realize that this is just more recurrences of that "bear in mind"
@@ -566,3 +545,189 @@ can be called repetitively by itself as many times as we want.
 If you find it confusing, read this preview of omega combinator in the first
 answer of this post:[scheme - Y combinator discussion in "The Little Schemer" -
 Stack Overflow](https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer/11864862#11864862)
+
+
+## Chapter 10 What is the value of all of this? {#chapter-10-what-is-the-value-of-all-of-this}
+
+Firstly this chapter defines entry and table/enviroment. An entry consists of a
+pair of lists of **equal length** (length is the number of first level atoms in a
+list). A list of entries is table/enviroment.
+
+{{< figure src="/img/little10.png" >}}
+
+The entries can be built by `(cons)` lists.
+
+{{< highlight scheme >}}
+; Let's build entries with build from chapter 7 (07-friends-and-relations.ss)
+(define build
+  (lambda (s1 s2)
+    (cons s1 (cons s2 '()))))
+
+(define new-entry build)
+
+; Test it out and build the example entries above
+(build '(appetizer entree bevarage)
+       '(pate boeuf vin))
+{{< /highlight >}}
+
+We are using entries and tables to write an interpreter in this chapter, so in our interested entry, the first list is a set of names, and
+the second list is a set of values corresponding to the names.
+
+Given a function `(lookup-in-entry)`, we would be able to find a value in the second
+list, for every name in the first list.
+
+{{< highlight scheme >}}
+;(lookup-in-entry name entry)
+
+;food --
+'((appetizer entree bevarage)
+  (pate boeuf vin))
+
+(lookup-in-entry entree food)
+; -> boeuf
+{{< /highlight >}}
+
+Let's try writing it. The `(lookup-in-entry)` works this way: the function checks every
+names with input from the first list, and return the corresponding value in the
+second list. (Remember we always need to return `('())` first if the input is null.)
+
+{{< highlight scheme >}}
+;(define second
+;  (lambda (p)
+;    (car (cdr p))))
+
+;the entry-f take null λ function to make it not break
+(define lookup-in-entry
+  (lambda (name entry entry-f)
+    (lookup-in-entry-help
+      name
+      (first entry)
+      (second entry)
+      entry-f)))
+
+; lookup-in-entry uses lookup-in-entry-help helper function
+(define lookup-in-entry-help
+  (lambda (name names values entry-f)
+    (cond
+      ((null? names) (entry-f name))
+      ((eq? (car names) name) (car values))
+      (else
+        (lookup-in-entry-help
+          name
+          (cdr names)
+          (cdr values)
+          entry-f)))))
+
+; Let's try out lookup-in-entry
+(lookup-in-entry
+  'entree
+  '((appetizer entree bevarage) (pate boeuf vin))
+  (lambda (n) '()))
+;-> boeuf
+
+; The null function make sure the function doesn't break with incorrect input.
+(lookup-in-entry
+  'no-such-item
+  '((appetizer entree bevarage) (pate boeuf vin))
+  (lambda (n) '()))
+;-> '()
+{{< /highlight >}}
+
+Putting the above code to DrRacket and run with stepper, you can see how things
+are achieved.
+
+The table/environment can be extended by adding more pairs of list on top of the current
+entries. We can write another `(lookup-in-entry)` working as above But notice
+the take the `(car (cdr table))` as input in every recurions, it means the function will immediately cease and return value when the first name matches the input.
+
+{{< highlight scheme >}}
+; lookup-in-table finds an entry in a table
+(define lookup-in-table
+  (lambda (name table table-f)
+    (cond
+      ((null? table) (table-f name))
+      (else
+        (lookup-in-entry
+          name
+          (car table)
+          (lambda (name)
+            (lookup-in-table
+              name
+              (cdr table)
+              table-f)))))))
+
+; Let's try lookup-in-table
+(lookup-in-table
+  'beverage
+  '(((entree dessert) (spaghetti spumoni))
+    ((appetizer entree beverage) (food tastes good)))
+  (lambda (n) '()))
+; -> 'good
+{{< /highlight >}}
+
+Unrelated to the above, let's look at value and type. When asking what's the
+value of an S-expression, in most of the cases, it returns the nature of itself. For
+example, see the value of these S-expression:
+
+{{< highlight scheme >}}
+(value e) where e is (car (quote (a b c)))
+; is a, coz the first element of '(a b c) is an atom
+
+(value e) where e is (quote (car (quote (a b c))))
+; is (car (quote (a b c)))
+; coz (quote()) make the whole argument literal as a list
+; the inner car won't work as function
+
+(value e) where e is
+((lambda (nothing)
+  (cond
+     (nothing (quote something))
+     (else (quote nothing))))
+#t)
+;is something
+;coz the e is evaluated first, returned 'something
+;'something is an atom
+{{< /highlight >}}
+
+What is type and why using type in interpreting program? Well, type function is like an efficiency boost
+classifier in deconstructing/running code. Most of the functions we've seen can
+be roughly allocated to several categories based on action similarities. If we can write an abstract and
+universal function for each type, we can call them and optimal each function
+based on their distinctive characteristics.
+
+Based on the work essence of characters in this book, there are six types for scheme:
+`(const, quote, identifier, lambda, cond, application)`. The first layer of
+classifier is `(expression-to-action)` and follow by other more detailed ones:
+![](/img/little11.png)
+The above tree code blocks can be linked by two function as:
+
+{{< highlight scheme >}}
+; The value function takes an expression and evaulates it
+(define value
+  (lambda (e)
+    (meaning e '())))
+
+; The meaning function translates an expression to its meaning
+(define meaning
+  (lambda (e table)
+    ((expression-to-action e) e table)))
+
+;; (define expression-to-action
+;;   (lambda (e)
+;;     (cond
+;;       ((atom? e) (atom-to-action e))
+;;       (else
+;;         (list-to-action e)))))
+{{< /highlight >}}
+
+The `(*cond)` is a bit more complex:
+
+{{< figure src="/img/little12.png" >}}
+
+{{< highlight scheme >}}
+(define else?
+  (lambda (x)
+    (cond
+      ((atom? x) (eq? x 'else))
+      (else #f))))
+{{< /highlight >}}

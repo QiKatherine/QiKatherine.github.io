@@ -1,7 +1,7 @@
 +++
 title = "Using Anki-editor to build flashcard in Emacs Org-mode 【用 Anki-editor 在 Emacs Org-mode 中生成复杂记忆卡片】"
 date = 2019-09-30T23:54:00+01:00
-lastmod = 2020-05-14T21:09:19+01:00
+lastmod = 2020-06-02T17:08:36+01:00
 tags = ["windows", "org-mode", "Anki", "Emacs"]
 categories = ["TECH"]
 draft = false
@@ -65,8 +65,7 @@ in Emacs, so my way is to: `delete Msys2 curl and install with scoop.`
 
 {{< highlight nil >}}
 (use-package anki-editor
-  (use-package anki-editor
-    :ensure t)
+  :ensure t)
 {{< /highlight >}}
 
 -   Spacemacs:
@@ -75,7 +74,6 @@ in Emacs, so my way is to: `delete Msys2 curl and install with scoop.`
 
 {{< highlight nil >}}
 dotspacemacs-additional-packages '(anki-editor)
-  dotspacemacs-additional-packages '(anki-editor)
 {{< /highlight >}}
 
 

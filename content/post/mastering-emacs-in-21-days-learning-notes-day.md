@@ -2,7 +2,7 @@
 title = "Essentials in vanilla Emacs 【Vanilla Emacs 精华简介】"
 summary = "Learning notes about Emacs."
 date = 2019-08-25T23:51:00+01:00
-lastmod = 2020-05-14T21:09:18+01:00
+lastmod = 2020-06-02T17:08:35+01:00
 tags = ["Emacs"]
 categories = ["TECH"]
 draft = false
@@ -61,16 +61,15 @@ GitHub 备份，在初始化文件里加上一个系统类型判断函数，让�
 
 {{< highlight emacs-lisp >}}
 ;; 更改显示字体大小 16pt
-  ;; 更改显示字体大小 16pt
-  (set-face-attribute 'default nil :height 160)                   ---- 1
+(set-face-attribute 'default nil :height 160)                   ---- 1
 
-  ;; 快速打开配置文件
-  (defun open-init-file()
-    (interactive)
-    (find-file "~/.emacs.d/init.el"))                             ---- 2
+;; 快速打开配置文件
+(defun open-init-file()
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))                             ---- 2
 
-  ;; 这一行代码，将函数 open-init-file 绑定到 <f2> 键上
-  (global-set-key (kbd "<f2>") 'open-init-file)                   ---- 3
+;; 这一行代码，将函数 open-init-file 绑定到 <f2> 键上
+(global-set-key (kbd "<f2>") 'open-init-file)                   ---- 3
 {{< /highlight >}}
 
 这个知识点目前看起来很简单，但是以后涉及到要去其它.el 文件层层加载，记得这个顺序性 load 的特质会帮助理解 Emacs 的加载机制。
@@ -79,11 +78,10 @@ GitHub 备份，在初始化文件里加上一个系统类型判断函数，让�
 
 {{< highlight emacs-lisp >}}
 (defmacro after-load (feature &rest body)
-  (defmacro after-load (feature &rest body)
-    "After FEATURE is loaded, evaluate BODY."
-    (declare (indent defun))
-    `(eval-after-load ,feature
-       '(progn ,@body)))
+  "After FEATURE is loaded, evaluate BODY."
+  (declare (indent defun))
+  `(eval-after-load ,feature
+     '(progn ,@body)))
 {{< /highlight >}}
 
 

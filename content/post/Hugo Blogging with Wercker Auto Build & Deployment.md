@@ -2,7 +2,7 @@
 title = "Hugo Blogging with Wercker Auto Build & Deployment 【用 Wercker 自动部署网站】"
 summary = "Using Wercker to for automated website code build and deployment"
 date = 2019-07-26T01:02:00+01:00
-lastmod = 2020-05-14T21:09:18+01:00
+lastmod = 2020-06-02T17:08:34+01:00
 tags = ["Hugo", "Git", "Wercker", "Org-mode", "Emacs"]
 categories = ["TECH"]
 draft = false
@@ -25,43 +25,42 @@ Here is my wercker.yml:
 
 {{< highlight yml >}}
 # This references a standard debian container from the
-  # This references a standard debian container from the
-  # Docker Hub https://registry.hub.docker.com/_/debian/
-  # Read more about containers on our dev center
-  # https://devcenter.wercker.com/overview-and-core-concepts/containers/
-  box: debian
-  # You can also use services such as databases. Read more on our dev center:
-  # https://devcenter.wercker.com/administration/services/
-  # services:
-      # - postgres
-      # https://devcenter.wercker.com/administration/services/examples/postgresql/
+# Docker Hub https://registry.hub.docker.com/_/debian/
+# Read more about containers on our dev center
+# https://devcenter.wercker.com/overview-and-core-concepts/containers/
+box: debian
+# You can also use services such as databases. Read more on our dev center:
+# https://devcenter.wercker.com/administration/services/
+# services:
+    # - postgres
+    # https://devcenter.wercker.com/administration/services/examples/postgresql/
 
-      # - mongo
-      # https://devcenter.wercker.com/administration/services/examples/mongodb/
+    # - mongo
+    # https://devcenter.wercker.com/administration/services/examples/mongodb/
 
-  # This is the build pipeline. Pipelines are the core of wercker
-  # Read more about pipelines on our dev center
-  # https://devcenter.wercker.com/development/pipelines/
-  build:
-      steps:
-      # Steps make up the actions in your pipeline
-      # Read more about steps on our dev center:
-      # https://devcenter.wercker.com/development/steps/
-          - arjen/hugo-build@2.8.0:
-              # your hugo theme name
-              theme: hugo-theme-cleanwhite
-              flags: --buildDrafts=false
-  deploy:
-      steps:
-          - install-packages:
-              packages: git ssh-client
+# This is the build pipeline. Pipelines are the core of wercker
+# Read more about pipelines on our dev center
+# https://devcenter.wercker.com/development/pipelines/
+build:
+    steps:
+    # Steps make up the actions in your pipeline
+    # Read more about steps on our dev center:
+    # https://devcenter.wercker.com/development/steps/
+        - arjen/hugo-build@2.8.0:
+            # your hugo theme name
+            theme: hugo-theme-cleanwhite
+            flags: --buildDrafts=false
+deploy:
+    steps:
+        - install-packages:
+            packages: git ssh-client
 
-          - sf-zhou/gh-pages@0.2.6:
-              token: $GIT_TOKEN
-              domain: sheishe.xyz
-              repo: QiKatherine/QiKatherine.github.io
-              branch: master
-              basedir: public
+        - sf-zhou/gh-pages@0.2.6:
+            token: $GIT_TOKEN
+            domain: sheishe.xyz
+            repo: QiKatherine/QiKatherine.github.io
+            branch: master
+            basedir: public
 {{< /highlight >}}
 
 Notice the name 'build' and 'deploy' in the workflow above need to be the same with the name in steps in the wercker.yml file.
@@ -70,21 +69,20 @@ You can also add a local deploy.sh to make source code push easier too:
 
 {{< highlight nil >}}
 #!/bin/bash
- #!/bin/bash
- cd ~/Hugo/myblog/
+cd ~/Hugo/myblog/
 
- # Add changes to git.
- git add .
+# Add changes to git.
+git add .
 
- # Commit changes.
- msg="rebuilding site `date`"
- if [ $# -eq 1 ]
-   then msg="$1"
- fi
- git commit -m "$msg"
+# Commit changes.
+msg="rebuilding site `date`"
+if [ $# -eq 1 ]
+  then msg="$1"
+fi
+git commit -m "$msg"
 
- # Push source and build repos.
- git push origin -u dev
+# Push source and build repos.
+git push origin -u dev
 {{< /highlight >}}
 
 Happy hacking! :)

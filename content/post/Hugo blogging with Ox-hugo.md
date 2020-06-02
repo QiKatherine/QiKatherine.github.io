@@ -2,7 +2,7 @@
 title = "Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】"
 summary = "My personal experience of blogging with Emacs/Spacemacs and plug-in ox-hugo, along with some explanation of Hugo's working structure."
 date = 2019-07-16T01:03:00+01:00
-lastmod = 2020-05-14T21:09:18+01:00
+lastmod = 2020-06-02T17:08:34+01:00
 tags = ["Hugo", "Ox-hugo"]
 categories = ["TECH"]
 draft = false
@@ -64,30 +64,28 @@ Front matter give the information about the content, but NOT the information of 
 
 {{< highlight nil >}}
 $ hugo new site posts
-  $ hugo new site posts
 {{< /highlight >}}
 
 Hugo will automatically add front matter information at the top of the article like this:
 
 {{< highlight nil >}}
 ---
- ---
- title: Good day
- date: 2017-09-01T1705-43                    (YAML)
- draft: true
- ---
+title: Good day
+date: 2017-09-01T1705-43                    (YAML)
+draft: true
+---
 
- +++
- title= Good day
- date= 2017-09-01T1705-43                   (TOML)
- draft= true
- +++
++++
+title= Good day
+date= 2017-09-01T1705-43                   (TOML)
+draft= true
++++
 
- {
- "title":  "Good day" ,
- "date": "2017-09-01T1705-43",           (json)
- "draft": "true"
- }
+{
+"title":  "Good day" ,
+"date": "2017-09-01T1705-43",           (json)
+"draft": "true"
+}
 {{< /highlight >}}
 
 所以想用 org 进行写作，也需要定义自己的 front matter. 但是 org 语法里 front
@@ -96,11 +94,9 @@ matter 定义如下
 {{< highlight lisp >}}
 :PROPERTIES:
 :EXPORT_FILE_NAME: ox-hugo-tutorial
-  :PROPERTIES:
-  :EXPORT_FILE_NAME: ox-hugo-tutorial
-  :EXPORT_DESCRIPTION: Exporting to Hugo's Blackfriday Markdown from Orgmode
-  :EXPORT_HUGO_IMAGES: /img/org.pn
-  :END:
+:EXPORT_DESCRIPTION: Exporting to Hugo's Blackfriday Markdown from Orgmode
+:EXPORT_HUGO_IMAGES: /img/org.pn
+:END:
 {{< /highlight >}}
 
 以 `:properties:` 这块为代表的代码就是 org 以自己的方式定义 meta
@@ -157,14 +153,12 @@ Section 是一组页面的合集称呼，一般被放在 content 文件夹下面
 {{< highlight nil >}}
 content
 └── blog        <-- Section, because first-level dir under content/
-  content
-  └── blog        <-- Section, because first-level dir under content/
-      ├── funny-cats
-      │   ├── mypost.md
-      │   └── kittens         <-- Section, because contains _index.md
-      │       └── _index.md
-      └── tech                <-- Section, because contains _index.md
-          └── _index.md
+    ├── funny-cats
+    │   ├── mypost.md
+    │   └── kittens         <-- Section, because contains _index.md
+    │       └── _index.md
+    └── tech                <-- Section, because contains _index.md
+        └── _index.md
 {{< /highlight >}}
 
 

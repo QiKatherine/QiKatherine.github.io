@@ -2420,10 +2420,6 @@ continuation example on p.137 of The Little Schemer - Stack Overflow]]
    :PROPERTIES:
    :EXPORT_FILE_NAME: The-little-schemer-note-3-3
    :END:
-   - State "TODO"       from "DONE"       [2020-01-06 Mon 17:44]
-   :LOGBOOK:
-   - State "DONE"       from "DONE"       [2020-01-06 Mon 01:56]
-   :END:
 
 The former chapters can be easily understood from reading the code without
 counting parenthesis. *However from this chapter, it is highly recommended to
@@ -2932,6 +2928,175 @@ can be called repetitively by itself as many times as we want.
 If you find it confusing, read this preview of omega combinator in the first
 answer of this post:[[https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer/11864862#11864862][scheme - Y combinator discussion in "The Little Schemer" -
 Stack Overflow]]
+
+*** Chapter 10 What is the value of all of this?
+Firstly this chapter defines entry and table/enviroment. An entry consists of a
+pair of lists of *equal length* (length is the number of first level atoms in a
+list). A list of entries is table/enviroment.
+
+[[/img/little10.png]]
+
+The entries can be built by =(cons)= lists.
+#+begin_src scheme
+; Let's build entries with build from chapter 7 (07-friends-and-relations.ss)
+(define build
+  (lambda (s1 s2)
+    (cons s1 (cons s2 '()))))
+
+(define new-entry build)
+
+; Test it out and build the example entries above
+(build '(appetizer entree bevarage)
+       '(pate boeuf vin))
+#+end_src
+
+We are using entries and tables to write an interpreter in this chapter, so in our interested entry, the first list is a set of names, and
+the second list is a set of values corresponding to the names.
+
+Given a function =(lookup-in-entry)=, we would be able to find a value in the second
+list, for every name in the first list. 
+
+#+begin_src scheme
+;(lookup-in-entry name entry)
+
+;food -- 
+'((appetizer entree bevarage)
+  (pate boeuf vin))
+
+(lookup-in-entry entree food)
+; -> boeuf
+#+end_src
+
+Let's try writing it. The =(lookup-in-entry)= works this way: the function checks every
+names with input from the first list, and return the corresponding value in the
+second list. (Remember we always need to return =('())= first if the input is null.)
+
+#+begin_src scheme
+;(define second
+;  (lambda (p)
+;    (car (cdr p))))
+
+;the entry-f take null λ function to make it not break
+(define lookup-in-entry
+  (lambda (name entry entry-f)
+    (lookup-in-entry-help
+      name
+      (first entry)
+      (second entry)
+      entry-f)))
+
+; lookup-in-entry uses lookup-in-entry-help helper function
+(define lookup-in-entry-help
+  (lambda (name names values entry-f)
+    (cond
+      ((null? names) (entry-f name))
+      ((eq? (car names) name) (car values))
+      (else
+        (lookup-in-entry-help
+          name
+          (cdr names)
+          (cdr values)
+          entry-f)))))
+
+; Let's try out lookup-in-entry
+(lookup-in-entry
+  'entree
+  '((appetizer entree bevarage) (pate boeuf vin))
+  (lambda (n) '()))
+;-> boeuf
+
+; The null function make sure the function doesn't break with incorrect input.
+(lookup-in-entry
+  'no-such-item
+  '((appetizer entree bevarage) (pate boeuf vin))
+  (lambda (n) '()))
+;-> '()
+#+end_src
+Putting the above code to DrRacket and run with stepper, you can see how things
+are achieved.
+
+The table/environment can be extended by adding more pairs of list on top of the current
+entries. We can write another =(lookup-in-entry)= working as above But notice
+the take the =(car (cdr table))= as input in every recurions, it means the function will immediately cease and return value when the first name matches the input.
+#+begin_src scheme
+; lookup-in-table finds an entry in a table
+(define lookup-in-table
+  (lambda (name table table-f)
+    (cond
+      ((null? table) (table-f name))
+      (else
+        (lookup-in-entry
+          name
+          (car table)
+          (lambda (name)
+            (lookup-in-table
+              name
+              (cdr table)
+              table-f)))))))
+
+; Let's try lookup-in-table
+(lookup-in-table
+  'beverage
+  '(((entree dessert) (spaghetti spumoni))
+    ((appetizer entree beverage) (food tastes good)))
+  (lambda (n) '()))
+; -> 'good
+#+end_src
+
+Unrelated to the above, let's look at value and type. When asking what's the
+value of an S-expression, in most of the cases, it returns the nature of itself. For
+example, see the value of these S-expression:
+
+#+begin_src scheme
+(value e) where e is (car (quote (a b c)))
+; is a, coz the first element of '(a b c) is an atom
+
+(value e) where e is (quote (car (quote (a b c))))
+; is (car (quote (a b c)))
+; coz (quote()) make the whole argument literal as a list
+; the inner car won't work as function 
+
+(value e) where e is
+((lambda (nothing)
+  (cond
+     (nothing (quote something))
+     (else (quote nothing))))
+#t)
+;is something
+;coz the e is evaluated first, returned 'something
+;'something is an atom
+#+end_src
+
+Why using type in interpreting program? Well, it's like an efficiency boost
+classifier in deconstructing/running code. Most of the functions we've seen can
+be roughly allocated to several categories. If we can write an abstract and
+universal function for each type, we can call them and optimal each function
+based on its characteristics. 
+ 
+Type is allocated based on the work essence of characters in the context. There are six types:
+=(const, quote, identifier, lambda, cond, application)=. The expression is put
+in the function =(expression-to-action)= to allocate in to finer categories so
+that we can implement it to 
+[[/img/little11.png]]
+The above tree code blocks can be used with the below two function as link:
+#+begin_src scheme
+(define expression-to-action
+  (lambda (e)
+    (cond
+      ((atom? e) (atom-to-action e))
+      (else
+        (list-to-action e)))))
+
+; The value function takes an expression and evaulates it
+(define value
+  (lambda (e)
+    (meaning e '())))
+
+; The meaning function translates an expression to its meaning
+(define meaning
+  (lambda (e table)
+    ((expression-to-action e) e table)))
+#+end_src
 
 ** DONE Detailed key proof of ANOVA test: SST=SSE+SSB      :@MATH:statistics:
    CLOSED: [2020-03-09 Mon 00:07]

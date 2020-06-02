@@ -1,7 +1,7 @@
 +++
 title = "Building personal website with Hugo in one hour"
 date = 2020-04-13T22:57:00+01:00
-lastmod = 2020-05-14T21:09:21+01:00
+lastmod = 2020-06-02T17:08:38+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -98,15 +98,13 @@ in post folder, where you could initiate with:
 
 {{< highlight nil >}}
 cd myblog
-  cd myblog
-  hugo new post/name-of-new-article.md
+hugo new post/name-of-new-article.md
 {{< /highlight >}}
 
 You can always preview it in local host:
 
 {{< highlight nil >}}
 hugo server themename
-  hugo server themename
 {{< /highlight >}}
 
 Open web browser input `(http://localhost:1313)` to preview. Input `(ctrl-c)` in
@@ -119,18 +117,16 @@ Make sure you generate html files into /public file first:
 
 {{< highlight nil >}}
 hugo -t themename
-  hugo -t themename
 {{< /highlight >}}
 
 Push everything generate in /public file to `(XX.github.io)` repository.
 
 {{< highlight nil >}}
 git init
-  git init
-  git add .
-  git commit -m "Initial commit."
-  git remote add origin git@github.com:Brent-Li/brent-li.github.io.git
-  git push -u origin master
+git add .
+git commit -m "Initial commit."
+git remote add origin git@github.com:Brent-Li/brent-li.github.io.git
+git push -u origin master
 {{< /highlight >}}
 
 Unless you want to giving version control, not only for your website, but also for the
