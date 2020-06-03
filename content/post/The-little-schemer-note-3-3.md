@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (3/3)"
 date = 2020-01-06T17:44:00+00:00
-lastmod = 2020-06-02T17:08:38+01:00
+lastmod = 2020-06-03T02:57:00+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -636,8 +636,14 @@ second list. (Remember we always need to return `('())` first if the input is nu
 Putting the above code to DrRacket and run with stepper, you can see how things
 are achieved.
 
-The table/environment can be extended by adding more pairs of list on top of the current
-entries. We can write another `(lookup-in-entry)` working as above But notice
+The table/environment can be extended by adding more new pairs (aka entries) on top of the current
+table/entries.
+
+{{< highlight scheme >}}
+(define extend-table cons)
+{{< /highlight >}}
+
+We can write another `(lookup-in-entry)` working as above But notice
 the take the `(car (cdr table))` as input in every recurions, it means the function will immediately cease and return value when the first name matches the input.
 
 {{< highlight scheme >}}
@@ -711,23 +717,32 @@ The above tree code blocks can be linked by two function as:
 (define meaning
   (lambda (e table)
     ((expression-to-action e) e table)))
-
-;; (define expression-to-action
-;;   (lambda (e)
-;;     (cond
-;;       ((atom? e) (atom-to-action e))
-;;       (else
-;;         (list-to-action e)))))
 {{< /highlight >}}
 
-The `(*cond)` is a bit more complex:
+Notice the example of determining the meaning of a **non-primitive, lambda
+expression**
+![](/img/little14.png)
 
-{{< figure src="/img/little12.png" >}}
+The `(*cond)` is a bit more complex. The most eternal condition of `(cond)` is
+`(else)` so it's the first one got translated into meaning. But the other seen
+conditions of cond (cond-lines-of e) dosn't have much varieties either, no much more
+than `(atom? eq? null? zero? o< o>)` with combinations of `(and or)`. These
+primitive ones got translated in the second predicate with meaning of `(*const)`
+from the `(atom-to-action)` the non-usual ones which are either atom or others
+got translated into `(*application)`.
+![](/img/little12.png)
+Try this example:
 
 {{< highlight scheme >}}
-(define else?
-  (lambda (x)
-    (cond
-      ((atom? x) (eq? x 'else))
-      (else #f))))
+(*cond (cond (coffee klatsch)(else party))
+  (((coffee)(#t))
+   ((klatsch party)(5 (6)))))
 {{< /highlight >}}
+
+{{< figure src="/img/little13.png" >}}
+
+The coffee example roughly shows an idea of searching function for meaning/action in
+the table when it's not primitive like `(eq?)`.
+
+Next, we are finally giving the most complex body of interpreter:
+![](/img/little15.png)

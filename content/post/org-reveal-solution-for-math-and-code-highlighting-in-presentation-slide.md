@@ -2,7 +2,7 @@
 title = "Org-reveal: solution for math and code highlighting in presentation slide 【在 ppt 中展示代码高亮，数学公式的优秀解决方案】"
 summary = "Learning notes and trouble shooting for using org-reveal."
 date = 2019-08-23T22:50:00+01:00
-lastmod = 2020-06-02T17:08:35+01:00
+lastmod = 2020-06-03T02:56:57+01:00
 tags = ["Emacs", "Org-mode"]
 categories = ["TECH"]
 draft = false
