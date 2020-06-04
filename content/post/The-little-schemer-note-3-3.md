@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (3/3)"
 date = 2020-01-06T17:44:00+00:00
-lastmod = 2020-06-03T02:57:00+01:00
+lastmod = 2020-06-04T02:13:20+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -570,11 +570,13 @@ The entries can be built by `(cons)` lists.
        '(pate boeuf vin))
 {{< /highlight >}}
 
-We are using entries and tables to write an interpreter in this chapter, so in our interested entry, the first list is a set of names, and
-the second list is a set of values corresponding to the names.
+We are using entries and tables to write an interpreter in this chapter, which
+refers to find names with matching values. So in our interested entry, the first
+list is usually a set of names, and
+the second list is a set of values corresponding to every names.
 
-Given a function `(lookup-in-entry)`, we would be able to find a value in the second
-list, for every name in the first list.
+Given a function `(lookup-in-entry)`, we would be able to find a value for every
+name.
 
 {{< highlight scheme >}}
 ;(lookup-in-entry name entry)
@@ -587,8 +589,8 @@ list, for every name in the first list.
 ; -> boeuf
 {{< /highlight >}}
 
-Let's try writing it. The `(lookup-in-entry)` works this way: the function checks every
-names with input from the first list, and return the corresponding value in the
+Let's try writing it. The `(lookup-in-entry)` works this way: the `(eq?)` checks
+input with every element in name lists, and return the corresponding value in the
 second list. (Remember we always need to return `('())` first if the input is null.)
 
 {{< highlight scheme >}}
@@ -636,7 +638,7 @@ second list. (Remember we always need to return `('())` first if the input is nu
 Putting the above code to DrRacket and run with stepper, you can see how things
 are achieved.
 
-The table/environment can be extended by adding more new pairs (aka entries) on top of the current
+The table/environment can be extended by adding more new pairs (aka entries) on top of the old
 table/entries.
 
 {{< highlight scheme >}}
@@ -644,7 +646,7 @@ table/entries.
 {{< /highlight >}}
 
 We can write another `(lookup-in-entry)` working as above But notice
-the take the `(car (cdr table))` as input in every recurions, it means the function will immediately cease and return value when the first name matches the input.
+the take the `(car (cdr table))` as input in every recursions, which means the function will immediately cease and return value when the first name matches the input.
 
 {{< highlight scheme >}}
 ; lookup-in-table finds an entry in a table
@@ -671,7 +673,9 @@ the take the `(car (cdr table))` as input in every recurions, it means the funct
 ; -> 'good
 {{< /highlight >}}
 
-Unrelated to the above, let's look at value and type. When asking what's the
+---
+
+Then let's look at value and type. When asking what's the
 value of an S-expression, in most of the cases, it returns the nature of itself. For
 example, see the value of these S-expression:
 
@@ -682,7 +686,7 @@ example, see the value of these S-expression:
 (value e) where e is (quote (car (quote (a b c))))
 ; is (car (quote (a b c)))
 ; coz (quote()) make the whole argument literal as a list
-; the inner car won't work as function
+; the inner car won't be called.
 
 (value e) where e is
 ((lambda (nothing)
@@ -703,9 +707,9 @@ based on their distinctive characteristics.
 
 Based on the work essence of characters in this book, there are six types for scheme:
 `(const, quote, identifier, lambda, cond, application)`. The first layer of
-classifier is `(expression-to-action)` and follow by other more detailed ones:
+classifier is `(expression-to-action)` and followed by other more detailed ones:
 ![](/img/little11.png)
-The above tree code blocks can be linked by two function as:
+The above tree code blocks can be linked by two functions as:
 
 {{< highlight scheme >}}
 ; The value function takes an expression and evaulates it
@@ -719,9 +723,19 @@ The above tree code blocks can be linked by two function as:
     ((expression-to-action e) e table)))
 {{< /highlight >}}
 
-Notice the example of determining the meaning of a **non-primitive, lambda
-expression**
-![](/img/little14.png)
+The `(meaning e table)` is going to be the most important function in this
+chapter. The main job is: it classifies any input into the above six categories
+based on the "nature of action" of the input. Then each categories has its own
+running/interpreting rules with starred names (e.g. \*const, \*identifier).
+
+Most of the codes are easy to read with examples. We will be see difficult ones:
+`(*lambda, *cond, *application)`.
+
+**(1) lambda**
+
+{{< figure src="/img/little14.png" >}}
+
+**(2) cond**
 
 The `(*cond)` is a bit more complex. The most eternal condition of `(cond)` is
 `(else)` so it's the first one got translated into meaning. But the other seen
@@ -744,5 +758,8 @@ Try this example:
 The coffee example roughly shows an idea of searching function for meaning/action in
 the table when it's not primitive like `(eq?)`.
 
-Next, we are finally giving the most complex body of interpreter:
+**(3) application**
+
+This includes all complex function expressions. For example, a S-expression
+applying value to a lambda function.
 ![](/img/little15.png)
