@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (1/3)"
 date = 2019-12-10T23:20:00+00:00
-lastmod = 2020-06-04T02:13:19+01:00
+lastmod = 2020-06-04T02:46:07+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"

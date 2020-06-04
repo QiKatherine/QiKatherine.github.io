@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (3/3)"
 date = 2020-01-06T17:44:00+00:00
-lastmod = 2020-06-04T02:13:20+01:00
+lastmod = 2020-06-04T02:46:08+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -726,26 +726,32 @@ The above tree code blocks can be linked by two functions as:
 The `(meaning e table)` is going to be the most important function in this
 chapter. The main job is: it classifies any input into the above six categories
 based on the "nature of action" of the input. Then each categories has its own
-running/interpreting rules with starred names (e.g. \*const, \*identifier).
+execution/interpreting rules with starred names (e.g. \*const, \*identifier).
 
-Most of the codes are easy to read with examples. We will be see difficult ones:
+Most of the execution rules for the six categories are just writing down details
+of its working nature. And the examples on book are easy to follow. We will see some difficult ones together:
 `(*lambda, *cond, *application)`.
 
 **(1) lambda**
 
-{{< figure src="/img/little14.png" >}}
+We can see that e as an lambda expression, when passed to `(meaning e table)` it
+quickly classified as \*lambda. The following rule of \*lambda action defines e as
+non-primitive and attaches the table to its remainder. Later we will see in =(apply-closure), for a
+function defined as non-primitive, we will further deconstruct the content of
+itself to run.
+![](/img/little14.png)
 
 **(2) cond**
 
-The `(*cond)` is a bit more complex. The most eternal condition of `(cond)` is
-`(else)` so it's the first one got translated into meaning. But the other seen
-conditions of cond (cond-lines-of e) dosn't have much varieties either, no much more
+The rule for `(*cond)` category is similar to lambda. As we know an eternal condition of `(cond)` is
+`(else)` so it's the first one got translated into meaning. The other predicates
+conditions of cond (cond-lines-of e) do not have much varieties either, no much more
 than `(atom? eq? null? zero? o< o>)` with combinations of `(and or)`. These
 primitive ones got translated in the second predicate with meaning of `(*const)`
-from the `(atom-to-action)` the non-usual ones which are either atom or others
-got translated into `(*application)`.
+from the `(atom-to-action)`. The remaining non-usual ones which either goes to atom/identifier or got translated into `(*application)`.
 ![](/img/little12.png)
-Try this example:
+
+If you wonder, put the book example in DrRacket:
 
 {{< highlight scheme >}}
 (*cond (cond (coffee klatsch)(else party))
@@ -753,13 +759,14 @@ Try this example:
    ((klatsch party)(5 (6)))))
 {{< /highlight >}}
 
-{{< figure src="/img/little13.png" >}}
-
+And my answer:
 The coffee example roughly shows an idea of searching function for meaning/action in
 the table when it's not primitive like `(eq?)`.
 
+{{< figure src="/img/little13.png" >}}
+
 **(3) application**
 
-This includes all complex function expressions. For example, a S-expression
+This category processes all other complex function expressions. For example, a S-expression
 applying value to a lambda function.
 ![](/img/little15.png)
