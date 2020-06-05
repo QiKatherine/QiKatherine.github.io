@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (3/3)"
 date = 2020-01-06T17:44:00+00:00
-lastmod = 2020-06-04T02:46:08+01:00
+lastmod = 2020-06-05T02:01:31+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -699,17 +699,29 @@ example, see the value of these S-expression:
 ;'something is an atom
 {{< /highlight >}}
 
-What is type and why using type in interpreting program? Well, type function is like an efficiency boost
-classifier in deconstructing/running code. Most of the functions we've seen can
-be roughly allocated to several categories based on action similarities. If we can write an abstract and
-universal function for each type, we can call them and optimal each function
+What is type? Based on the working essence, all the functions we have seen in
+this book can be described in six types:
+`(const, quote, identifier, lambda, cond, application)`. In interpreting
+program, implementing a type classification function in the first step is an
+efficiency booster. Because functions in the same type work in similar way. If we can write an universal function for each type, we can call and optimize each function
 based on their distinctive characteristics.
 
-Based on the work essence of characters in this book, there are six types for scheme:
-`(const, quote, identifier, lambda, cond, application)`. The first layer of
-classifier is `(expression-to-action)` and followed by other more detailed ones:
+The similar part of interpretation is, recognizing the type and arguments of function, finding the
+corresponding value for each type and arguments (use `(lookup-in-table)`), then
+implementing the value to the type and arguments.
+
+So firstly let's how the type classification works. The first layer of
+classifier is `(expression-to-action)` and followed by other more detailed ones.
+This is going to be the most important function in this
+chapter: it classifies any input into the above six categories
+based on the "nature of action" of the input. Then each categories has its own
+execution/interpreting rules with starred names (e.g. \*const, \*identifier). With
+these starred functions, we can roughly find values for anything, with a proper table.
 ![](/img/little11.png)
-The above tree code blocks can be linked by two functions as:
+
+Since everything can be classified with the above function, we can use `(meaning
+e table)` to find value for both functions and arguments, and merge the type and value together in a table to further writing implementing
+procedure. The above tree code blocks can be linked by two functions as:
 
 {{< highlight scheme >}}
 ; The value function takes an expression and evaulates it
@@ -722,11 +734,6 @@ The above tree code blocks can be linked by two functions as:
   (lambda (e table)
     ((expression-to-action e) e table)))
 {{< /highlight >}}
-
-The `(meaning e table)` is going to be the most important function in this
-chapter. The main job is: it classifies any input into the above six categories
-based on the "nature of action" of the input. Then each categories has its own
-execution/interpreting rules with starred names (e.g. \*const, \*identifier).
 
 Most of the execution rules for the six categories are just writing down details
 of its working nature. And the examples on book are easy to follow. We will see some difficult ones together:
