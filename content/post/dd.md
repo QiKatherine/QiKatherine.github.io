@@ -1,7 +1,7 @@
 +++
 title = "Detailed key proof of ANOVA test: SST=SSE+SSB"
 date = 2020-03-09T00:07:00+00:00
-lastmod = 2020-06-05T02:01:31+01:00
+lastmod = 2020-06-06T02:36:57+01:00
 tags = ["statistics"]
 categories = ["MATH"]
 draft = false

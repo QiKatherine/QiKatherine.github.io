@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (3/3)"
 date = 2020-01-06T17:44:00+00:00
-lastmod = 2020-06-05T02:01:31+01:00
+lastmod = 2020-06-06T02:36:57+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -715,7 +715,7 @@ classifier is `(expression-to-action)` and followed by other more detailed ones.
 This is going to be the most important function in this
 chapter: it classifies any input into the above six categories
 based on the "nature of action" of the input. Then each categories has its own
-execution/interpreting rules with starred names (e.g. \*const, \*identifier). With
+running/interpreting rules with starred names (e.g. \*const, \*identifier). With
 these starred functions, we can roughly find values for anything, with a proper table.
 ![](/img/little11.png)
 
@@ -735,15 +735,15 @@ procedure. The above tree code blocks can be linked by two functions as:
     ((expression-to-action e) e table)))
 {{< /highlight >}}
 
-Most of the execution rules for the six categories are just writing down details
+Most of the running rules for the six categories are just writing down details
 of its working nature. And the examples on book are easy to follow. We will see some difficult ones together:
-`(*lambda, *cond, *application)`.
+\*lambda, \*cond, \*application.
 
 **(1) lambda**
 
 We can see that e as an lambda expression, when passed to `(meaning e table)` it
-quickly classified as \*lambda. The following rule of \*lambda action defines e as
-non-primitive and attaches the table to its remainder. Later we will see in =(apply-closure), for a
+got classified as \*lambda. The following rule of \*lambda action defines e as
+non-primitive and attaches the table to its remainder. Later we will see in `(apply-closure)`, for a
 function defined as non-primitive, we will further deconstruct the content of
 itself to run.
 ![](/img/little14.png)
@@ -777,3 +777,24 @@ the table when it's not primitive like `(eq?)`.
 This category processes all other complex function expressions. For example, a S-expression
 applying value to a lambda function.
 ![](/img/little15.png)
+
+Starting from an simple example, implementing an lambda expression, is equal to
+find the meaning of a new e and table like this:
+![](/img/little17.png)
+
+But we would like to have an universal form to do this, maybe with a closure that
+got functions, arguments and corresponding values stored in a structural form.
+Evaluating any non-primitive function would like evaluating meaning of a
+standard objects.
+
+In fact yes, it is achievable. As is mention in \*lambda part, applying a non-primitive function - a closure -
+to a list of values is the same as finding the meaning of the closure's body
+with its table extended by an entry of the form `((formals values))`
+In this entry, _formals_ is the _formals_ of the closure and _values_ is the results of _evlis_.
+
+There maybe a thousand ways to design closure, but let's start with a simple one
+with a function with known form.
+![](/img/little18.png)
+
+This is how it evolves:
+![](/img/little16.png)
