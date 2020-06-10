@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (1/3)"
 date = 2019-12-10T23:20:00+00:00
-lastmod = 2020-06-06T02:36:56+01:00
+lastmod = 2020-06-10T03:18:18+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -564,7 +564,7 @@ insertL\*, occur\*, subst\* and member\* in the same way.
             (member* a (cdr l)))))))
 {{< /highlight >}}
 
-The starred functions require more predicates to consider all possibile
+The starred functions require more predicates to consider all possible
 situations. After observing the design pattern in the above functions, we
 would see that they all asked three fundamental questions: **(1) Is the list null?
 (2) If not, is the `(car argument)` an atom? (3) If yes, is the predicate

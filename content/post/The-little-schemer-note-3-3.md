@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (3/3)"
 date = 2020-01-06T17:44:00+00:00
-lastmod = 2020-06-06T02:36:57+01:00
+lastmod = 2020-06-10T03:18:19+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -141,9 +141,7 @@ makes any input with form of `((a b) (c d))` trapped in infinite item swapping l
 (shuffle '((a b) (c d)))    ; infinite swap pora  Ctrl + c  to break and input q to exit
 {{< /highlight >}}
 
----
-
-This seems unrelated to the above issue so far. We just define two different
+We just define two different
 ways to measure the mass of the first component of `(align)`. The `(length*)` measures every
 atom with same weight, whereas the `(weight*)` puts twice as much weight to the first component.
 
@@ -175,14 +173,20 @@ From `(align)` and `(shuffle)`, we realize that whether the arguments will
 decrease in recursion is not the key to infer whether a function is total. We
 start to think if possible to develop a diagnose function to detect the partial function. Let's make
 up a function `(will-stop?)` without getting into detail. We want it to **return
-\#t if the argument stops when applied to null input, and return #f it does not
-stop when inputting null input**. And
-itself has to be a total function. Then we try compounding it with `(length)` and `(eternity)` respectively.
+\#t if the function would eventually terminate with returning value, and return #f it does not
+stop**. And itself has to be a total function, in which case `(will-stop? will-stop>)` has
+to return #t.
+
+Such test function can be used with `(length)` and `(eternity)`.
 
 {{< highlight scheme >}}
+(define eternity
+  (lambda (x)
+    (eternity x)))
+
 (define will-stop?
- (lambda (f))
-...)
+  (lambda (x)
+    (eternity x)))
 
 (define length
   (lambda (lat)
@@ -193,20 +197,18 @@ itself has to be a total function. Then we try compounding it with `(length)` an
 (define will-stop?
   (lambda (x)
     (length x)))
-
-(define eternity
-  (lambda (x)
-    (eternity x)))
-
-(define will-stop?
-  (lambda (x)
-    (eternity x)))
 {{< /highlight >}}
 
 The `(length)` stops when the input is `'()`, so the `(will-stop?)` returns #t.
 But the `(eternity)` is partial and won't stop for any input, which makes the
 `(will-stop?)` returns #f whatsoever. This gives us a gist of what function we want
-to build. Let's see another tool function:
+to build.
+
+But you might have figured already: the partial function detecting function
+`(will-stop?)` do NOT exist. The author carefully raises an example to show
+this.
+
+Let's see this example:
 
 {{< highlight scheme >}}
 (define last-try
@@ -223,17 +225,19 @@ goes against the aka part in parenthesis. So we try the opposite hypothesis: it
 returns #t (aka the last-try will stop with null input), and then we get to
 evaluate `(eternity (quote()))`, which never stops. And this time, it logically
 goes against the hypothesis again. This makes the `(will-stop?)` a
-function we can describe but can not define. So be careful when using the recursion.
+function we can describe but can not define. The author demonstrate this by constructing a function
+based on `(will-stop?)` which `(will-stop?)` cannot judge.
 
 ---
 
-From now on, we start to learn to remove `(define function-name)` and use lambda
-expression to directly refer to a function. This allows us to save time when we
-want to quickly define something without permanently store it in official
-environment.
+A function calling itself directly or indirectly, is recursion. A common issue about
+recursion is that, if we have finishing defining a function,
+how would we call it? We probably can re-write a recursive function to
+non-recursive one.
 
-To start, try understand the below two functions are identical, and try writing a
-named funtion in lambda expression yourself.
+We still use `(length)` as an example. Right now, it is a full function
+that returns a value (i.e. the length of a list). It can use recursion in the last line
+because it has formal function name **length**.
 
 {{< highlight scheme >}}
 (define length
@@ -242,12 +246,21 @@ named funtion in lambda expression yourself.
     ((null? l) 0)
     (else
       (add1 (length (cdr l)))))))
+{{< /highlight >}}
 
-(lambda (l)
+In stead of being a name defined by **define**, **length** can also work as an
+argument if we change the **define** to **lambda**. The difference is, the above function will return a
+value whereas the below function will return a function. It is the returned
+function `(λ l)` that will return value. For the below lamnbda function, the input also has to be
+a function.
+
+{{< highlight scheme >}}
+(lambda (length)
+ (lambda (l)
   (cond
     ((null? l) 0)
     (else
-      (add1 (length (cdr l))))))
+      (add1 (length (cdr l)))))))
 {{< /highlight >}}
 
 It's absolutely normal to get confused when there are more layers of lambda expressions involved in a
@@ -272,16 +285,16 @@ omega combinator. It has shape in the below picture and more information can be
 found at [Lambda calculus - Wikipedia](https://en.wikipedia.org/wiki/Lambda%5Fcalculus#Standard%5Fterms)
 ![](/img/little2.png)
 
-As you read more, you will understand
-the below example is carefully selected: it achieves a simple job at a time; applying
-it on itself is achieving a simple job on a achieved job; when repeating calling itself,
-it can achieve a almost infinite loop.
+Next, we change `(length)` a little by calling `(eternity)`
+instead of `(length)` in the most inner recursion. This change makes the
+function can only
+terminates in the `(null?)` predicate. In any other case the non-null input will
+trigger the `(eternity)` and the function will trap in infinite loop.
 
-In addition, the function change `(length)` a little by calling `(eternity)`
-instead of `(length)` in its recursion. This makes the function only works on **null input**, since it will terminate in the `(null?)` predicate without calling the partial
-`(eternity)`, otherwise any non-null input will trigger the infinite
-recursion and cause failure by giving no answer. This is essentially how the `(length<=0)` can **only** determine the length of the empty list. With it, we can further develop an `(length<=1)` which measures the length of list
-with less than one element:
+This is how the
+`(length<=0)` can only measure length of list with **zero** element. So if we want to
+develop a `(length<=1)` to measure list with less
+than **one** element, we have to design a **new function** that adds another layer of function inside the `(length<=0)`.
 
 {{< highlight scheme >}}
 ;length<=0
@@ -314,9 +327,8 @@ with less than one element:
 
 {{< figure src="/img/length1.png" >}}
 
-Recursively we can develop `(length<=2)` below. Notice these
-three functions are identical. (here we start dumping `(define ...)`, referring the
-length0 and length1 are there only for demonstration purpose).
+Recursively we can develop `(length<=2)` below. Can you explain why these
+three functions are identical?
 
 {{< highlight scheme >}}
 ;length<=2
@@ -778,22 +790,23 @@ This category processes all other complex function expressions. For example, a S
 applying value to a lambda function.
 ![](/img/little15.png)
 
-Starting from an simple example, implementing an lambda expression, is equal to
-find the meaning of a new e and table like this:
+Starting from a simple example, implementing a lambda expression, is equal to
+find the meaning of an e with a table like this:
 ![](/img/little17.png)
 
-But we would like to have an universal form to do this, maybe with a closure that
+It equals evaluating =(\*application (cons x y) table) too. We are not sure what
+kind of tables will always work, but We would like to have an universal form to do this, maybe with a closure that
 got functions, arguments and corresponding values stored in a structural form.
-Evaluating any non-primitive function would like evaluating meaning of a
-standard objects.
+Evaluating any non-primitive function would be like evaluating the meaning/\*application of a
+standard object.
 
 In fact yes, it is achievable. As is mention in \*lambda part, applying a non-primitive function - a closure -
 to a list of values is the same as finding the meaning of the closure's body
-with its table extended by an entry of the form `((formals values))`
+with its table extended by an entry of the form `(formals values)`.
 In this entry, _formals_ is the _formals_ of the closure and _values_ is the results of _evlis_.
 
-There maybe a thousand ways to design closure, but let's start with a simple one
-with a function with known form.
+There may be a thousand possible closures, but let's start with a simple one
+matching a function with known form.
 ![](/img/little18.png)
 
 This is how it evolves:
