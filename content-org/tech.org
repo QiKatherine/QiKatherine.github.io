@@ -2548,8 +2548,7 @@ makes any input with form of =((a b) (c d))= trapped in infinite item swapping l
 (shuffle '(a b))            ; '(a b)
 (shuffle '((a b) (c d)))    ; infinite swap pora  Ctrl + c  to break and input q to exit
 #+end_src
------
-This seems unrelated to the above issue so far. We just define two different
+We just define two different
 ways to measure the mass of the first component of =(align)=. The =(length*)= measures every
 atom with same weight, whereas the =(weight*)= puts twice as much weight to the first component. 
 #+begin_src scheme
@@ -2576,13 +2575,17 @@ atom with same weight, whereas the =(weight*)= puts twice as much weight to the 
 -----
 From =(align)= and =(shuffle)=, we realize that whether the arguments will
 decrease in recursion is not the key to infer whether a function is total. We
-start to think if possible to develop a diagnose function to detect the partial function. Let's make
+start to think if possible to develop a diagnose function to detect the partial
+function. Let's imaging making
 up a function =(will-stop?)= without getting into detail. We want it to *return
 #t if the function would eventually terminate with returning value, and return #f it does not
 stop*. And itself has to be a total function, in which case =(will-stop? will-stop>)= has
 to return #t. 
 
-Such test function can be used with =(length)= and =(eternity)=.  
+What would happen if the input are =(length)= and =(eternity)= like these? Sounds cool: the =(length)= stops when the input is ='()=, so the =(will-stop?)= returns #t, great!
+Meanwhile the =(eternity)= is partial and won't stop for any input, which makes the
+=(will-stop?)= returns #f whatsoever.
+ 
 #+begin_src scheme
 (define eternity
   (lambda (x)
@@ -2602,14 +2605,12 @@ Such test function can be used with =(length)= and =(eternity)=.
   (lambda (x)
     (length x)))
 #+end_src
-The =(length)= stops when the input is ='()=, so the =(will-stop?)= returns #t.
-But the =(eternity)= is partial and won't stop for any input, which makes the
-=(will-stop?)= returns #f whatsoever. This gives us a gist of what function we want
-to build. 
 
-But you might have figured already: the partial function detect function
-=(will-stop?)= do NOT exist. The scientists made a very delicate example to show
-this. 
+But you might also sense logical flaws already: if there is a function can make
+=(will-stop?)= return #t
+but won't stop, the partial function detection function may eventually NOT
+exist. If you cannot, the author has carefully come up with an example to show
+why. 
 
 Let's see this example:
 #+begin_src scheme
@@ -2626,17 +2627,23 @@ goes against the aka part in parenthesis. So we try the opposite hypothesis: it
 returns #t (aka the last-try will stop with null input), and then we get to
 evaluate =(eternity (quote()))=, which never stops. And this time, it logically
 goes against the hypothesis again. This makes the =(will-stop?)= a
-function we can describe but can not define. The author demonstrate this by constructing a function
+function we can describe but can not define. The example delicately demonstrates
+this by constructing a function
 based on =(will-stop?)= which =(will-stop?)= cannot judge.
 
+You might ask what if we just demand never use the logical contradiction case,
+such as "forbid tested function directly or indirectly calling =(will-stop?)=".
+In that case, will =(will-stop?)= exist? Not sure.
+
+But that's exactly what we want to do with Y combinator. 
 -----
 A function calling itself directly or indirectly, is recursion. A common issue about
-recursion is that, if we have finishing defining a function,
-how would we call it? We probably can re-write a recursive function to
+recursion is that, if we want to call a function that haven't been fully defined,
+how could we do it? We probably can re-write a recursive function to
 non-recursive one.
 
-We still use =(length)= as an example. Right now, it is a full function
-that returns a value (i.e. the length of a list). It can use recursion in the last line
+We still use =(length)= as an example. Currently it is a fully defined function
+that returns a value (i.e. the length of a list). It can use recursion inside itself
 because it has formal function name *length*. 
 #+begin_src scheme
 (define length
@@ -2649,9 +2656,11 @@ because it has formal function name *length*.
 #+end_src
 
 In stead of being a name defined by *define*, *length* can also work as an
-argument if we change the *define* to *lambda*. The difference is, the =(length)= function will return a
-value whereas the =(λ length)= will return a function. It is the returned
-function =(λ l)= that returns value.
+argument if changing =(define length)= to =(lambda length)=, as showed below. However there is a major
+difference: with or without =(define length)=, the above function can return
+value 0 for a null input. But to the below function, the input and output will have
+to be functions. It's the output function =(λ l)= that will return value. This
+is crucial for understanding the =(mk-length mk-length)= reformation later.
 #+begin_src scheme
 (lambda (length)
  (lambda (l)
@@ -2680,19 +2689,20 @@ omega combinator. It has shape in the below picture and more information can be
 found at [[https://en.wikipedia.org/wiki/Lambda_calculus#Standard_terms][Lambda calculus - Wikipedia]]
 [[/img/little2.png]]
 
+We can change =(length)= a little by calling =(eternity)=
+instead of =(length)= in the most inner recursion. This change makes the
+function can only
+terminate in the =(null?)= predicate. Because in any other case the non-null input will
+trigger the =(eternity)= and the function will trap in infinite loop. But the essence is fundamentally similar to the previous function.
 
-As you read more, you would realize
-the length measure function is a carefully selected example: it does a simple job at a time; applying
-it on itself is equal to doing a simple job on a achieved job; when repeating calling itself,
-it can achieve a almost infinite loop.
+This is how the
+=(length<=0)= can only measure length of list with *zero* element. It is
+happening only in the *applicative order* interpreting, which the arguments will
+be instantaneously evaluated the leftmost innermost reducible expression before the function is applied. 
 
-In addition, we change =(length)= a little by calling =(eternity)=
-instead of =(length)= in the most inner recursion. This makes the function only works on *null input*, since it will terminate in the =(null?)= predicate without calling the partial
-=(eternity)=, otherwise any non-null input will trigger the infinite
-recursion and cause failure by giving no answer. This is essentially how the
-=(length<=0)= can only measure length of list with *zero* element. If we want to
+So if we want to
 develop a =(length<=1)= to measure list with less
-than *one* element, we have to design a new function that adds another layer of function inside the =(length<=0)=.  
+than *one* element, we have to design a *new function* that adds another layer of function onto the =(length<=0)=.  
 #+begin_src scheme
 ;length<=0
 (lambda (l)
@@ -2723,9 +2733,8 @@ than *one* element, we have to design a new function that adds another layer of 
 #+end_src
 [[/img/length1.png]]
 
-Recursively we can develop =(length<=2)= below. Notice these
-three functions are identical. (here we start dumping =(define ...)=, referring the
-length0 and length1 are there only for demonstration purpose).
+Recursively we can develop =(length<=2)= below. Can you explain why these
+three functions are identical? 
 #+begin_src scheme
 ;length<=2
 (lambda (l)
@@ -2873,10 +2882,29 @@ call it =(mk-length)=, the length functions can be therefore written as:
 #+end_src
 
 In the length 0, the actual working part is =((null? l) 0)= and the =(else)= predicate
-was never really got invoked. So in that predicate it doesn't really matter if we call =(eternity)=, or
-even itself =(mk-length)=. Therefore we try further abstract it with this thoughts:
+would never really got triggered. So in that predicate it doesn't really matter if we call =(eternity)=, or
+even itself =(mk-length)=. So why don't we just change =(eternity)= to =(mk-length)=:
 #+begin_src scheme
 ; length<=0
+((lambda (mk-length)
+   (mk-length mk-length)) ;<- we change here
+ (lambda (length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else
+         (add1 (length (cdr l))))))))
+#+end_src
+The above code is still ONLY able to measure null list, because for other input,
+it will have to expand =(add1 (length (cdr l)))= where the input of argument has
+to be a function (says by the outer lambda expression) but we only have list as
+input. It fails in this step:
+[[/img/little121.png]]
+
+As you might guess, we can actually pass a random/any function to make it
+measure length one list, since it will stop in =(null? list)= in the second
+loop. Any of this function could work:
+#+begin_src scheme
 ((lambda (mk-length)
    (mk-length mk-length))
  (lambda (length)
@@ -2884,10 +2912,36 @@ even itself =(mk-length)=. Therefore we try further abstract it with this though
      (cond
        ((null? l) 0)
        (else
-         (add1 (length (cdr l))))))))
+         (add1 ((length add1) (cdr l))))))))
 
+((lambda (mk-length)
+   (mk-length mk-length))
+ (lambda (length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else
+         (add1 ((length eternity) (cdr l))))))))
+
+((lambda (mk-length)
+   (mk-length mk-length))
+ (lambda (length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else
+         (add1 ((length length) (cdr l))))))))
+#+end_src
+
+
+The last part in above shows: since the =(eternity)= is now substituted by the
+=(mk-length)=, we can add one more workable layer on =(length0)=. This is achievable by calling the inner most
+function =(mk-length)= with another argument of =(eternity)=.
+
+#+begin_src scheme
 ; since it doesn't really matter what to name the inner argument
 ; we rewrite length<=0
+;-> this is the key of why there are so many same arguments in the Y combinator
 ((lambda (mk-length)
    (mk-length mk-length))
  (lambda (mk-length)
@@ -2898,18 +2952,15 @@ even itself =(mk-length)=. Therefore we try further abstract it with this though
          (add1 (mk-length (cdr l))))))))
 
 ;use length<=0 to achieve length<=1 
-(((lambda (mk-length)
+((lambda (mk-length)
    (mk-length mk-length))
  (lambda (mk-length)
    (lambda (l)
      (cond
        ((null? l) 0)
        (else
-         (add1 ((mk-length eternity) (cdr l)))))))))
+         (add1 ((mk-length eternity) (cdr l))))))))
 #+end_src
-The last part in above shows: since the =(eternity)= is now substituted by the
-=(mk-length)=, we can add one more workable layer on =(length0)=. This is achievable by calling the inner most
-function =(mk-length)= with another argument of =(eternity)=.
 
 The exercise in page 166 will help you on how it works. The instruction can be
 found in the answer of =soegaard= :
@@ -2918,7 +2969,8 @@ found in the answer of =soegaard= :
 When running it with stepper in DrRacket, there are 27 steps for a case =(l is
 (' a b c))=, I only demonstrate 4 steps here (press ctrl and + to see the enlarged image)
 
-[[../static/img/little.png]]
+[[/img/little.png]]
+
 You can try to play with longer list, such as this:
 #+begin_src scheme
 (((lambda (mk-length)
@@ -2936,7 +2988,7 @@ You would realize that this is just more recurrences of that "bear in mind"
 picture, aka calling =(mk-length mk-length)= one more time before applying a
 shorter candidate list, until the =(cdr l)= runs out of atom. In the end, the null
 list becomes the termination condition, without triggering it, we will go stack overflow by calling
-=(mk-length mk-length)= infinitely.
+=(mk-length mk-length)= infinite times.
 
 After undertanding the above code, the author finanlly gets to reform this
 procedure in to Y combinator, a function without defining name and so pithy that

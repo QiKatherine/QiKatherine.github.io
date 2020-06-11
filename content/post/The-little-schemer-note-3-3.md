@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (3/3)"
 date = 2020-01-06T17:44:00+00:00
-lastmod = 2020-06-10T03:18:19+01:00
+lastmod = 2020-06-11T23:39:25+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -171,13 +171,16 @@ atom with same weight, whereas the `(weight*)` puts twice as much weight to the 
 
 From `(align)` and `(shuffle)`, we realize that whether the arguments will
 decrease in recursion is not the key to infer whether a function is total. We
-start to think if possible to develop a diagnose function to detect the partial function. Let's make
+start to think if possible to develop a diagnose function to detect the partial
+function. Let's imaging making
 up a function `(will-stop?)` without getting into detail. We want it to **return
 \#t if the function would eventually terminate with returning value, and return #f it does not
 stop**. And itself has to be a total function, in which case `(will-stop? will-stop>)` has
 to return #t.
 
-Such test function can be used with `(length)` and `(eternity)`.
+What would happen if the input are `(length)` and `(eternity)` like these? Sounds cool: the `(length)` stops when the input is `'()`, so the `(will-stop?)` returns #t, great!
+Meanwhile the `(eternity)` is partial and won't stop for any input, which makes the
+`(will-stop?)` returns #f whatsoever.
 
 {{< highlight scheme >}}
 (define eternity
@@ -199,14 +202,11 @@ Such test function can be used with `(length)` and `(eternity)`.
     (length x)))
 {{< /highlight >}}
 
-The `(length)` stops when the input is `'()`, so the `(will-stop?)` returns #t.
-But the `(eternity)` is partial and won't stop for any input, which makes the
-`(will-stop?)` returns #f whatsoever. This gives us a gist of what function we want
-to build.
-
-But you might have figured already: the partial function detecting function
-`(will-stop?)` do NOT exist. The author carefully raises an example to show
-this.
+But you might also sense logical flaws already: if there is a function can make
+`(will-stop?)` return #t
+but won't stop, the partial function detection function may eventually NOT
+exist. If you cannot, the author has carefully come up with an example to show
+why.
 
 Let's see this example:
 
@@ -225,18 +225,25 @@ goes against the aka part in parenthesis. So we try the opposite hypothesis: it
 returns #t (aka the last-try will stop with null input), and then we get to
 evaluate `(eternity (quote()))`, which never stops. And this time, it logically
 goes against the hypothesis again. This makes the `(will-stop?)` a
-function we can describe but can not define. The author demonstrate this by constructing a function
+function we can describe but can not define. The example delicately demonstrates
+this by constructing a function
 based on `(will-stop?)` which `(will-stop?)` cannot judge.
+
+You might ask what if we just demand never use the logical contradiction case,
+such as "forbid tested function directly or indirectly calling `(will-stop?)`".
+In that case, will `(will-stop?)` exist? Not sure.
+
+But that's exactly what we want to do with Y combinator.
 
 ---
 
 A function calling itself directly or indirectly, is recursion. A common issue about
-recursion is that, if we have finishing defining a function,
-how would we call it? We probably can re-write a recursive function to
+recursion is that, if we want to call a function that haven't been fully defined,
+how could we do it? We probably can re-write a recursive function to
 non-recursive one.
 
-We still use `(length)` as an example. Right now, it is a full function
-that returns a value (i.e. the length of a list). It can use recursion in the last line
+We still use `(length)` as an example. Currently it is a fully defined function
+that returns a value (i.e. the length of a list). It can use recursion inside itself
 because it has formal function name **length**.
 
 {{< highlight scheme >}}
@@ -249,10 +256,11 @@ because it has formal function name **length**.
 {{< /highlight >}}
 
 In stead of being a name defined by **define**, **length** can also work as an
-argument if we change the **define** to **lambda**. The difference is, the above function will return a
-value whereas the below function will return a function. It is the returned
-function `(λ l)` that will return value. For the below lamnbda function, the input also has to be
-a function.
+argument if changing `(define length)` to `(lambda length)`, as showed below. However there is a major
+difference: with or without `(define length)`, the above function can return
+value 0 for a null input. But to the below function, the input and output will have
+to be functions. It's the output function `(λ l)` that will return value. This
+is crucial for understanding the `(mk-length mk-length)` reformation later.
 
 {{< highlight scheme >}}
 (lambda (length)
@@ -285,16 +293,20 @@ omega combinator. It has shape in the below picture and more information can be
 found at [Lambda calculus - Wikipedia](https://en.wikipedia.org/wiki/Lambda%5Fcalculus#Standard%5Fterms)
 ![](/img/little2.png)
 
-Next, we change `(length)` a little by calling `(eternity)`
+We can change `(length)` a little by calling `(eternity)`
 instead of `(length)` in the most inner recursion. This change makes the
 function can only
-terminates in the `(null?)` predicate. In any other case the non-null input will
-trigger the `(eternity)` and the function will trap in infinite loop.
+terminate in the `(null?)` predicate. Because in any other case the non-null input will
+trigger the `(eternity)` and the function will trap in infinite loop. But the essence is fundamentally similar to the previous function.
 
 This is how the
-`(length<=0)` can only measure length of list with **zero** element. So if we want to
+`(length<=0)` can only measure length of list with **zero** element. It is
+happening only in the **applicative order** interpreting, which the arguments will
+be instantaneously evaluated the leftmost innermost reducible expression before the function is applied.
+
+So if we want to
 develop a `(length<=1)` to measure list with less
-than **one** element, we have to design a **new function** that adds another layer of function inside the `(length<=0)`.
+than **one** element, we have to design a **new function** that adds another layer of function onto the `(length<=0)`.
 
 {{< highlight scheme >}}
 ;length<=0
@@ -481,11 +493,32 @@ call it `(mk-length)`, the length functions can be therefore written as:
 {{< /highlight >}}
 
 In the length 0, the actual working part is `((null? l) 0)` and the `(else)` predicate
-was never really got invoked. So in that predicate it doesn't really matter if we call `(eternity)`, or
-even itself `(mk-length)`. Therefore we try further abstract it with this thoughts:
+would never really got triggered. So in that predicate it doesn't really matter if we call `(eternity)`, or
+even itself `(mk-length)`. So why don't we just change `(eternity)` to `(mk-length)`:
 
 {{< highlight scheme >}}
 ; length<=0
+((lambda (mk-length)
+   (mk-length mk-length)) ;<- we change here
+ (lambda (length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else
+         (add1 (length (cdr l))))))))
+{{< /highlight >}}
+
+The above code is still ONLY able to measure null list, because for other input,
+it will have to expand `(add1 (length (cdr l)))` where the input of argument has
+to be a function (says by the outer lambda expression) but we only have list as
+input. It fails in this step:
+![](/img/little121.png)
+
+As you might guess, we can actually pass a random/any function to make it
+measure length one list, since it will stop in `(null? list)` in the second
+loop. Any of this function could work:
+
+{{< highlight scheme >}}
 ((lambda (mk-length)
    (mk-length mk-length))
  (lambda (length)
@@ -493,10 +526,35 @@ even itself `(mk-length)`. Therefore we try further abstract it with this though
      (cond
        ((null? l) 0)
        (else
-         (add1 (length (cdr l))))))))
+         (add1 ((length add1) (cdr l))))))))
 
+((lambda (mk-length)
+   (mk-length mk-length))
+ (lambda (length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else
+         (add1 ((length eternity) (cdr l))))))))
+
+((lambda (mk-length)
+   (mk-length mk-length))
+ (lambda (length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else
+         (add1 ((length length) (cdr l))))))))
+{{< /highlight >}}
+
+The last part in above shows: since the `(eternity)` is now substituted by the
+`(mk-length)`, we can add one more workable layer on `(length0)`. This is achievable by calling the inner most
+function `(mk-length)` with another argument of `(eternity)`.
+
+{{< highlight scheme >}}
 ; since it doesn't really matter what to name the inner argument
 ; we rewrite length<=0
+;-> this is the key of why there are so many same arguments in the Y combinator
 ((lambda (mk-length)
    (mk-length mk-length))
  (lambda (mk-length)
@@ -507,19 +565,15 @@ even itself `(mk-length)`. Therefore we try further abstract it with this though
          (add1 (mk-length (cdr l))))))))
 
 ;use length<=0 to achieve length<=1
-(((lambda (mk-length)
+((lambda (mk-length)
    (mk-length mk-length))
  (lambda (mk-length)
    (lambda (l)
      (cond
        ((null? l) 0)
        (else
-         (add1 ((mk-length eternity) (cdr l)))))))))
+         (add1 ((mk-length eternity) (cdr l))))))))
 {{< /highlight >}}
-
-The last part in above shows: since the `(eternity)` is now substituted by the
-`(mk-length)`, we can add one more workable layer on `(length0)`. This is achievable by calling the inner most
-function `(mk-length)` with another argument of `(eternity)`.
 
 The exercise in page 166 will help you on how it works. The instruction can be
 found in the answer of `soegaard` :
@@ -528,7 +582,8 @@ found in the answer of `soegaard` :
 When running it with stepper in DrRacket, there are 27 steps for a case `(l is
 (' a b c))`, I only demonstrate 4 steps here (press ctrl and + to see the enlarged image)
 
-![](/img/little.png)
+{{< figure src="/img/little.png" >}}
+
 You can try to play with longer list, such as this:
 
 {{< highlight scheme >}}
@@ -548,7 +603,7 @@ You would realize that this is just more recurrences of that "bear in mind"
 picture, aka calling `(mk-length mk-length)` one more time before applying a
 shorter candidate list, until the `(cdr l)` runs out of atom. In the end, the null
 list becomes the termination condition, without triggering it, we will go stack overflow by calling
-`(mk-length mk-length)` infinitely.
+`(mk-length mk-length)` infinite times.
 
 After undertanding the above code, the author finanlly gets to reform this
 procedure in to Y combinator, a function without defining name and so pithy that

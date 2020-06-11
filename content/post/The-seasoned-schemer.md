@@ -1,6 +1,6 @@
 +++
 title = "The Seasoned Schemer"
-lastmod = 2020-06-10T03:18:20+01:00
+lastmod = 2020-06-11T23:39:25+01:00
 categories = ["TECH"]
 draft = true
 image = "img/111.jpg"
