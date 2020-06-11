@@ -2,7 +2,7 @@
 title = "Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】"
 summary = "My personal experience of blogging with Emacs/Spacemacs and plug-in ox-hugo, along with some explanation of Hugo's working structure."
 date = 2019-07-16T01:03:00+01:00
-lastmod = 2020-06-11T23:39:22+01:00
+lastmod = 2020-06-12T00:56:44+01:00
 tags = ["Hugo", "Ox-hugo"]
 categories = ["TECH"]
 draft = false

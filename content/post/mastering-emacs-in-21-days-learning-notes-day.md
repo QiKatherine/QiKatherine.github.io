@@ -2,7 +2,7 @@
 title = "Essentials in vanilla Emacs 【Vanilla Emacs 精华简介】"
 summary = "Learning notes about Emacs."
 date = 2019-08-25T23:51:00+01:00
-lastmod = 2020-06-11T23:39:23+01:00
+lastmod = 2020-06-12T00:56:45+01:00
 tags = ["Emacs"]
 categories = ["TECH"]
 draft = false

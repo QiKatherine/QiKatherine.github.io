@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (3/3)"
 date = 2020-01-06T17:44:00+00:00
-lastmod = 2020-06-11T23:39:25+01:00
+lastmod = 2020-06-12T00:56:47+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -515,7 +515,7 @@ input. It fails in this step:
 ![](/img/little121.png)
 
 As you might guess, we can actually pass a random/any function to make it
-measure length one list, since it will stop in `(null? list)` in the second
+measure **length one** list, since it will stop in `(null? list)` in the second
 loop. Any of this function could work:
 
 {{< highlight scheme >}}
@@ -537,6 +537,7 @@ loop. Any of this function could work:
        (else
          (add1 ((length eternity) (cdr l))))))))
 
+;This one is fundamentally different from the above two, why?
 ((lambda (mk-length)
    (mk-length mk-length))
  (lambda (length)
@@ -547,14 +548,17 @@ loop. Any of this function could work:
          (add1 ((length length) (cdr l))))))))
 {{< /highlight >}}
 
-The last part in above shows: since the `(eternity)` is now substituted by the
-`(mk-length)`, we can add one more workable layer on `(length0)`. This is achievable by calling the inner most
-function `(mk-length)` with another argument of `(eternity)`.
+The former two functions can only help you measure **length one** list. For
+**length two** input it would fail in the function expansion with non-legitimate functions `(add1 add1)`
+`(eternity eternity)` in the second loop. However, the third one won't fail
+because `(length length)` is a legitimate function, it can help us measure list
+with **any length**.
+
+Another thing is, it doesn't matter what we name the inner arguments, because it's
+just an pseudo name inside a function. So we can name it anything as long as we
+keep naming and calling consistent. The last function above can be written as:
 
 {{< highlight scheme >}}
-; since it doesn't really matter what to name the inner argument
-; we rewrite length<=0
-;-> this is the key of why there are so many same arguments in the Y combinator
 ((lambda (mk-length)
    (mk-length mk-length))
  (lambda (mk-length)
@@ -562,17 +566,7 @@ function `(mk-length)` with another argument of `(eternity)`.
      (cond
        ((null? l) 0)
        (else
-         (add1 (mk-length (cdr l))))))))
-
-;use length<=0 to achieve length<=1
-((lambda (mk-length)
-   (mk-length mk-length))
- (lambda (mk-length)
-   (lambda (l)
-     (cond
-       ((null? l) 0)
-       (else
-         (add1 ((mk-length eternity) (cdr l))))))))
+         (add1 ((mk-length mk-length) (cdr l))))))))
 {{< /highlight >}}
 
 The exercise in page 166 will help you on how it works. The instruction can be
@@ -596,7 +590,7 @@ You can try to play with longer list, such as this:
         (else (add1
                ((mk-length mk-length)
                 (cdr l))))))))
- '(a b c))
+ '(a b c)) ;<- it works with lists in any length, try it
 {{< /highlight >}}
 
 You would realize that this is just more recurrences of that "bear in mind"
@@ -605,13 +599,79 @@ shorter candidate list, until the `(cdr l)` runs out of atom. In the end, the nu
 list becomes the termination condition, without triggering it, we will go stack overflow by calling
 `(mk-length mk-length)` infinite times.
 
-After undertanding the above code, the author finanlly gets to reform this
-procedure in to Y combinator, a function without defining name and so pithy that
-can be called repetitively by itself as many times as we want.
-
 If you find it confusing, read this preview of omega combinator in the first
 answer of this post:[scheme - Y combinator discussion in "The Little Schemer" -
 Stack Overflow](https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer/11864862#11864862)
+
+Let's further abstract the function with the legitimate though interrupting
+`(mk-length mk-length)` part. Simple, just add another layer, I call the added
+one `(mk-length-two)` to distinguish with the original `(mk-length i.e. mk-length-one)` so you can see it clearer:
+
+{{< highlight scheme >}}
+((lambda (mk-length)
+   (mk-length mk-length))
+ (lambda (mk-length-two)
+   ((lambda (mk-length-one)
+      (lambda (l)
+        (cond
+          ((null? l) 0)
+          (else (add1 (mk-length-one (cdr l)))))))
+   (lambda (l)
+     ((mk-length-two mk-length-two) l)))))
+{{< /highlight >}}
+
+Then we add one last more layer, (I swear it's the last layer) to switch the
+order a bit, moving the actual length measuring part to make it look nicer:
+
+{{< highlight scheme >}}
+((lambda (mk-length-one)
+   ((lambda (mk-length)
+      (mk-length mk-length))
+    (lambda (mk-length-two)
+      (mk-length-one (lambda (l)
+            ((mk-length-two mk-length-two) l))))))
+ (lambda (mk-length-one)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (add1 (mk-length-one (cdr l))))))))
+{{< /highlight >}}
+
+That's very complex, let's simplify it
+
+{{< highlight scheme >}}
+((lambda (f)
+   ((lambda (x) (x x))
+    (lambda (x)
+      (f (lambda (l)
+            ((x x) l))))))
+ (lambda (mk-length-one)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (add1 (mk-length-one (cdr l))))))))
+{{< /highlight >}}
+
+Define and name the first part as Y combinator
+
+{{< highlight scheme >}}
+(define Y
+ (lambda (f)
+   ((lambda (x) (x x))
+    (lambda (x)
+      (f (lambda (l)
+            ((x x) l)))))))
+
+;and call Y with any function you want
+((Y
+ (lambda (len)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (+ 1 (len (cdr l)))))))) '(a b c d))
+{{< /highlight >}}
+
+Done. Happy hacking!
 
 
 ## Chapter 10 What is the value of all of this? {#chapter-10-what-is-the-value-of-all-of-this}
