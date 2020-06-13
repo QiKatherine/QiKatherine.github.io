@@ -1,7 +1,7 @@
 +++
 title = "The Little Schemer speedy referring note (3/3)"
 date = 2020-01-06T17:44:00+00:00
-lastmod = 2020-06-12T00:56:47+01:00
+lastmod = 2020-06-13T02:25:07+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -233,80 +233,55 @@ You might ask what if we just demand never use the logical contradiction case,
 such as "forbid tested function directly or indirectly calling `(will-stop?)`".
 In that case, will `(will-stop?)` exist? Not sure.
 
-But that's exactly what we want to do with Y combinator.
+But that "calling things without calling itself" is exactly what we want to do
+with the Y combinator.
 
 ---
 
-A function calling itself directly or indirectly, is recursion. A common issue about
+A function calling itself directly or indirectly, is recursion. A nature wonder about
 recursion is that, if we want to call a function that haven't been fully defined,
 how could we do it? We probably can re-write a recursive function to
-non-recursive one.
+non-recursive one, then we can use it as much as we want. That's what the Y
+combinator is for.
 
-We still use `(length)` as an example. Currently it is a fully defined function
-that returns a value (i.e. the length of a list). It can use recursion inside itself
-because it has formal function name **length**.
+Let's begin with recursive function we have seen, to see what part we can get
+rid of and reform. We still use `(length)` as an example. Currently it is a fully defined function
+recursive function. The input is a list and the output is a value (i.e. the
+length of a list). It can use recursion inside itself because it has formal function name **length**.
 
 {{< highlight scheme >}}
+;you have use to other name in DrRacket, coz length has been a build-in function
 (define length
  (lambda (l)
   (cond
     ((null? l) 0)
     (else
       (add1 (length (cdr l)))))))
+
+(length '(a b)) ;-> 2
 {{< /highlight >}}
 
-In stead of being a name defined by **define**, **length** can also work as an
-argument if changing `(define length)` to `(lambda length)`, as showed below. However there is a major
-difference: with or without `(define length)`, the above function can return
-value 0 for a null input. But to the below function, the input and output will have
-to be functions. It's the output function `(λ l)` that will return value. This
-is crucial for understanding the `(mk-length mk-length)` reformation later.
+I highlight four key procedures to show how it adapts:
+![](/img/little122.png)
+
+The thing about the recursion `(length)` is, it may look like the `(length)` is
+calling itself. In fact it is just calling a function happens to have the same
+name, which will be used when the input `(cdr l)` is not null. It can be any
+functions, so you
+can try substituting `(length)` with any function you like. This means the lambda expression of `(length)` has another hidden layer
+of parameter whose input is a function, like this
 
 {{< highlight scheme >}}
 (lambda (length)
- (lambda (l)
-  (cond
-    ((null? l) 0)
-    (else
-      (add1 (length (cdr l)))))))
+  (lambda (l)
+    (cond ((null? l) 0)
+      (else (+ 1 (length (cdr l)))))))
 {{< /highlight >}}
 
-It's absolutely normal to get confused when there are more layers of lambda expressions involved in a
-function/recursion. It helps to think whether the lambda expressions is being
-merely defined or being defined and called, i.e. counting the parenthesis very
-carefully. The difference between defining and calling is that calling a function has arguments involved:
-
-{{< highlight scheme >}}
-;defining
-(lambda (f)
-  (lambda (g)...)
-)
-
-;calling(f) with defining(g)
-((lambda (f)
-  (lambda (g)...))
-    arguments-for-f)
-{{< /highlight >}}
-
-A more general case of calling with defining in lambda expression is called the
-omega combinator. It has shape in the below picture and more information can be
-found at [Lambda calculus - Wikipedia](https://en.wikipedia.org/wiki/Lambda%5Fcalculus#Standard%5Fterms)
-![](/img/little2.png)
-
-We can change `(length)` a little by calling `(eternity)`
-instead of `(length)` in the most inner recursion. This change makes the
-function can only
-terminate in the `(null?)` predicate. Because in any other case the non-null input will
-trigger the `(eternity)` and the function will trap in infinite loop. But the essence is fundamentally similar to the previous function.
-
-This is how the
-`(length<=0)` can only measure length of list with **zero** element. It is
-happening only in the **applicative order** interpreting, which the arguments will
-be instantaneously evaluated the leftmost innermost reducible expression before the function is applied.
-
-So if we want to
-develop a `(length<=1)` to measure list with less
-than **one** element, we have to design a **new function** that adds another layer of function onto the `(length<=0)`.
+ But notice, most
+cases will not work with non-null input list. For
+example let's call `(eternity)` instead of `(length)`: when the list has more
+than zero atom, the eternity will be called and the function will trap in infinite loop.
 
 {{< highlight scheme >}}
 ;length<=0
@@ -315,7 +290,19 @@ than **one** element, we have to design a **new function** that adds another lay
       ((null? l) 0)
       (else
         (add1 (eternity (cdr l))))))
+{{< /highlight >}}
 
+This is how the
+`(length<=0)` can only measure input of **null list**. It is
+happening only in the **applicative order** interpreting, which the arguments will
+be instantaneously evaluated the leftmost innermost reducible expression before the function is applied.
+
+But there is still way we can develop a `(length<=1)` to measure list with less
+than **one** element. We just have to design a **new function** that calls length
+measure function
+one more time.
+
+{{< highlight scheme >}}
 ;length<=1
 (lambda (l)
   (cond
@@ -400,20 +387,10 @@ three functions are identical?
       (cdr l2))))))
 {{< /highlight >}}
 
-The above functions show repetitive content, aka the `(length)` part is being
-called over and over, working on a shorter and shorter argument. Normally, we would write and save as a named
-function for calling in the future. **But, if we don't save it, instead we want to directly
-address it within other function, or even address itself. How do we do that?**
-You may have realized the motivation of this question, addressing itself withing itself
-is exactly the nature of recursion.
-
-If we can define length abstractly, we can call it to simplify the reptitive procedure.
-This need is particularly necessary when there is going to be many algorithms
-having similar repetitions as `(length<=n)`.
-
-First we deal with the first question, separating `(eternity)` by calling it
-from argument, see in length<=0. Then we deal the second question, separating
-length0 as "g calling eternity", addressing it through f.
+As you might imagine, the above form is not quite complete, so we were only saying
+its got a "hidden layer of parameter". Let's make it slightly more formal by
+separating `(eternity)` and calling it as argument. In the `(length<=1)` code we just want to use distinctive names for
+you to see this procedure clearer.
 
 {{< highlight scheme >}}
 ;length<=0
@@ -456,12 +433,56 @@ length0 as "g calling eternity", addressing it through f.
   eternity)))
 {{< /highlight >}}
 
-The repetitions decrease but not pithy enough, and we can further simplify it.
-Since we observe that the length testing part is highly similar, therefore we
-call it `(mk-length)`, the length functions can be therefore written as:
+It's absolutely normal to get confused when there are more layers of lambda expressions involved in a
+function/recursion. It helps to think whether the lambda expressions is being
+merely defined or being defined and called, i.e. counting the parenthesis very
+carefully. The difference between defining and calling is that calling a function has arguments involved:
 
 {{< highlight scheme >}}
-;length<=0
+;defining
+(lambda (f)
+  (lambda (g)...)
+)
+
+;calling(f) with defining(g)
+((lambda (f)
+  (lambda (g)...))
+    arguments-for-f)
+{{< /highlight >}}
+
+A more general case of calling with defining in lambda expression is called the
+omega combinator. It has shape in the below picture and more information can be
+found at [Lambda calculus - Wikipedia](https://en.wikipedia.org/wiki/Lambda%5Fcalculus#Standard%5Fterms)
+![](/img/little2.png)
+
+The above functions show repetitive content: the `(length)` part is being
+called over and over, working on a shorter and shorter argument. Normally, we would write and save as a named
+function for calling in the future like `(define length)`. **But, if we don't
+save it, instead we want to directly address it within other function, or even
+address itself. How do we do that?**
+
+You may have realized the motivation of this question, addressing itself withing itself
+is exactly the nature of recursion. In this chapter we just want to find a good way to
+do it for anonymous functions.
+
+If we can define length abstractly, we can call it to simplify the reptitive procedure.
+This need is particularly necessary when there is going to be many algorithms
+having similar repetitions as `(length<=n)`.
+
+Ok, we are finally reaching the core reforming step. We are giving the
+formal calling form as equivalent to `(define length)`:
+
+{{< highlight scheme >}}
+(define length
+ (lambda (l)
+  (cond
+    ((null? l) 0)
+    (else
+      (add1 (length (cdr l)))))))
+
+(length '( )) ;-> 0
+(length '(a b)) ;-> 2
+;--------------------------------------------
 ((lambda (mk-length)
   (mk-length eternity))
  (lambda (length)
@@ -470,6 +491,26 @@ call it `(mk-length)`, the length functions can be therefore written as:
  ((null? l) 0)
   (else (add1 (length (cdr l))))))))
 
+((mk-length eternity) '());-> 0
+((mk-length eternity) '(a));-> error
+{{< /highlight >}}
+
+From the above we can see instead of being a name defined by **define**, **length** can also work as an
+parameter/argument.
+
+However there is a major difference:  `(define length)` has only one lambda expression, the input must be
+a list and the output is value. But the anonymous definition is adding another layer of lambda expression, the input and
+output for the outer lambda expression (i.e. the whole function) will have
+to be functions. It's the output "function `(λ l)`" that will return value like
+the defined length function.
+
+Another very important note is that, the `(define length)` function
+can evalue list with **any length**. the anonymous function can only evaluate input of **null list**, why? Because the input for
+length must be function (`(cdr l)` sure won't fit), so if we don't want get error message, it will have to
+terminate at `(null? l)` stage. Like we said, we will have to use call function more times if
+we want to measure longer lists:
+
+{{< highlight scheme >}}
 ;length<=1
 ((lambda (mk-length)
  (mk-length
@@ -492,9 +533,9 @@ call it `(mk-length)`, the length functions can be therefore written as:
   (else (add1 (length (cdr l))))))))
 {{< /highlight >}}
 
-In the length 0, the actual working part is `((null? l) 0)` and the `(else)` predicate
-would never really got triggered. So in that predicate it doesn't really matter if we call `(eternity)`, or
-even itself `(mk-length)`. So why don't we just change `(eternity)` to `(mk-length)`:
+In the `(length<=0)` function the only working part is `((null? l) 0)` and the `(else)` predicate
+would never got triggered. So in that predicate it doesn't really matter whether
+we call function `(eternity)`, or itself `(mk-length)`. We just change `(eternity)` to `(mk-length)`:
 
 {{< highlight scheme >}}
 ; length<=0
@@ -509,14 +550,14 @@ even itself `(mk-length)`. So why don't we just change `(eternity)` to `(mk-leng
 {{< /highlight >}}
 
 The above code is still ONLY able to measure null list, because for other input,
-it will have to expand `(add1 (length (cdr l)))` where the input of argument has
-to be a function (says by the outer lambda expression) but we only have list as
-input. It fails in this step:
+it will have to expand `(add1 (length (cdr l)))` where **the input of argument
+has to be a function**, defined by the `(lambda (mk-length)(mk-length
+mk-length)`. But the input `(cdr l)` is a list. See how it fails in stepper:
 ![](/img/little121.png)
 
-As you might guess, we can actually pass a random/any function to make it
-measure **length one** list, since it will stop in `(null? list)` in the second
-loop. Any of this function could work:
+As you might guess, we can just pass a random/any function to make it
+successfully measure the **length one** list, since it will stop in `(null? list)` in the second
+loop. For example any of these three functions could work:
 
 {{< highlight scheme >}}
 ((lambda (mk-length)
@@ -549,12 +590,31 @@ loop. Any of this function could work:
 {{< /highlight >}}
 
 The former two functions can only help you measure **length one** list. For
-**length two** input it would fail in the function expansion with non-legitimate functions `(add1 add1)`
+**length two** input it would fail in the function expansion, resulting in non-legitimate functions `(add1 add1)`
 `(eternity eternity)` in the second loop. However, the third one won't fail
 because `(length length)` is a legitimate function, it can help us measure list
-with **any length**.
+with **any length**. So functionally speaking, these two are finally consistent:
 
-Another thing is, it doesn't matter what we name the inner arguments, because it's
+{{< highlight scheme >}}
+(define length
+ (lambda (l)
+  (cond
+    ((null? l) 0)
+    (else
+      (add1 (length (cdr l)))))))
+
+((lambda (mk-length)
+   (mk-length mk-length))
+ (lambda (length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else
+         (add1 ((length length) (cdr l))))))))
+{{< /highlight >}}
+
+All left job is just to make things extremely pithy. Let's adding some syntax
+sugar here: since it doesn't matter what we name the inner arguments, because it's
 just an pseudo name inside a function. So we can name it anything as long as we
 keep naming and calling consistent. The last function above can be written as:
 
@@ -604,8 +664,7 @@ answer of this post:[scheme - Y combinator discussion in "The Little Schemer" -
 Stack Overflow](https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer/11864862#11864862)
 
 Let's further abstract the function with the legitimate though interrupting
-`(mk-length mk-length)` part. Simple, just add another layer, I call the added
-one `(mk-length-two)` to distinguish with the original `(mk-length i.e. mk-length-one)` so you can see it clearer:
+`(mk-length mk-length)` part. Simple, just add another layer, I add some syntax salt `(mk-length-two)` to distinguish with the original `(mk-length i.e. mk-length-one)` so you can see it clearer:
 
 {{< highlight scheme >}}
 ((lambda (mk-length)
