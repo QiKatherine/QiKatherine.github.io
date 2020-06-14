@@ -2631,16 +2631,24 @@ function we can describe but can not define. The example delicately demonstrates
 this by constructing a function
 based on =(will-stop?)= which =(will-stop?)= cannot judge.
 
-You might ask what if we just demand never use the logical contradiction case,
-such as "forbid tested function directly or indirectly calling =(will-stop?)=".
-In that case, will =(will-stop?)= exist? Not sure.
-
-But that "calling things without calling itself" is exactly what we want to do
+You might ask what if we just ban the logical contradiction part,
+such as "preventing tested function from directly or indirectly calling =(will-stop?)=".
+In that case, will =(will-stop?)= exist? I am not sure. But that "using
+functions without  recursively calling itself" is exactly what we want to do
 with the Y combinator. 
 -----
 A function calling itself directly or indirectly, is recursion. A nature wonder about
 recursion is that, if we want to call a function that haven't been fully defined,
-how could we do it? We probably can re-write a recursive function to
+how could we do it? 
+
+There are
+many ways to write programs to realize the same procedure. But a specific
+interpreter has clear rule to implement a function. In this
+chapter, we can use transformations and derivations to gain fundamental
+understanding of nested functions, to peel off the syntax sugar so that we can
+reform them to design elegant form.
+
+We probably can re-write a recursive function to
 non-recursive one, then we can use it as much as we want. That's what the Y
 combinator is for.
 
@@ -2663,22 +2671,23 @@ I highlight four key procedures to show how it adapts:
 [[/img/little122.png]]
 
 The thing about the recursion =(length)= is, it may look like the =(length)= is
-calling itself. In fact it is just calling a function happens to have the same
-name, which will be used when the input =(cdr l)= is not null. It can be any
+calling itself. More broadly speaking, it is just calling a function happens to have the same
+name with itself. The function will be used when the input =(cdr l)= is not null. It can be any
 functions, so you
-can try substituting =(length)= with any function you like. This means the lambda expression of =(length)= has another hidden layer
-of parameter whose input is a function, like this 
+can try substituting =(length)= with any function you like. This equals to
+having another layer of lambda expression to the function of =(length)=:
 #+begin_src scheme
 (lambda (length)
   (lambda (l)
     (cond ((null? l) 0)
       (else (+ 1 (length (cdr l)))))))
 #+end_src
- But notice, most
-cases will not work with non-null input list. For
+Notice, you can try inputting any function in outer layer but most
+functions will not work with non-null input list. For
 example let's call =(eternity)= instead of =(length)=: when the list has more
-than zero atom, the eternity will be called and the function will trap in infinite loop.
+than zero atom, the null predicate returns #f and =(eternity '())= will be called and the function will trap in infinite loop.
 #+begin_src scheme
+;((lambda (length) ..) eternity)
 ;length<=0
 (lambda (l)
     (cond
@@ -2686,16 +2695,12 @@ than zero atom, the eternity will be called and the function will trap in infini
       (else
         (add1 (eternity (cdr l))))))
 #+end_src
-
-This is how the
-=(length<=0)= can only measure input of *null list*. It is
-happening only in the *applicative order* interpreting, which the arguments will
+It can still measure null list only in the *applicative order* interpreting, where the arguments will
 be instantaneously evaluated the leftmost innermost reducible expression before the function is applied. 
 
-But there is still way we can develop a =(length<=1)= to measure list with less
-than *one* element. We just have to design a *new function* that calls length
-measure function
-one more time.  
+But there is still a way to measure list with less
+than *one* element. We just have to call length
+measuring function on top of =(length0)= one more time.  
 #+begin_src scheme
 ;length<=1
 (lambda (l)

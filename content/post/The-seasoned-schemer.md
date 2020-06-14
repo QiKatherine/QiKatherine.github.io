@@ -1,10 +1,13 @@
 +++
 title = "The Seasoned Schemer"
-lastmod = 2020-06-13T02:25:08+01:00
+date = 2020-06-14T01:13:00+01:00
+lastmod = 2020-06-14T01:13:13+01:00
 categories = ["TECH"]
-draft = true
+draft = false
 image = "img/111.jpg"
 +++
+
+-   State "DONE"       from "TODO"       <span class="timestamp-wrapper"><span class="timestamp">[2020-06-14 Sun 01:13]</span></span>
 
 This book is continuous to book The Little Schemer, which the notes can be found
 in previous articles. So we begin with chapter 11.
@@ -41,8 +44,8 @@ is that, it is the `(or two-in-a-row?)` get to decide termination. The `(is-firs
 one atom, the other is no two-in-row. The first case will not make the function
 terminate - even though the lat is null with `(is-first?)` returns #f, the `(or
 two-in-a-row?)` will continue running for at least another round. This makes the
-program a bit wrong, so we want to add termination judgment to `(is-first?)`,
-making it immediately terminate for empty argument, like this:
+program a bit wrong: we want to add termination judgment to `(is-first?)`, to
+make it immediately terminate for empty argument, like this:
 
 {{< highlight scheme >}}
 (define two-in-a-row-2?
