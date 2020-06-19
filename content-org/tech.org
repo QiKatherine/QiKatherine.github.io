@@ -1,4 +1,4 @@
-   #+hugo_base_dir: d:/Hugo/myblog/
+#+hugo_base_dir: d:/Hugo/myblog/
    #+hugo_section: post  
    #+hugo_auto_set_lastmod: t
    #+hugo_code_fence: nil  
@@ -3614,7 +3614,8 @@ This is because Emacs for Windows has its own setting coping the =(default-direc
 This is upsetting especially for Spacemacs who specially creates =(.env)= file to read the HOME variable from bash, which happens to stop Emacs loading dotfile in Windows since most users put dotfile in Roaming file, not in HOME of bash.
 
 This is also the reason that calling Emacs from different places and launching =(c-x c-f)=, the directories are different. Of course at the same time, you can always reset the default working directory in dotfile as in answer from here: [[https://stackoverflow.com/questions/60464/changing-the-default-folder-in-emacs][customization - Changing the default folder in Emacs - Stack Overflow]].
-** TODO The Seasoned Schemer                                          :@TECH:
+** DONE The Seasoned Schemer learning note (1/3)                      :@TECH:
+   CLOSED: [2020-06-14 Sun 01:13]
    :PROPERTIES:
    :EXPORT_FILE_NAME: The-seasoned-schemer
    :END:
@@ -3652,8 +3653,8 @@ is that, it is the =(or two-in-a-row?)= get to decide termination. The =(is-firs
 one atom, the other is no two-in-row. The first case will not make the function
 terminate - even though the lat is null with =(is-first?)= returns #f, the =(or
 two-in-a-row?)= will continue running for at least another round. This makes the
-program a bit wrong, so we want to add termination judgment to =(is-first?)=,
-making it immediately terminate for empty argument, like this:
+program a bit wrong: we want to add termination judgment to =(is-first?)=, to
+make it immediately terminate for empty argument, like this:
 
 #+begin_src scheme
 (define two-in-a-row-2?
@@ -3736,3 +3737,148 @@ And another case of selecting reversed items base on the number of the atom.
 (scramble '(1 2 3 4 5 6 7 8 9))         ; '(1 1 1 1 1 1 1 1 1)
 (scramble '(1 2 3 1 2 3 4 1 8 2 10))    ; '(1 1 1 1 1 1 1 1 2 8 2)
 #+end_src
+
+*** Chapter 12 Take Cover
+In this chapter we reform previous function to seperate values. 
+
+Let's firstly
+review Y combinator:
+#+begin_src scheme
+;deducted in chapter 9 in The Little Schemer
+(define Y
+  (lambda (le)
+    ((lambda (f) (f f))
+     (lambda (f)
+       (le (lambda (x) ((f f) x)))))))
+
+; An example of using Y-combinator to measure length and applied to '(a b c)
+((Y (lambda (length)
+     (lambda (l)
+       (cond
+         ((null? l) 0)
+         (else (add1 (length (cdr l)))))))) '(a b c))  ; produces output 3
+#+end_src
+
+We can use Y combinator to rewrite =(multirember)= that removes multi-members from a list.
+#+begin_src scheme
+;old friend multirember
+(define multirember
+  (lambda (a lat)
+    (cond
+      ((null? lat) '())
+      ((eq? (car lat) a)
+       (multirember a (cdr lat)))
+      (else
+        (cons (car lat) (multirember a (cdr lat)))))))
+
+; No need to pass 'a' around in multirember
+; Use Y-combinator not to pass it around
+(define multirember
+  (lambda (a lat)
+    ((Y (lambda (mr)
+          (lambda (lat)
+            (cond
+              ((null? lat) '())
+              ((eq? a (car lat)) (mr (cdr lat)))
+              (else
+               (cons (car lat) (mr (cdr lat))))))))
+     lat)))
+
+(multirember 'a '(a b c a a a x)) ;-> '(b c x)
+#+end_src
+
+We can see from the above that =(multirember)= has two arguments - /a/: the word we
+want to remove; /lat/: the candidate list. /a/ is contant all the time but
+/lat/ becomes shorter and shorter in every recursion. We re-write =(multirember)= in the second
+definition by adding another layer to just passing the arguments. It is defining
+with calling, which we called currying in The Little Schemer.
+
+What is the benefit of doing this? It seperates the procedures of applying /a/
+and /lat/, you would naturally ask, what if I use currying learned from The
+Little Schemer to write it, maybe like this?
+#+begin_src scheme
+(define mr
+  (lambda (lat)
+     (cond
+       ((null? lat) '())
+            ((eq? a (car lat)) (mr (cdr lat)))
+              (else
+               (cons (car lat) (mr (cdr lat)))))))
+
+(define multirember
+  (lambda (a lat)
+    (mr lat)))
+#+end_src
+When we apply it, we would notice problems, with step two result, instead of
+finding =(mr)= function, it will substitute /a/ with /'c/ and /lat/ with /'(c d)/, which will report error
+because we did not specify /a/ in =(multirember)=. The third part is procedure we actually want.
+#+begin_src scheme
+;step 1
+(multirember 'c '(c d))
+
+;step 2
+((lambda (a lat)
+    (mr lat)) 'c '(c d)) ;-> error variable 'a is not defined
+
+;what we actually want it 
+((lambda (a lat)
+    ((lambda (lat)
+     (cond
+       ((null? lat) '())
+            ((eq? a (car lat)) (mr (cdr lat)))
+              (else
+               (cons (car lat) (mr (cdr lat)))))))
+ lat)) 
+'c '(c d))
+#+end_src
+
+How do we write function achieve the code we want? The difference between the
+right and wrong function is holding the argument substitution until after applying
+the =(mr)= function. Apart from the traditional way, we can use =(letre)= to define:
+#+begin_src scheme
+(define multirember-letrec
+  (lambda (a lat)
+    ((letrec
+       ((mr (lambda (lat)
+              (cond
+                ((null? lat) '())
+                ((eq? a (car lat)) (mr (cdr lat)))
+                (else
+                  (cons (car lat) (mr (cdr lat))))))))
+       mr)
+     lat)))
+
+(multirember-letrec 'apple '(apple bbb)) ;-> '(bbb)
+#+end_src
+As the it says in the book, the implementation of =(lambda (a lat))= is
+implementing =((letrec ((mr..)) mr) lat)=. It is the same as the implementation of old traditional =(multirember lat)=. We can put the
+above code in DrRacket see exactly how =(letrec)= part is called:
+[[/img/seasoned11.png]]
+
+Here are more information about the concept of =(letrec)=:
+
+[[https://docs.racket-lang.org/reference/let.html][3.9 Local Binding: let, let*, letrec, ...]]
+
+[[https://ds26gte.github.io/tyscheme/index-Z-H-8.html][Teach Yourself Scheme in Fixnum Days]]
+
+We slightly adding a bit syntax sugar, changing the =((letrec ((mr..)) mr) lat)= by moving the /lat/ inside as
+=(letrec ((mr..)) (mr lat))=:
+#+begin_src scheme
+(define multirember-letrec
+  (lambda (a lat)
+    (letrec
+       ((mr (lambda (lat)
+              (cond
+                ((null? lat) '())
+                ((eq? a (car lat)) (mr (cdr lat)))
+                (else
+                  (cons (car lat) (mr (cdr lat))))))))
+       (mr lat))))
+
+(multirember-letrec 'apple '(apple bbb)) 
+#+end_src
+
+By this function we successfully achieve the function we want without error as
+above. With the syntax sugar, the function is very easy to read: we are just
+defining a local recursive function that knows the definition of /a/, then we implement the function
+to list /lat/.

@@ -1,7 +1,7 @@
 +++
 title = "Building personal website with Hugo in one hour"
 date = 2020-04-13T22:57:00+01:00
-lastmod = 2020-06-14T01:13:13+01:00
+lastmod = 2020-06-19T01:57:17+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"

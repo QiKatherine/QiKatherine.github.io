@@ -1,13 +1,11 @@
 +++
-title = "The Seasoned Schemer"
+title = "The Seasoned Schemer learning note (1/3)"
 date = 2020-06-14T01:13:00+01:00
-lastmod = 2020-06-14T01:13:13+01:00
+lastmod = 2020-06-19T01:57:18+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
 +++
-
--   State "DONE"       from "TODO"       <span class="timestamp-wrapper"><span class="timestamp">[2020-06-14 Sun 01:13]</span></span>
 
 This book is continuous to book The Little Schemer, which the notes can be found
 in previous articles. So we begin with chapter 11.
@@ -132,3 +130,158 @@ And another case of selecting reversed items base on the number of the atom.
 (scramble '(1 2 3 4 5 6 7 8 9))         ; '(1 1 1 1 1 1 1 1 1)
 (scramble '(1 2 3 1 2 3 4 1 8 2 10))    ; '(1 1 1 1 1 1 1 1 2 8 2)
 {{< /highlight >}}
+
+
+## Chapter 12 Take Cover {#chapter-12-take-cover}
+
+In this chapter we reform previous function to seperate values.
+
+Let's firstly
+review Y combinator:
+
+{{< highlight scheme >}}
+;deducted in chapter 9 in The Little Schemer
+(define Y
+  (lambda (le)
+    ((lambda (f) (f f))
+     (lambda (f)
+       (le (lambda (x) ((f f) x)))))))
+
+; An example of using Y-combinator to measure length and applied to '(a b c)
+((Y (lambda (length)
+     (lambda (l)
+       (cond
+         ((null? l) 0)
+         (else (add1 (length (cdr l)))))))) '(a b c))  ; produces output 3
+{{< /highlight >}}
+
+We can use Y combinator to rewrite `(multirember)` that removes multi-members from a list.
+
+{{< highlight scheme >}}
+;old friend multirember
+(define multirember
+  (lambda (a lat)
+    (cond
+      ((null? lat) '())
+      ((eq? (car lat) a)
+       (multirember a (cdr lat)))
+      (else
+        (cons (car lat) (multirember a (cdr lat)))))))
+
+; No need to pass 'a' around in multirember
+; Use Y-combinator not to pass it around
+(define multirember
+  (lambda (a lat)
+    ((Y (lambda (mr)
+          (lambda (lat)
+            (cond
+              ((null? lat) '())
+              ((eq? a (car lat)) (mr (cdr lat)))
+              (else
+               (cons (car lat) (mr (cdr lat))))))))
+     lat)))
+
+(multirember 'a '(a b c a a a x)) ;-> '(b c x)
+{{< /highlight >}}
+
+We can see from the above that `(multirember)` has two arguments - _a_: the word we
+want to remove; _lat_: the candidate list. _a_ is contant all the time but
+_lat_ becomes shorter and shorter in every recursion. We re-write `(multirember)` in the second
+definition by adding another layer to just passing the arguments. It is defining
+with calling, which we called currying in The Little Schemer.
+
+What is the benefit of doing this? It seperates the procedures of applying _a_
+and _lat_, you would naturally ask, what if I use currying learned from The
+Little Schemer to write it, maybe like this?
+
+{{< highlight scheme >}}
+(define mr
+  (lambda (lat)
+     (cond
+       ((null? lat) '())
+            ((eq? a (car lat)) (mr (cdr lat)))
+              (else
+               (cons (car lat) (mr (cdr lat)))))))
+
+(define multirember
+  (lambda (a lat)
+    (mr lat)))
+{{< /highlight >}}
+
+When we apply it, we would notice problems, with step two result, instead of
+finding `(mr)` function, it will substitute _a_ with _'c_ and _lat_ with _'(c d)_, which will report error
+because we did not specify _a_ in `(multirember)`. The third part is procedure we actually want.
+
+{{< highlight scheme >}}
+;step 1
+(multirember 'c '(c d))
+
+;step 2
+((lambda (a lat)
+    (mr lat)) 'c '(c d)) ;-> error variable 'a is not defined
+
+;what we actually want it
+((lambda (a lat)
+    ((lambda (lat)
+     (cond
+       ((null? lat) '())
+            ((eq? a (car lat)) (mr (cdr lat)))
+              (else
+               (cons (car lat) (mr (cdr lat)))))))
+ lat))
+'c '(c d))
+{{< /highlight >}}
+
+How do we write function achieve the code we want? The difference between the
+right and wrong function is holding the argument substitution until after applying
+the `(mr)` function. Apart from the traditional way, we can use `(letre)` to define:
+
+{{< highlight scheme >}}
+(define multirember-letrec
+  (lambda (a lat)
+    ((letrec
+       ((mr (lambda (lat)
+              (cond
+                ((null? lat) '())
+                ((eq? a (car lat)) (mr (cdr lat)))
+                (else
+                  (cons (car lat) (mr (cdr lat))))))))
+       mr)
+     lat)))
+
+(multirember-letrec 'apple '(apple bbb)) ;-> '(bbb)
+{{< /highlight >}}
+
+As the it says in the book, the implementation of `(lambda (a lat))` is
+implementing `((letrec ((mr..)) mr) lat)`. It is the same as the implementation of old traditional `(multirember lat)`. We can put the
+above code in DrRacket see exactly how `(letrec)` part is called:
+![](/img/seasoned11.png)
+
+Here are more information about the concept of `(letrec)`:
+
+[3.9 Local Binding: let, let\*, letrec, ...](https://docs.racket-lang.org/reference/let.html)
+
+[Teach Yourself Scheme in Fixnum Days](https://ds26gte.github.io/tyscheme/index-Z-H-8.html)
+
+We slightly adding a bit syntax sugar, changing the `((letrec ((mr..)) mr) lat)` by moving the _lat_ inside as
+`(letrec ((mr..)) (mr lat))`:
+
+{{< highlight scheme >}}
+(define multirember-letrec
+  (lambda (a lat)
+    (letrec
+       ((mr (lambda (lat)
+              (cond
+                ((null? lat) '())
+                ((eq? a (car lat)) (mr (cdr lat)))
+                (else
+                  (cons (car lat) (mr (cdr lat))))))))
+       (mr lat))))
+
+(multirember-letrec 'apple '(apple bbb))
+{{< /highlight >}}
+
+By this function we successfully achieve the function we want without error as
+above. With the syntax sugar, the function is very easy to read: we are just
+defining a local recursive function that knows the definition of _a_, then we implement the function
+to list _lat_.
