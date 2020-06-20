@@ -1,7 +1,7 @@
 +++
 title = "The Seasoned Schemer learning note (1/3)"
 date = 2020-06-14T01:13:00+01:00
-lastmod = 2020-06-19T01:57:18+01:00
+lastmod = 2020-06-20T01:36:05+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -187,11 +187,12 @@ We can use Y combinator to rewrite `(multirember)` that removes multi-members fr
 We can see from the above that `(multirember)` has two arguments - _a_: the word we
 want to remove; _lat_: the candidate list. _a_ is contant all the time but
 _lat_ becomes shorter and shorter in every recursion. We re-write `(multirember)` in the second
-definition by adding another layer to just passing the arguments. It is defining
-with calling, which we called currying in The Little Schemer.
+definition by adding another layer to just pass the arguments. The major
+difference is the execution for `(eq? and else)` predicates, the `(mr)` get
+called without _a_ as argument anymore.
 
 What is the benefit of doing this? It seperates the procedures of applying _a_
-and _lat_, you would naturally ask, what if I use currying learned from The
+and _lat_, making the repetitive procedure `(mr)` easier for having less argument. You would probably wonder, instead of using Y combinator, what if I use currying learned from The
 Little Schemer to write it, maybe like this?
 
 {{< highlight scheme >}}
@@ -209,7 +210,7 @@ Little Schemer to write it, maybe like this?
 {{< /highlight >}}
 
 When we apply it, we would notice problems, with step two result, instead of
-finding `(mr)` function, it will substitute _a_ with _'c_ and _lat_ with _'(c d)_, which will report error
+finding `(mr)` function, the interpreter will firstly substitute _a_ with _'c_ and _lat_ with _'(c d)_, which will report error
 because we did not specify _a_ in `(multirember)`. The third part is procedure we actually want.
 
 {{< highlight scheme >}}
@@ -234,7 +235,7 @@ because we did not specify _a_ in `(multirember)`. The third part is procedure w
 
 How do we write function achieve the code we want? The difference between the
 right and wrong function is holding the argument substitution until after applying
-the `(mr)` function. Apart from the traditional way, we can use `(letre)` to define:
+the `(mr)` function. Apart from using layer by layer lambda functions, we can use `(letrec)` to define:
 
 {{< highlight scheme >}}
 (define multirember-letrec
@@ -253,7 +254,7 @@ the `(mr)` function. Apart from the traditional way, we can use `(letre)` to def
 {{< /highlight >}}
 
 As the it says in the book, the implementation of `(lambda (a lat))` is
-implementing `((letrec ((mr..)) mr) lat)`. It is the same as the implementation of old traditional `(multirember lat)`. We can put the
+equal to calling `((letrec ((mr..)) mr) lat)`. We can put the
 above code in DrRacket see exactly how `(letrec)` part is called:
 ![](/img/seasoned11.png)
 
@@ -283,5 +284,104 @@ We slightly adding a bit syntax sugar, changing the `((letrec ((mr..)) mr) lat)`
 
 By this function we successfully achieve the function we want without error as
 above. With the syntax sugar, the function is very easy to read: we are just
-defining a local recursive function that knows the definition of _a_, then we implement the function
-to list _lat_.
+using `(letrec)` to define a local recursive function that knows the definition
+of _a_, which is called naming part. Then we implement the function to a list _lat_,
+which is called valuing part.
+
+Of course you could always use traditional, old friend one piece `(multirember)`. The reason we have
+to explore a correct way to call compound function to define it, is to isolate every part in
+the future so that we could define more versatile functions.
+
+That's a naming with valuing procedure, this function can also be used to
+produce functions - if we isolate the predicate part with a function, we can procedure different types of
+functions. We have seen this in Y combinator section - we just add more layers.
+
+{{< highlight scheme >}}
+(define multirember-f
+  (lambda (test?)
+    (lambda (a lat)
+      (cond
+       ((null? lat) '())
+       ((test? a (car lat)) ((multirember-f  test? ) a (cdr lat)))
+       (else
+        (cons (car lat) ((multirember-f test?) a (cdr lat))))))))
+
+;we can also use letrec
+(define multirember-f
+  (lambda (test?)
+   (letrec
+     ((m-f
+       (lambda (a lat)
+         (cond
+       ((null? lat) '())
+       ((test? a (car lat)) (m-f a (cdr lat)))
+       (else
+        (cons (car lat) (m-f a (cdr lat))))))))
+     m-f)))
+{{< /highlight >}}
+
+Notice that the function `(lambda a lat)` as a whole is inside the `(letrec)`,
+so the entire function `(multirember-f)` uses _test?_ as argument and returns a function as result. The
+returned function will referred as m-f. When substituting `(test?)` as `(eq?)`
+we get our old friend `(multirember)`. You might notice the `(m-f)` becomes
+`(mr)` but they are basically the same thing. Parameter names don't matter as
+long as they are consistent.
+
+{{< highlight scheme >}}
+(define multirember-eq? (multirember-f eq?)); multirember-eq? == multirember
+
+(define multirember
+   (letrec
+     ((mr
+       (lambda (a lat)
+         (cond
+       ((null? lat) '())
+       ((eq? a (car lat)) (mr a (cdr lat)))
+       (else
+        (cons (car lat) (mr a (cdr lat))))))))
+     mr))
+{{< /highlight >}}
+
+The involvement of `(lambda (test?)` layer enables us to design a function for
+any function possibilities: with `(test?)` satisfied, we can call the procedure
+`(m-f)` on something.
+
+---
+
+It seems using the extra step for separation is not a big deal, especially when in the above
+example where _a_ and _lat_ are so distinctive that we would not make mistake in
+applying them. But we can see another example.
+
+Remember how we design `(union)` function to merge two sets: we traverse every element in set1, if it
+is also a member in set2, we skip; otherwise we cons this element to set2:
+
+{{< highlight scheme >}}
+(define union
+  (lambda (set1 set2)
+    (cond
+      ((null? set1) set2)
+      ((member? (car set1) set2) ;<- notice the order of arguments
+       (union (cdr set1) set2))
+      (else
+        (cons (car set1) (union (cdr set1) set2))))))
+
+;we can of course define with letrec
+(define union-letrec
+  (lambda (set1 set2)
+    (letrec
+      ((U (lambda (set)
+            (cond
+              ((null? set) set2)
+              ((member? (car set) set2) ;<- notice the order of arguments
+               (U (cdr set)))
+              (else
+                (cons (car set) (U (cdr set))))))))
+      (U set1))))
+
+(union-letrec
+  '(tomatoes and macaroni casserole)
+  '(macaroni and cheese))
+{{< /highlight >}}
+
+Now set2 is the unchanged parameter in function, set1 is getting shorter and
+shorter in recursion.

@@ -3790,11 +3790,12 @@ We can use Y combinator to rewrite =(multirember)= that removes multi-members fr
 We can see from the above that =(multirember)= has two arguments - /a/: the word we
 want to remove; /lat/: the candidate list. /a/ is contant all the time but
 /lat/ becomes shorter and shorter in every recursion. We re-write =(multirember)= in the second
-definition by adding another layer to just passing the arguments. It is defining
-with calling, which we called currying in The Little Schemer.
+definition by adding another layer to just pass the arguments. The major
+difference is the execution for =(eq? and else)= predicates, the =(mr)= get
+called without /a/ as argument anymore. 
 
 What is the benefit of doing this? It seperates the procedures of applying /a/
-and /lat/, you would naturally ask, what if I use currying learned from The
+and /lat/, making the repetitive procedure =(mr)= easier for having less argument. You would probably wonder, instead of using Y combinator, what if I use currying learned from The
 Little Schemer to write it, maybe like this?
 #+begin_src scheme
 (define mr
@@ -3810,7 +3811,7 @@ Little Schemer to write it, maybe like this?
     (mr lat)))
 #+end_src
 When we apply it, we would notice problems, with step two result, instead of
-finding =(mr)= function, it will substitute /a/ with /'c/ and /lat/ with /'(c d)/, which will report error
+finding =(mr)= function, the interpreter will firstly substitute /a/ with /'c/ and /lat/ with /'(c d)/, which will report error
 because we did not specify /a/ in =(multirember)=. The third part is procedure we actually want.
 #+begin_src scheme
 ;step 1
@@ -3834,7 +3835,7 @@ because we did not specify /a/ in =(multirember)=. The third part is procedure w
 
 How do we write function achieve the code we want? The difference between the
 right and wrong function is holding the argument substitution until after applying
-the =(mr)= function. Apart from the traditional way, we can use =(letre)= to define:
+the =(mr)= function. Apart from using layer by layer lambda functions, we can use =(letrec)= to define:
 #+begin_src scheme
 (define multirember-letrec
   (lambda (a lat)
@@ -3851,7 +3852,7 @@ the =(mr)= function. Apart from the traditional way, we can use =(letre)= to def
 (multirember-letrec 'apple '(apple bbb)) ;-> '(bbb)
 #+end_src
 As the it says in the book, the implementation of =(lambda (a lat))= is
-implementing =((letrec ((mr..)) mr) lat)=. It is the same as the implementation of old traditional =(multirember lat)=. We can put the
+equal to calling =((letrec ((mr..)) mr) lat)=. We can put the
 above code in DrRacket see exactly how =(letrec)= part is called:
 [[/img/seasoned11.png]]
 
@@ -3880,5 +3881,100 @@ We slightly adding a bit syntax sugar, changing the =((letrec ((mr..)) mr) lat)=
 
 By this function we successfully achieve the function we want without error as
 above. With the syntax sugar, the function is very easy to read: we are just
-defining a local recursive function that knows the definition of /a/, then we implement the function
-to list /lat/.
+using =(letrec)= to define a local recursive function that knows the definition
+of /a/, which is called naming part. Then we implement the function to a list /lat/,
+which is called valuing part. 
+
+Of course you could always use traditional, old friend one piece =(multirember)=. The reason we have
+to explore a correct way to call compound function to define it, is to isolate every part in
+the future so that we could define more versatile functions.
+
+That's a naming with valuing procedure, this function can also be used to
+produce functions - if we isolate the predicate part with a function, we can procedure different types of
+functions. We have seen this in Y combinator section - we just add more layers.
+#+begin_src scheme
+(define multirember-f
+  (lambda (test?)  
+    (lambda (a lat)
+      (cond
+       ((null? lat) '())
+       ((test? a (car lat)) ((multirember-f  test? ) a (cdr lat)))
+       (else
+        (cons (car lat) ((multirember-f test?) a (cdr lat))))))))
+
+;we can also use letrec 
+(define multirember-f
+  (lambda (test?)
+   (letrec
+     ((m-f
+       (lambda (a lat)
+         (cond
+       ((null? lat) '())
+       ((test? a (car lat)) (m-f a (cdr lat)))
+       (else
+        (cons (car lat) (m-f a (cdr lat))))))))
+     m-f)))
+#+end_src
+
+Notice that the function =(lambda a lat)= as a whole is inside the =(letrec)=,
+so the entire function =(multirember-f)= uses /test?/ as argument and returns a function as result. The
+returned function will referred as m-f. When substituting =(test?)= as =(eq?)=
+we get our old friend =(multirember)=. You might notice the =(m-f)= becomes
+=(mr)= but they are basically the same thing. Parameter names don't matter as
+long as they are consistent.
+#+begin_src scheme
+(define multirember-eq? (multirember-f eq?)); multirember-eq? == multirember
+
+(define multirember
+   (letrec
+     ((mr
+       (lambda (a lat)
+         (cond
+       ((null? lat) '())
+       ((eq? a (car lat)) (mr a (cdr lat)))
+       (else
+        (cons (car lat) (mr a (cdr lat))))))))
+     mr))
+#+end_src
+
+The involvement of =(lambda (test?)= layer enables us to design a function for
+any function possibilities: with =(test?)= satisfied, we can call the procedure
+=(m-f)= on something.
+
+-----
+It seems using the extra step for separation is not a big deal, especially when in the above
+example where /a/ and /lat/ are so distinctive that we would not make mistake in
+applying them. But we can see another example.
+ 
+Remember how we design =(union)= function to merge two sets: we traverse every element in set1, if it
+is also a member in set2, we skip; otherwise we cons this element to set2:
+#+begin_src scheme
+(define union
+  (lambda (set1 set2)
+    (cond
+      ((null? set1) set2)
+      ((member? (car set1) set2) ;<- notice the order of arguments
+       (union (cdr set1) set2))
+      (else
+        (cons (car set1) (union (cdr set1) set2))))))
+
+;we can of course define with letrec
+(define union-letrec
+  (lambda (set1 set2)
+    (letrec
+      ((U (lambda (set)
+            (cond
+              ((null? set) set2)
+              ((member? (car set) set2) ;<- notice the order of arguments
+               (U (cdr set)))
+              (else
+                (cons (car set) (U (cdr set))))))))
+      (U set1))))
+
+(union-letrec
+  '(tomatoes and macaroni casserole)
+  '(macaroni and cheese)) 
+#+end_src
+
+Now set2 is the unchanged parameter in function, set1 is getting shorter and
+shorter in recursion. 
