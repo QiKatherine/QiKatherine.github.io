@@ -1,11 +1,18 @@
 +++
 title = "The Little Schemer speedy referring note (1/3)"
 date = 2019-12-10T23:20:00+00:00
-lastmod = 2020-06-20T01:36:03+01:00
+lastmod = 2020-06-21T02:04:24+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
 +++
+
+The first part of the note:
+[The Little Schemer speedy referring note (1/3)-Katherine He Blog|何琪的博客](https://sheishe.xyz/post/the-little-schemer-note/)
+The second part of the note:
+[The Little Schemer speedy referring note (2/3)-Katherine He Blog|何琪的博客](https://sheishe.xyz/post/the-little-schemer-note-2-3/)
+The third part of the note:
+[The Little Schemer speedy referring note (3/3)-Katherine He Blog|何琪的博客](https://sheishe.xyz/post/the-little-schemer-note-3-3/)
 
 The Little Schemer uses a very easy way, introducing the nature of recursion,
 continuation and Y combinator with only several simple building blocks. You might
@@ -13,7 +20,7 @@ have been so used to writing and calling functions with formal name, this book
 will show you how complex procedure can be reformed by lambda expressions.
 
 This is a quick reference note that I pull from the book The Little Schemer. The
-full detailed code can be found in this repo:
+ code in this note is from here with edition:
 
 [the-little-schemer/02-do-it-again.ss at master · pkrumins/the-little-schemer](https://github.com/pkrumins/the-little-schemer/blob/master/02-do-it-again.ss)
 

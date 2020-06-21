@@ -1,14 +1,21 @@
 +++
 title = "The Little Schemer speedy referring note (2/3)"
 date = 2019-12-23T01:35:00+00:00
-lastmod = 2020-06-20T01:36:04+01:00
+lastmod = 2020-06-21T02:04:25+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
 +++
 
+The first part of the note:
+[The Little Schemer speedy referring note (1/3)-Katherine He Blog|何琪的博客](https://sheishe.xyz/post/the-little-schemer-note/)
+The second part of the note:
+[The Little Schemer speedy referring note (2/3)-Katherine He Blog|何琪的博客](https://sheishe.xyz/post/the-little-schemer-note-2-3/)
+The third part of the note:
+[The Little Schemer speedy referring note (3/3)-Katherine He Blog|何琪的博客](https://sheishe.xyz/post/the-little-schemer-note-3-3/)
+
 This is a quick reference note that I pull from the book The Little Schemer. The
-full detailed code can be found:
+ code in this note is from here with edition:
 
 [the-little-schemer/02-do-it-again.ss at master · pkrumins/the-little-schemer](https://github.com/pkrumins/the-little-schemer/blob/master/02-do-it-again.ss)
 

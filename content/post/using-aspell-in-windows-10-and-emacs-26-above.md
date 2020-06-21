@@ -2,7 +2,7 @@
 title = "Using aspell in windows 10 and Emacs 26 above 【拼写检查 Emacs26 使用更新版 aspell】"
 summary = "Installing aspell for Emacs 26+ in windows system."
 date = 2019-09-13T01:34:00+01:00
-lastmod = 2020-06-20T01:36:02+01:00
+lastmod = 2020-06-21T02:04:23+01:00
 tags = ["Emacs", "Spacemacs", "Windows10"]
 categories = ["TECH"]
 draft = false

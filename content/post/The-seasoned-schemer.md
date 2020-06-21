@@ -1,11 +1,16 @@
 +++
 title = "The Seasoned Schemer learning note (1/3)"
 date = 2020-06-14T01:13:00+01:00
-lastmod = 2020-06-20T01:36:05+01:00
+lastmod = 2020-06-21T02:04:26+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
 +++
+
+This is learning note of The Seasoned Schemer, the code of my note is from here
+with edition:
+
+[pkrumins/the-seasoned-schemer: All the Scheme code examples from the book "The Seasoned Schemer"](https://github.com/pkrumins/the-seasoned-schemer)
 
 This book is continuous to book The Little Schemer, which the notes can be found
 in previous articles. So we begin with chapter 11.
@@ -20,6 +25,12 @@ check equality. If it returns #f, the `(or)` predicate will make sure the
 function recursively check the rest of list until there are two identical atoms appear.
 
 {{< highlight scheme >}}
+(define is-first?
+  (lambda (a lat)
+    (cond
+      ((null? lat) #f)
+      (else (eq? (car lat) a)))))
+
 (define two-in-a-row?
   (lambda (lat)
     (cond
@@ -27,12 +38,6 @@ function recursively check the rest of list until there are two identical atoms 
       (else
         (or (is-first? (car lat) (cdr lat))
             (two-in-a-row? (cdr lat)))))))
-
-(define is-first?
-  (lambda (a lat)
-    (cond
-      ((null? lat) #f)
-      (else (eq? (car lat) a)))))
 
 ;(two-in-a-row? '(Italian sardines sardines spaghetti parsley)) -> true
 {{< /highlight >}}
@@ -46,6 +51,13 @@ program a bit wrong: we want to add termination judgment to `(is-first?)`, to
 make it immediately terminate for empty argument, like this:
 
 {{< highlight scheme >}}
+(define is-first-b?
+  (lambda (a lat)
+    (cond
+      ((null? lat) #f)
+      (else (or (eq? (car lat) a)
+                (two-in-a-row-2? lat))))))
+
 (define two-in-a-row-2?
   (lambda (lat)
     (cond
@@ -53,12 +65,7 @@ make it immediately terminate for empty argument, like this:
       (else
        (is-first-b? (car lat) (cdr lat))))))
 
-(define is-first-b?
-  (lambda (a lat)
-    (cond
-      ((null? lat) #f)
-      (else (or (eq? (car lat) a)
-                (two-in-a-row-2? lat))))))
+
 ;(two-in-a-row-2? '(Italian)) will terminate in the first predicate of is-first-b?
 {{< /highlight >}}
 
@@ -66,15 +73,9 @@ We notice that the `(is-first-b?)` has a very similar procedure to
 `(two-in-a-row-2?)`. A slight change can make `(is-first?)` very similar to its
 master function - so calling two functions is almost like calling one. The
 core `(is-first?)` uses intermediate argument `(a)` to save the first element
-for comparison, so we are using `(preceding)` for the same purpose.
+for comparison, using `(preceding)` is identical to using `(a)`.
 
 {{< highlight scheme >}}
-(define two-in-a-row-final?
-  (lambda (lat)
-    (cond
-      ((null? lat) #f)
-      (else (two-in-a-row-b? (car lat) (cdr lat))))))
-
 ;the original is-first?
 (define two-in-a-row-b?
   (lambda (preceding lat)
@@ -83,11 +84,20 @@ for comparison, so we are using `(preceding)` for the same purpose.
       (else (or (eq? (car lat) preceding)
                 (two-in-a-row-b? (car lat) (cdr lat)))))))
 
+(define two-in-a-row-final?
+  (lambda (lat)
+    (cond
+      ((null? lat) #f)
+      (else (two-in-a-row-b? (car lat) (cdr lat))))))
 ;(two-in-a-row-final? '(Italian sardines sardines spaghetti parsley)) -> true
 {{< /highlight >}}
 
-With the modification, in `(two-in-a-row-b?)` part, the designated recursion function has
-become itself, rather than `(two-in-a-row-final?)`. This design is inspiring to
+Notice: the `(two-in-a-row-b?)` has
+two arguments whereas the `(two-in-a-row-final?)` only has one argument. In next chapter, we will see
+how to use `(letrec)` to isolate functions so that we can particularly define
+function as black box.
+
+This design is inspiring to
 any function that can be solved with a intermediate changing argument, and a one
 by one searching procedure. For example, a function stores step-by step sums of a tuple.
 
@@ -348,11 +358,7 @@ any function possibilities: with `(test?)` satisfied, we can call the procedure
 
 ---
 
-It seems using the extra step for separation is not a big deal, especially when in the above
-example where _a_ and _lat_ are so distinctive that we would not make mistake in
-applying them. But we can see another example.
-
-Remember how we design `(union)` function to merge two sets: we traverse every element in set1, if it
+Let's see another function: remember how we design `(union)` function to merge two sets: we traverse every element in set1, if it
 is also a member in set2, we skip; otherwise we cons this element to set2:
 
 {{< highlight scheme >}}
@@ -384,4 +390,143 @@ is also a member in set2, we skip; otherwise we cons this element to set2:
 {{< /highlight >}}
 
 Now set2 is the unchanged parameter in function, set1 is getting shorter and
-shorter in recursion.
+shorter in recursion. Similar with `(multirember-letrec)`, the procedure firstly
+passes the unchanged set2, making the `(U)` function only has one changing
+parameter `(set)` which then got substituted by traversed set1.
+
+It seems using the extra step for separation is not a big deal, especially when in the `(multirember-letrec)`
+example where _a_ and _lat_ are so distinctive that we would not make mistake in
+applying them. But from `(union-letrec)` we will see things particularly need
+to me mindful. The only difference between the below functions are the order of
+the parameters:
+
+{{< highlight scheme >}}
+;right for the above union-letrec function
+(define member?-1
+  (lambda (a lat)
+    (cond
+      ((null? lat) #f)
+      ((eq? (car lat) a) #t)
+      (else (member? a (cdr lat))))))
+
+;wrong for the above union-letrec function, (but correct as itself).
+(define member?-2
+  (lambda (lat a)
+    (cond
+      ((null? lat) #f)
+      ((eq? (car lat) a) #t)
+      (else (member? (cdr lat) a)))))
+{{< /highlight >}}
+
+If the `(member)` function (defined outside the `(union-letrec)`) have stated to take the first element as list to
+traverse, when writing `(union-letrec)` we have to make sure the arguments passed
+to `(member?)` has the consistent order.
+
+Meanwhile, we can just define the `(member?)` inside `(union-letrec)` since
+`(letrec)` allows us to define multiple functions at the same time.
+
+{{< highlight scheme >}}
+(define union-letrec-protected
+  (lambda (set1 set2)
+    (letrec
+      ((U (lambda (set)
+            (cond
+              ((null? set) set2)
+              ((M? (car set) set2)
+               (U (cdr set)))
+              (else
+                (cons (car set) (U (cdr set)))))))
+       (M?
+         (lambda (a lat)
+           (cond
+             ((null? lat) #f)
+             ((eq? (car lat) a) #t)
+             (else
+               (M? a (cdr lat)))))))
+      (U set1))))
+
+(union-letrec-protected
+  '(tomatoes and macaroni casserole)
+  '(macaroni and cheese)) ; '(tomatoes and macaroni casserole cheese)
+{{< /highlight >}}
+
+Currently it has the form of `(letrec (U M) (U set1))`, where the `(U)` and `(M?)` are in
+the same lay. This design only isolates the unchanged variable _set2_. But we
+notice that there is also an unchanged variable _a_ so we should wrap `(M?)` in
+a inner layer of the function `(U)`:
+
+{{< highlight scheme >}}
+(define union-letrec-protected-12
+  (lambda (set1 set2)
+    (letrec
+      ((U (lambda (set)
+            (cond
+              ((null? set) set2)
+              ((M? (car set) set2)
+               (U (cdr set)))
+              (else
+                (cons (car set) (U (cdr set)))))))
+       (M?
+         (lambda (a lat)
+           (letrec
+             ((N? (lambda (lat)
+                    (cond
+                      ((null? lat) #f)
+                      ((eq? (car lat) a) #t)
+                      (else
+                        (N? (cdr lat)))))))
+             (N? lat)))))
+      (U set1))))
+{{< /highlight >}}
+
+Another example we've seem is `(two-in-a-row)`, let's try rewrite it with letrec
+too. Last time our final definition is: defining recursive function `(two-in-a-row-b?)` first, then
+call it in `(two-in-a-row-final?)`. At here, the separation of two function is
+no long for distinguishing changing and unchanged variables, but to separate
+procedures as black box to for future purpose.
+
+{{< highlight scheme >}}
+(define two-in-a-row-b?
+  (lambda (preceding lat)
+    (cond
+      ((null? lat) #f)
+      (else (or (eq? (car lat) preceding)
+                (two-in-a-row-b? (car lat) (cdr lat)))))))
+
+(define two-in-a-row-final?
+  (lambda (lat)
+    (cond
+      ((null? lat) #f)
+      (else (two-in-a-row-b? (car lat) (cdr lat))))))
+
+;---define above function with letrec
+(define two-in-a-row?
+  (lambda (lat)
+    (letrec
+      ((W (lambda (a lat)
+            (cond
+              ((null? lat) #f)
+              ((eq? a (car lat)) #t)
+              (else
+                (W (car lat) (cdr lat)))))))
+      (cond
+        ((null? lat) #f)
+        (else (W (car lat) (cdr lat)))))))
+
+;here is another version
+(define two-in-a-row-2?
+  (letrec
+    ((W (lambda (a lat)
+          (cond
+            ((null? lat) #f)
+            ((eq? a (car lat)) #t)
+            (else
+              (W (car lat) (cdr lat)))))))
+    (lambda (lat)
+      (cond
+        ((null? lat) #f)
+        (else (W (car lat) (cdr lat)))))))
+
+; Test two-in-a-row-2?
+(two-in-a-row-2? '(Italian sardines spaghetti parsley))
+{{< /highlight >}}
