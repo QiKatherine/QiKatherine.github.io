@@ -1,7 +1,7 @@
 +++
 title = "The Seasoned Schemer learning note (1/3)"
 date = 2020-06-14T01:13:00+01:00
-lastmod = 2020-06-21T02:04:26+01:00
+lastmod = 2020-06-22T01:23:20+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -141,10 +141,19 @@ And another case of selecting reversed items base on the number of the atom.
 (scramble '(1 2 3 1 2 3 4 1 8 2 10))    ; '(1 1 1 1 1 1 1 1 2 8 2)
 {{< /highlight >}}
 
+---
+
 
 ## Chapter 12 Take Cover {#chapter-12-take-cover}
 
-In this chapter we reform previous function to seperate values.
+In this chapter we reform previous function to seperate values. There has been a
+issue left since we introduced lambda expressions and recursions: redundancy.
+Lots of similar parameters are called/updated with unnecessary amount of
+times, which are at expense of time, space or reading complexity. In
+next few chapters, we will see a few different ways designed to alleviate this issue.
+
+The first way is to use `(letrec)` with lexical closure to wrap function
+in function to make the outer function with clearer shape.
 
 Let's firstly
 review Y combinator:
@@ -243,7 +252,7 @@ because we did not specify _a_ in `(multirember)`. The third part is procedure w
 'c '(c d))
 {{< /highlight >}}
 
-How do we write function achieve the code we want? The difference between the
+How do we organize code to achieve the function we want? The difference between the
 right and wrong function is holding the argument substitution until after applying
 the `(mr)` function. Apart from using layer by layer lambda functions, we can use `(letrec)` to define:
 
@@ -479,10 +488,10 @@ a inner layer of the function `(U)`:
       (U set1))))
 {{< /highlight >}}
 
-Another example we've seem is `(two-in-a-row)`, let's try rewrite it with letrec
+Another example we've seem is `(two-in-a-row)`, let's try rewrite it with `(letrec)`
 too. Last time our final definition is: defining recursive function `(two-in-a-row-b?)` first, then
 call it in `(two-in-a-row-final?)`. At here, the separation of two function is
-no long for distinguishing changing and unchanged variables, but to separate
+no longer for distinguishing changing and unchanged variables, but to separate
 procedures as black box to for future purpose.
 
 {{< highlight scheme >}}
@@ -530,3 +539,23 @@ procedures as black box to for future purpose.
 ; Test two-in-a-row-2?
 (two-in-a-row-2? '(Italian sardines spaghetti parsley))
 {{< /highlight >}}
+
+And `(sum-of-prefixes)` can be rewrite like this:
+
+{{< highlight scheme >}}
+(define sum-of-prefixes
+  (lambda (tup)
+    (letrec
+      ((S (lambda (sss tup)
+            (cond
+              ((null? tup) '())
+              (else
+                (cons (+ sss (car tup))
+                      (S (+ sss (car tup)) (cdr tup))))))))
+      (S 0 tup))))
+
+(sum-of-prefixes '(2 1 9 17 0))   ; '(2 3 12 29 29)
+{{< /highlight >}}
+
+The applying procedures for the first steps are:
+![](/img/seasoned102.png)
