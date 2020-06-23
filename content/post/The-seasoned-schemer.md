@@ -1,7 +1,7 @@
 +++
 title = "The Seasoned Schemer learning note (1/3)"
 date = 2020-06-14T01:13:00+01:00
-lastmod = 2020-06-22T01:23:20+01:00
+lastmod = 2020-06-23T02:02:58+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -146,7 +146,7 @@ And another case of selecting reversed items base on the number of the atom.
 
 ## Chapter 12 Take Cover {#chapter-12-take-cover}
 
-In this chapter we reform previous function to seperate values. There has been a
+In this chapter we reform previous function to separate values. There has been a
 issue left since we introduced lambda expressions and recursions: redundancy.
 Lots of similar parameters are called/updated with unnecessary amount of
 times, which are at expense of time, space or reading complexity. In
@@ -210,7 +210,7 @@ definition by adding another layer to just pass the arguments. The major
 difference is the execution for `(eq? and else)` predicates, the `(mr)` get
 called without _a_ as argument anymore.
 
-What is the benefit of doing this? It seperates the procedures of applying _a_
+What is the benefit of doing this? It separates the procedures of applying _a_
 and _lat_, making the repetitive procedure `(mr)` easier for having less argument. You would probably wonder, instead of using Y combinator, what if I use currying learned from The
 Little Schemer to write it, maybe like this?
 
@@ -559,3 +559,149 @@ And `(sum-of-prefixes)` can be rewrite like this:
 
 The applying procedures for the first steps are:
 ![](/img/seasoned102.png)
+
+
+## Chapter 13  Hop, Skip, and Jump {#chapter-13-hop-skip-and-jump}
+
+We are continuing the story of `(letrec)`. In the last part of chapter 12, from the application of
+`(two-in-a-row letrec)` and `(two-in-a-row-2)` we have seen that the letrec
+function can be defined and called anywhere in any function. The purpose is no
+longer limited to "separating changing and unchanged" variables.
+
+We were told that set is a list
+consists of **non-repeated** atoms. Remember we defined two functions for sets:
+`(intersect set1 set2)` that returns the common atoms of two input sets; and
+`(intersectall)` that use `(intersect)` to find common atoms of list of sets. Let's first rewrite `(intersect)` with `(letrec)`, which is simple:
+
+{{< highlight scheme >}}
+(define intersect
+  (lambda (set1 set2)
+    (cond
+      ((null? set1) '())  ; don't forget the 1st commandment
+      ((member? (car set1) set2)
+       (cons (car set1) (intersect (cdr set1) set2)))
+      (else
+        (intersect (cdr set1) set2)))))
+
+(intersect '(a b x c d) '(q w e x r t y a))     ;-> '(a x)
+
+(define intersect-letrec
+  (lambda (set1 set2)
+    (letrec
+      ((I (lambda (set)
+            (cond
+              ((null? set) '())
+              ((member? (car set) set2)
+               (cons (car set) (I (cdr set))))
+              (else
+                (I (cdr set)))))))
+      (I set1))))
+
+(intersect-letrec '(a b x c d) '(q w e x r t y a))     ;-> '(a x)
+{{< /highlight >}}
+
+This is old friend `(intersectall)`:
+
+{{< highlight scheme >}}
+(define intersectall
+  (lambda (lset)
+    (cond
+      ((null? (cdr lset)) (car lset))  ; don't forget the 1st commandment
+      (else
+        (intersect (car lset)
+           (intersectall (cdr lset)))))))
+
+(intersectall '((a) (a) (a)))                   ;-> '(a)
+{{< /highlight >}}
+
+The old friend `(intersectall)` works like this: the input can be classified to
+possibilities that: list with zero set, one set and more than one sets. We
+assumed the input "list of sets" is not null so last time we only prepared
+function for list with one or more sets. For one set case, the `(null? (cdr
+lset))` identify and return itself as common atoms; for two or more sets, the
+function would work properly with function for `(else)` predicate. We can fix
+the condition we ignored last time with `(letrec)` by adding line of predicate
+for pure null input:
+
+{{< highlight scheme >}}
+(define intersectall
+  (lambda (lset)
+    (cond
+      ((null? lset) '()) ;<- so far the only difference is here
+      ((null? (cdr lset)) (car lset))
+      (else
+        (intersect (car lset)
+                   (intersectall (cdr lset)))))))
+{{< /highlight >}}
+
+Here is the letrec function of `(intersectall)`. Pay attention that the outer
+parameter has name of _lset_, which is the same with the inner parameter name
+_lset_. This is a coincidence, and the name in A can use something else a
+name holder. The value of this name holder will be substituted by the _lset_ of `(else (A lset))`.
+
+{{< highlight scheme >}}
+(define intersectall-letrec
+  (lambda (lset)
+    (letrec
+      ((A (lambda (lset)
+            (cond
+              ((null? (cdr lset)) (car lset))
+              (else
+                (intersect (car lset)
+                           (A (cdr lset))))))))
+      (cond
+        ((null? lset) '())
+        (else (A lset))))))
+
+(intersectall-letrec '((a b c d) (b c d e) (c d e f))) ; '(c d)
+{{< /highlight >}}
+
+The `(null? (cdr lset)` works as terminating condition in first commandment,
+which will be use every time in the inner recursion. However, the `(null? lset)`
+only exam once in the very beginning. Therefore we can separate them with
+calling A inside.
+
+However for the new function, we can still find efficiency issue: we notice that
+the whole process has to be ended by terminating condition when there is an
+input for `(intersect)` becoming null, and the it has to happen with `(cdr lat)`
+input. For case `((intersectall-letrec '((a b c
+d) () (c d e f))))` we do not need to run some recursions to realize that the
+intersection is null. But in DrRacket if we use stepper we can set it takes 73
+steps for the function to finish: the input list is peeled layer by layer, until
+the function use A to hit #t in `(A (cdr lset))`
+with the LAST set `'(c d e f)`, and it has to finish all the continuation function. So it would be more efficient if we can add a predicate
+inside, testing null `(car lset)` to terminate immediately. That's where we need `(letcc)`:
+
+{{< highlight scheme >}}
+(define intersectall
+  (lambda (lset)
+   (letcc (hop)                       ;<- add new function here
+        (letrec
+          ((A (lambda (lset)
+                (cond
+                  ((null? (car lset)) (hop '()))     ;<- add a predicate here
+                  ((null? (cdr lset)) (car lset))
+                  (else
+                    (intersect (car lset)
+                               (A (cdr lset))))))))
+          (cond
+            ((null? lset) '())
+            (else (A lset)))))))
+
+;or another way to write
+(define intersectall-letcc
+  (lambda (lset)
+    (call-with-current-continuation  ;<- add a name here
+      (lambda (hop)                       ;<- add new function here
+        (letrec
+          ((A (lambda (lset)
+                (cond
+                  ((null? (car lset)) (hop '()))     ;<- add a predicate here
+                  ((null? (cdr lset)) (car lset))
+                  (else
+                    (intersect (car lset)
+                               (A (cdr lset))))))))
+          (cond
+            ((null? lset) '())
+            (else (A lset))))))))
+{{< /highlight >}}

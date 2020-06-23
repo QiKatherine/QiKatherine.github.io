@@ -878,7 +878,7 @@ https://github.com/]]
 
 *** 4. Anki
 -----
-I have written a seperate article of Anki in this blog:
+I have written a separate article of Anki in this blog:
 [[https://sheishe.xyz/post/using-anki-editor-to-build-flashcard-in-org-mode/][Using
 Anki-editor to build flashcard in Emacs Org-mode]]
 
@@ -1048,11 +1048,11 @@ https://github.com/QiKatherine/Linear-algebra/blob/master/1.pdf
    - State "DONE"       from "TODO"       [2019-12-10 ÖÜ¶þ 23:20]
    :END:
 
-The first part of the note:
+Part one:
 [[https://sheishe.xyz/post/the-little-schemer-note/][The Little Schemer speedy referring note (1/3)-Katherine He Blog|何琪的博客]]
-The second part of the note:
+Part two:
 [[https://sheishe.xyz/post/the-little-schemer-note-2-3/][The Little Schemer speedy referring note (2/3)-Katherine He Blog|何琪的博客]]
-The third part of the note:
+Part three:
 [[https://sheishe.xyz/post/the-little-schemer-note-3-3/][The Little Schemer speedy referring note (3/3)-Katherine He Blog|何琪的博客]]
 
 The Little Schemer uses a very easy way, introducing the nature of recursion,
@@ -1865,11 +1865,11 @@ setting functions*, we know this work will not be limited to =(1 + 1) and (+1
    - State "DONE"       from "TODO"       [2019-12-23 Mon 01:35]
    :END:
 
-The first part of the note:
+Part one:
 [[https://sheishe.xyz/post/the-little-schemer-note/][The Little Schemer speedy referring note (1/3)-Katherine He Blog|何琪的博客]]
-The second part of the note:
+Part two:
 [[https://sheishe.xyz/post/the-little-schemer-note-2-3/][The Little Schemer speedy referring note (2/3)-Katherine He Blog|何琪的博客]]
-The third part of the note:
+Part three:
 [[https://sheishe.xyz/post/the-little-schemer-note-3-3/][The Little Schemer speedy referring note (3/3)-Katherine He Blog|何琪的博客]]
 
 This is a quick reference note that I pull from the book The Little Schemer. The
@@ -1881,11 +1881,13 @@ This is a quick reference note that I pull from the book The Little Schemer. The
 *** Chapter 7 Friend and Relations
 -----
 
-In this chapter, we see more examples of using the previously defined functions
-to develop more functions.
+In this chapter, we will use more previously defined functions
+to develop new functions.
 
-*set* is a list consists of *non-repeated* atoms. The function =(set? argument)=
- checks whether a list is a set. It can be written with =(member?)=:
+*Set* is a list consists of *non-repeated* atoms. The function =(set? argument)=
+ checks whether a list is a set. So this function basically checks whether there
+ are repetitive atoms in a list. Using =(member?)= to check whether =(car lat)= is a
+ member of =(cdr lat)= is a good idea:
 #+begin_src scheme
   (define member?
     (lambda (a lat)
@@ -1904,8 +1906,9 @@ to develop more functions.
           (set? (cdr lat))))))
 #+end_src
 
-=(makeset argument)= make a new list by removing duplicated atoms in argument
-list. For a repeated atom in list, in order to retain the first occurrence while remove others, we use =(multirember)=: 
+We can make a set from any list by removing the duplicated atoms. Actually we've
+had =(multirember)= that traverse a list and only retain the first occurrence of
+many identical atoms.  
  #+begin_src scheme
 (define multirember
   (lambda (a lat)
@@ -1987,7 +1990,15 @@ The below functions do a bit more, they return intersection or union or differen
        (xxx (cdr set1) set2))
       (else
         (cons (car set1) (xxx (cdr set1) set2))))))
-
+#+end_src
+For the function =(intersectall)= that selects common atoms for list with more
+sets, we can write as follow:  the input can be classified to
+possibilities that: list with zero set, one set and more than one sets. We
+assume the input "list of sets" is not null we only prepare
+function for list with one or more sets. For one set case, the =(null? (cdr
+lset))= identify and return itself as common atoms; for two or more sets, the
+function would work properly with function for =(else)= predicate. 
+#+begin_src scheme
 ;(intersectall '((a b c) (c a d e) (e f g h a b))) -> '(a)
 (define intersectall
   (lambda (l-set)
@@ -1996,6 +2007,7 @@ The below functions do a bit more, they return intersection or union or differen
       (else
         (intersect (car l-set) (intersectall (cdr l-set)))))))
 #+end_src
+
 
 The *pair* is a list with only TWO s-expressions and the *rel* is a set of
 pairs. We use =(set?)= and =(firsts)= to define =(fun?)=, which is used to test
@@ -2435,11 +2447,11 @@ continuation example on p.137 of The Little Schemer - Stack Overflow]]
    :EXPORT_FILE_NAME: The-little-schemer-note-3-3
    :END:
 
-The first part of the note:
+Part one:
 [[https://sheishe.xyz/post/the-little-schemer-note/][The Little Schemer speedy referring note (1/3)-Katherine He Blog|何琪的博客]]
-The second part of the note:
+Part two:
 [[https://sheishe.xyz/post/the-little-schemer-note-2-3/][The Little Schemer speedy referring note (2/3)-Katherine He Blog|何琪的博客]]
-The third part of the note:
+Part three:
 [[https://sheishe.xyz/post/the-little-schemer-note-3-3/][The Little Schemer speedy referring note (3/3)-Katherine He Blog|何琪的博客]]
 
 This is a quick reference note that I pull from the book The Little Schemer. The
@@ -3141,7 +3153,7 @@ Done. Happy hacking!
 *** Chapter 10 What is the value of all of this?
 Firstly this chapter defines entry and table/enviroment. An entry consists of a
 pair of lists of *equal length* (length is the number of first level atoms in a
-list). A list of entries is table/enviroment.
+list). A list of entries is table/environment.
 
 [[/img/little10.png]]
 
@@ -3777,7 +3789,7 @@ And another case of selecting reversed items base on the number of the atom.
 -----
 
 *** Chapter 12 Take Cover
-In this chapter we reform previous function to seperate values. There has been a
+In this chapter we reform previous function to separate values. There has been a
 issue left since we introduced lambda expressions and recursions: redundancy.
 Lots of similar parameters are called/updated with unnecessary amount of
 times, which are at expense of time, space or reading complexity. In
@@ -3839,7 +3851,7 @@ definition by adding another layer to just pass the arguments. The major
 difference is the execution for =(eq? and else)= predicates, the =(mr)= get
 called without /a/ as argument anymore. 
 
-What is the benefit of doing this? It seperates the procedures of applying /a/
+What is the benefit of doing this? It separates the procedures of applying /a/
 and /lat/, making the repetitive procedure =(mr)= easier for having less argument. You would probably wonder, instead of using Y combinator, what if I use currying learned from The
 Little Schemer to write it, maybe like this?
 #+begin_src scheme
@@ -4173,4 +4185,144 @@ And =(sum-of-prefixes)= can be rewrite like this:
 #+end_src
 The applying procedures for the first steps are:
 [[/img/seasoned102.png]]
+
+*** Chapter 13  Hop, Skip, and Jump
+We are continuing the story of =(letrec)=. In the last part of chapter 12, from the application of
+=(two-in-a-row letrec)= and =(two-in-a-row-2)= we have seen that the letrec
+function can be defined and called anywhere in any function. The purpose is no
+longer limited to "separating changing and unchanged" variables.
+
+We were told that set is a list
+consists of *non-repeated* atoms. Remember we defined two functions for sets:
+=(intersect set1 set2)= that returns the common atoms of two input sets; and
+=(intersectall)= that use =(intersect)= to find common atoms of list of sets. Let's first rewrite =(intersect)= with =(letrec)=, which is simple:
+#+begin_src scheme
+(define intersect
+  (lambda (set1 set2)
+    (cond
+      ((null? set1) '())  ; don't forget the 1st commandment
+      ((member? (car set1) set2)
+       (cons (car set1) (intersect (cdr set1) set2)))
+      (else
+        (intersect (cdr set1) set2)))))
+
+(intersect '(a b x c d) '(q w e x r t y a))     ;-> '(a x)
+
+(define intersect-letrec
+  (lambda (set1 set2)
+    (letrec
+      ((I (lambda (set)
+            (cond
+              ((null? set) '())
+              ((member? (car set) set2)
+               (cons (car set) (I (cdr set))))
+              (else
+                (I (cdr set)))))))
+      (I set1))))
+
+(intersect-letrec '(a b x c d) '(q w e x r t y a))     ;-> '(a x)
+#+end_src
+
+This is old friend =(intersectall)=:
+#+begin_src scheme
+(define intersectall
+  (lambda (lset)
+    (cond
+      ((null? (cdr lset)) (car lset))  ; don't forget the 1st commandment
+      (else
+        (intersect (car lset) 
+           (intersectall (cdr lset)))))))
+
+(intersectall '((a) (a) (a)))                   ;-> '(a)
+#+end_src
+
+The old friend =(intersectall)= works like this: the input can be classified to
+possibilities that: list with zero set, one set and more than one sets. We
+assumed the input "list of sets" is not null so last time we only prepared
+function for list with one or more sets. For one set case, the =(null? (cdr
+lset))= identify and return itself as common atoms; for two or more sets, the
+function would work properly with function for =(else)= predicate. We can fix
+the condition we ignored last time with =(letrec)= by adding line of predicate
+for pure null input:
+#+begin_src scheme
+(define intersectall
+  (lambda (lset)
+    (cond
+      ((null? lset) '()) ;<- so far the only difference is here
+      ((null? (cdr lset)) (car lset))
+      (else
+        (intersect (car lset)
+                   (intersectall (cdr lset)))))))
+#+end_src
+
+Here is the letrec function of =(intersectall)=. Pay attention that the outer
+parameter has name of /lset/, which is the same with the inner parameter name
+/lset/. This is a coincidence, and the name in A can use something else a
+name holder. The value of this name holder will be substituted by the /lset/ of =(else (A lset))=.
+#+begin_src scheme
+(define intersectall-letrec
+  (lambda (lset)
+    (letrec
+      ((A (lambda (lset)
+            (cond
+              ((null? (cdr lset)) (car lset))
+              (else
+                (intersect (car lset)
+                           (A (cdr lset))))))))
+      (cond
+        ((null? lset) '())
+        (else (A lset))))))
+
+(intersectall-letrec '((a b c d) (b c d e) (c d e f))) ; '(c d)
+#+end_src
+
+The =(null? (cdr lset)= works as terminating condition in first commandment,
+which will be use every time in the inner recursion. However, the =(null? lset)=
+only exam once in the very beginning. Therefore we can separate them with
+calling A inside. 
+
+However for the new function, we can still find efficiency issue: we notice that
+the whole process has to be ended by terminating condition when there is an
+input for =(intersect)= becoming null, and the it has to happen with =(cdr lat)=
+input. For case =((intersectall-letrec '((a b c
+d) () (c d e f))))= we do not need to run some recursions to realize that the
+intersection is null. But in DrRacket if we use stepper we can set it takes 73
+steps for the function to finish: the input list is peeled layer by layer, until
+the function use A to hit #t in =(A (cdr lset))=
+with the LAST set ='(c d e f)=, and it has to finish all the continuation function. So it would be more efficient if we can add a predicate
+inside, testing null =(car lset)= to terminate immediately. That's where we need =(letcc)=:
+#+begin_src scheme
+(define intersectall
+  (lambda (lset)
+   (letcc (hop)                       ;<- add new function here
+        (letrec
+          ((A (lambda (lset)
+                (cond
+                  ((null? (car lset)) (hop '()))     ;<- add a predicate here
+                  ((null? (cdr lset)) (car lset))
+                  (else
+                    (intersect (car lset)
+                               (A (cdr lset))))))))
+          (cond
+            ((null? lset) '())
+            (else (A lset)))))))
+
+;or another way to write
+(define intersectall-letcc
+  (lambda (lset)
+    (call-with-current-continuation  ;<- add a name here
+      (lambda (hop)                       ;<- add new function here
+        (letrec
+          ((A (lambda (lset)
+                (cond
+                  ((null? (car lset)) (hop '()))     ;<- add a predicate here
+                  ((null? (cdr lset)) (car lset))
+                  (else
+                    (intersect (car lset)
+                               (A (cdr lset))))))))
+          (cond
+            ((null? lset) '())
+            (else (A lset))))))))
+#+end_src
+
 

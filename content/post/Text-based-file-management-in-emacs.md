@@ -2,7 +2,7 @@
 title = "Text based file management in Emacs 【Emacs 文本文件管理】"
 summary = "Overview of text process tools in org-mode."
 date = 2019-09-22T23:56:00+01:00
-lastmod = 2020-06-22T01:23:17+01:00
+lastmod = 2020-06-23T02:02:55+01:00
 draft = false
 image = "img/111.jpg"
 +++
@@ -126,6 +126,6 @@ https://github.com/](https://github.com/synchrony/smsn/wiki/A-video-introduction
 
 ---
 
-I have written a seperate article of Anki in this blog:
+I have written a separate article of Anki in this blog:
 [Using
 Anki-editor to build flashcard in Emacs Org-mode](https://sheishe.xyz/post/using-anki-editor-to-build-flashcard-in-org-mode/)

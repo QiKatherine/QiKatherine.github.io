@@ -1,17 +1,17 @@
 +++
 title = "The Little Schemer speedy referring note (3/3)"
 date = 2020-01-06T17:44:00+00:00
-lastmod = 2020-06-22T01:23:19+01:00
+lastmod = 2020-06-23T02:02:57+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
 +++
 
-The first part of the note:
+Part one:
 [The Little Schemer speedy referring note (1/3)-Katherine He Blog|何琪的博客](https://sheishe.xyz/post/the-little-schemer-note/)
-The second part of the note:
+Part two:
 [The Little Schemer speedy referring note (2/3)-Katherine He Blog|何琪的博客](https://sheishe.xyz/post/the-little-schemer-note-2-3/)
-The third part of the note:
+Part three:
 [The Little Schemer speedy referring note (3/3)-Katherine He Blog|何琪的博客](https://sheishe.xyz/post/the-little-schemer-note-3-3/)
 
 This is a quick reference note that I pull from the book The Little Schemer. The
@@ -755,7 +755,7 @@ Done. Happy hacking!
 
 Firstly this chapter defines entry and table/enviroment. An entry consists of a
 pair of lists of **equal length** (length is the number of first level atoms in a
-list). A list of entries is table/enviroment.
+list). A list of entries is table/environment.
 
 {{< figure src="/img/little10.png" >}}
 

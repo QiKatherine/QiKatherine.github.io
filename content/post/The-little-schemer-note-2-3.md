@@ -1,17 +1,17 @@
 +++
 title = "The Little Schemer speedy referring note (2/3)"
 date = 2019-12-23T01:35:00+00:00
-lastmod = 2020-06-22T01:23:18+01:00
+lastmod = 2020-06-23T02:02:56+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
 +++
 
-The first part of the note:
+Part one:
 [The Little Schemer speedy referring note (1/3)-Katherine He Blog|何琪的博客](https://sheishe.xyz/post/the-little-schemer-note/)
-The second part of the note:
+Part two:
 [The Little Schemer speedy referring note (2/3)-Katherine He Blog|何琪的博客](https://sheishe.xyz/post/the-little-schemer-note-2-3/)
-The third part of the note:
+Part three:
 [The Little Schemer speedy referring note (3/3)-Katherine He Blog|何琪的博客](https://sheishe.xyz/post/the-little-schemer-note-3-3/)
 
 This is a quick reference note that I pull from the book The Little Schemer. The
@@ -24,11 +24,13 @@ This is a quick reference note that I pull from the book The Little Schemer. The
 
 ---
 
-In this chapter, we see more examples of using the previously defined functions
-to develop more functions.
+In this chapter, we will use more previously defined functions
+to develop new functions.
 
-**set** is a list consists of **non-repeated** atoms. The function `(set? argument)`
- checks whether a list is a set. It can be written with `(member?)`:
+**Set** is a list consists of **non-repeated** atoms. The function `(set? argument)`
+ checks whether a list is a set. So this function basically checks whether there
+ are repetitive atoms in a list. Using `(member?)` to check whether `(car lat)` is a
+ member of `(cdr lat)` is a good idea:
 
 {{< highlight scheme >}}
   (define member?
@@ -48,8 +50,9 @@ to develop more functions.
           (set? (cdr lat))))))
 {{< /highlight >}}
 
-`(makeset argument)` make a new list by removing duplicated atoms in argument
-list. For a repeated atom in list, in order to retain the first occurrence while remove others, we use `(multirember)`:
+We can make a set from any list by removing the duplicated atoms. Actually we've
+had `(multirember)` that traverse a list and only retain the first occurrence of
+many identical atoms.
 
 {{< highlight scheme >}}
 (define multirember
@@ -134,7 +137,17 @@ The below functions do a bit more, they return intersection or union or differen
        (xxx (cdr set1) set2))
       (else
         (cons (car set1) (xxx (cdr set1) set2))))))
+{{< /highlight >}}
 
+For the function `(intersectall)` that selects common atoms for list with more
+sets, we can write as follow:  the input can be classified to
+possibilities that: list with zero set, one set and more than one sets. We
+assume the input "list of sets" is not null we only prepare
+function for list with one or more sets. For one set case, the `(null? (cdr
+lset))` identify and return itself as common atoms; for two or more sets, the
+function would work properly with function for `(else)` predicate.
+
+{{< highlight scheme >}}
 ;(intersectall '((a b c) (c a d e) (e f g h a b))) -> '(a)
 (define intersectall
   (lambda (l-set)

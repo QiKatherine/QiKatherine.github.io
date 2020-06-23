@@ -1,17 +1,17 @@
 +++
 title = "The Little Schemer speedy referring note (1/3)"
 date = 2019-12-10T23:20:00+00:00
-lastmod = 2020-06-22T01:23:18+01:00
+lastmod = 2020-06-23T02:02:56+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
 +++
 
-The first part of the note:
+Part one:
 [The Little Schemer speedy referring note (1/3)-Katherine He Blog|何琪的博客](https://sheishe.xyz/post/the-little-schemer-note/)
-The second part of the note:
+Part two:
 [The Little Schemer speedy referring note (2/3)-Katherine He Blog|何琪的博客](https://sheishe.xyz/post/the-little-schemer-note-2-3/)
-The third part of the note:
+Part three:
 [The Little Schemer speedy referring note (3/3)-Katherine He Blog|何琪的博客](https://sheishe.xyz/post/the-little-schemer-note-3-3/)
 
 The Little Schemer uses a very easy way, introducing the nature of recursion,
