@@ -1,7 +1,7 @@
 +++
 title = "The Seasoned Schemer learning note (1/3)"
 date = 2020-06-14T01:13:00+01:00
-lastmod = 2020-06-23T02:02:58+01:00
+lastmod = 2020-06-24T01:34:44+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -673,6 +673,7 @@ with the LAST set `'(c d e f)`, and it has to finish all the continuation functi
 inside, testing null `(car lset)` to terminate immediately. That's where we need `(letcc)`:
 
 {{< highlight scheme >}}
+;we prefer this version than the below one
 (define intersectall
   (lambda (lset)
    (letcc (hop)                       ;<- add new function here
@@ -688,7 +689,7 @@ inside, testing null `(car lset)` to terminate immediately. That's where we need
             ((null? lset) '())
             (else (A lset)))))))
 
-;or another way to write
+;or another way to write, raised by Alonzo Church
 (define intersectall-letcc
   (lambda (lset)
     (call-with-current-continuation  ;<- add a name here
@@ -701,6 +702,87 @@ inside, testing null `(car lset)` to terminate immediately. That's where we need
                   (else
                     (intersect (car lset)
                                (A (cdr lset))))))))
+          (cond
+            ((null? lset) '())
+            (else (A lset))))))))
+
+(intersectall-letcc '((a b c d) ( ) (c d e f)))
+{{< /highlight >}}
+
+We notice that in the first code block, two lines of code are added. When
+finding `(null? (car lset))` is true, we will call hop function making A _hop_
+to the right position. The example helps to learn how the _hop_ works. First the
+input list will substitute the outer _lat_ and the function starts to run,
+triggering `(A lset)`. The first round of loop wouldn't trigger `(hop)` because
+`(car lset)` is `(3 mangos and)` not null. But the second loop will trigger the
+`(hop)` because `(car (() (c d e f))` is true. The `(hop)` basically halts the
+whole function and return `('())` for this case, regardless we have remembered `(intersect
+(a b c d) something)` to run. We only need to find the results of `(letcc hop
+M)`, which in this case is `(letcc hop (quote ())))`.
+
+So `(letcc)` can be used to return value abruptly and promptly.
+
+We are continuing improve the functions, because we notice something inefficient
+again with a slight different example:
+
+{{< highlight scheme >}}
+(intersectall-letcc '((a b c d) (d e) (x y z)))
+{{< /highlight >}}
+
+The procedure is very easy: we take intersection between the third and
+second, then with the first. But we have figured out instantaneously that the
+intersection for `(x y z)` and `(d e)` is `()`. But the current program won't
+tell until after running `(intersect)` several times. A feasible (not the best)
+improvement is initially checking the second set in `(intersect)`:
+
+{{< highlight scheme >}}
+(define intersect-letrec
+  (lambda (set1 set2)
+    (letrec
+      ((I (lambda (set)
+            (cond
+              ((null? set) '())
+              ((member? (car set) set2)
+               (cons (car set) (I (cdr set))))
+              (else
+                (I (cdr set)))))))
+      (cond                            ;<- new line
+        ((null? set2) (quote ()))      ;<- new line
+          (else (I set1))))))          ;<- new line
+{{< /highlight >}}
+
+Using this `(intersectall)` is not the best because, it only creates the best
+efficiency for `(intersect)`, not for `(intersectall)` yet. The ideal scenario
+should be once there is a empty set in list, the `(intersectall)` should
+immediately cease and return null list. In another word, we don't just want
+hop happen in one-out-of-two checking, we want hop happen in one-out-of-n
+checking. Writing function like this would solve it:
+
+{{< highlight scheme >}}
+(define intersectall-ap
+  (lambda (lset)
+    (call-with-current-continuation
+      (lambda (hop)
+        (letrec
+          ((A (lambda (lset)          ;<-intersectall
+                (cond
+                  ((null? (car lset)) (hop '()))
+                  ((null? (cdr lset)) (car lset))
+                  (else
+                    (I (car lset)
+                       (A (cdr lset)))))))
+           (I (lambda (s1 s2)         ;<-intersect
+                (letrec
+                  ((J (lambda (s1)
+                        (cond
+                          ((null? s1) '())
+                          ((member? (car s1) s2)
+                           (cons (car s1) (J (cdr s1))))
+                          (else
+                            (J (cdr s1)))))))
+                  (cond
+                    ((null? s2) (hop '()))  ;<-we can hop in minor function
+                    (else (J s1)))))))
           (cond
             ((null? lset) '())
             (else (A lset))))))))
