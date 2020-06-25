@@ -1,7 +1,7 @@
 +++
 title = "The Seasoned Schemer learning note (1/3)"
 date = 2020-06-14T01:13:00+01:00
-lastmod = 2020-06-24T01:34:44+01:00
+lastmod = 2020-06-25T01:14:01+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -12,17 +12,16 @@ with edition:
 
 [pkrumins/the-seasoned-schemer: All the Scheme code examples from the book "The Seasoned Schemer"](https://github.com/pkrumins/the-seasoned-schemer)
 
-This book is continuous to book The Little Schemer, which the notes can be found
-in previous articles. So we begin with chapter 11.
+This book is continuous to book The Little Schemer. The notes can be found
+in previous articles.
 
 
 ## Chapter 11 Welcome Back to the Show {#chapter-11-welcome-back-to-the-show}
 
-Firstly, we are defining function `(two-in-a-row?)` to test whether there are two
-identical atoms in a row in a list. A initial trial is to use a function
-`(is-first?)` that takes the first and the first of the `(cdr lat)` as input to
-check equality. If it returns #f, the `(or)` predicate will make sure the
-function recursively check the rest of list until there are two identical atoms appear.
+Firstly, we begin by defining function `(two-in-a-row?)` to test whether there are two
+identical atoms in a row in a list. An initial trial is to use a function
+`(is-first?)` that checks if the first and the second atom in the list are equal. If not, the `(or)` predicate will make sure the
+function recursively checking the rest of list until there are two identical atoms appear.
 
 {{< highlight scheme >}}
 (define is-first?
@@ -39,16 +38,21 @@ function recursively check the rest of list until there are two identical atoms 
         (or (is-first? (car lat) (cdr lat))
             (two-in-a-row? (cdr lat)))))))
 
-;(two-in-a-row? '(Italian sardines sardines spaghetti parsley)) -> true
+(two-in-a-row? '(Italian sardines sardines spaghetti parsley)) ;-> true
 {{< /highlight >}}
 
-There are other ways to realize the same functionality. The trait of the above one
-is that, it is the `(or two-in-a-row?)` get to decide termination. The `(is-first?)` returns #f for two cases, one is when the original lat has
-one atom, the other is no two-in-row. The first case will not make the function
-terminate - even though the lat is null with `(is-first?)` returns #f, the `(or
-two-in-a-row?)` will continue running for at least another round. This makes the
-program a bit wrong: we want to add termination judgment to `(is-first?)`, to
-make it immediately terminate for empty argument, like this:
+There are other ways to realize the same functionality. A slight issue of the above one
+is that, it is the `(or two-in-a-row?)` get to decide termination.
+
+For example cases
+`(two-in-a-row? '(a))` and `(two-in-a-row? '(a b))` both print #f. For the first
+case the function does not immediately terminate - even though the `(is-first? a
+'())` returns #f, the `(or
+two-in-a-row?)` still gets called for at least another round. The same thing
+happen in the latter example in the second round of `(two-in-a-row?)`. That means the `(or)`
+design is systematically less efficient - in this chapter, all we will learn is to make sure
+the program as efficient as possible.
+So we can rewrite `(is-first?)` to make it immediately terminate for empty _lat_, like this:
 
 {{< highlight scheme >}}
 (define is-first-b?
@@ -65,18 +69,17 @@ make it immediately terminate for empty argument, like this:
       (else
        (is-first-b? (car lat) (cdr lat))))))
 
-
 ;(two-in-a-row-2? '(Italian)) will terminate in the first predicate of is-first-b?
 {{< /highlight >}}
 
-We notice that the `(is-first-b?)` has a very similar procedure to
-`(two-in-a-row-2?)`. A slight change can make `(is-first?)` very similar to its
-master function - so calling two functions is almost like calling one. The
-core `(is-first?)` uses intermediate argument `(a)` to save the first element
+Meanwhile we notice that the `(is-first-b?)` has a very similar procedure to
+`(two-in-a-row-2?)`. A small change can make `(is-first-b?)` very similar to its
+master function - so calling two functions is almost like recursively calling one. The
+core `(is-first-b?)` uses intermediate argument `(a)` to save the first element
 for comparison, using `(preceding)` is identical to using `(a)`.
 
 {{< highlight scheme >}}
-;the original is-first?
+;rewrite is-first-b?
 (define two-in-a-row-b?
   (lambda (preceding lat)
     (cond
@@ -92,14 +95,14 @@ for comparison, using `(preceding)` is identical to using `(a)`.
 ;(two-in-a-row-final? '(Italian sardines sardines spaghetti parsley)) -> true
 {{< /highlight >}}
 
-Notice: the `(two-in-a-row-b?)` has
+Notice: although they are similar, the `(two-in-a-row-b?)` has
 two arguments whereas the `(two-in-a-row-final?)` only has one argument. In next chapter, we will see
-how to use `(letrec)` to isolate functions so that we can particularly define
-function as black box.
+how to use `(letrec)` to isolate the definition of `(two-in-a-row-b?)`, so that
+we can wrap and use it as a black box.
 
-This design is inspiring to
-any function that can be solved with a intermediate changing argument, and a one
-by one searching procedure. For example, a function stores step-by step sums of a tuple.
+Another function stores step-by step sums of a tuple. It has similar procedure
+like the above, recursively operating the first and second atom of a list, with
+a changing intermediate argument saving the by-product for every step.
 
 {{< highlight scheme >}}
 (define sum-of-prefixes-b
@@ -119,7 +122,8 @@ by one searching procedure. For example, a function stores step-by step sums of 
 ;(sum-of-prefixes '(2 1 9 17 0)) -> '(2 3 12 29 29)
 {{< /highlight >}}
 
-And another case of selecting reversed items base on the number of the atom.
+And another case of selecting reversed items base on the number of the atom. So
+far, we have seen enough examples of the eleventh commandment: use additional arguments when a function needs to know what the other arguments to the function have been like so far.
 
 {{< highlight scheme >}}
 (define scramble-b
@@ -146,14 +150,19 @@ And another case of selecting reversed items base on the number of the atom.
 
 ## Chapter 12 Take Cover {#chapter-12-take-cover}
 
-In this chapter we reform previous function to separate values. There has been a
-issue left since we introduced lambda expressions and recursions: redundancy.
+In the last chapter we have seen again how to separately define and call
+recursive functions, with some designing improvement for efficiency. There
+is a natural thinking out of this: what if we combine them together? Actually we
+have seen combining functions with lambda expression and recursion in The Little Schemer, such as currying, Y
+combinator.
+
+But there is an issue haven't been mentioned: redundancy.
 Lots of similar parameters are called/updated with unnecessary amount of
 times, which are at expense of time, space or reading complexity. In
 next few chapters, we will see a few different ways designed to alleviate this issue.
 
 The first way is to use `(letrec)` with lexical closure to wrap function
-in function to make the outer function with clearer shape.
+in function to make the outer function have clearer shape.
 
 Let's firstly
 review Y combinator:
@@ -560,13 +569,17 @@ And `(sum-of-prefixes)` can be rewrite like this:
 The applying procedures for the first steps are:
 ![](/img/seasoned102.png)
 
+---
+
 
 ## Chapter 13  Hop, Skip, and Jump {#chapter-13-hop-skip-and-jump}
 
 We are continuing the story of `(letrec)`. In the last part of chapter 12, from the application of
 `(two-in-a-row letrec)` and `(two-in-a-row-2)` we have seen that the letrec
 function can be defined and called anywhere in any function. The purpose is no
-longer limited to "separating changing and unchanged" variables.
+longer limited to "separating changing and unchanged" variables. It is true that
+the letrec closure can be used anywhere in function for any relevant needs.
+Let's see more examples.
 
 We were told that set is a list
 consists of **non-repeated** atoms. Remember we defined two functions for sets:
@@ -615,12 +628,10 @@ This is old friend `(intersectall)`:
 {{< /highlight >}}
 
 The old friend `(intersectall)` works like this: the input can be classified to
-possibilities that: list with zero set, one set and more than one sets. We
-assumed the input "list of sets" is not null so last time we only prepared
-function for list with one or more sets. For one set case, the `(null? (cdr
-lset))` identify and return itself as common atoms; for two or more sets, the
-function would work properly with function for `(else)` predicate. We can fix
-the condition we ignored last time with `(letrec)` by adding line of predicate
+possibilities that: list containing zero set, one set or more than one sets. In
+the Little Schemer we assumed the input is not null so last time we only prepared
+function for list with one or more sets. We can fix
+the condition ignored by us at the last time: adding another line of predicate
 for pure null input:
 
 {{< highlight scheme >}}
@@ -634,16 +645,17 @@ for pure null input:
                    (intersectall (cdr lset)))))))
 {{< /highlight >}}
 
-Here is the letrec function of `(intersectall)`. Pay attention that the outer
-parameter has name of _lset_, which is the same with the inner parameter name
-_lset_. This is a coincidence, and the name in A can use something else a
-name holder. The value of this name holder will be substituted by the _lset_ of `(else (A lset))`.
+Here is the letrec function of `(intersectall)`. As we have stressed in last chapter, the outer lambda
+expression's parameter use name _lset_, which is the same with the inner lambda
+expression's parameter name
+_lset_. This is a coincidence, and parameter in A can use any name as a
+name holder, which will be substituted by the _lset_ of `(else (A lset))`.
 
 {{< highlight scheme >}}
 (define intersectall-letrec
   (lambda (lset)
     (letrec
-      ((A (lambda (lset)
+      ((A (lambda (lset) ;<-there is one more pair of parenthesis for more function
             (cond
               ((null? (cdr lset)) (car lset))
               (else
@@ -656,27 +668,34 @@ name holder. The value of this name holder will be substituted by the _lset_ of 
 (intersectall-letrec '((a b c d) (b c d e) (c d e f))) ; '(c d)
 {{< /highlight >}}
 
-The `(null? (cdr lset)` works as terminating condition in first commandment,
-which will be use every time in the inner recursion. However, the `(null? lset)`
-only exam once in the very beginning. Therefore we can separate them with
-calling A inside.
+The `(null? lset)` works as terminating condition as stated by the first commandment,
+which will be use every time in the inner recursion, and only checks once at the
+very beginning. We wrap the remaining old friend in `(A)` and call it.
 
-However for the new function, we can still find efficiency issue: we notice that
-the whole process has to be ended by terminating condition when there is an
-input for `(intersect)` becoming null, and the it has to happen with `(cdr lat)`
-input. For case `((intersectall-letrec '((a b c
-d) () (c d e f))))` we do not need to run some recursions to realize that the
+However there is still an inefficiency issue: the
+terminating condition appears too late. The terminating condition is hidden in A
+, and it won't be triggered until the `(cdr lat)` become null.
+
+For example:
+
+{{< highlight scheme >}}
+(intersectall-letrec '((a b c d) () (c d e f)))
+{{< /highlight >}}
+
+We do not need to run function to realize that the
 intersection is null. But in DrRacket if we use stepper we can set it takes 73
 steps for the function to finish: the input list is peeled layer by layer, until
-the function use A to hit #t in `(A (cdr lset))`
-with the LAST set `'(c d e f)`, and it has to finish all the continuation function. So it would be more efficient if we can add a predicate
+the function `(null? (cdr lset)` in `(A)` receives the LAST set `'(c d e f)`,
+and it has to finish computing all the remembered value `(intersect (intersect (intersect..)))`.
+
+So it would be more efficient if we can add a predicate
 inside, testing null `(car lset)` to terminate immediately. That's where we need `(letcc)`:
 
 {{< highlight scheme >}}
 ;we prefer this version than the below one
 (define intersectall
   (lambda (lset)
-   (letcc (hop)                       ;<- add new function here
+    (letcc hop                       ;<- add new function here
         (letrec
           ((A (lambda (lset)
                 (cond
@@ -717,23 +736,27 @@ triggering `(A lset)`. The first round of loop wouldn't trigger `(hop)` because
 `(car lset)` is `(3 mangos and)` not null. But the second loop will trigger the
 `(hop)` because `(car (() (c d e f))` is true. The `(hop)` basically halts the
 whole function and return `('())` for this case, regardless we have remembered `(intersect
-(a b c d) something)` to run. We only need to find the results of `(letcc hop
-M)`, which in this case is `(letcc hop (quote ())))`.
+(a b c d) something)` to run. We only need to find the results of `(letcc hop M)`, which in this case is `(letcc hop (quote ())))`.
+
+Long story short, so far we design a function that would stop the first
+moment it detects a null set in list.
 
 So `(letcc)` can be used to return value abruptly and promptly.
 
 We are continuing improve the functions, because we notice something inefficient
-again with a slight different example:
+again. We know the `(intersectall)` takes intersection of all sets in a list, by
+`(intersect)` two sets once in turn. That means any two cases has no intersection
+should make the whole process return null immediately.
 
 {{< highlight scheme >}}
 (intersectall-letcc '((a b c d) (d e) (x y z)))
 {{< /highlight >}}
 
-The procedure is very easy: we take intersection between the third and
-second, then with the first. But we have figured out instantaneously that the
-intersection for `(x y z)` and `(d e)` is `()`. But the current program won't
+For above example we need to take intersection between the third and
+second, then with the first. Ideally a function should instantaneously stop when
+finding the intersection for `(x y z)` and `(d e)` is `()`. But our current program won't
 tell until after running `(intersect)` several times. A feasible (not the best)
-improvement is initially checking the second set in `(intersect)`:
+improvement is to fix `(intersect)`:
 
 {{< highlight scheme >}}
 (define intersect-letrec
@@ -751,18 +774,18 @@ improvement is initially checking the second set in `(intersect)`:
           (else (I set1))))))          ;<- new line
 {{< /highlight >}}
 
-Using this `(intersectall)` is not the best because, it only creates the best
+We say the above is not the best because, it only creates the best
 efficiency for `(intersect)`, not for `(intersectall)` yet. The ideal scenario
 should be once there is a empty set in list, the `(intersectall)` should
-immediately cease and return null list. In another word, we don't just want
-hop happen in one-out-of-two checking, we want hop happen in one-out-of-n
-checking. Writing function like this would solve it:
+immediately cease and return null list. In another word, we want
+hop happening not only in one-out-of-two checking, but also in one-out-of-n
+checking. Writing function like the below one  would solve it. I suggest to
+put the code in DrRacket to see the structure with better highlighting.
 
 {{< highlight scheme >}}
 (define intersectall-ap
   (lambda (lset)
-    (call-with-current-continuation
-      (lambda (hop)
+      (letcc hop
         (letrec
           ((A (lambda (lset)          ;<-intersectall
                 (cond
@@ -786,4 +809,84 @@ checking. Writing function like this would solve it:
           (cond
             ((null? lset) '())
             (else (A lset))))))))
+
+(intersectall-ap '((a b c d) (b c d e) (c d e f))) ;-> '(c d)
 {{< /highlight >}}
+
+Here is how the two functions have evolved to `(intersectall-ap)`:
+
+{{< figure src="/img/seasoned131.png" >}}
+
+---
+
+We have been familiar with more flexible application of `(hop)`. Let's see
+another example. Firstly we rewrite old friend `(rember)` with letrec:
+
+{{< highlight scheme >}}
+(define rember
+  (lambda (a lat)
+    (letrec
+      ((R (lambda (lat)
+            (cond
+              ((null? lat) '())
+              ((eq? (car lat) a) (cdr lat))
+              (else
+                (cons (car lat) (R (cdr lat))))))))
+      (R lat))))
+{{< /highlight >}}
+
+The rember-beyond-first function `(rember)` everything beyond first match:
+
+{{< highlight scheme >}}
+(define rember-beyond-first
+  (lambda (a lat)
+    (letrec
+      ((R (lambda (lat)
+            (cond
+              ((null? lat) '())
+              ((eq? (car lat) a) '())
+              (else
+                (cons (car lat) (R (cdr lat))))))))
+      (R lat))))
+
+(rember-beyond-first
+  'roots
+  '(noodles spaghetti spatzle bean-thread roots potatoes yam others rice))
+;-> '(noodles spaghetti spaghetti bean-thread)
+{{< /highlight >}}
+
+The above function seems easy. It's hard if we want a function that retains everything
+AFTER _a_ in a list. Luckily we have `(skip)` that helps us to realize it by
+tweaking `(rember-beyond-first)` a little:
+
+{{< highlight scheme >}}
+(define rember-upto-last
+  (lambda (a lat)
+      (letcc skip
+        (letrec
+          ((R (lambda (lat)
+                (cond
+                  ((null? lat) '())
+                  ((eq? (car lat) a) (skip (R (cdr lat))))
+                  (else
+                    (cons (car lat) (R (cdr lat))))))))
+          (R lat))))))
+
+(rember-upto-last
+  'roots
+  '(noodles spaghetti spatzle bean-thread roots potatoes yam others rice))
+;-> '(potatoes yam others rice)
+{{< /highlight >}}
+
+The function works similar to `(hop)`: when the function not triggered, we just
+ignore it and run as usual. In the above example, it conses `(noodles spaghetti
+spatzle bean-thread)` until `(roots)` is input. The `(skip (R (cdr lat))` means
+we can eliminate all the pending conses and determine the value of `(letcc skip
+(R (cdr lat)))` where _lat_ is `(roots potatoes yam others rice)`. The remaining
+list doesn't contain _roots_, therefore it will be traversed and returns `(roots
+potatoes yam others rice)`.
+
+---
+
+
+## chapter 14 {#chapter-14}
