@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hugo on Katherine&#39;s Blog</title>
+    <link>http://sheishe.xyz/tags/hugo/</link>
+    <description>Recent content in Hugo on Katherine&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 26 Jul 2019 01:02:00 +0100</lastBuildDate>
+    
+	<atom:link href="http://sheishe.xyz/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hugo Blogging with Wercker Auto Build &amp; Deployment 【用 Wercker 自动部署网站】</title>
+      <link>http://sheishe.xyz/post/hugo-blogging-with-wercker-auto-build-deployment/</link>
+      <pubDate>Fri, 26 Jul 2019 01:02:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/hugo-blogging-with-wercker-auto-build-deployment/</guid>
+      <description>The automated static website generators (e.g., Octopress, Hexo, and Hugo) have made website building and maintaining way more relaxed than before. The workflow has been simplified to: write and save markdown &amp;ndash; preview on the localhost 1313 &amp;ndash; generate the ~/public (HTML) file &amp;ndash; push to a remote server (GitHub) &amp;ndash; backup source code. If one considers all technicalities, there are still many questions worth discussing to make this process</description>
+    </item>
+    
+    <item>
+      <title>Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】</title>
+      <link>http://sheishe.xyz/post/hugo-blogging-with-ox-hugo/</link>
+      <pubDate>Tue, 16 Jul 2019 01:03:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/hugo-blogging-with-ox-hugo/</guid>
+      <description>There have been many excellent articles talking about using ox-hugo to help with efficient blog-writing in Emacs/Spacemacs. I read these articles carefully several times and feel pretty confident using ox-hugo, so I would strongly recommend you give them a look: This is true for many cases, but no, not for Hugo or ox-hugo. Ox-hugo has fantastic official documentation! (Mr.Kaushal I know you occasionally search ox-hugo related articles in all different</description>
+    </item>
+    
+  </channel>
+</rss>

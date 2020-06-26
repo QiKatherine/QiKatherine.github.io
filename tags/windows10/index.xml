@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows10 on Katherine&#39;s Blog</title>
+    <link>http://sheishe.xyz/tags/windows10/</link>
+    <description>Recent content in Windows10 on Katherine&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 13 Sep 2019 01:34:00 +0100</lastBuildDate>
+    
+	<atom:link href="http://sheishe.xyz/tags/windows10/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using aspell in windows 10 and Emacs 26 above 【拼写检查 Emacs26 使用更新版 aspell】</title>
+      <link>http://sheishe.xyz/post/using-aspell-in-windows-10-and-emacs-26-above/</link>
+      <pubDate>Fri, 13 Sep 2019 01:34:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/using-aspell-in-windows-10-and-emacs-26-above/</guid>
+      <description>I just realized that my ispell doesn&amp;rsquo;t work after updating my Emacs to 27.0 version. I kept getting errors that: aspell release 0.60 or greater is required flyspell - aspell with emacs 26.1 on ms windows - Emacs Stack Exchange - https://emacs.stackexchange.com/ The above discussion shows that by the time being of emacs 26 released, there was no binary aspell in windows OS, so the workaround was to use hunspell.</description>
+    </item>
+    
+    <item>
+      <title>Best workaround to use Emacs in MS Windows 【在 MS windows 中使用 Emacs 的最佳解决方案】</title>
+      <link>http://sheishe.xyz/post/best-workaround-to-use-emacs-in-ms-windows/</link>
+      <pubDate>Fri, 16 Aug 2019 01:03:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/best-workaround-to-use-emacs-in-ms-windows/</guid>
+      <description>Background Due to the working environment limitation, I occasionally have to use MS windows system (and therefore Emacs for Windows). But some similar users and I have constantly found cases where Emacs is significantly relying on *unix system. So far, my experience is that compiling Emacs in msys2 has been a best (maybe) workaround in this situation. If you this is relatable to you, you might want to give it</description>
+    </item>
+    
+  </channel>
+</rss>

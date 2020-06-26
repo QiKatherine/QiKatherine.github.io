@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>org-mode on Katherine&#39;s Blog</title>
+    <link>http://sheishe.xyz/tags/org-mode/</link>
+    <description>Recent content in org-mode on Katherine&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 17 Sep 2019 12:53:00 +0100</lastBuildDate>
+    
+	<atom:link href="http://sheishe.xyz/tags/org-mode/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Overview: Emacs line truncation in text editing 【Emacs org 换行/对齐/排版  汇总指南】</title>
+      <link>http://sheishe.xyz/post/emacs-line-truncation-in-text-editing-mode/</link>
+      <pubDate>Tue, 17 Sep 2019 12:53:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/emacs-line-truncation-in-text-editing-mode/</guid>
+      <description>The text line (with line number) in Emacs, is called logical line . When a logical line gets too long in typing window, Emacs provides two distinguish solutions: line truncation and line wrapping . Common approaches Here is the link of technicalities of the solutions: Truncation - GNU Emacs Lisp Reference Manual - https://www.gnu.org/ I draw a more straightforward figure: • The breaked or wrapped line is refered as screen</description>
+    </item>
+    
+    <item>
+      <title>Org-reveal: solution for math and code highlighting in presentation slide 【在 ppt 中展示代码高亮，数学公式的优秀解决方案】</title>
+      <link>http://sheishe.xyz/post/org-reveal-solution-for-math-and-code-highlighting-in-presentation-slide/</link>
+      <pubDate>Fri, 23 Aug 2019 22:50:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/org-reveal-solution-for-math-and-code-highlighting-in-presentation-slide/</guid>
+      <description>I have used flash card for remembering new things for years. Before using software like org-drill or Anki, I was pretty much putting everything in slides, printing on papers and cutting it into a portable sized card and carried in my pocket. So I have been exploring an ultimate solution of perfect formatting for everything. This picture shows what I feel about slides making tools. I always thought math functions</description>
+    </item>
+    
+    <item>
+      <title>Hugo Blogging with Wercker Auto Build &amp; Deployment 【用 Wercker 自动部署网站】</title>
+      <link>http://sheishe.xyz/post/hugo-blogging-with-wercker-auto-build-deployment/</link>
+      <pubDate>Fri, 26 Jul 2019 01:02:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/hugo-blogging-with-wercker-auto-build-deployment/</guid>
+      <description>The automated static website generators (e.g., Octopress, Hexo, and Hugo) have made website building and maintaining way more relaxed than before. The workflow has been simplified to: write and save markdown &amp;ndash; preview on the localhost 1313 &amp;ndash; generate the ~/public (HTML) file &amp;ndash; push to a remote server (GitHub) &amp;ndash; backup source code. If one considers all technicalities, there are still many questions worth discussing to make this process</description>
+    </item>
+    
+  </channel>
+</rss>
