@@ -1,7 +1,7 @@
 +++
 title = "The Seasoned Schemer learning note (1/3)"
 date = 2020-06-14T01:13:00+01:00
-lastmod = 2020-06-25T01:14:01+01:00
+lastmod = 2020-06-26T01:18:06+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -890,3 +890,13 @@ potatoes yam others rice)`.
 
 
 ## chapter 14 {#chapter-14}
+
+So far you must have realized, in addition to using `(letrec letcc)` and `(hop
+skip)` to terminate program, we also leanred an important concept in
+programming: checking judgement and abormality processing. This is the major
+concept in all programming: how can we design and improve a function which
+considers all possible conditions while gurantees the efficiency at the same
+time?
+
+There is no one-for-all instruction for perfect program, but we can gain more
+and more insights by seeing multiple examples.

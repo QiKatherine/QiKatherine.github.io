@@ -4496,5 +4496,18 @@ we can eliminate all the pending conses and determine the value of =(letcc skip
 (R (cdr lat)))= where /lat/ is =(roots potatoes yam others rice)=. The remaining
 list doesn't contain /roots/, therefore it will be traversed and returns =(roots
 potatoes yam others rice)=.
+
 -----
- *** chapter 14
+*** chapter 14
+So far you must have realized, in addition to using =(letrec letcc)= and =(hop
+skip)= to terminate program, we also leanred an important concept in
+programming: checking judgement and abormality processing. This is the major
+concept in all programming: how can we design and improve a function which
+considers all possible conditions while gurantees the efficiency at the same
+time?
+
+There is no one-for-all instruction for perfect program, but we can gain more
+and more insights by seeing multiple examples.
+
+
+
