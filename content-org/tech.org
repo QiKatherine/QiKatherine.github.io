@@ -4507,7 +4507,51 @@ considers all possible conditions while gurantees the efficiency at the same
 time?
 
 There is no one-for-all instruction for perfect program, but we can gain more
-and more insights by seeing multiple examples.
+and more insights by seeing improving an examples.
 
+There is old friend =(left most)=:
+#+begin_src scheme
+(define leftmost
+  (lambda (l)
+    (cond
+      ((atom? (car l)) (car l))
+      (else (leftmost (car l))))))
+
+(leftmost '(((a) b) (c d))) ;-> 'a
+#+end_src
+
+But it won't work for input like =((()) a b)= because we didn't prepate for the
+null input case. In addtion, we also want it to skip the null and return
+meaningful atom. Let's improve it:
+#+begin_src scheme
+(define leftmost-fixed
+  (lambda (l)
+    (cond
+      ((null? l) '())
+      ((atom? (car l)) (car l))
+      (else
+        (cond
+          ((atom? (leftmost-fixed (car l)))
+           (leftmost-fixed (car l)))
+          (else (leftmost-fixed (cdr l))))))))
+
+(leftmost-fixed '(((() x) ())))     ;-> 'x
+#+end_src
+
+We rewrite this by introducing =(let)= who helps define local function within functions.
+#+begin_src scheme
+(define leftmost-let
+  (lambda (l)
+    (cond
+      ((null? l) '())
+      ((atom? (car l)) (car l))
+      (else
+        (let ((a (leftmost-let (car l))))
+          (cond
+            ((atom? a) a)
+            (else (leftmost-let (cdr l)))))))))
+
+(leftmost-let '(((y) b) (c d)))   ;-> 'y
+#+end_src
 
 

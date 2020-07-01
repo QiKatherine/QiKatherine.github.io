@@ -1,7 +1,7 @@
 +++
 title = "The Seasoned Schemer learning note (1/3)"
 date = 2020-06-14T01:13:00+01:00
-lastmod = 2020-06-26T01:18:06+01:00
+lastmod = 2020-07-01T03:07:13+01:00
 categories = ["TECH"]
 draft = false
 image = "img/111.jpg"
@@ -899,4 +899,77 @@ considers all possible conditions while gurantees the efficiency at the same
 time?
 
 There is no one-for-all instruction for perfect program, but we can gain more
-and more insights by seeing multiple examples.
+and more insights by seeing improving an examples.
+
+There is old friend `(left most)`:
+
+{{< highlight scheme >}}
+(define leftmost
+  (lambda (l)
+    (cond
+      ((atom? (car l)) (car l))
+      (else (leftmost (car l))))))
+
+(leftmost '(((a) b) (c d))) ;-> 'a
+{{< /highlight >}}
+
+But it won't work for input like `((()) a b)` because we didn't prepate for the
+null input case. In addtion, we also want it to skip the null and return
+meaningful atom. Let's improve it:
+
+{{< highlight scheme >}}
+(define leftmost-fixed
+  (lambda (l)
+    (cond
+      ((null? l) '())
+      ((atom? (car l)) (car l))
+      (else
+        (cond
+          ((atom? (leftmost-fixed (car l)))
+           (leftmost-fixed (car l)))
+          (else (leftmost-fixed (cdr l))))))))
+
+(leftmost-fixed '(((() x) ())))     ;-> 'x
+{{< /highlight >}}
+
+We rewrite this by introducing `(let)` who helps define local function within functions.
+
+{{< highlight scheme >}}
+(define leftmost-let
+  (lambda (l)
+    (cond
+      ((null? l) '())
+      ((atom? (car l)) (car l))
+      (else
+        (let ((a (leftmost-let (car l))))
+          (cond
+            ((atom? a) a)
+            (else (leftmost-let (cdr l)))))))))
+
+(leftmost-let '(((y) b) (c d)))   ;-> 'y
+{{< /highlight >}}
+
+Similarly, we define an improved version of `(rember a lat)` that removes the leftmost occurrence of _a_ in _lat_.
+
+{{< highlight scheme >}}
+(define rember1*
+  (lambda (a l)
+    (cond
+      ((null? l) '())
+      ((atom? (car l))
+       (cond
+         ((eq? (car l) a) (cdr l))
+         (else
+           (cons (car l) (rember1* a (cdr l))))))
+      (else
+        (cond
+          ((equal? (rember1* a (car l)) (car l)) ; if the list with 'a' removed doesn't change
+           (cons (car l) (rember1* a (cdr l))))  ; then recurse
+          (else
+            (cons (rember1* a (car l)) (cdr l)))))))) ; otherwise remove 'a'
+
+(rember1*
+  'salad
+  '((Swedish rye) (French (mustard salad turkey)) salad))
+;-> '((Swedish rye) (French (mustard turkey)) salad)
+{{< /highlight >}}

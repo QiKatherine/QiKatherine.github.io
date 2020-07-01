@@ -1,7 +1,7 @@
 +++
 title = "Emacs dotfile loading mechanism in Windows system"
 date = 2020-05-11T02:29:00+01:00
-lastmod = 2020-06-26T01:18:05+01:00
+lastmod = 2020-07-01T03:07:13+01:00
 draft = false
 image = "img/111.jpg"
 +++
