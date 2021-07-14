@@ -6,10 +6,20 @@
     <description>Recent content in statistics on Katherine&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 15 Oct 2019 02:34:00 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 09 Mar 2020 00:07:00 +0000</lastBuildDate>
     
 	<atom:link href="http://sheishe.xyz/tags/statistics/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Detailed key proof of ANOVA test: SST=SSE&#43;SSB</title>
+      <link>http://sheishe.xyz/post/dd/</link>
+      <pubDate>Mon, 09 Mar 2020 00:07:00 +0000</pubDate>
+      
+      <guid>http://sheishe.xyz/post/dd/</guid>
+      <description>Background Note: the aim of this article is to provide a detailed proof of ANOVA foundation with full notation, not to explain ANOVA. More explaintation can be found in the Youtube link.A
+The ANOVA test is to use (rigorous mathmatical based) calculation to infer whether there are differences in performance/data for different groups/treatment. The ANOVA compares the within group variance (SSE:sum of squares within group) and between group variance (SSB: sum of squares between groups).</description>
+    </item>
     
     <item>
       <title>Deduction of Poisson process 【泊松过程推导】</title>

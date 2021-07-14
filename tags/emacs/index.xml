@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>Using Anki-editor to build flashcard in Emacs Org-mode 【用 Anki-editor 在 Emacs Org-mode 中生成复杂记忆卡片】</title>
+      <link>http://sheishe.xyz/post/using-anki-editor-to-build-flashcard-in-org-mode/</link>
+      <pubDate>Mon, 30 Sep 2019 23:54:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/using-anki-editor-to-build-flashcard-in-org-mode/</guid>
+      <description>1. Anki One of a major activity in my daily work is to learn new things. I have rely heavily on paper flashcard which gives me most flexibility on keeping tables, code, math functions etc. But the shortcoming is pretty obvious: there is no scientific reviewing cycle, and it&amp;rsquo;s getting cumbersome to maintain and carry with. Then I dived into different softwares and discovered Anki has been exceled in every</description>
+    </item>
+    
+    <item>
       <title>Overview: Emacs line truncation in text editing 【Emacs org 换行/对齐/排版  汇总指南】</title>
       <link>http://sheishe.xyz/post/emacs-line-truncation-in-text-editing-mode/</link>
       <pubDate>Tue, 17 Sep 2019 12:53:00 +0100</pubDate>
@@ -39,7 +48,7 @@
     </item>
     
     <item>
-      <title>Mastering emacs in 21 days learning notes - 1 【21 天学会 Emacs 笔记 - 1】</title>
+      <title>Essentials in vanilla Emacs 【Vanilla Emacs 精华简介】</title>
       <link>http://sheishe.xyz/post/mastering-emacs-in-21-days-learning-notes-day/</link>
       <pubDate>Sun, 25 Aug 2019 23:51:00 +0100</pubDate>
       

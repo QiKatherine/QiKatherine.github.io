@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Katherine&#39;s Blog">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="http://sheishe.xyz/img/vivi.jpg">
+    <meta property="twitter:image" content="http://sheishe.xyz/img/vivi.jpg" />
+    
+
+    
+    <meta name="title" content="The Seasoned Schemer learning note (1/3)" />
+    <meta property="og:title" content="The Seasoned Schemer learning note (1/3)" />
+    <meta property="twitter:title" content="The Seasoned Schemer learning note (1/3)" />
+    
+
+    
+    <meta name="description" content="Katherine He coder statistician econometrician machine learning">
+    <meta property="og:description" content="Katherine He coder statistician econometrician machine learning" />
+    <meta property="twitter:description" content="Katherine He coder statistician econometrician machine learning" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content=" ">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>The Seasoned Schemer learning note (1/3)-Katherine&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/the-seasoned-schemer/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+	
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+	
+	
+<script src="http://sheishe.xyz/js/mathjax-config.js"></script>
+ 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML"></script>
+
+
+
+</head>
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Katherine&#39;s Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/math">math</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/tech">tech</a>
+                    </li>
+                    
+                    
+		    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search">SEARCH <img src="/img/search.png" height="15" style="cursor: pointer;" alt="Search"></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/111.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>The Seasoned Schemer learning note (1/3)</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+			Posted by 
+			
+		            Katherine&#39;s Blog
+			 
+			on 
+			Sunday, June 14, 2020
+                        
+                            <span id="/post/the-seasoned-schemer/" class="leancloud_visitors meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span> 
+    </span>
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span class="leancloud-visitors-count"></span>
+</span>
+
+
+
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+
+<script>
+	AV.initialize("", "");
+</script>
+
+<script type="text/javascript">
+function showTime(Counter) {
+    var query = new AV.Query(Counter);
+    var entries = [];
+    var $visitors = $(".leancloud_visitors");
+
+    $visitors.each(function() {
+        entries.push($(this).attr("id").trim());
+    });
+
+    query.containedIn('url', entries);
+    query.find()
+        .done(function(results) {
+            var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+            var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+
+            
+            
+            
+            
+
+            for (var i = 0; i < results.length; i++) {
+                var item = results[i];
+                var url = item.get('url');
+                var time = item.get('time');
+                var element = document.getElementById(url);
+
+                $(element).find(COUNT_CONTAINER_REF).text(time);
+            }
+            for (var i = 0; i < entries.length; i++) {
+                var url = entries[i];
+                var element = document.getElementById(url);
+                var countSpan = $(element).find(COUNT_CONTAINER_REF);
+                if (countSpan.text() == '') {
+                    var oldCountSpan = $(element).find(OLD_COUNT_CONTAINER_REF).text();
+                    if(oldCountSpan!=''){
+                        countSpan.text(0+parseInt(oldCountSpan));
+                    }else{
+                        countSpan.text(0);          
+                    }
+                }
+            }
+        })
+        .fail(function(object, error) {
+            console.log("Error: " + error.code + " " + error.message);
+        });
+}
+
+function addCount(Counter) {
+    var $visitors = $(".leancloud_visitors");
+    var url = $visitors.attr('id').trim();
+    var title = $visitors.attr('data-flag-title').trim();
+    var query = new AV.Query(Counter);
+
+    query.equalTo("url", url);
+    query.find({
+        success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment("time");
+                counter.save(null, {
+                    success: function(counter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+                var newcounter = new Counter();
+                 
+                var acl = new AV.ACL();
+                acl.setPublicReadAccess(true);
+                acl.setPublicWriteAccess(true);
+                newcounter.setACL(acl);
+                 
+                newcounter.set("title", title);
+                newcounter.set("url", url);
+                var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+                var $element = $(document.getElementById(url));
+                var oldCountSpan = $element.find(OLD_COUNT_CONTAINER_REF).text();
+                if(oldCountSpan!=''){
+                    newcounter.set("time", parseInt(oldCountSpan)+1);
+                }else{
+ 	                    newcounter.set("time",  1);
+                }
+                newcounter.save(null, {
+                    success: function(newcounter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                    },
+                    error: function(newcounter, error) {
+                        console.log('Failed to create');
+                    }
+                });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + " " + error.message);
+        }
+    });
+}
+$(function() {
+    var Counter = AV.Object.extend("Counter");
+    
+    
+    if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+    } else {
+        showTime(Counter);
+    }
+});
+</script>
+
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>TOC</h2>
+                </header>
+                <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#chapter-11-welcome-back-to-the-show">Chapter 11 Welcome Back to the Show</a></li>
+<li><a href="#chapter-12-take-cover">Chapter 12 Take Cover</a></li>
+<li><a href="#chapter-13-hop-skip-and-jump">Chapter 13  Hop, Skip, and Jump</a></li>
+<li><a href="#chapter-14">chapter 14</a></li>
+</ul></li>
+</ul>
+</nav>
+                
+                
+
+<p>This is learning note of The Seasoned Schemer, the code of my note is from here
+with edition:</p>
+
+<p><a href="https://github.com/pkrumins/the-seasoned-schemer">pkrumins/the-seasoned-schemer: All the Scheme code examples from the book &ldquo;The Seasoned Schemer&rdquo;</a></p>
+
+<p>This book is continuous to book The Little Schemer. The notes can be found
+in previous articles.</p>
+
+<h2 id="chapter-11-welcome-back-to-the-show">Chapter 11 Welcome Back to the Show</h2>
+
+<p>Firstly, we begin by defining function <code>(two-in-a-row?)</code> to test whether there are two
+identical atoms in a row in a list. An initial trial is to use a function
+<code>(is-first?)</code> that checks if the first and the second atom in the list are equal. If not, the <code>(or)</code> predicate will make sure the
+function recursively checking the rest of list until there are two identical atoms appear.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">is-first?</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) #f)
+      (<span style="color:#ff79c6">else </span>(<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">a</span>)))))
+
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">two-in-a-row?</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) #f)
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#ff79c6">or </span>(<span style="color:#50fa7b">is-first?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))
+            (<span style="color:#50fa7b">two-in-a-row?</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))
+
+(<span style="color:#50fa7b">two-in-a-row?</span> <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">Italian</span> <span style="color:#8be9fd;font-style:italic">sardines</span> <span style="color:#8be9fd;font-style:italic">sardines</span> <span style="color:#8be9fd;font-style:italic">spaghetti</span> <span style="color:#8be9fd;font-style:italic">parsley</span>)) <span style="color:#6272a4">;-&gt; true</span></code></pre></div>
+
+<p>There are other ways to realize the same functionality. A slight issue of the above one
+is that, it is the <code>(or two-in-a-row?)</code> get to decide termination.</p>
+
+<p>For example cases
+<code>(two-in-a-row? '(a))</code> and <code>(two-in-a-row? '(a b))</code> both print #f. For the first
+case the function does not immediately terminate - even though the <code>(is-first? a
+'())</code> returns #f, the <code>(or
+two-in-a-row?)</code> still gets called for at least another round. The same thing
+happen in the latter example in the second round of <code>(two-in-a-row?)</code>. That means the <code>(or)</code>
+design is systematically less efficient - in this chapter, all we will learn is to make sure
+the program as efficient as possible.
+So we can rewrite <code>(is-first?)</code> to make it immediately terminate for empty <em>lat</em>, like this:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">is-first-b?</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) #f)
+      (<span style="color:#ff79c6">else </span>(<span style="color:#ff79c6">or </span>(<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">a</span>)
+                (<span style="color:#50fa7b">two-in-a-row-2?</span> <span style="color:#8be9fd;font-style:italic">lat</span>))))))
+
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">two-in-a-row-2?</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) #f)
+      (<span style="color:#50fa7b">else</span>
+       (<span style="color:#50fa7b">is-first-b?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))))
+
+<span style="color:#6272a4">;(two-in-a-row-2? &#39;(Italian)) will terminate in the first predicate of is-first-b?</span></code></pre></div>
+
+<p>Meanwhile we notice that the <code>(is-first-b?)</code> has a very similar procedure to
+<code>(two-in-a-row-2?)</code>. A small change can make <code>(is-first-b?)</code> very similar to its
+master function - so calling two functions is almost like recursively calling one. The
+core <code>(is-first-b?)</code> uses intermediate argument <code>(a)</code> to save the first element
+for comparison, using <code>(preceding)</code> is identical to using <code>(a)</code>.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;rewrite is-first-b?</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">two-in-a-row-b?</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">preceding</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) #f)
+      (<span style="color:#ff79c6">else </span>(<span style="color:#ff79c6">or </span>(<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">preceding</span>)
+                (<span style="color:#50fa7b">two-in-a-row-b?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))
+
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">two-in-a-row-final?</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) #f)
+      (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">two-in-a-row-b?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))))
+<span style="color:#6272a4">;(two-in-a-row-final? &#39;(Italian sardines sardines spaghetti parsley)) -&gt; true</span></code></pre></div>
+
+<p>Notice: although they are similar, the <code>(two-in-a-row-b?)</code> has
+two arguments whereas the <code>(two-in-a-row-final?)</code> only has one argument. In next chapter, we will see
+how to use <code>(letrec)</code> to isolate the definition of <code>(two-in-a-row-b?)</code>, so that
+we can wrap and use it as a black box.</p>
+
+<p>Another function stores step-by step sums of a tuple. It has similar procedure
+like the above, recursively operating the first and second atom of a list, with
+a changing intermediate argument saving the by-product for every step.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">sum-of-prefixes-b</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">sonssf</span> <span style="color:#8be9fd;font-style:italic">tup</span>)     <span style="color:#6272a4">; sonssf stands for &#39;sum of numbers seen so far&#39;</span>
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">tup</span>) <span style="color:#ff79c6">&#39;</span>())
+      (<span style="color:#ff79c6">else </span>(<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">+ </span><span style="color:#8be9fd;font-style:italic">sonssf</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">tup</span>))
+                  (<span style="color:#50fa7b">sum-of-prefixes-b</span>
+                   (<span style="color:#8be9fd;font-style:italic">+ </span><span style="color:#8be9fd;font-style:italic">sonssf</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">tup</span>))
+                   (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">tup</span>)))))))
+
+<span style="color:#6272a4">; sum-of-prefixes function finds the running sum of a list of numbers</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">sum-of-prefixes</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">tup</span>)
+    (<span style="color:#50fa7b">sum-of-prefixes-b</span> <span style="color:#bd93f9">0</span> <span style="color:#8be9fd;font-style:italic">tup</span>)))
+
+<span style="color:#6272a4">;(sum-of-prefixes &#39;(2 1 9 17 0)) -&gt; &#39;(2 3 12 29 29)</span></code></pre></div>
+
+<p>And another case of selecting reversed items base on the number of the atom. So
+far, we have seen enough examples of the eleventh commandment: use additional arguments when a function needs to know what the other arguments to the function have been like so far.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">scramble-b</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">tup</span> <span style="color:#8be9fd;font-style:italic">rev-pre</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">tup</span>) <span style="color:#ff79c6">&#39;</span>())
+      (<span style="color:#50fa7b">else</span>
+       (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#50fa7b">pick</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">tup</span>) (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">tup</span>) <span style="color:#8be9fd;font-style:italic">rev-pre</span>))
+             (<span style="color:#50fa7b">scramble-b</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">tup</span>)
+                         (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">tup</span>) <span style="color:#8be9fd;font-style:italic">rev-pre</span>)))))))
+
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">scramble</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">tup</span>)
+    (<span style="color:#50fa7b">scramble-b</span> <span style="color:#8be9fd;font-style:italic">tup</span> <span style="color:#ff79c6">&#39;</span>())))
+
+<span style="color:#6272a4">; Examples of scramble</span>
+(<span style="color:#50fa7b">scramble</span> <span style="color:#ff79c6">&#39;</span>(<span style="color:#bd93f9">1</span> <span style="color:#bd93f9">1</span> <span style="color:#bd93f9">1</span> <span style="color:#bd93f9">3</span> <span style="color:#bd93f9">4</span> <span style="color:#bd93f9">2</span> <span style="color:#bd93f9">1</span> <span style="color:#bd93f9">1</span> <span style="color:#bd93f9">9</span> <span style="color:#bd93f9">2</span>))       <span style="color:#6272a4">; &#39;(1 1 1 1 1 4 1 1 1 9)</span>
+(<span style="color:#50fa7b">scramble</span> <span style="color:#ff79c6">&#39;</span>(<span style="color:#bd93f9">1</span> <span style="color:#bd93f9">2</span> <span style="color:#bd93f9">3</span> <span style="color:#bd93f9">4</span> <span style="color:#bd93f9">5</span> <span style="color:#bd93f9">6</span> <span style="color:#bd93f9">7</span> <span style="color:#bd93f9">8</span> <span style="color:#bd93f9">9</span>))         <span style="color:#6272a4">; &#39;(1 1 1 1 1 1 1 1 1)</span>
+(<span style="color:#50fa7b">scramble</span> <span style="color:#ff79c6">&#39;</span>(<span style="color:#bd93f9">1</span> <span style="color:#bd93f9">2</span> <span style="color:#bd93f9">3</span> <span style="color:#bd93f9">1</span> <span style="color:#bd93f9">2</span> <span style="color:#bd93f9">3</span> <span style="color:#bd93f9">4</span> <span style="color:#bd93f9">1</span> <span style="color:#bd93f9">8</span> <span style="color:#bd93f9">2</span> <span style="color:#bd93f9">10</span>))    <span style="color:#6272a4">; &#39;(1 1 1 1 1 1 1 1 2 8 2)</span></code></pre></div>
+
+<hr />
+
+<h2 id="chapter-12-take-cover">Chapter 12 Take Cover</h2>
+
+<p>In the last chapter we have seen again how to separately define and call
+recursive functions, with some designing improvement for efficiency. There
+is a natural thinking out of this: what if we combine them together? Actually we
+have seen combining functions with lambda expression and recursion in The Little Schemer, such as currying, Y
+combinator.</p>
+
+<p>But there is an issue haven&rsquo;t been mentioned: redundancy.
+Lots of similar parameters are called/updated with unnecessary amount of
+times, which are at expense of time, space or reading complexity. In
+next few chapters, we will see a few different ways designed to alleviate this issue.</p>
+
+<p>The first way is to use <code>(letrec)</code> with lexical closure to wrap function
+in function to make the outer function have clearer shape.</p>
+
+<p>Let&rsquo;s firstly
+review Y combinator:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;deducted in chapter 9 in The Little Schemer</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">Y</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">le</span>)
+    ((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">f</span>) (<span style="color:#50fa7b">f</span> <span style="color:#8be9fd;font-style:italic">f</span>))
+     (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">f</span>)
+       (<span style="color:#50fa7b">le</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">x</span>) ((<span style="color:#50fa7b">f</span> <span style="color:#8be9fd;font-style:italic">f</span>) <span style="color:#8be9fd;font-style:italic">x</span>)))))))
+
+<span style="color:#6272a4">; An example of using Y-combinator to measure length and applied to &#39;(a b c)</span>
+((<span style="color:#50fa7b">Y</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">length</span>)
+     (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
+       (<span style="color:#50fa7b">cond</span>
+         ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
+         (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">add1</span> (<span style="color:#8be9fd;font-style:italic">length </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))) <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">a</span> <span style="color:#8be9fd;font-style:italic">b</span> <span style="color:#8be9fd;font-style:italic">c</span>))  <span style="color:#6272a4">; produces output 3</span></code></pre></div>
+
+<p>We can use Y combinator to rewrite <code>(multirember)</code> that removes multi-members from a list.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;old friend multirember</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">multirember</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+      ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">a</span>)
+       (<span style="color:#50fa7b">multirember</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">multirember</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))
+
+<span style="color:#6272a4">; No need to pass &#39;a&#39; around in multirember</span>
+<span style="color:#6272a4">; Use Y-combinator not to pass it around</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">multirember</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    ((<span style="color:#50fa7b">Y</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mr</span>)
+          (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span>)
+            (<span style="color:#50fa7b">cond</span>
+              ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+              ((<span style="color:#8be9fd;font-style:italic">eq? </span><span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>)) (<span style="color:#50fa7b">mr</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))
+              (<span style="color:#50fa7b">else</span>
+               (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">mr</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))))))
+     <span style="color:#8be9fd;font-style:italic">lat</span>)))
+
+(<span style="color:#50fa7b">multirember</span> <span style="color:#f1fa8c">&#39;a</span> <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">a</span> <span style="color:#8be9fd;font-style:italic">b</span> <span style="color:#8be9fd;font-style:italic">c</span> <span style="color:#8be9fd;font-style:italic">a</span> <span style="color:#8be9fd;font-style:italic">a</span> <span style="color:#8be9fd;font-style:italic">a</span> <span style="color:#8be9fd;font-style:italic">x</span>)) <span style="color:#6272a4">;-&gt; &#39;(b c x)</span></code></pre></div>
+
+<p>We can see from the above that <code>(multirember)</code> has two arguments - <em>a</em>: the word we
+want to remove; <em>lat</em>: the candidate list. <em>a</em> is contant all the time but
+<em>lat</em> becomes shorter and shorter in every recursion. We re-write <code>(multirember)</code> in the second
+definition by adding another layer to just pass the arguments. The major
+difference is the execution for <code>(eq? and else)</code> predicates, the <code>(mr)</code> get
+called without <em>a</em> as argument anymore.</p>
+
+<p>What is the benefit of doing this? It separates the procedures of applying <em>a</em>
+and <em>lat</em>, making the repetitive procedure <code>(mr)</code> easier for having less argument. You would probably wonder, instead of using Y combinator, what if I use currying learned from The
+Little Schemer to write it, maybe like this?</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">mr</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span>)
+     (<span style="color:#50fa7b">cond</span>
+       ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+            ((<span style="color:#8be9fd;font-style:italic">eq? </span><span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>)) (<span style="color:#50fa7b">mr</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))
+              (<span style="color:#50fa7b">else</span>
+               (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">mr</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))
+
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">multirember</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">mr</span> <span style="color:#8be9fd;font-style:italic">lat</span>)))</code></pre></div>
+
+<p>When we apply it, we would notice problems, with step two result, instead of
+finding <code>(mr)</code> function, the interpreter will firstly substitute <em>a</em> with <em>&lsquo;c</em> and <em>lat</em> with <em>&rsquo;(c d)</em>, which will report error
+because we did not specify <em>a</em> in <code>(multirember)</code>. The third part is procedure we actually want.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;step 1</span>
+(<span style="color:#50fa7b">multirember</span> <span style="color:#f1fa8c">&#39;c</span> <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">c</span> <span style="color:#8be9fd;font-style:italic">d</span>))
+
+<span style="color:#6272a4">;step 2</span>
+((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">mr</span> <span style="color:#8be9fd;font-style:italic">lat</span>)) <span style="color:#f1fa8c">&#39;c</span> <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">c</span> <span style="color:#8be9fd;font-style:italic">d</span>)) <span style="color:#6272a4">;-&gt; error variable &#39;a is not defined</span>
+
+<span style="color:#6272a4">;what we actually want it</span>
+((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    ((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span>)
+     (<span style="color:#50fa7b">cond</span>
+       ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+            ((<span style="color:#8be9fd;font-style:italic">eq? </span><span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>)) (<span style="color:#50fa7b">mr</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))
+              (<span style="color:#50fa7b">else</span>
+               (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">mr</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))
+ <span style="color:#8be9fd;font-style:italic">lat</span>))
+<span style="color:#f1fa8c">&#39;c</span> <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">c</span> <span style="color:#8be9fd;font-style:italic">d</span>))</code></pre></div>
+
+<p>How do we organize code to achieve the function we want? The difference between the
+right and wrong function is holding the argument substitution until after applying
+the <code>(mr)</code> function. Apart from using layer by layer lambda functions, we can use <code>(letrec)</code> to define:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">multirember-letrec</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    ((<span style="color:#50fa7b">letrec</span>
+       ((<span style="color:#50fa7b">mr</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span>)
+              (<span style="color:#50fa7b">cond</span>
+                ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+                ((<span style="color:#8be9fd;font-style:italic">eq? </span><span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>)) (<span style="color:#50fa7b">mr</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))
+                (<span style="color:#50fa7b">else</span>
+                  (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">mr</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))))))
+       <span style="color:#8be9fd;font-style:italic">mr</span>)
+     <span style="color:#8be9fd;font-style:italic">lat</span>)))
+
+(<span style="color:#50fa7b">multirember-letrec</span> <span style="color:#f1fa8c">&#39;apple</span> <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">apple</span> <span style="color:#8be9fd;font-style:italic">bbb</span>)) <span style="color:#6272a4">;-&gt; &#39;(bbb)</span></code></pre></div>
+
+<p>As the it says in the book, the implementation of <code>(lambda (a lat))</code> is
+equal to calling <code>((letrec ((mr..)) mr) lat)</code>. We can put the
+above code in DrRacket see exactly how <code>(letrec)</code> part is called:
+<img src="/img/seasoned11.png" alt="" /></p>
+
+<p>Here are more information about the concept of <code>(letrec)</code>:</p>
+
+<p><a href="https://docs.racket-lang.org/reference/let.html">3.9 Local Binding: let, let*, letrec, &hellip;</a></p>
+
+<p><a href="https://ds26gte.github.io/tyscheme/index-Z-H-8.html">Teach Yourself Scheme in Fixnum Days</a></p>
+
+<p>We slightly adding a bit syntax sugar, changing the <code>((letrec ((mr..)) mr) lat)</code> by moving the <em>lat</em> inside as
+<code>(letrec ((mr..)) (mr lat))</code>:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">multirember-letrec</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">letrec</span>
+       ((<span style="color:#50fa7b">mr</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span>)
+              (<span style="color:#50fa7b">cond</span>
+                ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+                ((<span style="color:#8be9fd;font-style:italic">eq? </span><span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>)) (<span style="color:#50fa7b">mr</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))
+                (<span style="color:#50fa7b">else</span>
+                  (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">mr</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))))))
+       (<span style="color:#50fa7b">mr</span> <span style="color:#8be9fd;font-style:italic">lat</span>))))
+
+(<span style="color:#50fa7b">multirember-letrec</span> <span style="color:#f1fa8c">&#39;apple</span> <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">apple</span> <span style="color:#8be9fd;font-style:italic">bbb</span>))</code></pre></div>
+
+<p>By this function we successfully achieve the function we want without error as
+above. With the syntax sugar, the function is very easy to read: we are just
+using <code>(letrec)</code> to define a local recursive function that knows the definition
+of <em>a</em>, which is called naming part. Then we implement the function to a list <em>lat</em>,
+which is called valuing part.</p>
+
+<p>Of course you could always use traditional, old friend one piece <code>(multirember)</code>. The reason we have
+to explore a correct way to call compound function to define it, is to isolate every part in
+the future so that we could define more versatile functions.</p>
+
+<p>That&rsquo;s a naming with valuing procedure, this function can also be used to
+produce functions - if we isolate the predicate part with a function, we can procedure different types of
+functions. We have seen this in Y combinator section - we just add more layers.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">multirember-f</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">test?</span>)
+    (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+      (<span style="color:#50fa7b">cond</span>
+       ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+       ((<span style="color:#50fa7b">test?</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>)) ((<span style="color:#50fa7b">multirember-f</span>  <span style="color:#8be9fd;font-style:italic">test?</span> ) <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))
+       (<span style="color:#50fa7b">else</span>
+        (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) ((<span style="color:#50fa7b">multirember-f</span> <span style="color:#8be9fd;font-style:italic">test?</span>) <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))))))
+
+<span style="color:#6272a4">;we can also use letrec</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">multirember-f</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">test?</span>)
+   (<span style="color:#50fa7b">letrec</span>
+     ((<span style="color:#50fa7b">m-f</span>
+       (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+         (<span style="color:#50fa7b">cond</span>
+       ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+       ((<span style="color:#50fa7b">test?</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>)) (<span style="color:#50fa7b">m-f</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))
+       (<span style="color:#50fa7b">else</span>
+        (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">m-f</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))))))
+     <span style="color:#8be9fd;font-style:italic">m-f</span>)))</code></pre></div>
+
+<p>Notice that the function <code>(lambda a lat)</code> as a whole is inside the <code>(letrec)</code>,
+so the entire function <code>(multirember-f)</code> uses <em>test?</em> as argument and returns a function as result. The
+returned function will referred as m-f. When substituting <code>(test?)</code> as <code>(eq?)</code>
+we get our old friend <code>(multirember)</code>. You might notice the <code>(m-f)</code> becomes
+<code>(mr)</code> but they are basically the same thing. Parameter names don&rsquo;t matter as
+long as they are consistent.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">multirember-eq?</span> (<span style="color:#50fa7b">multirember-f</span> <span style="color:#8be9fd;font-style:italic">eq?</span>))<span style="color:#6272a4">; multirember-eq? == multirember</span>
+
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">multirember</span>
+   (<span style="color:#50fa7b">letrec</span>
+     ((<span style="color:#50fa7b">mr</span>
+       (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+         (<span style="color:#50fa7b">cond</span>
+       ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+       ((<span style="color:#8be9fd;font-style:italic">eq? </span><span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>)) (<span style="color:#50fa7b">mr</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))
+       (<span style="color:#50fa7b">else</span>
+        (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">mr</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))))))
+     <span style="color:#8be9fd;font-style:italic">mr</span>))</code></pre></div>
+
+<p>The involvement of <code>(lambda (test?)</code> layer enables us to design a function for
+any function possibilities: with <code>(test?)</code> satisfied, we can call the procedure
+<code>(m-f)</code> on something.</p>
+
+<hr />
+
+<p>Let&rsquo;s see another function: remember how we design <code>(union)</code> function to merge two sets: we traverse every element in set1, if it
+is also a member in set2, we skip; otherwise we cons this element to set2:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">union</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">set1</span> <span style="color:#8be9fd;font-style:italic">set2</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">set1</span>) <span style="color:#8be9fd;font-style:italic">set2</span>)
+      ((<span style="color:#50fa7b">member?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">set1</span>) <span style="color:#8be9fd;font-style:italic">set2</span>) <span style="color:#6272a4">;&lt;- notice the order of arguments</span>
+       (<span style="color:#50fa7b">union</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">set1</span>) <span style="color:#8be9fd;font-style:italic">set2</span>))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">set1</span>) (<span style="color:#50fa7b">union</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">set1</span>) <span style="color:#8be9fd;font-style:italic">set2</span>))))))
+
+<span style="color:#6272a4">;we can of course define with letrec</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">union-letrec</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">set1</span> <span style="color:#8be9fd;font-style:italic">set2</span>)
+    (<span style="color:#50fa7b">letrec</span>
+      ((<span style="color:#50fa7b">U</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">set</span>)
+            (<span style="color:#50fa7b">cond</span>
+              ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">set</span>) <span style="color:#8be9fd;font-style:italic">set2</span>)
+              ((<span style="color:#50fa7b">member?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">set</span>) <span style="color:#8be9fd;font-style:italic">set2</span>) <span style="color:#6272a4">;&lt;- notice the order of arguments</span>
+               (<span style="color:#50fa7b">U</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">set</span>)))
+              (<span style="color:#50fa7b">else</span>
+                (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">set</span>) (<span style="color:#50fa7b">U</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">set</span>))))))))
+      (<span style="color:#50fa7b">U</span> <span style="color:#8be9fd;font-style:italic">set1</span>))))
+
+(<span style="color:#50fa7b">union-letrec</span>
+  <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">tomatoes</span> <span style="color:#ff79c6">and </span><span style="color:#8be9fd;font-style:italic">macaroni</span> <span style="color:#8be9fd;font-style:italic">casserole</span>)
+  <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">macaroni</span> <span style="color:#ff79c6">and </span><span style="color:#8be9fd;font-style:italic">cheese</span>))</code></pre></div>
+
+<p>Now set2 is the unchanged parameter in function, set1 is getting shorter and
+shorter in recursion. Similar with <code>(multirember-letrec)</code>, the procedure firstly
+passes the unchanged set2, making the <code>(U)</code> function only has one changing
+parameter <code>(set)</code> which then got substituted by traversed set1.</p>
+
+<p>It seems using the extra step for separation is not a big deal, especially when in the <code>(multirember-letrec)</code>
+example where <em>a</em> and <em>lat</em> are so distinctive that we would not make mistake in
+applying them. But from <code>(union-letrec)</code> we will see things particularly need
+to me mindful. The only difference between the below functions are the order of
+the parameters:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;right for the above union-letrec function</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">member?-1</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) #f)
+      ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">a</span>) #t)
+      (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">member?</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))))
+
+<span style="color:#6272a4">;wrong for the above union-letrec function, (but correct as itself).</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">member?-2</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span> <span style="color:#8be9fd;font-style:italic">a</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) #f)
+      ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">a</span>) #t)
+      (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">member?</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">a</span>)))))</code></pre></div>
+
+<p>If the <code>(member)</code> function (defined outside the <code>(union-letrec)</code>) have stated to take the first element as list to
+traverse, when writing <code>(union-letrec)</code> we have to make sure the arguments passed
+to <code>(member?)</code> has the consistent order.</p>
+
+<p>Meanwhile, we can just define the <code>(member?)</code> inside <code>(union-letrec)</code> since
+<code>(letrec)</code> allows us to define multiple functions at the same time.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">union-letrec-protected</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">set1</span> <span style="color:#8be9fd;font-style:italic">set2</span>)
+    (<span style="color:#50fa7b">letrec</span>
+      ((<span style="color:#50fa7b">U</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">set</span>)
+            (<span style="color:#50fa7b">cond</span>
+              ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">set</span>) <span style="color:#8be9fd;font-style:italic">set2</span>)
+              ((<span style="color:#50fa7b">M?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">set</span>) <span style="color:#8be9fd;font-style:italic">set2</span>)
+               (<span style="color:#50fa7b">U</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">set</span>)))
+              (<span style="color:#50fa7b">else</span>
+                (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">set</span>) (<span style="color:#50fa7b">U</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">set</span>)))))))
+       (<span style="color:#50fa7b">M?</span>
+         (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+           (<span style="color:#50fa7b">cond</span>
+             ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) #f)
+             ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">a</span>) #t)
+             (<span style="color:#50fa7b">else</span>
+               (<span style="color:#50fa7b">M?</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))
+      (<span style="color:#50fa7b">U</span> <span style="color:#8be9fd;font-style:italic">set1</span>))))
+
+(<span style="color:#50fa7b">union-letrec-protected</span>
+  <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">tomatoes</span> <span style="color:#ff79c6">and </span><span style="color:#8be9fd;font-style:italic">macaroni</span> <span style="color:#8be9fd;font-style:italic">casserole</span>)
+  <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">macaroni</span> <span style="color:#ff79c6">and </span><span style="color:#8be9fd;font-style:italic">cheese</span>)) <span style="color:#6272a4">; &#39;(tomatoes and macaroni casserole cheese)</span></code></pre></div>
+
+<p>Currently it has the form of <code>(letrec (U M) (U set1))</code>, where the <code>(U)</code> and <code>(M?)</code> are in
+the same lay. This design only isolates the unchanged variable <em>set2</em>. But we
+notice that there is also an unchanged variable <em>a</em> so we should wrap <code>(M?)</code> in
+a inner layer of the function <code>(U)</code>:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">union-letrec-protected-12</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">set1</span> <span style="color:#8be9fd;font-style:italic">set2</span>)
+    (<span style="color:#50fa7b">letrec</span>
+      ((<span style="color:#50fa7b">U</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">set</span>)
+            (<span style="color:#50fa7b">cond</span>
+              ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">set</span>) <span style="color:#8be9fd;font-style:italic">set2</span>)
+              ((<span style="color:#50fa7b">M?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">set</span>) <span style="color:#8be9fd;font-style:italic">set2</span>)
+               (<span style="color:#50fa7b">U</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">set</span>)))
+              (<span style="color:#50fa7b">else</span>
+                (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">set</span>) (<span style="color:#50fa7b">U</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">set</span>)))))))
+       (<span style="color:#50fa7b">M?</span>
+         (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+           (<span style="color:#50fa7b">letrec</span>
+             ((<span style="color:#50fa7b">N?</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span>)
+                    (<span style="color:#50fa7b">cond</span>
+                      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) #f)
+                      ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">a</span>) #t)
+                      (<span style="color:#50fa7b">else</span>
+                        (<span style="color:#50fa7b">N?</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))
+             (<span style="color:#50fa7b">N?</span> <span style="color:#8be9fd;font-style:italic">lat</span>)))))
+      (<span style="color:#50fa7b">U</span> <span style="color:#8be9fd;font-style:italic">set1</span>))))</code></pre></div>
+
+<p>Another example we&rsquo;ve seem is <code>(two-in-a-row)</code>, let&rsquo;s try rewrite it with <code>(letrec)</code>
+too. Last time our final definition is: defining recursive function <code>(two-in-a-row-b?)</code> first, then
+call it in <code>(two-in-a-row-final?)</code>. At here, the separation of two function is
+no longer for distinguishing changing and unchanged variables, but to separate
+procedures as black box to for future purpose.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">two-in-a-row-b?</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">preceding</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) #f)
+      (<span style="color:#ff79c6">else </span>(<span style="color:#ff79c6">or </span>(<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">preceding</span>)
+                (<span style="color:#50fa7b">two-in-a-row-b?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))
+
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">two-in-a-row-final?</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) #f)
+      (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">two-in-a-row-b?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))))
+
+<span style="color:#6272a4">;---define above function with letrec</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">two-in-a-row?</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span>)
+    (<span style="color:#50fa7b">letrec</span>
+      ((<span style="color:#50fa7b">W</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+            (<span style="color:#50fa7b">cond</span>
+              ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) #f)
+              ((<span style="color:#8be9fd;font-style:italic">eq? </span><span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>)) #t)
+              (<span style="color:#50fa7b">else</span>
+                (<span style="color:#50fa7b">W</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))
+      (<span style="color:#50fa7b">cond</span>
+        ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) #f)
+        (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">W</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))
+
+<span style="color:#6272a4">;here is another version</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">two-in-a-row-2?</span>
+  (<span style="color:#50fa7b">letrec</span>
+    ((<span style="color:#50fa7b">W</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+          (<span style="color:#50fa7b">cond</span>
+            ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) #f)
+            ((<span style="color:#8be9fd;font-style:italic">eq? </span><span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>)) #t)
+            (<span style="color:#50fa7b">else</span>
+              (<span style="color:#50fa7b">W</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))
+    (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span>)
+      (<span style="color:#50fa7b">cond</span>
+        ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) #f)
+        (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">W</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))
+
+<span style="color:#6272a4">; Test two-in-a-row-2?</span>
+(<span style="color:#50fa7b">two-in-a-row-2?</span> <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">Italian</span> <span style="color:#8be9fd;font-style:italic">sardines</span> <span style="color:#8be9fd;font-style:italic">spaghetti</span> <span style="color:#8be9fd;font-style:italic">parsley</span>))</code></pre></div>
+
+<p>And <code>(sum-of-prefixes)</code> can be rewrite like this:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">sum-of-prefixes</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">tup</span>)
+    (<span style="color:#50fa7b">letrec</span>
+      ((<span style="color:#50fa7b">S</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">sss</span> <span style="color:#8be9fd;font-style:italic">tup</span>)
+            (<span style="color:#50fa7b">cond</span>
+              ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">tup</span>) <span style="color:#ff79c6">&#39;</span>())
+              (<span style="color:#50fa7b">else</span>
+                (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">+ </span><span style="color:#8be9fd;font-style:italic">sss</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">tup</span>))
+                      (<span style="color:#50fa7b">S</span> (<span style="color:#8be9fd;font-style:italic">+ </span><span style="color:#8be9fd;font-style:italic">sss</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">tup</span>)) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">tup</span>))))))))
+      (<span style="color:#50fa7b">S</span> <span style="color:#bd93f9">0</span> <span style="color:#8be9fd;font-style:italic">tup</span>))))
+
+(<span style="color:#50fa7b">sum-of-prefixes</span> <span style="color:#ff79c6">&#39;</span>(<span style="color:#bd93f9">2</span> <span style="color:#bd93f9">1</span> <span style="color:#bd93f9">9</span> <span style="color:#bd93f9">17</span> <span style="color:#bd93f9">0</span>))   <span style="color:#6272a4">; &#39;(2 3 12 29 29)</span></code></pre></div>
+
+<p>The applying procedures for the first steps are:
+<img src="/img/seasoned102.png" alt="" /></p>
+
+<hr />
+
+<h2 id="chapter-13-hop-skip-and-jump">Chapter 13  Hop, Skip, and Jump</h2>
+
+<p>We are continuing the story of <code>(letrec)</code>. In the last part of chapter 12, from the application of
+<code>(two-in-a-row letrec)</code> and <code>(two-in-a-row-2)</code> we have seen that the letrec
+function can be defined and called anywhere in any function. The purpose is no
+longer limited to &ldquo;separating changing and unchanged&rdquo; variables. It is true that
+the letrec closure can be used anywhere in function for any relevant needs.
+Let&rsquo;s see more examples.</p>
+
+<p>We were told that set is a list
+consists of <strong>non-repeated</strong> atoms. Remember we defined two functions for sets:
+<code>(intersect set1 set2)</code> that returns the common atoms of two input sets; and
+<code>(intersectall)</code> that use <code>(intersect)</code> to find common atoms of list of sets. Let&rsquo;s first rewrite <code>(intersect)</code> with <code>(letrec)</code>, which is simple:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">intersect</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">set1</span> <span style="color:#8be9fd;font-style:italic">set2</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">set1</span>) <span style="color:#ff79c6">&#39;</span>())  <span style="color:#6272a4">; don&#39;t forget the 1st commandment</span>
+      ((<span style="color:#50fa7b">member?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">set1</span>) <span style="color:#8be9fd;font-style:italic">set2</span>)
+       (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">set1</span>) (<span style="color:#50fa7b">intersect</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">set1</span>) <span style="color:#8be9fd;font-style:italic">set2</span>)))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#50fa7b">intersect</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">set1</span>) <span style="color:#8be9fd;font-style:italic">set2</span>)))))
+
+(<span style="color:#50fa7b">intersect</span> <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">a</span> <span style="color:#8be9fd;font-style:italic">b</span> <span style="color:#8be9fd;font-style:italic">x</span> <span style="color:#8be9fd;font-style:italic">c</span> <span style="color:#8be9fd;font-style:italic">d</span>) <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">q</span> <span style="color:#8be9fd;font-style:italic">w</span> <span style="color:#8be9fd;font-style:italic">e</span> <span style="color:#8be9fd;font-style:italic">x</span> <span style="color:#8be9fd;font-style:italic">r</span> <span style="color:#8be9fd;font-style:italic">t</span> <span style="color:#8be9fd;font-style:italic">y</span> <span style="color:#8be9fd;font-style:italic">a</span>))     <span style="color:#6272a4">;-&gt; &#39;(a x)</span>
+
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">intersect-letrec</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">set1</span> <span style="color:#8be9fd;font-style:italic">set2</span>)
+    (<span style="color:#50fa7b">letrec</span>
+      ((<span style="color:#50fa7b">I</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">set</span>)
+            (<span style="color:#50fa7b">cond</span>
+              ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">set</span>) <span style="color:#ff79c6">&#39;</span>())
+              ((<span style="color:#50fa7b">member?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">set</span>) <span style="color:#8be9fd;font-style:italic">set2</span>)
+               (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">set</span>) (<span style="color:#50fa7b">I</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">set</span>))))
+              (<span style="color:#50fa7b">else</span>
+                (<span style="color:#50fa7b">I</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">set</span>)))))))
+      (<span style="color:#50fa7b">I</span> <span style="color:#8be9fd;font-style:italic">set1</span>))))
+
+(<span style="color:#50fa7b">intersect-letrec</span> <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">a</span> <span style="color:#8be9fd;font-style:italic">b</span> <span style="color:#8be9fd;font-style:italic">x</span> <span style="color:#8be9fd;font-style:italic">c</span> <span style="color:#8be9fd;font-style:italic">d</span>) <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">q</span> <span style="color:#8be9fd;font-style:italic">w</span> <span style="color:#8be9fd;font-style:italic">e</span> <span style="color:#8be9fd;font-style:italic">x</span> <span style="color:#8be9fd;font-style:italic">r</span> <span style="color:#8be9fd;font-style:italic">t</span> <span style="color:#8be9fd;font-style:italic">y</span> <span style="color:#8be9fd;font-style:italic">a</span>))     <span style="color:#6272a4">;-&gt; &#39;(a x)</span></code></pre></div>
+
+<p>This is old friend <code>(intersectall)</code>:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">intersectall</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lset</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lset</span>)) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lset</span>))  <span style="color:#6272a4">; don&#39;t forget the 1st commandment</span>
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#50fa7b">intersect</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lset</span>)
+           (<span style="color:#50fa7b">intersectall</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lset</span>)))))))
+
+(<span style="color:#50fa7b">intersectall</span> <span style="color:#ff79c6">&#39;</span>((<span style="color:#50fa7b">a</span>) (<span style="color:#50fa7b">a</span>) (<span style="color:#50fa7b">a</span>)))                   <span style="color:#6272a4">;-&gt; &#39;(a)</span></code></pre></div>
+
+<p>The old friend <code>(intersectall)</code> works like this: the input can be classified to
+possibilities that: list containing zero set, one set or more than one sets. In
+the Little Schemer we assumed the input is not null so last time we only prepared
+function for list with one or more sets. We can fix
+the condition ignored by us at the last time: adding another line of predicate
+for pure null input:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">intersectall</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lset</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lset</span>) <span style="color:#ff79c6">&#39;</span>()) <span style="color:#6272a4">;&lt;- so far the only difference is here</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lset</span>)) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lset</span>))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#50fa7b">intersect</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lset</span>)
+                   (<span style="color:#50fa7b">intersectall</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lset</span>)))))))</code></pre></div>
+
+<p>Here is the letrec function of <code>(intersectall)</code>. As we have stressed in last chapter, the outer lambda
+expression&rsquo;s parameter use name <em>lset</em>, which is the same with the inner lambda
+expression&rsquo;s parameter name
+<em>lset</em>. This is a coincidence, and parameter in A can use any name as a
+name holder, which will be substituted by the <em>lset</em> of <code>(else (A lset))</code>.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">intersectall-letrec</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lset</span>)
+    (<span style="color:#50fa7b">letrec</span>
+      ((<span style="color:#50fa7b">A</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lset</span>) <span style="color:#6272a4">;&lt;-there is one more pair of parenthesis for more function</span>
+            (<span style="color:#50fa7b">cond</span>
+              ((<span style="color:#8be9fd;font-style:italic">null? </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lset</span>)) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lset</span>))
+              (<span style="color:#50fa7b">else</span>
+                (<span style="color:#50fa7b">intersect</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lset</span>)
+                           (<span style="color:#50fa7b">A</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lset</span>))))))))
+      (<span style="color:#50fa7b">cond</span>
+        ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lset</span>) <span style="color:#ff79c6">&#39;</span>())
+        (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">A</span> <span style="color:#8be9fd;font-style:italic">lset</span>))))))
+
+(<span style="color:#50fa7b">intersectall-letrec</span> <span style="color:#ff79c6">&#39;</span>((<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">b</span> <span style="color:#8be9fd;font-style:italic">c</span> <span style="color:#8be9fd;font-style:italic">d</span>) (<span style="color:#50fa7b">b</span> <span style="color:#8be9fd;font-style:italic">c</span> <span style="color:#8be9fd;font-style:italic">d</span> <span style="color:#8be9fd;font-style:italic">e</span>) (<span style="color:#50fa7b">c</span> <span style="color:#8be9fd;font-style:italic">d</span> <span style="color:#8be9fd;font-style:italic">e</span> <span style="color:#8be9fd;font-style:italic">f</span>))) <span style="color:#6272a4">; &#39;(c d)</span></code></pre></div>
+
+<p>The <code>(null? lset)</code> works as terminating condition as stated by the first commandment,
+which will be use every time in the inner recursion, and only checks once at the
+very beginning. We wrap the remaining old friend in <code>(A)</code> and call it.</p>
+
+<p>However there is still an inefficiency issue: the
+terminating condition appears too late. The terminating condition is hidden in A
+, and it won&rsquo;t be triggered until the <code>(cdr lat)</code> become null.</p>
+
+<p>For example:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#50fa7b">intersectall-letrec</span> <span style="color:#ff79c6">&#39;</span>((<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">b</span> <span style="color:#8be9fd;font-style:italic">c</span> <span style="color:#8be9fd;font-style:italic">d</span>) () (<span style="color:#50fa7b">c</span> <span style="color:#8be9fd;font-style:italic">d</span> <span style="color:#8be9fd;font-style:italic">e</span> <span style="color:#8be9fd;font-style:italic">f</span>)))</code></pre></div>
+
+<p>We do not need to run function to realize that the
+intersection is null. But in DrRacket if we use stepper we can set it takes 73
+steps for the function to finish: the input list is peeled layer by layer, until
+the function <code>(null? (cdr lset)</code> in <code>(A)</code> receives the LAST set <code>'(c d e f)</code>,
+and it has to finish computing all the remembered value <code>(intersect (intersect (intersect..)))</code>.</p>
+
+<p>So it would be more efficient if we can add a predicate
+inside, testing null <code>(car lset)</code> to terminate immediately. That&rsquo;s where we need <code>(letcc)</code>:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;we prefer this version than the below one</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">intersectall</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lset</span>)
+    (<span style="color:#50fa7b">letcc</span> <span style="color:#8be9fd;font-style:italic">hop</span>                       <span style="color:#6272a4">;&lt;- add new function here</span>
+        (<span style="color:#50fa7b">letrec</span>
+          ((<span style="color:#50fa7b">A</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lset</span>)
+                (<span style="color:#50fa7b">cond</span>
+                  ((<span style="color:#8be9fd;font-style:italic">null? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lset</span>)) (<span style="color:#50fa7b">hop</span> <span style="color:#ff79c6">&#39;</span>()))     <span style="color:#6272a4">;&lt;- add a predicate here</span>
+                  ((<span style="color:#8be9fd;font-style:italic">null? </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lset</span>)) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lset</span>))
+                  (<span style="color:#50fa7b">else</span>
+                    (<span style="color:#50fa7b">intersect</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lset</span>)
+                               (<span style="color:#50fa7b">A</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lset</span>))))))))
+          (<span style="color:#50fa7b">cond</span>
+            ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lset</span>) <span style="color:#ff79c6">&#39;</span>())
+            (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">A</span> <span style="color:#8be9fd;font-style:italic">lset</span>)))))))
+
+<span style="color:#6272a4">;or another way to write, raised by Alonzo Church</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">intersectall-letcc</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lset</span>)
+    (<span style="color:#8be9fd;font-style:italic">call-with-current-continuation </span> <span style="color:#6272a4">;&lt;- add a name here</span>
+      (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">hop</span>)                       <span style="color:#6272a4">;&lt;- add new function here</span>
+        (<span style="color:#50fa7b">letrec</span>
+          ((<span style="color:#50fa7b">A</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lset</span>)
+                (<span style="color:#50fa7b">cond</span>
+                  ((<span style="color:#8be9fd;font-style:italic">null? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lset</span>)) (<span style="color:#50fa7b">hop</span> <span style="color:#ff79c6">&#39;</span>()))     <span style="color:#6272a4">;&lt;- add a predicate here</span>
+                  ((<span style="color:#8be9fd;font-style:italic">null? </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lset</span>)) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lset</span>))
+                  (<span style="color:#50fa7b">else</span>
+                    (<span style="color:#50fa7b">intersect</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lset</span>)
+                               (<span style="color:#50fa7b">A</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lset</span>))))))))
+          (<span style="color:#50fa7b">cond</span>
+            ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lset</span>) <span style="color:#ff79c6">&#39;</span>())
+            (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">A</span> <span style="color:#8be9fd;font-style:italic">lset</span>))))))))
+
+(<span style="color:#50fa7b">intersectall-letcc</span> <span style="color:#ff79c6">&#39;</span>((<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">b</span> <span style="color:#8be9fd;font-style:italic">c</span> <span style="color:#8be9fd;font-style:italic">d</span>) ( ) (<span style="color:#50fa7b">c</span> <span style="color:#8be9fd;font-style:italic">d</span> <span style="color:#8be9fd;font-style:italic">e</span> <span style="color:#8be9fd;font-style:italic">f</span>)))</code></pre></div>
+
+<p>We notice that in the first code block, two lines of code are added. When
+finding <code>(null? (car lset))</code> is true, we will call hop function making A <em>hop</em>
+to the right position. The example helps to learn how the <em>hop</em> works. First the
+input list will substitute the outer <em>lat</em> and the function starts to run,
+triggering <code>(A lset)</code>. The first round of loop wouldn&rsquo;t trigger <code>(hop)</code> because
+<code>(car lset)</code> is <code>(3 mangos and)</code> not null. But the second loop will trigger the
+<code>(hop)</code> because <code>(car (() (c d e f))</code> is true. The <code>(hop)</code> basically halts the
+whole function and return <code>('())</code> for this case, regardless we have remembered <code>(intersect
+(a b c d) something)</code> to run. We only need to find the results of <code>(letcc hop M)</code>, which in this case is <code>(letcc hop (quote ())))</code>.</p>
+
+<p>Long story short, so far we design a function that would stop the first
+moment it detects a null set in list.</p>
+
+<p>So <code>(letcc)</code> can be used to return value abruptly and promptly.</p>
+
+<p>We are continuing improve the functions, because we notice something inefficient
+again. We know the <code>(intersectall)</code> takes intersection of all sets in a list, by
+<code>(intersect)</code> two sets once in turn. That means any two cases has no intersection
+should make the whole process return null immediately.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#50fa7b">intersectall-letcc</span> <span style="color:#ff79c6">&#39;</span>((<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">b</span> <span style="color:#8be9fd;font-style:italic">c</span> <span style="color:#8be9fd;font-style:italic">d</span>) (<span style="color:#50fa7b">d</span> <span style="color:#8be9fd;font-style:italic">e</span>) (<span style="color:#50fa7b">x</span> <span style="color:#8be9fd;font-style:italic">y</span> <span style="color:#8be9fd;font-style:italic">z</span>)))</code></pre></div>
+
+<p>For above example we need to take intersection between the third and
+second, then with the first. Ideally a function should instantaneously stop when
+finding the intersection for <code>(x y z)</code> and <code>(d e)</code> is <code>()</code>. But our current program won&rsquo;t
+tell until after running <code>(intersect)</code> several times. A feasible (not the best)
+improvement is to fix <code>(intersect)</code>:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">intersect-letrec</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">set1</span> <span style="color:#8be9fd;font-style:italic">set2</span>)
+    (<span style="color:#50fa7b">letrec</span>
+      ((<span style="color:#50fa7b">I</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">set</span>)
+            (<span style="color:#50fa7b">cond</span>
+              ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">set</span>) <span style="color:#ff79c6">&#39;</span>())
+              ((<span style="color:#50fa7b">member?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">set</span>) <span style="color:#8be9fd;font-style:italic">set2</span>)
+               (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">set</span>) (<span style="color:#50fa7b">I</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">set</span>))))
+              (<span style="color:#50fa7b">else</span>
+                (<span style="color:#50fa7b">I</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">set</span>)))))))
+      (<span style="color:#ff79c6">cond </span>                           <span style="color:#6272a4">;&lt;- new line</span>
+        ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">set2</span>) (<span style="color:#ff79c6">quote </span>()))      <span style="color:#6272a4">;&lt;- new line</span>
+          (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">I</span> <span style="color:#8be9fd;font-style:italic">set1</span>))))))          <span style="color:#6272a4">;&lt;- new line</span></code></pre></div>
+
+<p>We say the above is not the best because, it only creates the best
+efficiency for <code>(intersect)</code>, not for <code>(intersectall)</code> yet. The ideal scenario
+should be once there is a empty set in list, the <code>(intersectall)</code> should
+immediately cease and return null list. In another word, we want
+hop happening not only in one-out-of-two checking, but also in one-out-of-n
+checking. Writing function like the below one  would solve it. I suggest to
+put the code in DrRacket to see the structure with better highlighting.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">intersectall-ap</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lset</span>)
+      (<span style="color:#50fa7b">letcc</span> <span style="color:#8be9fd;font-style:italic">hop</span>
+        (<span style="color:#50fa7b">letrec</span>
+          ((<span style="color:#50fa7b">A</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lset</span>)          <span style="color:#6272a4">;&lt;-intersectall</span>
+                (<span style="color:#50fa7b">cond</span>
+                  ((<span style="color:#8be9fd;font-style:italic">null? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lset</span>)) (<span style="color:#50fa7b">hop</span> <span style="color:#ff79c6">&#39;</span>()))
+                  ((<span style="color:#8be9fd;font-style:italic">null? </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lset</span>)) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lset</span>))
+                  (<span style="color:#50fa7b">else</span>
+                    (<span style="color:#50fa7b">I</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lset</span>)
+                       (<span style="color:#50fa7b">A</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lset</span>)))))))
+           (<span style="color:#50fa7b">I</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">s1</span> <span style="color:#8be9fd;font-style:italic">s2</span>)         <span style="color:#6272a4">;&lt;-intersect</span>
+                (<span style="color:#50fa7b">letrec</span>
+                  ((<span style="color:#50fa7b">J</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">s1</span>)
+                        (<span style="color:#50fa7b">cond</span>
+                          ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">s1</span>) <span style="color:#ff79c6">&#39;</span>())
+                          ((<span style="color:#50fa7b">member?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">s1</span>) <span style="color:#8be9fd;font-style:italic">s2</span>)
+                           (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">s1</span>) (<span style="color:#50fa7b">J</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">s1</span>))))
+                          (<span style="color:#50fa7b">else</span>
+                            (<span style="color:#50fa7b">J</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">s1</span>)))))))
+                  (<span style="color:#50fa7b">cond</span>
+                    ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">s2</span>) (<span style="color:#50fa7b">hop</span> <span style="color:#ff79c6">&#39;</span>()))  <span style="color:#6272a4">;&lt;-we can hop in minor function</span>
+                    (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">J</span> <span style="color:#8be9fd;font-style:italic">s1</span>)))))))
+          (<span style="color:#50fa7b">cond</span>
+            ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lset</span>) <span style="color:#ff79c6">&#39;</span>())
+            (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">A</span> <span style="color:#8be9fd;font-style:italic">lset</span>))))))))
+
+(<span style="color:#50fa7b">intersectall-ap</span> <span style="color:#ff79c6">&#39;</span>((<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">b</span> <span style="color:#8be9fd;font-style:italic">c</span> <span style="color:#8be9fd;font-style:italic">d</span>) (<span style="color:#50fa7b">b</span> <span style="color:#8be9fd;font-style:italic">c</span> <span style="color:#8be9fd;font-style:italic">d</span> <span style="color:#8be9fd;font-style:italic">e</span>) (<span style="color:#50fa7b">c</span> <span style="color:#8be9fd;font-style:italic">d</span> <span style="color:#8be9fd;font-style:italic">e</span> <span style="color:#8be9fd;font-style:italic">f</span>))) <span style="color:#6272a4">;-&gt; &#39;(c d)</span></code></pre></div>
+
+<p>Here is how the two functions have evolved to <code>(intersectall-ap)</code>:</p>
+
+<figure>
+    <img src="/img/seasoned131.png"/> 
+</figure>
+
+
+<hr />
+
+<p>We have been familiar with more flexible application of <code>(hop)</code>. Let&rsquo;s see
+another example. Firstly we rewrite old friend <code>(rember)</code> with letrec:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">rember</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">letrec</span>
+      ((<span style="color:#50fa7b">R</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span>)
+            (<span style="color:#50fa7b">cond</span>
+              ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+              ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">a</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))
+              (<span style="color:#50fa7b">else</span>
+                (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">R</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))))))
+      (<span style="color:#50fa7b">R</span> <span style="color:#8be9fd;font-style:italic">lat</span>))))</code></pre></div>
+
+<p>The rember-beyond-first function <code>(rember)</code> everything beyond first match:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">rember-beyond-first</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">letrec</span>
+      ((<span style="color:#50fa7b">R</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span>)
+            (<span style="color:#50fa7b">cond</span>
+              ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+              ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">a</span>) <span style="color:#ff79c6">&#39;</span>())
+              (<span style="color:#50fa7b">else</span>
+                (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">R</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))))))
+      (<span style="color:#50fa7b">R</span> <span style="color:#8be9fd;font-style:italic">lat</span>))))
+
+(<span style="color:#50fa7b">rember-beyond-first</span>
+  <span style="color:#f1fa8c">&#39;roots</span>
+  <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">noodles</span> <span style="color:#8be9fd;font-style:italic">spaghetti</span> <span style="color:#8be9fd;font-style:italic">spatzle</span> <span style="color:#8be9fd;font-style:italic">bean-thread</span> <span style="color:#8be9fd;font-style:italic">roots</span> <span style="color:#8be9fd;font-style:italic">potatoes</span> <span style="color:#8be9fd;font-style:italic">yam</span> <span style="color:#8be9fd;font-style:italic">others</span> <span style="color:#8be9fd;font-style:italic">rice</span>))
+<span style="color:#6272a4">;-&gt; &#39;(noodles spaghetti spaghetti bean-thread)</span></code></pre></div>
+
+<p>The above function seems easy. It&rsquo;s hard if we want a function that retains everything
+AFTER <em>a</em> in a list. Luckily we have <code>(skip)</code> that helps us to realize it by
+tweaking <code>(rember-beyond-first)</code> a little:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">rember-upto-last</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+      (<span style="color:#50fa7b">letcc</span> <span style="color:#8be9fd;font-style:italic">skip</span>
+        (<span style="color:#50fa7b">letrec</span>
+          ((<span style="color:#50fa7b">R</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span>)
+                (<span style="color:#50fa7b">cond</span>
+                  ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+                  ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">a</span>) (<span style="color:#50fa7b">skip</span> (<span style="color:#50fa7b">R</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))
+                  (<span style="color:#50fa7b">else</span>
+                    (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">R</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))))))
+          (<span style="color:#50fa7b">R</span> <span style="color:#8be9fd;font-style:italic">lat</span>))))))
+
+(<span style="color:#50fa7b">rember-upto-last</span>
+  <span style="color:#f1fa8c">&#39;roots</span>
+  <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">noodles</span> <span style="color:#8be9fd;font-style:italic">spaghetti</span> <span style="color:#8be9fd;font-style:italic">spatzle</span> <span style="color:#8be9fd;font-style:italic">bean-thread</span> <span style="color:#8be9fd;font-style:italic">roots</span> <span style="color:#8be9fd;font-style:italic">potatoes</span> <span style="color:#8be9fd;font-style:italic">yam</span> <span style="color:#8be9fd;font-style:italic">others</span> <span style="color:#8be9fd;font-style:italic">rice</span>))
+<span style="color:#6272a4">;-&gt; &#39;(potatoes yam others rice)</span></code></pre></div>
+
+<p>The function works similar to <code>(hop)</code>: when the function not triggered, we just
+ignore it and run as usual. In the above example, it conses <code>(noodles spaghetti
+spatzle bean-thread)</code> until <code>(roots)</code> is input. The <code>(skip (R (cdr lat))</code> means
+we can eliminate all the pending conses and determine the value of <code>(letcc skip
+(R (cdr lat)))</code> where <em>lat</em> is <code>(roots potatoes yam others rice)</code>. The remaining
+list doesn&rsquo;t contain <em>roots</em>, therefore it will be traversed and returns <code>(roots
+potatoes yam others rice)</code>.</p>
+
+<hr />
+
+<h2 id="chapter-14">chapter 14</h2>
+
+<p>So far you must have realized, in addition to using <code>(letrec letcc)</code> and <code>(hop
+skip)</code> to terminate program, we also leanred an important concept in
+programming: checking judgement and abormality processing. This is the major
+concept in all programming: how can we design and improve a function which
+considers all possible conditions while gurantees the efficiency at the same
+time?</p>
+
+<p>There is no one-for-all instruction for perfect program, but we can gain more
+and more insights by seeing improving an examples.</p>
+
+<p>There is old friend <code>(left most)</code>:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">leftmost</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>)) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>))
+      (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">leftmost</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>))))))
+
+(<span style="color:#50fa7b">leftmost</span> <span style="color:#ff79c6">&#39;</span>(((<span style="color:#50fa7b">a</span>) <span style="color:#8be9fd;font-style:italic">b</span>) (<span style="color:#50fa7b">c</span> <span style="color:#8be9fd;font-style:italic">d</span>))) <span style="color:#6272a4">;-&gt; &#39;a</span></code></pre></div>
+
+<p>But it won&rsquo;t work for input like <code>((()) a b)</code> because we didn&rsquo;t prepate for the
+null input case. In addtion, we also want it to skip the null and return
+meaningful atom. Let&rsquo;s improve it:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">leftmost-fixed</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#ff79c6">&#39;</span>())
+      ((<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>)) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#50fa7b">cond</span>
+          ((<span style="color:#50fa7b">atom?</span> (<span style="color:#50fa7b">leftmost-fixed</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>)))
+           (<span style="color:#50fa7b">leftmost-fixed</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>)))
+          (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">leftmost-fixed</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))))
+
+(<span style="color:#50fa7b">leftmost-fixed</span> <span style="color:#ff79c6">&#39;</span>(((() <span style="color:#8be9fd;font-style:italic">x</span>) ())))     <span style="color:#6272a4">;-&gt; &#39;x</span></code></pre></div>
+
+<p>We rewrite this by introducing <code>(let)</code> who helps define local function within functions.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">leftmost-let</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#ff79c6">&#39;</span>())
+      ((<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>)) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#ff79c6">let </span>((<span style="color:#50fa7b">a</span> (<span style="color:#50fa7b">leftmost-let</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>))))
+          (<span style="color:#50fa7b">cond</span>
+            ((<span style="color:#50fa7b">atom?</span> <span style="color:#8be9fd;font-style:italic">a</span>) <span style="color:#8be9fd;font-style:italic">a</span>)
+            (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">leftmost-let</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))))
+
+(<span style="color:#50fa7b">leftmost-let</span> <span style="color:#ff79c6">&#39;</span>(((<span style="color:#50fa7b">y</span>) <span style="color:#8be9fd;font-style:italic">b</span>) (<span style="color:#50fa7b">c</span> <span style="color:#8be9fd;font-style:italic">d</span>)))   <span style="color:#6272a4">;-&gt; &#39;y</span></code></pre></div>
+
+<p>Similarly, we define an improved version of <code>(rember a lat)</code> that removes the leftmost occurrence of <em>a</em> in <em>lat</em>.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">rember1*</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">l</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#ff79c6">&#39;</span>())
+      ((<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>))
+       (<span style="color:#50fa7b">cond</span>
+         ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#8be9fd;font-style:italic">a</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))
+         (<span style="color:#50fa7b">else</span>
+           (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>) (<span style="color:#50fa7b">rember1*</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#50fa7b">cond</span>
+          ((<span style="color:#8be9fd;font-style:italic">equal? </span>(<span style="color:#50fa7b">rember1*</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>)) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>)) <span style="color:#6272a4">; if the list with &#39;a&#39; removed doesn&#39;t change</span>
+           (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>) (<span style="color:#50fa7b">rember1*</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))  <span style="color:#6272a4">; then recurse</span>
+          (<span style="color:#50fa7b">else</span>
+            (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#50fa7b">rember1*</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>)) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))) <span style="color:#6272a4">; otherwise remove &#39;a&#39;</span>
+
+(<span style="color:#50fa7b">rember1*</span>
+  <span style="color:#f1fa8c">&#39;salad</span>
+  <span style="color:#ff79c6">&#39;</span>((<span style="color:#50fa7b">Swedish</span> <span style="color:#8be9fd;font-style:italic">rye</span>) (<span style="color:#50fa7b">French</span> (<span style="color:#50fa7b">mustard</span> <span style="color:#8be9fd;font-style:italic">salad</span> <span style="color:#8be9fd;font-style:italic">turkey</span>)) <span style="color:#8be9fd;font-style:italic">salad</span>))
+<span style="color:#6272a4">;-&gt; &#39;((Swedish rye) (French (mustard turkey)) salad)</span></code></pre></div>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/emacs-dotfile-loading-mechanism-in-windows-system/" data-toggle="tooltip" data-placement="top" title="Emacs dotfile loading mechanism in Windows system">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "katherine He" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/anki" title="anki">
+                            anki
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/emacs" title="emacs">
+                            emacs
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/emasc" title="emasc">
+                            emasc
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/git" title="git">
+                            git
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/hugo" title="hugo">
+                            hugo
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/msys2" title="msys2">
+                            msys2
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/org-mode" title="org-mode">
+                            org-mode
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ox-hugo" title="ox-hugo">
+                            ox-hugo
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/probability" title="probability">
+                            probability
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/spacemacs" title="spacemacs">
+                            spacemacs
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/statistics" title="statistics">
+                            statistics
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/stochastic-process" title="stochastic-process">
+                            stochastic-process
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ubuntu" title="ubuntu">
+                            ubuntu
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/wercker" title="wercker">
+                            wercker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/windows" title="windows">
+                            windows
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/windows10" title="windows10">
+                            windows10
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://twitter.com/laowai121">Twitter @ 伯逸</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                    
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    <li>
+                        <a target="_blank" href="/img/example-qr.png">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/QiKatherine">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Katherine&#39;s Blog 2021
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-145919675-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+</body>
+</html>

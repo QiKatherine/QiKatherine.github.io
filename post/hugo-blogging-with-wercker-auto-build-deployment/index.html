@@ -34,7 +34,7 @@
     <meta name="keyword"  content=" ">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>Hugo Blogging with Wercker Auto Build &amp; Deployment 【用 Wercker 自动部署网站】-Katherine He Blog|何琪的博客</title>
+    <title>Hugo Blogging with Wercker Auto Build &amp; Deployment 【用 Wercker 自动部署网站】-Katherine&#39;s Blog</title>
 
     <link rel="canonical" href="/post/hugo-blogging-with-wercker-auto-build-deployment/">
 
@@ -361,15 +361,15 @@ $(function() {
                 </header>
                 
                 
-                <p>The automated static website generators (e.g. Octopress, Hexo and Hugo) have made <strong>website building and maintaining</strong> way more relaxed than before. The workflow has been simplified to: write and save markdown &ndash; preview on the localhost 1313 &ndash; generate the ~/public (HTML) file &ndash; push to a remote server (GitHub) &ndash; backup source code.</p>
+                <p>The automated static website generators (e.g., Octopress, Hexo, and Hugo) have made <strong>website building and maintaining</strong> way more relaxed than before. The workflow has been simplified to: write and save markdown &ndash; preview on the localhost 1313 &ndash; generate the ~/public (HTML) file &ndash; push to a remote server (GitHub) &ndash; backup source code.</p>
 
-<p>If one considers all technicalities, there are still many questions worth discussing to make this process more efficient, such as (1) which is the best way to host HTML files and source code files (2) which is the better way to automate the procedure.</p>
+<p>If one considers all technicalities, there are still many questions worth discussing to make this process more efficient, such as (1) which is the best way to host HTML files and source code files (2), which is the better way to automate the procedure.</p>
 
-<p>I used to use Hexo where three things need to be tracked separately:  source code and ~/public file (both updated for every article), forked/cloned theme (updated according to theme author) and Hexo generator. I have to use git submodules to track everything. Soon, the hustle and page generation speed make me convert to Hugo. Hugo requires only a binary file to generate a website, with which the update cannot be more straightforward: you download a new .exe file and replace the old one. The updated theme can be manually merged as long as the site config.toml file is well preserved.</p>
+<p>I used to use Hexo where three things need to be tracked separately: source code and ~/public file (both updated for every article), forked/cloned theme (updated according to theme author), and Hexo generator. I have to use git submodules to track everything. Soon, the hustle and page generation speed make me convert to Hugo. Hugo requires only a binary file to generate a website, with which the update cannot be more straightforward: you download a new .exe file and replace the old one. The updated theme can be manually merged as long as the site config.toml file is well preserved.</p>
 
-<p>Let&rsquo;s go back to the first issue. The Hugo official manual has given two way to publish ~/public file: (1) using Master branch of user.github.io to host /doc (instead of public) folder, which is the easiest one to me; (2) using gh-pages and the advantage of this method is that allows you to have another branch hosting source code in the same repo. I fail to generate /doc file somehow, but it gives me a chance to try Wercker, which surprisingly allows me to achieve the first method with the same advantages of the second method. Long story short, now I am using the Master branch of user.github.io to host ~/public file and dev branch to host source file.</p>
+<p>Let&rsquo;s go back to the first issue. The Hugo official manual has given two way to publish ~/public file: (1) using Master branch of user.github.io to host /doc (instead of public) folder, which is the easiest one to me; (2) using gh-pages and the advantage of this method is that allows you to have another branch hosting source code in the same repo. I fail to generate /doc file somehow, but it gives me a chance to try Wercker, which surprisingly allows me to achieve the first method with the same advantages as the second method. Long story short, now I am using the Master branch of user.github.io to host ~/public file and dev branch to host source file.</p>
 
-<p>My answer to the second issue is using Wercker. It will automatically go to your source code repo and build the ~/public folder and deploy the website. So the process mentioned at the beginning of this article becomes even easier: write and save an article in markdown &ndash; push the whole source code to the remote repo. This means you do NOT need to generate and deploy in the local terminal any more. Wercker does the work every time it detects a new push on the designated repo on the remote server. The script  wercker.yml (generated and pushed by you) will tell Wercker precisely how and where to build and deploy. There&rsquo;re also other popular continuous integration tools such as Travis CI, Jenkins which has advantages at different aspects such as free usage, commercial stability, running speed and etc. I choose to use wercker based on my needs.</p>
+<p>My answer to the second issue is using Wercker. It will automatically go to your source code repo and build the ~/public folder and deploy the website. So the process mentioned at the beginning of this article becomes even easier: write and save an article in markdown &ndash; push the full source code to the remote repo. This means you do NOT need to generate and deploy in the local terminal anymore. Wercker does the work every time it detects a new push on the designated repo on the remote server. The script wercker.yml (generated and pushed by you) will tell Wercker precisely how and where to build and deploy. There are also other popular continuous integration tools such as Travis CI, Jenkins, which has advantages at different aspects such as free usage, commercial stability, running speed and etc. I choose to use wercker based on my needs.</p>
 
 <p>The Hugo instruction <a href="https://gohugo.io/hosting-and-deployment/deployment-with-wercker/">https://gohugo.io/hosting-and-deployment/deployment-with-wercker/</a> is very detailed and well written, and you should be quite clear before the &lsquo;Configure Access&rsquo; section. The Wercker has changed quite a bit in the generating wercker.yml part. You do NOT HAVE to search and choose boxes or steps to build and deploy. The default script contains the box information, and it can be modified unless you don&rsquo;t like it. The build and deploy part are generated separately in the workflow section (press CTRL and + to see the bigger picture) <img src="/img/Hugo blogging with werecker 1.png" alt="" /></p>
 
@@ -417,7 +417,7 @@ deploy:
 
 <p>You can also add a local deploy.sh to make source code push easier too:</p>
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">#!/bin/bash
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nil" data-lang="nil"><span style="color:#ff79c6">#!/bin/bash
 </span><span style="color:#ff79c6"></span><span style="color:#8be9fd;font-style:italic">cd</span> ~/Hugo/myblog/
 
 <span style="color:#6272a4"># Add changes to git.</span>
@@ -622,15 +622,6 @@ git push origin -u dev</code></pre></div>
                 <ul class="list-inline text-center">
                    
                     
-                    <li>
-                        <a href="mailto:ucbqqhe@ucl.ac.uk">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-		    
                     
                     
                     
@@ -663,7 +654,7 @@ git push origin -u dev</code></pre></div>
                     
                 </ul>
 		<p class="copyright text-muted">
-                    Copyright &copy; Katherine&#39;s Blog 2019
+                    Copyright &copy; Katherine&#39;s Blog 2021
                     <br>
                     <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
                     <iframe

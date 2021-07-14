@@ -34,7 +34,7 @@
     <meta name="keyword"  content=" ">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>The Little Schemer speedy referring note (1/3)-Katherine He Blog|何琪的博客</title>
+    <title>The Little Schemer speedy referring note (1/3)-Katherine&#39;s Blog</title>
 
     <link rel="canonical" href="/post/the-little-schemer-note/">
 
@@ -347,22 +347,38 @@ $(function() {
 <li><a href="#chapter-2-do-it-again-and-again">Chapter 2 Do It Again and Again</a></li>
 <li><a href="#chapter-3-cons-the-magnificent">Chapter 3 Cons the Magnificent</a></li>
 <li><a href="#chapter-4-number-games">Chapter 4 Number Games</a></li>
+<li><a href="#chapter-5-it-s-full-of-stars">Chapter 5 It&rsquo;s Full Of Stars</a></li>
+<li><a href="#chapter-6-shadows">Chapter 6 Shadows</a></li>
 </ul></li>
 </ul>
 </nav>
                 
                 
 
+<p>Part one:
+<a href="https://sheishe.xyz/post/the-little-schemer-note/">The Little Schemer speedy referring note (<sup>1</sup>&frasl;<sub>3</sub>)-Katherine He Blog|何琪的博客</a>
+Part two:
+<a href="https://sheishe.xyz/post/the-little-schemer-note-2-3/">The Little Schemer speedy referring note (<sup>2</sup>&frasl;<sub>3</sub>)-Katherine He Blog|何琪的博客</a>
+Part three:
+<a href="https://sheishe.xyz/post/the-little-schemer-note-3-3/">The Little Schemer speedy referring note (<sup>3</sup>&frasl;<sub>3</sub>)-Katherine He Blog|何琪的博客</a></p>
+
+<p>The Little Schemer uses a very easy way, introducing the nature of recursion,
+continuation and Y combinator with only several simple building blocks. You might
+have been so used to writing and calling functions with formal name, this book
+will show you how complex procedure can be reformed by lambda expressions.</p>
+
 <p>This is a quick reference note that I pull from the book The Little Schemer. The
-full detailed code can be found in this repo:</p>
+ code in this note is from here with edition:</p>
 
 <p><a href="https://github.com/pkrumins/the-little-schemer/blob/master/02-do-it-again.ss">the-little-schemer/02-do-it-again.ss at master · pkrumins/the-little-schemer</a></p>
 
 <p>My recommendation of reading this book is that don&rsquo;t skip too much questions
-after fifth chapter, as the functions getting more complex, you will find those
-questions are carefully asked to help you improve thoughts to design better
-programs. Meanwhile try to write functions on papers before checking the
-answer. I really enjoy this book and hope you have much fun as I do :).</p>
+after the fifth chapter, as the functions getting more complex, you will find those
+questions from the dialogue are carefully asked, in order to guide us to gradually write a better program. Meanwhile try to write functions with pens and papers before checking the
+answer, and often review them with quick scan of this article. I really enjoy this book, and hope you have much fun as I do :).</p>
+
+<p>From some point, you probably need to read &ldquo;Fibonacci times&rdquo; in every chapter to fully
+understand but keep going, you won&rsquo;t regret it.</p>
 
 <h2 id="chapter-1-toy">Chapter 1 Toy</h2>
 
@@ -377,8 +393,8 @@ parenthesis: a string of digits/characters/numbers.</p>
 <p><strong>list</strong> is something enclosed by pair of parenthesis: something can be nothing, can be
 atom, can be another list.</p>
 
-<p><strong>s-expression</strong> can be any of :an atom; an (empty) list; a pair. A series of s-expression
-enclosed by parenthesis is <strong>list</strong>.</p>
+<p><strong>s-expression</strong> can be an atom, or an expression of the form (x y) where x and
+y are s-expressions. It&rsquo;s essentially a binary tree.</p>
 
 <p><code>(car argument)</code>: returns first s-expression among all the first-level
  s-expression within a list. It can NOT work on empty list.</p>
@@ -415,7 +431,12 @@ whenever the first F is found and returns F, otherwise it returns T.</p>
 <p><code>(lat? argument)</code>: checks if every s-expression in a list is atom. Since the
  s-expression is either atom or list/pair, <code>(lat?)</code> use <code>(atom?)</code> as core function.</p>
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">; (lat? (Jack Sprat could eat no chicken fat)) -&gt; #t, for every element is atom.</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;define atom? as primitive function first:</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">atom?</span>
+ (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">x</span>)
+    (<span style="color:#ff79c6">and </span>(<span style="color:#8be9fd;font-style:italic">not </span>(<span style="color:#8be9fd;font-style:italic">pair? </span><span style="color:#8be9fd;font-style:italic">x</span>)) (<span style="color:#8be9fd;font-style:italic">not </span>(<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">x</span>)))))
+
+<span style="color:#6272a4">; (lat? (Jack Sprat could eat no chicken fat)) -&gt; #t, for every element is atom.</span>
 (<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">lat?</span>
   (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
     (<span style="color:#50fa7b">cond</span>
@@ -562,7 +583,7 @@ of old atom in lat (a list).</p>
       (<span style="color:#50fa7b">else</span>
         (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">multisubst</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))</code></pre></div>
 
-<p>The multi operation is genenally better designed. It can work with both single
+<p>The multi operation is generally better designed. It can work with both single
 and multiple occurrences of old atoms, and terminate at until it&rsquo;s got null
 list. But the single operations terminate right when the first <code>(eq?)</code> returns
 T. Generally applicable termination should be at finishing the last element.</p>
@@ -761,6 +782,373 @@ designated function.</p>
         (<span style="color:#50fa7b">else</span>
           (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">rempick-one</span> (<span style="color:#50fa7b">sub1</span> <span style="color:#8be9fd;font-style:italic">n</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))</code></pre></div>
 
+<h2 id="chapter-5-it-s-full-of-stars">Chapter 5 It&rsquo;s Full Of Stars</h2>
+
+<p>The starred function family re-write the functions in previous chapters with a
+bit more recursions. The purpose is to achieve higher level of
+mission, or to make the work more thoroughly.</p>
+
+<hr />
+
+<p>For example, <code>(rember a l)</code> removes multiple occurrences of <code>a</code> as the <em>first level</em> s-expression of list <code>l</code>, whereas <code>(rember* a l)</code>
+removes <code>a</code> as <em>any level</em> s-expressions. This is done by changing one more
+condition in the outer <code>(else)</code> by recusion. We can also improve insertR*,
+insertL*, occur*, subst* and member* in the same way.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">; (rember* &#39;cup &#39;((coffee) cup ((tea) cup) (and (hick)) cup))</span>
+<span style="color:#6272a4">; -&gt; &#39;((coffee) ((tea)) (and (hick)))</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">rember*</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">l</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#ff79c6">&#39;</span>())
+      ((<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>))
+       (<span style="color:#50fa7b">cond</span>
+         ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#8be9fd;font-style:italic">a</span>)
+          (<span style="color:#50fa7b">rember*</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))
+         (<span style="color:#50fa7b">else</span>
+           (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>) (<span style="color:#50fa7b">rember*</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#50fa7b">rember*</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>)) (<span style="color:#50fa7b">rember*</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))
+
+<span style="color:#6272a4">;(insertR* &#39;roast &#39;chuck</span>
+<span style="color:#6272a4">;  &#39;((how much (wood)) could ((a (wood) chuck)) (((chuck))) (if (a) ((wood chuck))) could chuck wood))</span>
+<span style="color:#6272a4">; -&gt; ((how much (wood)) could ((a (wood) chuck roast)) (((chuck roast)))</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">insertR*</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">new</span> <span style="color:#8be9fd;font-style:italic">old</span> <span style="color:#8be9fd;font-style:italic">l</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#ff79c6">&#39;</span>())
+      ((<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>))
+       (<span style="color:#50fa7b">cond</span>
+         ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#8be9fd;font-style:italic">old</span>)
+          (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">new</span> (<span style="color:#50fa7b">insertR*</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))
+         (<span style="color:#50fa7b">else</span>
+           (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>) (<span style="color:#50fa7b">insertR*</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#50fa7b">insertR*</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>)) (<span style="color:#50fa7b">insertR*</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))
+
+<span style="color:#6272a4">;(insertL* &#39;pecker &#39;chuck</span>
+<span style="color:#6272a4">;  &#39;((how much (wood)) could ((a (wood) chuck)) (((chuck))) (if (a) ((wood chuck))) could chuck wood))</span>
+<span style="color:#6272a4">; -&gt; ((how much (wood)) could ((a (wood) chuck pecker)) (((chuck pecker))) (if (a) ((wood chuck pecker))) could chuck pecker wood)</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">insertL*</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">new</span> <span style="color:#8be9fd;font-style:italic">old</span> <span style="color:#8be9fd;font-style:italic">l</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#ff79c6">&#39;</span>())
+      ((<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>))
+       (<span style="color:#50fa7b">cond</span>
+         ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#8be9fd;font-style:italic">old</span>)
+          (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">new</span> (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#50fa7b">insertL*</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))
+         (<span style="color:#50fa7b">else</span>
+           (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>) (<span style="color:#50fa7b">insertL*</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#50fa7b">insertL*</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>)) (<span style="color:#50fa7b">insertL*</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))
+
+<span style="color:#6272a4">;(occur* &#39;banana &#39;((banana) (split ((((banana ice))) (cream (banana)) sherbet)) (banana) (bread) (banana brandy)))</span>
+<span style="color:#6272a4">; -&gt; 5</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">occur*</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">l</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
+      ((<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>))
+       (<span style="color:#50fa7b">cond</span>
+         ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#8be9fd;font-style:italic">a</span>)
+          (<span style="color:#50fa7b">add1</span> (<span style="color:#50fa7b">occur*</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))
+         (<span style="color:#50fa7b">else</span>
+           (<span style="color:#50fa7b">occur*</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#8be9fd;font-style:italic">+ </span>(<span style="color:#50fa7b">occur*</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>))
+           (<span style="color:#50fa7b">occur*</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))
+
+<span style="color:#6272a4">;(subst* &#39;orange &#39;banana</span>
+<span style="color:#6272a4">;  &#39;((banana) (split ((((banana ice))) (cream (banana)) sherbet)) (banana) (bread) (banana brandy)))</span>
+<span style="color:#6272a4">; -&gt; &#39;((orange) (split ((((orange ice))) (cream (orange)) sherbet)) (orange) (bread) (orange brandy))</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">subst*</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">new</span> <span style="color:#8be9fd;font-style:italic">old</span> <span style="color:#8be9fd;font-style:italic">l</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#ff79c6">&#39;</span>())
+      ((<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>))
+       (<span style="color:#50fa7b">cond</span>
+         ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#8be9fd;font-style:italic">old</span>)
+          (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">new</span> (<span style="color:#50fa7b">subst*</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))
+         (<span style="color:#50fa7b">else</span>
+           (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>) (<span style="color:#50fa7b">subst*</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#50fa7b">subst*</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>)) (<span style="color:#50fa7b">subst*</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))
+
+<span style="color:#6272a4">;(member &#39;chips &#39;((potato) (chips ((with) fish) (chips)))) -&gt; #t</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">member*</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">l</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) #f)
+      ((<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>))
+       (<span style="color:#ff79c6">or </span>(<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#8be9fd;font-style:italic">a</span>)
+           (<span style="color:#50fa7b">member*</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#ff79c6">or </span>(<span style="color:#50fa7b">member*</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>))
+            (<span style="color:#50fa7b">member*</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))</code></pre></div>
+
+<p>The starred functions require more predicates to consider all possible
+situations. After observing the design pattern in the above functions, we
+would see that they all asked three fundamental questions: <strong>(1) Is the list null?
+(2) If not, is the <code>(car argument)</code> an atom? (3) If yes, is the predicate
+<code>(eq?)</code> true?</strong> It is these questions that enable a
+function to work on any cases with: empty list; atom <em>consed</em> to a list; list
+<em>consed</em> to a list.</p>
+
+<p>Let&rsquo;s see another function:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;(leftmost &#39;((potato) (chips ((with) fish) (chips)))) -&gt; &#39;potato</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">leftmost</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>)) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>))
+      (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">leftmost</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>))))))</code></pre></div>
+
+<p>As comparison, this function shows a case where only ONE question is
+asked, therefore it works on less types of argument than the starred functions. But
+there is more: you may noticed that there were TWO questions checked above. The <code>(null?)</code> and <code>(atom?)</code>
+are achieved by one predicate with some self deducted logic: if the list is null, the <code>(atom? car(lat))</code>
+would also return F and the recursion in <code>(else)</code> will still be called. This type of
+simplification will help us to improve functions into a pithy fashion.</p>
+
+<p>For example, we write <code>(eqlist?)</code> to check the equality of two lists. Based on
+the 3 golden questions we asked for operating ONE list, designing two lists operation
+will require asking 3*3 = 9 predicates (in permutation), and the <code>(eq?)</code> is happening when both of the
+arguments are atoms:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;(eqlist? &#39;(strawberry ice cream) &#39;(strawberry ice cream)) -&gt; #t</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">eqlist?</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l1</span> <span style="color:#8be9fd;font-style:italic">l2</span>)
+    (<span style="color:#50fa7b">cond</span>
+      <span style="color:#6272a4">; case 1: l1 is empty, l2 is empty, atom, list</span>
+      ((<span style="color:#ff79c6">and </span>(<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l1</span>) (<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l2</span>)) #t)
+      ((<span style="color:#ff79c6">and </span>(<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l1</span>) (<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l2</span>))) #f)
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l1</span>) #f)<span style="color:#6272a4">; the above predicates have ruled out l2 is empty or list</span>
+      <span style="color:#6272a4">; case 2: l1 is atom, l2 is empty, atom, list</span>
+      ((<span style="color:#ff79c6">and </span>(<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l1</span>)) (<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l2</span>)) #f)
+      ((<span style="color:#ff79c6">and </span>(<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l1</span>)) (<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l2</span>)))
+       (<span style="color:#ff79c6">and </span>(<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l1</span>) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l2</span>))
+            (<span style="color:#50fa7b">eqlist?</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l1</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l2</span>))))
+      ((<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l1</span>)) #f)
+      <span style="color:#6272a4">; case 3: l1 is a list, l2 is empty, atom, list</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l2</span>) #f)
+      ((<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l2</span>)) #f)
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#ff79c6">and </span>(<span style="color:#50fa7b">eqlist?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l1</span>) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l2</span>))
+             (<span style="color:#50fa7b">eqlist?</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l1</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l2</span>)))))))
+
+<span style="color:#6272a4">;(eqlist2? &#39;(a (b c)) &#39;(a (b c))) -&gt; #t</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">eqlist2?</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l1</span> <span style="color:#8be9fd;font-style:italic">l2</span>)
+    (<span style="color:#50fa7b">cond</span>
+      <span style="color:#6272a4">; case 1: l1 is empty, l2 is empty, atom, list</span>
+      ((<span style="color:#ff79c6">and </span>(<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l1</span>) (<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l2</span>)) #t)
+      ((<span style="color:#ff79c6">or </span>(<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l1</span>) (<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l2</span>)) #f)
+      <span style="color:#6272a4">; case 2: l1 is atom, l2 is empty, atom, list</span>
+      ((<span style="color:#ff79c6">and </span>(<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l1</span>)) (<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l2</span>)))
+       (<span style="color:#ff79c6">and </span>(<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l1</span>) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l2</span>))
+            (<span style="color:#50fa7b">eqlist2?</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l1</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l2</span>))))
+      ((<span style="color:#ff79c6">or </span>(<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l1</span>)) (<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l2</span>)))
+       #f)
+      <span style="color:#6272a4">; case 3: l1 is a list, l2 is empty, atom, list</span>
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#ff79c6">and </span>(<span style="color:#50fa7b">eqlist2?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l1</span>) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l2</span>))
+             (<span style="color:#50fa7b">eqlist2?</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l1</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l2</span>)))))))</code></pre></div>
+
+<p>Notice that the third predicate can be written as <code>(null? l1) #f)</code> because <code>(cond)</code> excutes the
+predicate one by one. Means that the second predicate gets to run <strong>only when</strong> the
+first predicate returns #f which gives us information for inference.  It&rsquo;s not
+quite pithy, so in the <code>(eqlist2?)</code> we merge some of the redundant #f predicates together
+with <code>(or)</code>.</p>
+
+<p>This can be further simplified by introducing an S-expression comparison
+function <code>(equal?)</code>, which itself can be also written in the simplified way as <code>(eqlist2?)</code>.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;(equal? &#39;(a) &#39;(a)) -&gt; #t</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">equal?</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">s1</span> <span style="color:#8be9fd;font-style:italic">s2</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#ff79c6">and </span>(<span style="color:#50fa7b">atom?</span> <span style="color:#8be9fd;font-style:italic">s1</span>) (<span style="color:#50fa7b">atom?</span> <span style="color:#8be9fd;font-style:italic">s2</span>))
+       (<span style="color:#8be9fd;font-style:italic">eq? </span><span style="color:#8be9fd;font-style:italic">s1</span> <span style="color:#8be9fd;font-style:italic">s2</span>))
+      ((<span style="color:#ff79c6">or </span>(<span style="color:#50fa7b">atom?</span> <span style="color:#8be9fd;font-style:italic">s1</span>) (<span style="color:#50fa7b">atom?</span> <span style="color:#8be9fd;font-style:italic">s2</span>)) #f)
+      (<span style="color:#ff79c6">else </span>(<span style="color:#8be9fd;font-style:italic">equal? </span><span style="color:#8be9fd;font-style:italic">s1</span> <span style="color:#8be9fd;font-style:italic">s2</span>)))))
+
+<span style="color:#6272a4">;(eqlist3?</span>
+<span style="color:#6272a4">;  &#39;(beef ((sausage)) (and (soda)))</span>
+<span style="color:#6272a4">;  &#39;(beef ((salami)) (and (soda)))) -&gt; #f</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">eqlist3?</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l1</span> <span style="color:#8be9fd;font-style:italic">l2</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#ff79c6">and </span>(<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l1</span>) (<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l2</span>)) #t)
+      ((<span style="color:#ff79c6">or </span>(<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l1</span>) (<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l2</span>)) #f)
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#ff79c6">and </span>(<span style="color:#8be9fd;font-style:italic">equal? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l1</span>) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l2</span>))
+             (<span style="color:#8be9fd;font-style:italic">equal? </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l1</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l2</span>)))))))</code></pre></div>
+
+<p>After defining <code>(eqlist?)</code> to compare the equality of two lists, we can further
+improve <code>(rember)</code> to remove <strong>lists</strong> as argument, not just removing atoms like in the
+previous chapter.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;(rember &#39;(foo (bar (baz))) &#39;(apples (foo (bar (baz))) oranges)) -&gt; &#39;(apples oranges)</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">rember</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">s</span> <span style="color:#8be9fd;font-style:italic">l</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#ff79c6">&#39;</span>())
+      ((<span style="color:#50fa7b">equal2??</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#8be9fd;font-style:italic">s</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))
+      (<span style="color:#ff79c6">else </span>(<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>) (<span style="color:#50fa7b">rember</span> <span style="color:#8be9fd;font-style:italic">s</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))</code></pre></div>
+
+<p>This chapter establish rules to write a good functions <code>(1) the first thing is to write ALL the operations
+for every predicate condition; (2) make sure the algorithm is correct; (3) then to simplify it.</code></p>
+
+<h2 id="chapter-6-shadows">Chapter 6 Shadows</h2>
+
+<hr />
+
+<p>An arithmetic expression (aexp) is either an atom or two arithmetic
+expression combined by o+, o* , ^. <code>(numbered? argument)</code> return #f if the
+argument contains anything other than numbers and o+, o* , ^.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;(numbered? &#39;(5 ox (3 &#39;foo 2))) -&gt; #f</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">numbered?</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">aexp</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#50fa7b">atom?</span> <span style="color:#8be9fd;font-style:italic">aexp</span>) (<span style="color:#8be9fd;font-style:italic">number? </span><span style="color:#8be9fd;font-style:italic">aexp</span>))
+      ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">aexp</span>)) <span style="color:#f1fa8c">&#39;o+</span>)
+       (<span style="color:#ff79c6">and </span>(<span style="color:#50fa7b">numbered?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">aexp</span>))
+            (<span style="color:#50fa7b">numbered?</span> (<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">aexp</span>))))))
+      ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">aexp</span>)) <span style="color:#f1fa8c">&#39;ox</span>)
+       (<span style="color:#ff79c6">and </span>(<span style="color:#50fa7b">numbered?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">aexp</span>))
+            (<span style="color:#50fa7b">numbered?</span> (<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">aexp</span>))))))
+      ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">aexp</span>)) <span style="color:#f1fa8c">&#39;o^</span>)
+       (<span style="color:#ff79c6">and </span>(<span style="color:#50fa7b">numbered?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">aexp</span>))
+            (<span style="color:#50fa7b">numbered?</span> (<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">aexp</span>))))))
+      (<span style="color:#ff79c6">else </span>#f))))
+
+<span style="color:#6272a4">;if we are only allowed to input numeric expression, we can simplify as:</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">numbered?</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">aexp</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#50fa7b">atom?</span> <span style="color:#8be9fd;font-style:italic">aexp</span>) (<span style="color:#8be9fd;font-style:italic">number? </span><span style="color:#8be9fd;font-style:italic">aexp</span>))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#ff79c6">and </span>(<span style="color:#50fa7b">numbered?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">aexp</span>))
+             (<span style="color:#50fa7b">numbered?</span> (<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">aexp</span>)))))))))</code></pre></div>
+
+<p>The function <code>(value argument)</code> print the calculated value of a numberic
+expression: when the argument is a single atom, it prints itself; when the
+argument is conpound, meaning more sub-expressions joint by operator, it
+recursively runs until hits a single atom, and then the aggregate calculation is
+done from inside to outside. However, notice that the predicate changes according to the syntax
+setting of numeric expressions, taking addition as example:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;(1 + 1) is written as:</span>
+ ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">nexp</span>)) <span style="color:#f1fa8c">&#39;o+</span>)
+
+<span style="color:#6272a4">;(+ 1 1) is written as:</span>
+ ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">nexp</span>) <span style="color:#f1fa8c">&#39;o+</span>)</code></pre></div>
+
+<p>So the <code>(value)</code> can be written in two forms:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;(value &#39;(1 o+ (3 o^ 4))) -&gt;82</span>
+  (<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">value</span>
+    (<span style="color:#ff79c6">lambda </span><span style="color:#8be9fd;font-style:italic">exp</span>)
+      (<span style="color:#50fa7b">cond</span>
+        ((<span style="color:#50fa7b">atom?</span> <span style="color:#8be9fd;font-style:italic">nexp</span>) <span style="color:#8be9fd;font-style:italic">nexp</span>)
+        ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">nexp</span>)) <span style="color:#f1fa8c">&#39;o+</span>)
+         (<span style="color:#8be9fd;font-style:italic">+ </span>(<span style="color:#50fa7b">value</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">nexp</span>))
+            (<span style="color:#50fa7b">value</span> (<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">nexp</span>))))))
+        ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">nexp</span>)) <span style="color:#f1fa8c">&#39;o*</span>)
+         (<span style="color:#8be9fd;font-style:italic">* </span>(<span style="color:#50fa7b">value</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">nexp</span>))
+            (<span style="color:#50fa7b">value</span> (<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">nexp</span>))))))
+        ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">nexp</span>)) <span style="color:#f1fa8c">&#39;o^</span>)
+         (<span style="color:#8be9fd;font-style:italic">expt </span>(<span style="color:#50fa7b">value</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">nexp</span>))
+               (<span style="color:#50fa7b">value</span> (<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">nexp</span>))))))
+        (<span style="color:#ff79c6">else </span>#f))))
+
+<span style="color:#6272a4">;(value-prefix &#39;(o+ 1 (o^ 3 4))) -&gt; 82</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">value-prefix</span>
+    (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">nexp</span>)
+      (<span style="color:#50fa7b">cond</span>
+        ((<span style="color:#50fa7b">atom?</span> <span style="color:#8be9fd;font-style:italic">nexp</span>) <span style="color:#8be9fd;font-style:italic">nexp</span>)
+        ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">nexp</span>) <span style="color:#f1fa8c">&#39;o+</span>)
+         (<span style="color:#8be9fd;font-style:italic">+ </span>(<span style="color:#50fa7b">value-prefix</span> (<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">nexp</span>)))
+            (<span style="color:#50fa7b">value-prefix</span> (<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">nexp</span>))))))
+        ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">nexp</span>) <span style="color:#f1fa8c">&#39;o*</span>)
+         (<span style="color:#8be9fd;font-style:italic">* </span>(<span style="color:#50fa7b">value-prefix</span> (<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">nexp</span>)))
+            (<span style="color:#50fa7b">value-prefix</span> (<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">nexp</span>))))))
+        ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">nexp</span>) <span style="color:#f1fa8c">&#39;o^</span>)
+         (<span style="color:#8be9fd;font-style:italic">expt </span>(<span style="color:#50fa7b">value-prefix</span> (<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">nexp</span>)))
+               (<span style="color:#50fa7b">value-prefix</span> (<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">nexp</span>))))))
+        (<span style="color:#ff79c6">else </span>#f))))</code></pre></div>
+
+<p>For this type of prefixed operator syntax, we can rewrite it with pre-defined
+1st and 2nd sub-expressions:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#bd93f9">1</span><span style="color:#8be9fd;font-style:italic">st-sub-exp</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">aexp</span>)
+    (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">aexp</span>)))
+
+(<span style="color:#ff79c6">define </span><span style="color:#bd93f9">2</span><span style="color:#8be9fd;font-style:italic">nd-sub-exp</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">aexp</span>)
+    (<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">aexp</span>)))))
+
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">operator</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">aexp</span>)
+    (<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">aexp</span>))))
+
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">value-prefix-helper</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">nexp</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#50fa7b">atom?</span> <span style="color:#8be9fd;font-style:italic">nexp</span>) <span style="color:#8be9fd;font-style:italic">nexp</span>)
+      ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#50fa7b">operator</span> <span style="color:#8be9fd;font-style:italic">nexp</span>) <span style="color:#f1fa8c">&#39;o+</span>)
+       (<span style="color:#8be9fd;font-style:italic">+ </span>(<span style="color:#50fa7b">value-prefix</span> (<span style="color:#bd93f9">1</span><span style="color:#8be9fd;font-style:italic">st-sub-exp</span> <span style="color:#8be9fd;font-style:italic">nexp</span>))
+          (<span style="color:#50fa7b">value-prefix</span> (<span style="color:#bd93f9">2</span><span style="color:#8be9fd;font-style:italic">nd-sub-exp</span> <span style="color:#8be9fd;font-style:italic">nexp</span>))))
+      ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">nexp</span>) <span style="color:#f1fa8c">&#39;o*</span>)
+       (<span style="color:#8be9fd;font-style:italic">* </span>(<span style="color:#50fa7b">value-prefix</span> (<span style="color:#bd93f9">1</span><span style="color:#8be9fd;font-style:italic">st-sub-exp</span> <span style="color:#8be9fd;font-style:italic">nexp</span>))
+          (<span style="color:#50fa7b">value-prefix</span> (<span style="color:#bd93f9">2</span><span style="color:#8be9fd;font-style:italic">nd-sub-exp</span> <span style="color:#8be9fd;font-style:italic">nexp</span>))))
+      ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">nexp</span>) <span style="color:#f1fa8c">&#39;o^</span>)
+       (<span style="color:#8be9fd;font-style:italic">expt </span>(<span style="color:#50fa7b">value-prefix</span> (<span style="color:#bd93f9">1</span><span style="color:#8be9fd;font-style:italic">st-sub-exp</span> <span style="color:#8be9fd;font-style:italic">nexp</span>))
+             (<span style="color:#50fa7b">value-prefix</span> (<span style="color:#bd93f9">2</span><span style="color:#8be9fd;font-style:italic">nd-sub-exp</span> <span style="color:#8be9fd;font-style:italic">nexp</span>))))
+      (<span style="color:#ff79c6">else </span>#f))))</code></pre></div>
+
+<p>From this chapter we begin to <strong>design different functions for different syntax
+setting functions</strong>, we know this work will not be limited to <code>(1 + 1) and (+1
+1)</code>. Actually, the syntactic/symbolic expression can be in any form, such as: if
+0 is written as <code>quote()</code>, then 4 can be written as <code>(() () () ()) or
+((((()))))</code>. Accordingly, the numberic operations can be written as:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">; sero? just like zero?</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">sero?</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span>)
+    (<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">n</span>)))
+
+<span style="color:#6272a4">; edd1 just like add1</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">edd1</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span>)
+    (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#ff79c6">&#39;</span>() <span style="color:#8be9fd;font-style:italic">n</span>)))
+
+<span style="color:#6272a4">; zub1 just like sub1</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">zub1</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span>)
+    (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">n</span>)))
+
+<span style="color:#6272a4">; .+ just like o+</span>
+<span style="color:#6272a4">;(.+ &#39;(()) &#39;(() ())) -&gt; &#39;(() () ())</span>
+(<span style="color:#ff79c6">define </span><span style="color:#ff79c6">.</span><span style="color:#8be9fd;font-style:italic">+</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span> <span style="color:#8be9fd;font-style:italic">m</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#50fa7b">sero?</span> <span style="color:#8be9fd;font-style:italic">m</span>) <span style="color:#8be9fd;font-style:italic">n</span>)
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#50fa7b">edd1</span> (<span style="color:#ff79c6">.</span><span style="color:#8be9fd;font-style:italic">+</span> <span style="color:#8be9fd;font-style:italic">n</span> (<span style="color:#50fa7b">zub1</span> <span style="color:#8be9fd;font-style:italic">m</span>)))))))
+
+<span style="color:#6272a4">; tat? just like lat?</span>
+<span style="color:#6272a4">;(tat? &#39;((()) (()()) (()()()))) -&gt; #f</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">tat?</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) #t)
+      ((<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>))
+       (<span style="color:#50fa7b">tat?</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))
+      (<span style="color:#ff79c6">else </span>#f))))</code></pre></div>
+
 
                 
 
@@ -948,15 +1336,6 @@ designated function.</p>
                 <ul class="list-inline text-center">
                    
                     
-                    <li>
-                        <a href="mailto:ucbqqhe@ucl.ac.uk">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-		    
                     
                     
                     
@@ -989,7 +1368,7 @@ designated function.</p>
                     
                 </ul>
 		<p class="copyright text-muted">
-                    Copyright &copy; Katherine&#39;s Blog 2019
+                    Copyright &copy; Katherine&#39;s Blog 2021
                     <br>
                     <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
                     <iframe

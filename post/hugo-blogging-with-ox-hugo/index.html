@@ -34,7 +34,7 @@
     <meta name="keyword"  content=" ">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】-Katherine He Blog|何琪的博客</title>
+    <title>Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】-Katherine&#39;s Blog</title>
 
     <link rel="canonical" href="/post/hugo-blogging-with-ox-hugo/">
 
@@ -367,26 +367,26 @@ $(function() {
                 
                 
 
-<p>There have been many good articles talking about using <code>ox-hugo</code> to aid
-efficient blog writing in Emacs/Spacemacs. I read these articles carefully
-several times and feel pretty confident using ox-hugo, so I would strongly
-recommend you give them a look:</p>
+<p>There have been many excellent articles talking about using <code>ox-hugo</code> to help with efficient blog-writing in Emacs/Spacemacs. I read these articles carefully several times and feel pretty confident using ox-hugo, so I would strongly recommend you give them a look:</p>
 
-<p><img src="/img/Hugo blogging with Ox-hugo 8.png" alt="" />
-This is true for many cases, but no, not for Hugo or <code>ox-hugo</code>. They are amazing official documentation! (Mr.Kaushal I know you occasionally search <code>ox-hugo</code> related articles in all different languages. If you happen to read this, thank you!)</p>
+<p><img src="/img/Hugo blogging with Ox-hugo 8.png" alt="" /> This is true for many cases, but no, not for Hugo or <code>ox-hugo</code>. Ox-hugo has fantastic official documentation! (Mr.Kaushal I know you occasionally search <code>ox-hugo</code> related articles in all different languages. If you happen to read this, thank you!)</p>
 
-<p>• <a href="https://ox-hugo.scripter.co/">ox-hugo official documentation</a> is very well written. The author carefully demonstrates not only all basics of using <code>ox-hugo</code>, but also some killer choices to improvise.</p>
+<p>• <a href="https://ox-hugo.scripter.co/">ox-hugo official documentation</a> is very well written. The author carefully demonstrates not only the basics of using <code>ox-hugo</code>, but also some killer choices to improvise.</p>
 
 <p>• <a href="https://gtpedrosa.github.io/blog/using-org-mode-and-ox-hugo-to-replace-markdown-in-hugo-workflow">USING ORG MODE AND OX-HUGO TO REPLACE MARKDOWN IN HUGO WORKFLOW</a> and the three other articles mentioned are very helpful to me too.</p>
 
 <p>• <a href="https://www.kengrimes.com/ox-hugo-tutorial/">Ken&rsquo;s ox-hugo tutorial</a> is the source of some of my sections mentioned below, which you can see the snapshots are directly from Ken&rsquo;s blog. I re-edit it to help understand the logic of the section tree.</p>
 
-<p>Most content comes from the Hugo official documentation along with these articles. I noticed that there had been quite a few Chinese articles talking about Hugo and <code>ox-hugo</code>, so I am writing this in Chinese.</p>
+<p>The content of this article comes from the Hugo official documentation along with the above articles. I am writing in Chinese because I noticed that there have not been many Chinese articles talking about Hugo and <code>ox-hugo</code>. If you are proficient in English reading, the official documentation and links above should be more than enough to get things done.</p>
 
-<p>我放弃 Hexo，安装 Hugo 的最初目的还是想用它配合 Emacs-org-mode 来写博客记笔记。灵感来自<a href="https://zilongshanren.com/post/move-from-hexo-to-hugo/">子龙山人</a>和<a href="https://www.xianmin.org/post/ox-hugo/">贤民</a>两位老师的博客，具体的安装和使用心得二位已经介绍的非常详细，仔细读完会受益良多。本着不再重复造轮子的原则，这篇文章我想简单写写学习中遇到到有用的东西：Hugo 原生的结构设计；Hugo 与 <code>ox-hugo</code> 的对接原理；在 Emacs/Spacemacs 使用 ox-hugo 帮助我们在 org-mode 以极高的效率写博客并发表。</p>
+<p>我放弃 Hexo，安装 Hugo 的最初目的，是因为 Hugo 的 Emacs 插件支持非常好。我的所有文本工作都用 Emacs 在管理，有了 Ox-hugo 这种插件就可以配合 Emacs-org-mode 来无缝衔接博客记笔记。配置灵感来自<a href="https://zilongshanren.com/post/move-from-hexo-to-hugo/">子龙山人</a>和<a href="https://www.xianmin.org/post/ox-hugo/">贤民</a>两位老师的博客，具体的安装和使用心得二位已经介绍的非常详细，仔细读完会受益良多。</p>
 
-<p>在阅读本文之前，强烈推荐阅读开头推荐的三部分内容。本篇博客主要就是整理了加工了一些来自 Hugo 官网，和以上三篇文章的内容，并配以更直观的图片帮助理解。对我来说 ox-hugo+org-mode 最牛的地方的在于高度集成 org-mode 有一个优秀的原生功能是通 tags 等功能，用一个大文件+一二三四五级小标题就能管理一个文本文件树。具体到本文就是，通过一个文件管理整个网站的内容撰写。这是作者力荐的写作方式，也是他编写这个插件的主要初衷。比起各种单个文件组成的零散网站管理模式，这个结构更清晰，管理更容易，搜索 toggle 都十分方便。作者用 <code>ox-hugo</code> 的官网直接展示了样版：
-<a href="https://ox-hugo.scripter.co/doc/why-ox-hugo/">Why ox-hugo? — ox-hugo - Org to Hugo exporter - https://ox-hugo.scripter.co/</a></p>
+<p>本着不再重复造轮子的原则，这篇文章我想简单写写学习中遇到到有用的东西：Hugo 原生的结构设计；Hugo 与 <code>ox-hugo</code> 的对接原理；在 Emacs/Spacemacs 使用 Ox-hugo 帮助我们在 org-mode 以极高的效率写博客并发表。在阅读本文之前，强烈推荐阅读开头推荐的三部分内容。本篇文章主要就是整理了加工了一些来自 Hugo 官网，和以上三篇文章的内容，并配以更直观的图片帮助理解。</p>
+
+<p>Emacs Org-mode 有一个优秀的原生功能是，可以用一个大文件加上多级别小标题，就能很方便的管理（包括编写，搜索，透视等等）一个超大型的文本文件树。对我来说
+Ox-hugo 最牛的地方的在于, 它把 org-mode 原生的强大功集成到网站编写里来。也就是说，我们也可以通过一个文件管理整个网站的内容撰写。这是 Ox-hugo 这个插件的作者力荐的写作方式，也是他编写这个插件的主要初衷。比起各种单个文件组成的零散网站的文本管理模式，一个文件树的结构更清晰，管理更容易。作者用 <code>ox-hugo</code> 的官网直接展示了一个大型文件网站的样版：</p>
+
+<p><a href="https://ox-hugo.scripter.co/doc/why-ox-hugo/">Why ox-hugo? — ox-hugo - Org to Hugo exporter - https://ox-hugo.scripter.co/</a></p>
 
 <p>这样的结构配合上一些 Emacs 自带的 killer 功能例如 <code>writeroom-mode</code>,
 <code>org-tree-to-indent-buffer</code> , <code>predictive</code> 英文补全, <code>org-capture</code> 一键捕获，能瞬间让写作如虎添翼。</p>
@@ -395,16 +395,22 @@ This is true for many cases, but no, not for Hugo or <code>ox-hugo</code>. They 
 
 <hr />
 
-<p>在写了 7 篇文章以后，其实我还是 org-mode 语法记忆困难户。官网给了零星几个常见的语法参考，但是 org-mode 能定制格式花样的远不止于此。我在此给出一个终极解决方式：参考网站原文的
-org file。网站 org 源码从 org markup 形式到 hugo section 的 front information 都有涵盖，在网站看到想要的格式去原文直接搜索照搬即可：
-<a href="https://ox-hugo.scripter.co/doc/hugo-section/">Full website</a>
-<a href="https://raw.githubusercontent.com/kaushalmodi/ox-hugo/master/doc/ox-hugo-manual.org">Full website source file</a></p>
+<p>我一直都很难记住 org-mode 所有语法细节。官网给了零星几个常见的语法参考，但是 org-mode 能定制格式花样的远不止于此。所以当 org-mode 写作记不起语法的时候，我给出一个终极解决方式：参考这个网站原文的 org file。网站 org 源码从
+org markup 形式到 hugo section 的 front information 都有涵盖，在网站看到想要的格式去原文直接搜索照搬即可。</p>
+
+<p>Most efficient way to use org syntax is digging source samples from the official
+website:</p>
+
+<p><a href="https://ox-hugo.scripter.co/doc/hugo-section/">Full website</a></p>
+
+<p><a href="https://raw.githubusercontent.com/kaushalmodi/ox-hugo/master/doc/ox-hugo-manual.org">Full website source file</a></p>
 
 <h2 id="1-dot-front-matter-页首信息">1. Front matter 页首信息</h2>
 
 <hr />
 
-<p>Hugo 本身其实支持直接把.org 文件渲染成 HTML 发布，但是许多人提到其实支持得不是很好。Hugo 支持最好的 markdown 语法类型是 blackfriday markdown。对很多 Emacs user 来说 org-mode 就像把有力的大锤，碰上跟写作沾边的任务不能抡一下是很遗憾的。所以可以使用这款非常棒的后端插件 <code>ox-hugo</code> 来支持 org-mode 写博文。它的解决方式是：把 org 文件转成 blackfriday markdown, 然后再生成 HTML 文件。首先我们详细看 <code>ox-hugo</code> 官网对其功能的解说：</p>
+<p>Hugo 本身其实支持直接把.org 文件渲染成 HTML 发布，但是许多人提到其实支持得不是很好。Hugo 支持最好的 markdown 语法类型是 blackfriday markdown。对很多 Emacs user
+来说 org-mode 就像把有力的大锤，碰上跟写作沾边的任务不能抡一下是很遗憾的。所以就有了这款非常棒的后端插件 <code>ox-hugo</code> 来支持 org-mode 写博文。它的解决方式是：把 org 文件转成 blackfriday markdown, 然后再生成 HTML 文件。首先我们详细看 <code>ox-hugo</code> 官网对其功能的解说：</p>
 
 <blockquote>
 <p>According to the information documentation, <code>ox-hugo</code> is an Org exporter backend that exports Org to Hugo-compatible Markdown (Blackfriday) and also generates the front matter (in TOML or YAML format).</p>
@@ -412,7 +418,7 @@ org file。网站 org 源码从 org markup 形式到 hugo section 的 front info
 
 <p>简言之，我们主要使用 <code>ox-hugo</code> 做两件事（1）把 org 格式内容转换成 markdown 格式内容；（2）解析 org file 中的用 org 语法写 front-matter，生成 Hugo 要求语法的 front-matter，使得 Hugo 通过正确的信息生成的 HTML 。那么 front-matter 具体指什么呢？</p>
 
-<p>Front matter give the information about the content, but NOT the information of content. It works as metadata to tell Hugo the general properties of the article. Hugo supports three types of front matter syntax: yaml, toml, json. Wheven you generate a new post/article/blog with</p>
+<p>Front matter give the information about the content, but NOT the information of content. It works as metadata to tell Hugo the general properties of the article. Hugo supports three types of front matter syntax: yaml, toml, json. Whenever you generate a new post/article/blog with</p>
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nil" data-lang="nil">$ hugo new site posts</code></pre></div>
 
@@ -436,7 +442,8 @@ draft= true
 &#34;draft&#34;: &#34;true&#34;
 }</code></pre></div>
 
-<p>所以想用 org 进行 blog 写作，也需要定义自己的 front matter. 但是 org file 里 front matter 语法如下</p>
+<p>所以想用 org 进行写作，也需要定义自己的 front matter. 但是 org 语法里 front
+matter 定义如下</p>
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#f1fa8c">:PROPERTIES:</span>
 <span style="color:#f1fa8c">:EXPORT_FILE_NAME:</span> <span style="color:#8be9fd;font-style:italic">ox-hugo-tutorial</span>
@@ -445,16 +452,19 @@ draft= true
 <span style="color:#f1fa8c">:END:</span></code></pre></div>
 
 <p>以 <code>:properties:</code> 这块为代表的代码就是 org 以自己的方式定义 meta
-information。~ox-hugo~ 会解析改写这个这些代码以生成 hugo 可以识别的 YAML 等 front matter.
+information。=(ox-hugo)= 会解析改写这个这些代码以生成 hugo 可以识别的 YAML 等 front matter.
 Ox-hugo 一般要求至少要有 <code>:EXPORT_FILE_NAME:</code> 。我们需要通过这个命令告诉
-ox-hugo&rdquo;有新的标题和内容需要去导出&rdquo;。</p>
+ox-hugo “有新的标题和内容需要去导出”。</p>
 
 <h2 id="2-dot-don-t-get-confused-易混淆的概念">2. Don&rsquo;t get confused 易混淆的概念</h2>
 
 <p>接下来这个问题可能对多大多数前端 coder 和 Emacs 熟练手都不是问题，但是这两个段头部代码被我着实混淆了一阵：</p>
 
 <p>通用 Front matter 主管面向一个 article 内部的性质设置，例如写作作者，写作日期，写作 tag。Heading information 例如 <code>#+hugo_base_dir</code> 的概念局限于 <code>ox-hugo</code> 里，是遵从
-org-mode 特色的命名方式设计的变量，类似的语法在其他 org 文章的管理信息中也可以看到。而 front-matter 这些变量在 markdown，网页 config file 等其它文件里都有。只是 <code>:PROPERTIES:</code> 这种表达形式是 ox-hugo 特色写法。换做 org 支持的另一种 projectile 导出 HTML 的 front matter 可能是这样:base-directory &ldquo;~/Dropbox/org/blog/&ldquo;.</p>
+org-mode 特色的命名方式设计的变量，类似的语法在其他 org 文章的管理信息中也可以看到。</p>
+
+<p>而 front-matter 这些变量在 markdown，网页配置等其它文件里都有。只是 <code>:PROPERTIES:</code> 这种表达形式是 ox-hugo 特色写法。换做 org 支持的另一种 projectile 导出 HTML 的 front matter
+可能是这样: <code>（base-directory &quot;~/Dropbox/org/blog/&quot;)</code>.</p>
 
 <h2 id="3-dot-content-type">3. Content type</h2>
 
@@ -464,11 +474,10 @@ org-mode 特色的命名方式设计的变量，类似的语法在其他 org 文
 
 <p>Hugo 认为每个栏目最好只做同一件事情，例如照片专栏只发发照片，post 专栏集中发文章。所以除非我们自定义，hugo 指定每个栏目的子单元都会自动继承一些此专栏 pre-defined 的特性，这样能最大限度的重复使用一个定义好的栏目，同时尽量减小‘config 每个栏目’工作。</p>
 
-<p>设定 content type: 只需在源文件的头部引用 hugo 提供的 heading
-information/metadata information（即 front matter）即可，能迅速方便的修改一两个页面的 layout。如果不能满足需求，可用 hugo 提供的自定义设置 archetypes，按照 hugo 指定的结构组合方式，编写正确的_index.md 文件拼接好一个网站的
+<p>设定 content type: 只需在源文件的头部引用 hugo 提供的 front matter 即可，能迅速方便的修改一两个页面的版式。如果不能满足需求，可用 hugo 提供的自定义设置 archetypes，按照 hugo 指定的结构组合方式，编写正确的_index.md 文件拼接好一个网站的
 layout 即可。</p>
 
-<p>如果你没有指定表达式样，比如暂时不太在乎如何展示 photo 这个栏目，Hugo 有这么一个 default 设定：在 front matter 大部分信息缺乏的时候，通过每个文章存储
+<p>如果你没有指定表达式样，比如暂时不太在乎如何展示 photo 这个栏目，Hugo 有一个默认设定：在 front matter 大部分信息缺乏的时候，通过每个文章存储
 path 或者所在 section 猜出给这篇文章赋予什么 layout。这会让我们在迅速上手写作 blog 的时候非常省心。</p>
 
 <h2 id="4-dot-page-bundles">4. Page bundles</h2>
@@ -485,7 +494,7 @@ Content 文件夹在这里是 home page, 他的主要功能是 hosting“决定�
 
 <hr />
 
-<p>Section 是一组页面的集合称呼，一般被放在 content 文件夹下面，就是上文提到的‘内容结构组织’的组成单元。从 default 设定来讲，content 下面的每个一级文件夹自成一个 root section。同时上面也提到 section 可以嵌套，即在一级文件夹下方再建二级 section 文件，构成一个更深层的 section。</p>
+<p>Section 是一组页面的合集称呼，一般被放在 content 文件夹下面，就是上文提到的‘内容结构组织’的组成单元。从 default 设定来讲，content 下面的每个一级文件夹自成一个 root section。同时上面也提到 section 可以嵌套，即在一级文件夹下方再建二级 section 文件，构成一个更深层的 section。</p>
 
 <p>那么问题来了，hugo 是如何知道 nested section 呢? 答案是：通过文件夹里要有_index.md 文件指定结构的设定。依此原理可以构建三级四级更深的 section 目录。 为了确保每一级网页都能被导览正确的链接到，每个最底层的文件夹里都要至少包含一个有内容文件，例如_index.md.</p>
 
@@ -732,15 +741,6 @@ index.md 刚好与之对应：分类的 index page 提供了所有需要的分�
                 <ul class="list-inline text-center">
                    
                     
-                    <li>
-                        <a href="mailto:ucbqqhe@ucl.ac.uk">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-		    
                     
                     
                     
@@ -773,7 +773,7 @@ index.md 刚好与之对应：分类的 index page 提供了所有需要的分�
                     
                 </ul>
 		<p class="copyright text-muted">
-                    Copyright &copy; Katherine&#39;s Blog 2019
+                    Copyright &copy; Katherine&#39;s Blog 2021
                     <br>
                     <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
                     <iframe
