@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ubuntu on Katherine&#39;s Blog</title>
+    <link>http://sheishe.xyz/tags/ubuntu/</link>
+    <description>Recent content in Ubuntu on Katherine&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 03 Sep 2019 21:53:00 +0100</lastBuildDate>
+    
+	<atom:link href="http://sheishe.xyz/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Installing Source Code Pro in Ubuntu and MS Windows platform 2019 【2019 版 Source Code Pro 字体安装指南】</title>
+      <link>http://sheishe.xyz/post/source-code-pro-in-ubuntu-mswindows/</link>
+      <pubDate>Tue, 03 Sep 2019 21:53:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/source-code-pro-in-ubuntu-mswindows/</guid>
+      <description>Installing source code pro and trouble shooting.</description>
+    </item>
+    
+  </channel>
+</rss>

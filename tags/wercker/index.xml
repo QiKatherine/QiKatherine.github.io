@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Wercker on Katherine&#39;s Blog</title>
+    <link>http://sheishe.xyz/tags/wercker/</link>
+    <description>Recent content in Wercker on Katherine&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 26 Jul 2019 01:02:00 +0100</lastBuildDate>
+    
+	<atom:link href="http://sheishe.xyz/tags/wercker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hugo Blogging with Wercker Auto Build &amp; Deployment 【用 Wercker 自动部署网站】</title>
+      <link>http://sheishe.xyz/post/hugo-blogging-with-wercker-auto-build-deployment/</link>
+      <pubDate>Fri, 26 Jul 2019 01:02:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/hugo-blogging-with-wercker-auto-build-deployment/</guid>
+      <description>Using Wercker to for automated website code build and deployment</description>
+    </item>
+    
+  </channel>
+</rss>

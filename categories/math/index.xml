@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MATH on Katherine&#39;s Blog</title>
+    <link>http://sheishe.xyz/categories/math/</link>
+    <description>Recent content in MATH on Katherine&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 19 Nov 2019 23:58:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://sheishe.xyz/categories/math/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linear algebra note - Gilbert Strang</title>
+      <link>http://sheishe.xyz/post/linear-algebra-gilbert-strang/</link>
+      <pubDate>Tue, 19 Nov 2019 23:58:00 +0000</pubDate>
+      
+      <guid>http://sheishe.xyz/post/linear-algebra-gilbert-strang/</guid>
+      <description>This is my personal note of linear algebra. I will be continuously updating the PDF file. It&amp;rsquo;s kinda huge work, hopefully I can achieving it little by little everyday. It is hosted on github with latex source code:
+https://github.com/QiKatherine/Linear-algebra/blob/master/1.pdf</description>
+    </item>
+    
+    <item>
+      <title>Deduction of Poisson process 【泊松过程推导】</title>
+      <link>http://sheishe.xyz/post/deduction-of-poisson-process/</link>
+      <pubDate>Tue, 15 Oct 2019 02:34:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/deduction-of-poisson-process/</guid>
+      <description>A straightforward deduction of poisson process. 一份简单明了的泊松过程推导。 1. Reasoning 2. Expected value and Variance</description>
+    </item>
+    
+  </channel>
+</rss>

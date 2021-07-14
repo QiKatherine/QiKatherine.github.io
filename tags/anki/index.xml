@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Anki on Katherine&#39;s Blog</title>
+    <link>http://sheishe.xyz/tags/anki/</link>
+    <description>Recent content in Anki on Katherine&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 30 Sep 2019 23:54:00 +0100</lastBuildDate>
+    
+	<atom:link href="http://sheishe.xyz/tags/anki/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using Anki-editor to build flashcard in Org-mode 【用 Anki-editor 在 org-mode 中生成复杂记忆卡片】</title>
+      <link>http://sheishe.xyz/post/using-anki-editor-to-build-flashcard-in-org-mode/</link>
+      <pubDate>Mon, 30 Sep 2019 23:54:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/using-anki-editor-to-build-flashcard-in-org-mode/</guid>
+      <description>1. Anki One of a major activity in my daily work is to learn new things. I have rely heavily on paper flashcard which gives me most flexibility on keeping tables, code, math functions etc. But the shortcoming is pretty obvious: there is no scientific reviewing cycle, and it&amp;rsquo;s getting cumbersome to maintain and carry with. Then I dived into different softwares and discovered Anki has been exceled in every</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Org-mode on Katherine&#39;s Blog</title>
+    <link>http://sheishe.xyz/tags/org-mode/</link>
+    <description>Recent content in Org-mode on Katherine&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 30 Sep 2019 23:54:00 +0100</lastBuildDate>
+    
+	<atom:link href="http://sheishe.xyz/tags/org-mode/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using Anki-editor to build flashcard in Org-mode 【用 Anki-editor 在 org-mode 中生成复杂记忆卡片】</title>
+      <link>http://sheishe.xyz/post/using-anki-editor-to-build-flashcard-in-org-mode/</link>
+      <pubDate>Mon, 30 Sep 2019 23:54:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/using-anki-editor-to-build-flashcard-in-org-mode/</guid>
+      <description>1. Anki One of a major activity in my daily work is to learn new things. I have rely heavily on paper flashcard which gives me most flexibility on keeping tables, code, math functions etc. But the shortcoming is pretty obvious: there is no scientific reviewing cycle, and it&amp;rsquo;s getting cumbersome to maintain and carry with. Then I dived into different softwares and discovered Anki has been exceled in every</description>
+    </item>
+    
+    <item>
+      <title>Overview: Emacs line truncation in text editing 【Emacs org 换行/对齐/排版  汇总指南】</title>
+      <link>http://sheishe.xyz/post/emacs-line-truncation-in-text-editing-mode/</link>
+      <pubDate>Tue, 17 Sep 2019 12:53:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/emacs-line-truncation-in-text-editing-mode/</guid>
+      <description>Line visualization and navigation settings in Emacs text editing.</description>
+    </item>
+    
+    <item>
+      <title>Org-reveal: solution for math and code highlighting in presentation slide 【在 ppt 中展示代码高亮，数学公式的优秀解决方案】</title>
+      <link>http://sheishe.xyz/post/org-reveal-solution-for-math-and-code-highlighting-in-presentation-slide/</link>
+      <pubDate>Fri, 23 Aug 2019 22:50:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/org-reveal-solution-for-math-and-code-highlighting-in-presentation-slide/</guid>
+      <description>Learning notes and trouble shooting for using org-reveal.</description>
+    </item>
+    
+    <item>
+      <title>Hugo Blogging with Wercker Auto Build &amp; Deployment 【用 Wercker 自动部署网站】</title>
+      <link>http://sheishe.xyz/post/hugo-blogging-with-wercker-auto-build-deployment/</link>
+      <pubDate>Fri, 26 Jul 2019 01:02:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/hugo-blogging-with-wercker-auto-build-deployment/</guid>
+      <description>Using Wercker to for automated website code build and deployment</description>
+    </item>
+    
+  </channel>
+</rss>

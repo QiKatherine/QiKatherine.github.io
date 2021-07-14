@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Katherine&#39;s Blog</title>
+    <link>http://sheishe.xyz/</link>
+    <description>Recent content on Katherine&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 23 Dec 2019 01:35:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://sheishe.xyz/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>The Little Schemer speedy referring note (2/3)</title>
+      <link>http://sheishe.xyz/post/the-little-schemer-note-2-3/</link>
+      <pubDate>Mon, 23 Dec 2019 01:35:00 +0000</pubDate>
+      
+      <guid>http://sheishe.xyz/post/the-little-schemer-note-2-3/</guid>
+      <description>This is a quick reference note that I pull from the book The Little Schemer. The full detailed code can be found:
+the-little-schemer/02-do-it-again.ss at master · pkrumins/the-little-schemer
+Chapter 5 It&amp;rsquo;s Full Of Stars The starred function means that compared with the premature function we defined above, we need to further extend it to achieve higher level of mission, or to do the work more thoroughly.
+For example, (rember a l) removes multiple occurrences a as the first level s-expression of list l, whileas (rember* a l) removes a as any level s-expressions.</description>
+    </item>
+    
+    <item>
+      <title>The Little Schemer speedy referring note (1/3)</title>
+      <link>http://sheishe.xyz/post/the-little-schemer-note/</link>
+      <pubDate>Tue, 10 Dec 2019 23:20:00 +0000</pubDate>
+      
+      <guid>http://sheishe.xyz/post/the-little-schemer-note/</guid>
+      <description>This is a quick reference note that I pull from the book The Little Schemer. The full detailed code can be found in this repo:
+the-little-schemer/02-do-it-again.ss at master · pkrumins/the-little-schemer
+My recommendation of reading this book is that don&amp;rsquo;t skip too much questions after fifth chapter, as the functions getting more complex, you will find those questions are carefully asked to help you improve thoughts to design better programs. Meanwhile try to write functions on papers before checking the answer.</description>
+    </item>
+    
+    <item>
+      <title>Linear algebra note - Gilbert Strang</title>
+      <link>http://sheishe.xyz/post/linear-algebra-gilbert-strang/</link>
+      <pubDate>Tue, 19 Nov 2019 23:58:00 +0000</pubDate>
+      
+      <guid>http://sheishe.xyz/post/linear-algebra-gilbert-strang/</guid>
+      <description>This is my personal note of linear algebra. I will be continuously updating the PDF file. It&amp;rsquo;s kinda huge work, hopefully I can achieving it little by little everyday. It is hosted on github with latex source code:
+https://github.com/QiKatherine/Linear-algebra/blob/master/1.pdf</description>
+    </item>
+    
+    <item>
+      <title>Migrating habituated cut copy and paste into Emacs</title>
+      <link>http://sheishe.xyz/post/foundamentals-about-factorial-experiment-design/</link>
+      <pubDate>Thu, 14 Nov 2019 11:40:00 +0000</pubDate>
+      
+      <guid>http://sheishe.xyz/post/foundamentals-about-factorial-experiment-design/</guid>
+      <description>In order to get as versitile as possible, I try to avoid re-config keybindings in different operating environment. I made myself to get used to the environment, for example there are about four or five different settings in Emacs, VIM, bash, Windows OS and other terminal. Overall speaking, I find this brings me more benefit than the cost of learning or migrating customerized config to other environment. In most cases, it&amp;rsquo;s just *nix (VIM, Emacs) v.</description>
+    </item>
+    
+    <item>
+      <title>Deduction of Poisson process 【泊松过程推导】</title>
+      <link>http://sheishe.xyz/post/deduction-of-poisson-process/</link>
+      <pubDate>Tue, 15 Oct 2019 02:34:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/deduction-of-poisson-process/</guid>
+      <description>A straightforward deduction of poisson process. 一份简单明了的泊松过程推导。 1. Reasoning 2. Expected value and Variance</description>
+    </item>
+    
+    <item>
+      <title>Using Anki-editor to build flashcard in Org-mode 【用 Anki-editor 在 org-mode 中生成复杂记忆卡片】</title>
+      <link>http://sheishe.xyz/post/using-anki-editor-to-build-flashcard-in-org-mode/</link>
+      <pubDate>Mon, 30 Sep 2019 23:54:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/using-anki-editor-to-build-flashcard-in-org-mode/</guid>
+      <description>1. Anki One of a major activity in my daily work is to learn new things. I have rely heavily on paper flashcard which gives me most flexibility on keeping tables, code, math functions etc. But the shortcoming is pretty obvious: there is no scientific reviewing cycle, and it&amp;rsquo;s getting cumbersome to maintain and carry with. Then I dived into different softwares and discovered Anki has been exceled in every</description>
+    </item>
+    
+    <item>
+      <title>Text based file management in Emacs 【Emacs 文本文件管理】</title>
+      <link>http://sheishe.xyz/post/text-based-file-management-in-emacs/</link>
+      <pubDate>Sun, 22 Sep 2019 23:56:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/text-based-file-management-in-emacs/</guid>
+      <description>Overview of text process tools in org-mode.</description>
+    </item>
+    
+    <item>
+      <title>Overview: Emacs line truncation in text editing 【Emacs org 换行/对齐/排版  汇总指南】</title>
+      <link>http://sheishe.xyz/post/emacs-line-truncation-in-text-editing-mode/</link>
+      <pubDate>Tue, 17 Sep 2019 12:53:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/emacs-line-truncation-in-text-editing-mode/</guid>
+      <description>Line visualization and navigation settings in Emacs text editing.</description>
+    </item>
+    
+    <item>
+      <title>Using aspell in windows 10 and Emacs 26 above 【拼写检查 Emacs26 使用更新版 aspell】</title>
+      <link>http://sheishe.xyz/post/using-aspell-in-windows-10-and-emacs-26-above/</link>
+      <pubDate>Fri, 13 Sep 2019 01:34:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/using-aspell-in-windows-10-and-emacs-26-above/</guid>
+      <description>Installing aspell for Emacs 26+ in windows system.</description>
+    </item>
+    
+    <item>
+      <title>Installing Source Code Pro in Ubuntu and MS Windows platform 2019 【2019 版 Source Code Pro 字体安装指南】</title>
+      <link>http://sheishe.xyz/post/source-code-pro-in-ubuntu-mswindows/</link>
+      <pubDate>Tue, 03 Sep 2019 21:53:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/source-code-pro-in-ubuntu-mswindows/</guid>
+      <description>Installing source code pro and trouble shooting.</description>
+    </item>
+    
+    <item>
+      <title>Mastering emacs in 21 days learning notes - 1 【21 天学会 Emacs 笔记 - 1】</title>
+      <link>http://sheishe.xyz/post/mastering-emacs-in-21-days-learning-notes-day/</link>
+      <pubDate>Sun, 25 Aug 2019 23:51:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/mastering-emacs-in-21-days-learning-notes-day/</guid>
+      <description>Learning notes about Emacs.</description>
+    </item>
+    
+    <item>
+      <title>Org-reveal: solution for math and code highlighting in presentation slide 【在 ppt 中展示代码高亮，数学公式的优秀解决方案】</title>
+      <link>http://sheishe.xyz/post/org-reveal-solution-for-math-and-code-highlighting-in-presentation-slide/</link>
+      <pubDate>Fri, 23 Aug 2019 22:50:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/org-reveal-solution-for-math-and-code-highlighting-in-presentation-slide/</guid>
+      <description>Learning notes and trouble shooting for using org-reveal.</description>
+    </item>
+    
+    <item>
+      <title>Best workaround to use Emacs in MS Windows 【在 MS windows 中使用 Emacs 的最佳解决方案】</title>
+      <link>http://sheishe.xyz/post/best-workaround-to-use-emacs-in-ms-windows/</link>
+      <pubDate>Fri, 16 Aug 2019 01:03:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/best-workaround-to-use-emacs-in-ms-windows/</guid>
+      <description>Experience Emacs with best workaround environment in windows.</description>
+    </item>
+    
+    <item>
+      <title>Hugo Blogging with Wercker Auto Build &amp; Deployment 【用 Wercker 自动部署网站】</title>
+      <link>http://sheishe.xyz/post/hugo-blogging-with-wercker-auto-build-deployment/</link>
+      <pubDate>Fri, 26 Jul 2019 01:02:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/hugo-blogging-with-wercker-auto-build-deployment/</guid>
+      <description>Using Wercker to for automated website code build and deployment</description>
+    </item>
+    
+    <item>
+      <title>Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】</title>
+      <link>http://sheishe.xyz/post/hugo-blogging-with-ox-hugo/</link>
+      <pubDate>Tue, 16 Jul 2019 01:03:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/post/hugo-blogging-with-ox-hugo/</guid>
+      <description>My personal experience of blogging with Emacs/Spacemacs and plug-in ox-hugo, along with some explanation of Hugo&amp;rsquo;s working structure.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://sheishe.xyz/search/placeholder/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://sheishe.xyz/search/placeholder/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://sheishe.xyz/top/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://sheishe.xyz/top/about/</guid>
+      <description>My GitHub chart: Hello beautiful people! Thanks for being interested in finding out about me :).
+I am a future poet, next generation Oscar Wilde (or Noël Coward) and comedian with healing power. (Well, we all have dreams right?). But somehow, I am currently doing Ph.D. research in the area of statistical/machine learning and econometrics.
+About my research (referring to some keywords I did not expect when I was a kid):</description>
+    </item>
+    
+  </channel>
+</rss>

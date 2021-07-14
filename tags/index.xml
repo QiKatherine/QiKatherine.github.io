@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Katherine&#39;s Blog</title>
+    <link>http://sheishe.xyz/tags/</link>
+    <description>Recent content in Tags on Katherine&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 14 Nov 2019 11:40:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://sheishe.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Emacs</title>
+      <link>http://sheishe.xyz/tags/emacs/</link>
+      <pubDate>Thu, 14 Nov 2019 11:40:00 +0000</pubDate>
+      
+      <guid>http://sheishe.xyz/tags/emacs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spacemacs</title>
+      <link>http://sheishe.xyz/tags/spacemacs/</link>
+      <pubDate>Thu, 14 Nov 2019 11:40:00 +0000</pubDate>
+      
+      <guid>http://sheishe.xyz/tags/spacemacs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>probability</title>
+      <link>http://sheishe.xyz/tags/probability/</link>
+      <pubDate>Tue, 15 Oct 2019 02:34:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/tags/probability/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>statistics</title>
+      <link>http://sheishe.xyz/tags/statistics/</link>
+      <pubDate>Tue, 15 Oct 2019 02:34:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/tags/statistics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>stochastic-process</title>
+      <link>http://sheishe.xyz/tags/stochastic-process/</link>
+      <pubDate>Tue, 15 Oct 2019 02:34:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/tags/stochastic-process/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Anki</title>
+      <link>http://sheishe.xyz/tags/anki/</link>
+      <pubDate>Mon, 30 Sep 2019 23:54:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/tags/anki/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Org-mode</title>
+      <link>http://sheishe.xyz/tags/org-mode/</link>
+      <pubDate>Mon, 30 Sep 2019 23:54:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/tags/org-mode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>windows</title>
+      <link>http://sheishe.xyz/tags/windows/</link>
+      <pubDate>Mon, 30 Sep 2019 23:54:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/tags/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Windows10</title>
+      <link>http://sheishe.xyz/tags/windows10/</link>
+      <pubDate>Fri, 13 Sep 2019 01:34:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/tags/windows10/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ubuntu</title>
+      <link>http://sheishe.xyz/tags/ubuntu/</link>
+      <pubDate>Tue, 03 Sep 2019 21:53:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/tags/ubuntu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Emasc</title>
+      <link>http://sheishe.xyz/tags/emasc/</link>
+      <pubDate>Fri, 16 Aug 2019 01:03:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/tags/emasc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Msys2</title>
+      <link>http://sheishe.xyz/tags/msys2/</link>
+      <pubDate>Fri, 16 Aug 2019 01:03:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/tags/msys2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>http://sheishe.xyz/tags/git/</link>
+      <pubDate>Fri, 26 Jul 2019 01:02:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>http://sheishe.xyz/tags/hugo/</link>
+      <pubDate>Fri, 26 Jul 2019 01:02:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Wercker</title>
+      <link>http://sheishe.xyz/tags/wercker/</link>
+      <pubDate>Fri, 26 Jul 2019 01:02:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/tags/wercker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ox-hugo</title>
+      <link>http://sheishe.xyz/tags/ox-hugo/</link>
+      <pubDate>Tue, 16 Jul 2019 01:03:00 +0100</pubDate>
+      
+      <guid>http://sheishe.xyz/tags/ox-hugo/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

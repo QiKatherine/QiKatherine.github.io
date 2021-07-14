@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Katherine&#39;s Blog">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="http://sheishe.xyz/img/vivi.jpg">
+    <meta property="twitter:image" content="http://sheishe.xyz/img/vivi.jpg" />
+    
+
+    
+    <meta name="title" content="The Little Schemer speedy referring note (1/3)" />
+    <meta property="og:title" content="The Little Schemer speedy referring note (1/3)" />
+    <meta property="twitter:title" content="The Little Schemer speedy referring note (1/3)" />
+    
+
+    
+    <meta name="description" content="Katherine He coder statistician econometrician machine learning">
+    <meta property="og:description" content="Katherine He coder statistician econometrician machine learning" />
+    <meta property="twitter:description" content="Katherine He coder statistician econometrician machine learning" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content=" ">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>The Little Schemer speedy referring note (1/3)-Katherine He Blog|何琪的博客</title>
+
+    <link rel="canonical" href="/post/the-little-schemer-note/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+	
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+	
+	
+<script src="http://sheishe.xyz/js/mathjax-config.js"></script>
+ 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML"></script>
+
+
+
+</head>
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Katherine&#39;s Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/math">math</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/tech">tech</a>
+                    </li>
+                    
+                    
+		    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search">SEARCH <img src="/img/search.png" height="15" style="cursor: pointer;" alt="Search"></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/111.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>The Little Schemer speedy referring note (1/3)</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+			Posted by 
+			
+		            Katherine&#39;s Blog
+			 
+			on 
+			Tuesday, December 10, 2019
+                        
+                            <span id="/post/the-little-schemer-note/" class="leancloud_visitors meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span> 
+    </span>
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span class="leancloud-visitors-count"></span>
+</span>
+
+
+
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+
+<script>
+	AV.initialize("", "");
+</script>
+
+<script type="text/javascript">
+function showTime(Counter) {
+    var query = new AV.Query(Counter);
+    var entries = [];
+    var $visitors = $(".leancloud_visitors");
+
+    $visitors.each(function() {
+        entries.push($(this).attr("id").trim());
+    });
+
+    query.containedIn('url', entries);
+    query.find()
+        .done(function(results) {
+            var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+            var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+
+            
+            
+            
+            
+
+            for (var i = 0; i < results.length; i++) {
+                var item = results[i];
+                var url = item.get('url');
+                var time = item.get('time');
+                var element = document.getElementById(url);
+
+                $(element).find(COUNT_CONTAINER_REF).text(time);
+            }
+            for (var i = 0; i < entries.length; i++) {
+                var url = entries[i];
+                var element = document.getElementById(url);
+                var countSpan = $(element).find(COUNT_CONTAINER_REF);
+                if (countSpan.text() == '') {
+                    var oldCountSpan = $(element).find(OLD_COUNT_CONTAINER_REF).text();
+                    if(oldCountSpan!=''){
+                        countSpan.text(0+parseInt(oldCountSpan));
+                    }else{
+                        countSpan.text(0);          
+                    }
+                }
+            }
+        })
+        .fail(function(object, error) {
+            console.log("Error: " + error.code + " " + error.message);
+        });
+}
+
+function addCount(Counter) {
+    var $visitors = $(".leancloud_visitors");
+    var url = $visitors.attr('id').trim();
+    var title = $visitors.attr('data-flag-title').trim();
+    var query = new AV.Query(Counter);
+
+    query.equalTo("url", url);
+    query.find({
+        success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment("time");
+                counter.save(null, {
+                    success: function(counter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+                var newcounter = new Counter();
+                 
+                var acl = new AV.ACL();
+                acl.setPublicReadAccess(true);
+                acl.setPublicWriteAccess(true);
+                newcounter.setACL(acl);
+                 
+                newcounter.set("title", title);
+                newcounter.set("url", url);
+                var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+                var $element = $(document.getElementById(url));
+                var oldCountSpan = $element.find(OLD_COUNT_CONTAINER_REF).text();
+                if(oldCountSpan!=''){
+                    newcounter.set("time", parseInt(oldCountSpan)+1);
+                }else{
+ 	                    newcounter.set("time",  1);
+                }
+                newcounter.save(null, {
+                    success: function(newcounter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                    },
+                    error: function(newcounter, error) {
+                        console.log('Failed to create');
+                    }
+                });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + " " + error.message);
+        }
+    });
+}
+$(function() {
+    var Counter = AV.Object.extend("Counter");
+    
+    
+    if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+    } else {
+        showTime(Counter);
+    }
+});
+</script>
+
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>TOC</h2>
+                </header>
+                <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#chapter-1-toy">Chapter 1 Toy</a></li>
+<li><a href="#chapter-2-do-it-again-and-again">Chapter 2 Do It Again and Again</a></li>
+<li><a href="#chapter-3-cons-the-magnificent">Chapter 3 Cons the Magnificent</a></li>
+<li><a href="#chapter-4-number-games">Chapter 4 Number Games</a></li>
+</ul></li>
+</ul>
+</nav>
+                
+                
+
+<p>This is a quick reference note that I pull from the book The Little Schemer. The
+full detailed code can be found in this repo:</p>
+
+<p><a href="https://github.com/pkrumins/the-little-schemer/blob/master/02-do-it-again.ss">the-little-schemer/02-do-it-again.ss at master · pkrumins/the-little-schemer</a></p>
+
+<p>My recommendation of reading this book is that don&rsquo;t skip too much questions
+after fifth chapter, as the functions getting more complex, you will find those
+questions are carefully asked to help you improve thoughts to design better
+programs. Meanwhile try to write functions on papers before checking the
+answer. I really enjoy this book and hope you have much fun as I do :).</p>
+
+<h2 id="chapter-1-toy">Chapter 1 Toy</h2>
+
+<p>In this chapter, we list primitive conceptions and functions which will be
+used through the entire book:</p>
+
+<hr />
+
+<p><strong>atom</strong> is the smallest element, something NOT enclosed by pair of
+parenthesis: a string of digits/characters/numbers.</p>
+
+<p><strong>list</strong> is something enclosed by pair of parenthesis: something can be nothing, can be
+atom, can be another list.</p>
+
+<p><strong>s-expression</strong> can be any of :an atom; an (empty) list; a pair. A series of s-expression
+enclosed by parenthesis is <strong>list</strong>.</p>
+
+<p><code>(car argument)</code>: returns first s-expression among all the first-level
+ s-expression within a list. It can NOT work on empty list.</p>
+
+<p><code>(cdr argument)</code>: returns the complement set of <code>(car argument)</code>, including
+the parenthesis. It can return empty list but can NOT work on non-list input.</p>
+
+<p><code>car/cdr</code> both take and output non-empty list. <code>cdr</code> cannot work on null list or
+atom. For <code>(han), han, ()</code> cdr can only work on the first.</p>
+
+<p><code>(cons argument1 argument2)</code>: add arg1 (s-exp) onto arg2 (list), the output is
+ list.</p>
+
+<p><code>(null? argument)</code>: returns T when the argument(list) is <code>(quote()), '() and ()</code> returns
+ error when argument is <code>atom</code>; returns F for others.</p>
+
+<p><code>(atom? argument)</code>: checks if the argument (any s-expression) is atom.</p>
+
+<p><code>(eq? argument1 argument2)</code>: returns T when arguments (atoms) are equal; returns
+ error when arguments are numerical or list; returns F for others.</p>
+
+<p><code>(or argument1 argument2 ...)</code> checks predicate arguments one by one. It terminates
+whenever the first T is found and returns T, otherwise it returns F.</p>
+
+<p><code>(and argument1 argument2 ...)</code> checks predicate arguments one by one. It terminates
+whenever the first F is found and returns F, otherwise it returns T.</p>
+
+<h2 id="chapter-2-do-it-again-and-again">Chapter 2 Do It Again and Again</h2>
+
+<p>From chapter 2, we begin to build functions with primitive building blocks.</p>
+
+<hr />
+
+<p><code>(lat? argument)</code>: checks if every s-expression in a list is atom. Since the
+ s-expression is either atom or list/pair, <code>(lat?)</code> use <code>(atom?)</code> as core function.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">; (lat? (Jack Sprat could eat no chicken fat)) -&gt; #t, for every element is atom.</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">lat?</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) #t)
+      ((<span style="color:#50fa7b">atom?</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>)) (<span style="color:#50fa7b">lat?</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))
+      (<span style="color:#ff79c6">else </span>#f))))</code></pre></div>
+
+<p><code>(member? argument1 argument2)</code>: checks if the argument1 (an atom) is in
+the argument2 (a non-empty list).</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">; (member? meat (mashed potatoes and meat gravy)) -&gt; #t, for meat is in the list.</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">member?</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) #f)
+      (<span style="color:#ff79c6">else </span>(<span style="color:#ff79c6">or </span>(<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">a</span>)
+                (<span style="color:#50fa7b">member?</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))</code></pre></div>
+
+<h2 id="chapter-3-cons-the-magnificent">Chapter 3 Cons the Magnificent</h2>
+
+<hr />
+
+<p><code>(rember argument1 argument2)</code>: removes the first occurrence of the argument1 (an atom) from
+the argument2 (a non-empty list).</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">; (rember cup (coffee cup tea cup and hick cup)) -&gt; (coffee tea cup and hick cup)</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">rember</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+      ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">a</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))
+      (<span style="color:#ff79c6">else </span>(<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>)
+                  (<span style="color:#50fa7b">rember</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))</code></pre></div>
+
+<p><code>(first argument)</code>: the argument is a non-empty list, possibly consists of more
+lists. The function returns a list consists of all the first s-expressions within
+the first level argument lists.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">; (firsts ((five plums) (four) (eleven green oranges))) -&gt; (five four eleven)</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">firsts</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#ff79c6">&#39;</span>())
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">l</span>)) (<span style="color:#50fa7b">firsts</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))</code></pre></div>
+
+<p><code>(insetR new old lat)</code> and <code>(insetL new old lat)</code>: insert the <em>new</em> atom at the
+RIGHT/LEFT side of the <em>old</em> atom in lat (a list).</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">; (insertR topping fudge (ice cream with fudge for dessert)) -&gt; (ice cream with fudge topping for dessert)</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">insertR</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">new</span> <span style="color:#8be9fd;font-style:italic">old</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+      ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">old</span>)
+       (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">new</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">insertR</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))
+
+<span style="color:#6272a4">; (insertL topping fudge (ice cream with fudge for dessert)) -&gt; (ice cream with topping fudge for dessert)</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">insertL</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">new</span> <span style="color:#8be9fd;font-style:italic">old</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+      ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">old</span>)
+       (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">new</span> (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">insertL</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))</code></pre></div>
+
+<p><code>(subst new old lat)</code>: in lat (a list), this function replaces old atom with new
+atom.
+<code>(subst2 new o1 o2 lat)</code>: in lat (a list), this function checks o1 o2, whichever
+occurs firstly is replaced by new atom.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">; (subst topping fudge (ice cream with fudge for dessert)) -&gt; (ice cream with topping for dessert)</span>
+  (<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">subst</span>
+    (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">new</span> <span style="color:#8be9fd;font-style:italic">old</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+      (<span style="color:#50fa7b">cond</span>
+        ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+        ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">old</span>)
+         (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">new</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))
+        (<span style="color:#50fa7b">else</span>
+          (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">subst</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))
+
+<span style="color:#6272a4">; (subst2 vanilla chocolate banana (banana ice cream with chocolate topping)) -&gt;</span>
+<span style="color:#6272a4">; (vanilla ice cream with chocolate topping)</span>
+  (<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">subst2</span>
+    (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">new</span> <span style="color:#8be9fd;font-style:italic">o1</span> <span style="color:#8be9fd;font-style:italic">o2</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+      (<span style="color:#50fa7b">cond</span>
+        ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+        ((<span style="color:#ff79c6">or </span>(<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">o1</span>) (<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">o2</span>))
+         (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">new</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))
+        (<span style="color:#50fa7b">else</span>
+          (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">subst</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">o1</span> <span style="color:#8be9fd;font-style:italic">o2</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))</code></pre></div>
+
+<p>From now on, we use recursion more than once, in different predicates to achieve
+multiple assignments, or more complicated assignments. For example, putting a
+recursion in <code>(eq?)</code> predicate, in <code>(rember)</code> function enables us to go deeper,
+removing multiple occurred atoms.
+<code>(multirember a lat)</code>: removes all the occurrences of a in lat (a list).
+<code>(multiinsertR new old lat)</code> and <code>(multiinsertL new old lat)</code>: insert new atom at the
+RIGHT/LEFT side of old atom for EVERY occurrence of old in lat (a list).</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">; (multirember cup (coffee cup tea cup and hick cup)) -&gt; (coffee tea and hick)</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">multirember</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+      ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">a</span>)
+       (<span style="color:#50fa7b">multirember</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">multirember</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))
+
+<span style="color:#6272a4">; (multiinsertR x a (a b c d e a a b)) -&gt; (a x b c d e a x a x b)</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">multiinsertR</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">new</span> <span style="color:#8be9fd;font-style:italic">old</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+      ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">old</span>)
+       (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">new</span> (<span style="color:#50fa7b">multiinsertR</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">multiinsertR</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))
+
+<span style="color:#6272a4">; (multiinsertL x a (a b c d e a a b)) -&gt; (x a b c d e x a x a b)</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">multiinsertL</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">new</span> <span style="color:#8be9fd;font-style:italic">old</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+      ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">old</span>)
+       (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">new</span> (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#50fa7b">multiinsertL</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">multiinsertL</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))</code></pre></div>
+
+<p><code>(multirsubst new old lat)</code>: replaces old atom with new atom for EVERY occurrence
+of old atom in lat (a list).</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">; (multisubst x a (a b c d e a a b)) -&gt; (x b c d e x x b)</span>
+<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">multisubst</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">new</span> <span style="color:#8be9fd;font-style:italic">old</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+      ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">old</span>)
+       (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">new</span> (<span style="color:#50fa7b">multisubst</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">multisubst</span> <span style="color:#8be9fd;font-style:italic">new</span> <span style="color:#8be9fd;font-style:italic">old</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))</code></pre></div>
+
+<p>The multi operation is genenally better designed. It can work with both single
+and multiple occurrences of old atoms, and terminate at until it&rsquo;s got null
+list. But the single operations terminate right when the first <code>(eq?)</code> returns
+T. Generally applicable termination should be at finishing the last element.</p>
+
+<h2 id="chapter-4-number-games">Chapter 4 Number Games</h2>
+
+<p>To start, we only consider <em>whole</em> and <em>positive</em> number. We are going to
+firstly build increment function <code>(add1 argument)</code>, and decrement function
+<code>(sub1 argument)</code>; then using them as fundamental blocks, we build addition
+<code>(o+)</code> and subtraction <code>(o-)</code>; again using addtion as building block, we build multiplication.
+It can be sensed that these recursive paradigm is exactly how we establish all more
+calculation algorithms.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;(add1 67) -&gt; 68</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">add1</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span>) (<span style="color:#8be9fd;font-style:italic">+ </span><span style="color:#8be9fd;font-style:italic">n</span> <span style="color:#bd93f9">1</span>)))
+
+<span style="color:#6272a4">;(sub1 5) -&gt; 4</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">sub1</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span>) (<span style="color:#8be9fd;font-style:italic">- </span><span style="color:#8be9fd;font-style:italic">n</span> <span style="color:#bd93f9">1</span>)))
+
+<span style="color:#6272a4">;(o+ 46 12) -&gt; 58</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">o+</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span> <span style="color:#8be9fd;font-style:italic">m</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">zero? </span><span style="color:#8be9fd;font-style:italic">m</span>) <span style="color:#8be9fd;font-style:italic">n</span>)
+      (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">add1</span> (<span style="color:#50fa7b">o+</span> <span style="color:#8be9fd;font-style:italic">n</span> (<span style="color:#50fa7b">sub1</span> <span style="color:#8be9fd;font-style:italic">m</span>)))))))
+
+<span style="color:#6272a4">;(o- 14 3) -&gt; 11</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">o-</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span> <span style="color:#8be9fd;font-style:italic">m</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">zero? </span><span style="color:#8be9fd;font-style:italic">m</span>) <span style="color:#8be9fd;font-style:italic">n</span>)
+      (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">sub1</span> (<span style="color:#50fa7b">o-</span> <span style="color:#8be9fd;font-style:italic">n</span> (<span style="color:#50fa7b">sub1</span> <span style="color:#8be9fd;font-style:italic">m</span>)))))))
+
+<span style="color:#6272a4">;(o* 5 3) -&gt; 15</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">o*</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span> <span style="color:#8be9fd;font-style:italic">m</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">zero? </span><span style="color:#8be9fd;font-style:italic">m</span>) <span style="color:#bd93f9">0</span>)
+      (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">o+</span> <span style="color:#8be9fd;font-style:italic">n</span> (<span style="color:#50fa7b">o*</span> <span style="color:#8be9fd;font-style:italic">n</span> (<span style="color:#50fa7b">sub1</span> <span style="color:#8be9fd;font-style:italic">m</span>)))))))</code></pre></div>
+
+<p>Next we introduce new class tuple (tup). <strong>tup</strong> is either an empty list, or it contains a number and a rest that is also a <strong>tup</strong>.</p>
+
+<p>Using tup as building block to create extent function is just as using list before.
+To enable natural termination on a list we use <code>(null? list)</code> and on a number we
+use <code>(zero? 0)</code>. To enable the natural termination on a tup we use <code>(null? tup)</code>.</p>
+
+<p>To enable natural recursion on a list we use <code>(cdr argument)</code>; the natural recursion on a
+tup we use <code>(cdr argument)</code>; the natural recursion on a number we use <code>(sub1
+argument)</code>. These condition is reused as new argument in inner recursion as
+stated in The Fourth Commandment.</p>
+
+<p>For tup, we develop two functions for fun:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;(addtup (3 5 2 8)) -&gt; 18</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">addtup</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">tup</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">tup</span>) <span style="color:#bd93f9">0</span>)
+      (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">o+</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">tup</span>) (<span style="color:#50fa7b">addtup</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">tup</span>)))))))
+
+<span style="color:#6272a4">;(tup+ (3 6 9 11 4) (8 5 2 0 7)) -&gt; (11 11 11 11 11)</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">tup+</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">tup1</span> <span style="color:#8be9fd;font-style:italic">tup2</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">tup1</span>) <span style="color:#8be9fd;font-style:italic">tup2</span>)
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">tup2</span>) <span style="color:#8be9fd;font-style:italic">tup1</span>)
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#50fa7b">o+</span> (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">tup1</span>) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">tup2</span>))
+              (<span style="color:#50fa7b">tup+</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">tup1</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">tup2</span>)))))))</code></pre></div>
+
+<p>The second case shows case need more than one terminal conditions. Using <code>(and
+(null? tup1) (null? tup2))</code> is wrong when tup1 and tup2 have different length.
+In such case, we use multiple terminal conditions and it works not only to finish the recursion,
+but also to delivery the key result.</p>
+
+<p>Back to the number game, we continuous use the foundamental blocks to creat:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;(o&gt; 12 133) -&gt; #f</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">o&gt;</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span> <span style="color:#8be9fd;font-style:italic">m</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">zero? </span><span style="color:#8be9fd;font-style:italic">n</span>) #f)
+      ((<span style="color:#8be9fd;font-style:italic">zero? </span><span style="color:#8be9fd;font-style:italic">m</span>) #t)
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#50fa7b">o&gt;</span> (<span style="color:#50fa7b">sub1</span> <span style="color:#8be9fd;font-style:italic">n</span>) (<span style="color:#50fa7b">sub1</span> <span style="color:#8be9fd;font-style:italic">m</span>))))))
+
+<span style="color:#6272a4">;(o&lt; 4 6) -&gt; #t</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">o&lt;</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span> <span style="color:#8be9fd;font-style:italic">m</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">zero? </span><span style="color:#8be9fd;font-style:italic">m</span>) #f)
+      ((<span style="color:#8be9fd;font-style:italic">zero? </span><span style="color:#8be9fd;font-style:italic">n</span>) #t)
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#50fa7b">o&lt;</span> (<span style="color:#50fa7b">sub1</span> <span style="color:#8be9fd;font-style:italic">n</span>) (<span style="color:#50fa7b">sub1</span> <span style="color:#8be9fd;font-style:italic">m</span>))))))
+
+<span style="color:#6272a4">;(o= 5 5) -&gt; #t</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">o=</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span> <span style="color:#8be9fd;font-style:italic">m</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#50fa7b">o&gt;</span> <span style="color:#8be9fd;font-style:italic">n</span> <span style="color:#8be9fd;font-style:italic">m</span>) #f)
+      ((<span style="color:#50fa7b">o&lt;</span> <span style="color:#8be9fd;font-style:italic">n</span> <span style="color:#8be9fd;font-style:italic">m</span>) #f)
+      (<span style="color:#ff79c6">else </span>#t))))
+
+<span style="color:#6272a4">;(o^ 2 3) -&gt; 8</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">o^</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span> <span style="color:#8be9fd;font-style:italic">m</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">zero? </span><span style="color:#8be9fd;font-style:italic">m</span>) <span style="color:#bd93f9">1</span>)
+      (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">o*</span> <span style="color:#8be9fd;font-style:italic">n</span> (<span style="color:#50fa7b">o^</span> <span style="color:#8be9fd;font-style:italic">n</span> (<span style="color:#50fa7b">sub1</span> <span style="color:#8be9fd;font-style:italic">m</span>)))))))
+
+<span style="color:#6272a4">;(o/ 15 4) -&gt; 3</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">o/</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span> <span style="color:#8be9fd;font-style:italic">m</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#50fa7b">o&lt;</span> <span style="color:#8be9fd;font-style:italic">n</span> <span style="color:#8be9fd;font-style:italic">m</span>) <span style="color:#bd93f9">0</span>)
+      (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">add1</span> (<span style="color:#50fa7b">o/</span> (<span style="color:#50fa7b">o-</span> <span style="color:#8be9fd;font-style:italic">n</span> <span style="color:#8be9fd;font-style:italic">m</span>) <span style="color:#8be9fd;font-style:italic">m</span>))))))</code></pre></div>
+
+<p>In the <code>o&gt; and o&lt;</code> we can see again that the terminating conditions not only
+terminate recursions,
+but also work in a carefully arranged order, to deliver the right results for
+designated function.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;(olength (hotdogs with mustard sauerkraut and pickles)) -&gt; 6</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">olength</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#bd93f9">0</span>)
+      (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">add1</span> (<span style="color:#50fa7b">olength</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))
+
+<span style="color:#6272a4">;(pick 4 (lasagna spaghetti ravioli macaroni meatball)) -&gt; macaroni</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">pick</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">zero? </span>(<span style="color:#50fa7b">sub1</span> <span style="color:#8be9fd;font-style:italic">n</span>)) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#50fa7b">pick</span> (<span style="color:#50fa7b">sub1</span> <span style="color:#8be9fd;font-style:italic">n</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))))
+
+<span style="color:#6272a4">;(rempick 3 (hotdogs with hot mustard)) -&gt; (hotdogs with mustard)</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">rempick</span>
+  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+    (<span style="color:#50fa7b">cond</span>
+      ((<span style="color:#8be9fd;font-style:italic">zero? </span>(<span style="color:#50fa7b">sub1</span> <span style="color:#8be9fd;font-style:italic">n</span>)) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))
+      (<span style="color:#50fa7b">else</span>
+        (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">rempick</span> (<span style="color:#50fa7b">sub1</span> <span style="color:#8be9fd;font-style:italic">n</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))</code></pre></div>
+
+<p>and number</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;(no-nums &#39;(5 pears 6 prunes 9 dates)) -&gt; (pears prunes dates)</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">no-nums</span>
+    (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span>)
+      (<span style="color:#50fa7b">cond</span>
+        ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+        ((<span style="color:#8be9fd;font-style:italic">number? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>)) (<span style="color:#50fa7b">no-nums</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))
+        (<span style="color:#50fa7b">else</span>
+          (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">no-nums</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))
+
+<span style="color:#6272a4">;(all-nums &#39;(5 pears 6 prunes 9 dates)) -&gt; (5 6 9)</span>
+  (<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">all-nums</span>
+    (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span>)
+      (<span style="color:#50fa7b">cond</span>
+        ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#ff79c6">&#39;</span>())
+        ((<span style="color:#8be9fd;font-style:italic">number? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>)) (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">all-nums</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))
+        (<span style="color:#50fa7b">else</span>
+          (<span style="color:#50fa7b">all-nums</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))))
+
+<span style="color:#6272a4">;(eqan? &#39;a &#39;a) -&gt; #t</span>
+  (<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">eqan?</span>
+    (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a1</span> <span style="color:#8be9fd;font-style:italic">a2</span>)
+      (<span style="color:#50fa7b">cond</span>
+        ((<span style="color:#ff79c6">and </span>(<span style="color:#8be9fd;font-style:italic">number? </span><span style="color:#8be9fd;font-style:italic">a1</span>) (<span style="color:#8be9fd;font-style:italic">number? </span><span style="color:#8be9fd;font-style:italic">a2</span>)) (<span style="color:#8be9fd;font-style:italic">= </span><span style="color:#8be9fd;font-style:italic">a1</span> <span style="color:#8be9fd;font-style:italic">a2</span>))
+        ((<span style="color:#ff79c6">or </span> (<span style="color:#8be9fd;font-style:italic">number? </span><span style="color:#8be9fd;font-style:italic">a1</span>) (<span style="color:#8be9fd;font-style:italic">number? </span><span style="color:#8be9fd;font-style:italic">a2</span>)) #f)
+        (<span style="color:#50fa7b">else</span>
+          (<span style="color:#8be9fd;font-style:italic">eq? </span><span style="color:#8be9fd;font-style:italic">a1</span> <span style="color:#8be9fd;font-style:italic">a2</span>)))))
+
+<span style="color:#6272a4">;(occur &#39;x &#39;(a b x x c d x)) -&gt; 3</span>
+  (<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">occur</span>
+    (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+      (<span style="color:#50fa7b">cond</span>
+        ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#bd93f9">0</span>)
+        ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">a</span>)
+         (<span style="color:#50fa7b">add1</span> (<span style="color:#50fa7b">occur</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))
+        (<span style="color:#50fa7b">else</span>
+          (<span style="color:#50fa7b">occur</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))))
+
+<span style="color:#6272a4">;  (one? 5) -&gt; #f</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">one?</span>
+    (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span>) (<span style="color:#8be9fd;font-style:italic">= </span><span style="color:#8be9fd;font-style:italic">n</span> <span style="color:#bd93f9">1</span>)))
+
+<span style="color:#6272a4">;(rempick-one 4 &#39;(hotdogs with hot mustard)) -&gt; &#39;(hotdogs with mustard)</span>
+(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">rempick-one</span>
+    (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
+      (<span style="color:#50fa7b">cond</span>
+        ((<span style="color:#50fa7b">one?</span> <span style="color:#8be9fd;font-style:italic">n</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))
+        (<span style="color:#50fa7b">else</span>
+          (<span style="color:#8be9fd;font-style:italic">cons </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>) (<span style="color:#50fa7b">rempick-one</span> (<span style="color:#50fa7b">sub1</span> <span style="color:#8be9fd;font-style:italic">n</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))))</code></pre></div>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/linear-algebra-gilbert-strang/" data-toggle="tooltip" data-placement="top" title="Linear algebra note - Gilbert Strang">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/the-little-schemer-note-2-3/" data-toggle="tooltip" data-placement="top" title="The Little Schemer speedy referring note (2/3)">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "katherine He" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/anki" title="anki">
+                            anki
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/emacs" title="emacs">
+                            emacs
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/emasc" title="emasc">
+                            emasc
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/git" title="git">
+                            git
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/hugo" title="hugo">
+                            hugo
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/msys2" title="msys2">
+                            msys2
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/org-mode" title="org-mode">
+                            org-mode
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ox-hugo" title="ox-hugo">
+                            ox-hugo
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/probability" title="probability">
+                            probability
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/spacemacs" title="spacemacs">
+                            spacemacs
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/statistics" title="statistics">
+                            statistics
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/stochastic-process" title="stochastic-process">
+                            stochastic-process
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ubuntu" title="ubuntu">
+                            ubuntu
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/wercker" title="wercker">
+                            wercker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/windows" title="windows">
+                            windows
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/windows10" title="windows10">
+                            windows10
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://twitter.com/laowai121">Twitter @ 伯逸</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                    
+                    <li>
+                        <a href="mailto:ucbqqhe@ucl.ac.uk">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    <li>
+                        <a target="_blank" href="/img/example-qr.png">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/QiKatherine">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Katherine&#39;s Blog 2019
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-145919675-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+</body>
+</html>
