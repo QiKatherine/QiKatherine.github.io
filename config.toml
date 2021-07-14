@@ -17,7 +17,7 @@ home = ["HTML", "RSS", "Algolia"]
 
 [params]
   header_image = "img/vivi.jpg"
-  SEOTitle = "Katherine He Blog|何琪的博客"
+  SEOTitle = "Katherine's Blog"
   description = "Katherine He coder statistician econometrician machine learning"
   keyword = " "
   slogan = "Hope this is interesting to someone, somewhere."
@@ -70,7 +70,7 @@ home = ["HTML", "RSS", "Algolia"]
 
   [params.social]
   rss            = false 
-  email          = "ucbqqhe@ucl.ac.uk"
+  #email          = ""
   #facebook      = "full profile url in facebook"
   #googleplus    = "full profile url in googleplus"
   #twitter       = "full profile url in twitter"

@@ -4554,4 +4554,26 @@ We rewrite this by introducing =(let)= who helps define local function within fu
 (leftmost-let '(((y) b) (c d)))   ;-> 'y
 #+end_src
 
+Similarly, we define an improved version of =(rember a lat)= that removes the leftmost occurrence of /a/ in /lat/.
+#+begin_src scheme
+(define rember1*
+  (lambda (a l)
+    (cond
+      ((null? l) '())
+      ((atom? (car l))
+       (cond
+         ((eq? (car l) a) (cdr l))
+         (else
+           (cons (car l) (rember1* a (cdr l))))))
+      (else
+        (cond
+          ((equal? (rember1* a (car l)) (car l)) ; if the list with 'a' removed doesn't change
+           (cons (car l) (rember1* a (cdr l))))  ; then recurse
+          (else
+            (cons (rember1* a (car l)) (cdr l)))))))) ; otherwise remove 'a'
 
+(rember1*
+  'salad
+  '((Swedish rye) (French (mustard salad turkey)) salad))
+;-> '((Swedish rye) (French (mustard turkey)) salad)
+#+end_src
