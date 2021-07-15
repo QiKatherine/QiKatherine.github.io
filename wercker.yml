@@ -20,7 +20,8 @@ build:
     # Steps make up the actions in your pipeline
     # Read more about steps on our dev center:
     # https://devcenter.wercker.com/development/steps/
-        - arjen/hugo-build@2.8.0:
+     - arjen/hugo-build:
+            version: "2.0.0"
             # your hugo theme name
             theme: hugo-theme-cleanwhite
             flags: --buildDrafts=false

@@ -70,7 +70,7 @@ home = ["HTML", "RSS", "Algolia"]
 
   [params.social]
   rss            = false 
-  #email          = ""
+  #email         = "abc@gmail.com"
   #facebook      = "full profile url in facebook"
   #googleplus    = "full profile url in googleplus"
   #twitter       = "full profile url in twitter"

@@ -1,0 +1,37 @@
+name: GitHub Pages
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Update theme
+        run: git submodule update --init --recursive
+
+      - name: Setup hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.85.0"
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.GIT_TOKEN }}
+          external_repository: QiKatherine/QiKatherine.github.io
+          publish_dir: ./public
+          publish_branch: master
+          cname: sheishe.xyz
+          # keep_files: true
+          # user_name: name
+          # user_email: user@email.com
