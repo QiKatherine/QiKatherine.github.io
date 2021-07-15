@@ -1,815 +1,97 @@
-<!DOCTYPE html>
-<html lang="en-us">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    
-    <meta property="og:site_name" content="Katherine&#39;s Blog">
-    <meta property="og:type" content="article">
-
-    
-    <meta property="og:image" content="http://sheishe.xyz/img/vivi.jpg">
-    <meta property="twitter:image" content="http://sheishe.xyz/img/vivi.jpg" />
-    
-
-    
-    <meta name="title" content="Building personal website with Hugo in one hour" />
-    <meta property="og:title" content="Building personal website with Hugo in one hour" />
-    <meta property="twitter:title" content="Building personal website with Hugo in one hour" />
-    
-
-    
-    <meta name="description" content="Katherine He coder statistician econometrician machine learning">
-    <meta property="og:description" content="Katherine He coder statistician econometrician machine learning" />
-    <meta property="twitter:description" content="Katherine He coder statistician econometrician machine learning" />
-    
-
-    
-    <meta property="twitter:card" content="summary" />
-    
-    
-
-    <meta name="keyword"  content=" ">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-
-    <title>Building personal website with Hugo in one hour-Katherine&#39;s Blog</title>
-
-    <link rel="canonical" href="/post/building-personal-website-with-hugo/">
-
-    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
-	
-    
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-
-    
-    <link rel="stylesheet" href="/css/hux-blog.min.css">
-
-    
-    <link rel="stylesheet" href="/css/syntax.css">
-
-    
-    <link rel="stylesheet" href="/css/zanshang.css">
-
-    
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    
-    
-    <script src="/js/jquery.min.js"></script>
-    
-    
-    <script src="/js/bootstrap.min.js"></script>
-    
-    
-    <script src="/js/hux-blog.min.js"></script>
-	
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-	
-	
-<script src="http://sheishe.xyz/js/mathjax-config.js"></script>
- 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML"></script>
-
-
-
-</head>
-
-
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Katherine&#39;s Blog</a>
-        </div>
-
-        
-        
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/categories/math">math</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/categories/tech">tech</a>
-                    </li>
-                    
-                    
-		    
-                        <li><a href="/top/about/">ABOUT</a></li>
-                    
-
-                    
-		    <li>
-                        <a href="/search">SEARCH <img src="/img/search.png" height="15" style="cursor: pointer;" alt="Search"></a>
-		    </li>
-                    
-                </ul>
-            </div>
-        </div>
-        
-    </div>
-    
-</nav>
-<script>
-    
-    
-    
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
-
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        
-            $navbar.className = " ";
-            
-            setTimeout(function(){
-                
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
-
-
-
-
-<style type="text/css">
-    header.intro-header {
-        background-image: url('/img/111.jpg')
-    }
-</style>
-<header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                    </div>
-                    <h1>Building personal website with Hugo in one hour</h1>
-                    <h2 class="subheading"></h2>
-                    <span class="meta">
-			Posted by 
-			
-		            Katherine&#39;s Blog
-			 
-			on 
-			Monday, April 13, 2020
-                        
-                            <span id="/post/building-personal-website-with-hugo/" class="leancloud_visitors meta_data_item" data-flag-title="">
-    <span class="post-meta-item-icon">
-      <span class="octicon octicon-eye"></span> 
-    </span>
-    <i class="fa fa-eye"></i>
-    <span class="old-visitors-count" style="display: none;"></span>
-    <span class="leancloud-visitors-count"></span>
-</span>
-
-
-
-<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-
-<script>
-	AV.initialize("", "");
-</script>
-
-<script type="text/javascript">
-function showTime(Counter) {
-    var query = new AV.Query(Counter);
-    var entries = [];
-    var $visitors = $(".leancloud_visitors");
-
-    $visitors.each(function() {
-        entries.push($(this).attr("id").trim());
-    });
-
-    query.containedIn('url', entries);
-    query.find()
-        .done(function(results) {
-            var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-            var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
-
-            
-            
-            
-            
-
-            for (var i = 0; i < results.length; i++) {
-                var item = results[i];
-                var url = item.get('url');
-                var time = item.get('time');
-                var element = document.getElementById(url);
-
-                $(element).find(COUNT_CONTAINER_REF).text(time);
-            }
-            for (var i = 0; i < entries.length; i++) {
-                var url = entries[i];
-                var element = document.getElementById(url);
-                var countSpan = $(element).find(COUNT_CONTAINER_REF);
-                if (countSpan.text() == '') {
-                    var oldCountSpan = $(element).find(OLD_COUNT_CONTAINER_REF).text();
-                    if(oldCountSpan!=''){
-                        countSpan.text(0+parseInt(oldCountSpan));
-                    }else{
-                        countSpan.text(0);          
-                    }
-                }
-            }
-        })
-        .fail(function(object, error) {
-            console.log("Error: " + error.code + " " + error.message);
-        });
-}
-
-function addCount(Counter) {
-    var $visitors = $(".leancloud_visitors");
-    var url = $visitors.attr('id').trim();
-    var title = $visitors.attr('data-flag-title').trim();
-    var query = new AV.Query(Counter);
-
-    query.equalTo("url", url);
-    query.find({
-        success: function(results) {
-            if (results.length > 0) {
-                var counter = results[0];
-                counter.fetchWhenSave(true);
-                counter.increment("time");
-                counter.save(null, {
-                    success: function(counter) {
-                        var $element = $(document.getElementById(url));
-                        $element.find('.leancloud-visitors-count').text(counter.get('time'));
-                    },
-                    error: function(counter, error) {
-                        console.log('Failed to save Visitor num, with error message: ' + error.message);
-                    }
-                });
-            } else {
-                var newcounter = new Counter();
-                 
-                var acl = new AV.ACL();
-                acl.setPublicReadAccess(true);
-                acl.setPublicWriteAccess(true);
-                newcounter.setACL(acl);
-                 
-                newcounter.set("title", title);
-                newcounter.set("url", url);
-                var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
-                var $element = $(document.getElementById(url));
-                var oldCountSpan = $element.find(OLD_COUNT_CONTAINER_REF).text();
-                if(oldCountSpan!=''){
-                    newcounter.set("time", parseInt(oldCountSpan)+1);
-                }else{
- 	                    newcounter.set("time",  1);
-                }
-                newcounter.save(null, {
-                    success: function(newcounter) {
-                        var $element = $(document.getElementById(url));
-                        $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-                    },
-                    error: function(newcounter, error) {
-                        console.log('Failed to create');
-                    }
-                });
-            }
-        },
-        error: function(error) {
-            console.log('Error:' + error.code + " " + error.message);
-        }
-    });
-}
-$(function() {
-    var Counter = AV.Object.extend("Counter");
-    
-    
-    if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-    } else {
-        showTime(Counter);
-    }
-});
-</script>
-
-                        
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-
-
-
-<article>
-    <div class="container">
-        <div class="row">
-
-            
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                
-                <header>
-                    <h2>TOC</h2>
-                </header>
-                <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#1-dot-register-a-github-account-and-install-local-terminal-dot">1. Register a GitHub account and install local terminal.</a></li>
-<li><a href="#2-dot-download-hugo-executable-and-installment-dot">2. Download Hugo executable and installment.</a></li>
-<li><a href="#3-dot-download-and-implement-a-hugo-theme-dot">3. Download and implement a Hugo theme.</a></li>
-<li><a href="#4-dot-adding-articles-and-local-test">4. Adding articles and local test</a></li>
-<li><a href="#5-dot-pushing-work-to-remote-server-dot">5. Pushing work to remote server.</a></li>
-<li><a href="#6-dot-more-to-do">6. More to do</a></li>
-</ul></li>
-</ul>
-</nav>
-                
-                
-
-<p>This is a minimum todo list for one to use a static website generator to build a
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:site_name" content="Katherine's Blog"><meta property="og:type" content="article"><meta property="og:image" content="http://sheishe.xyz/img/vivi.jpg"><meta property="twitter:image" content="http://sheishe.xyz/img/vivi.jpg"><meta name=title content="Building personal website with Hugo in one hour"><meta property="og:title" content="Building personal website with Hugo in one hour"><meta property="twitter:title" content="Building personal website with Hugo in one hour"><meta name=description content="Katherine He coder statistician econometrician machine learning"><meta property="og:description" content="Katherine He coder statistician econometrician machine learning"><meta property="twitter:description" content="Katherine He coder statistician econometrician machine learning"><meta property="twitter:card" content="summary"><meta name=keyword content=" "><link rel="shortcut icon" href=/img/favicon.ico><title>Building personal website with Hugo in one hour-Katherine's Blog</title><link rel=canonical href=/post/building-personal-website-with-hugo/><link rel=stylesheet href=/css/iDisqus.min.css><link rel=stylesheet href=/css/bootstrap.min.css><link rel=stylesheet href=/css/hux-blog.min.css><link rel=stylesheet href=/css/syntax.css><link rel=stylesheet href=/css/zanshang.css><link href=//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css rel=stylesheet type=text/css><script src=/js/jquery.min.js></script><script src=/js/bootstrap.min.js></script><script src=/js/hux-blog.min.js></script><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js></script><script>hljs.initHighlightingOnLoad()</script><script src=http://sheishe.xyz/js/mathjax-config.js></script><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML"></script></head><nav class="navbar navbar-default navbar-custom navbar-fixed-top"><div class=container-fluid><div class="navbar-header page-scroll"><button type=button class=navbar-toggle>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button>
+<a class=navbar-brand href=/>Katherine's Blog</a></div><div id=huxblog_navbar><div class=navbar-collapse><ul class="nav navbar-nav navbar-right"><li><a href=/>Home</a></li><li><a href=/categories/math>math</a></li><li><a href=/categories/tech>tech</a></li><li><a href=/top/about/>ABOUT</a></li><li><a href=/search>SEARCH <img src=/img/search.png height=15 style=cursor:pointer alt=Search></a></li></ul></div></div></div></nav><script>var $body=document.body,$toggle=document.querySelector('.navbar-toggle'),$navbar=document.querySelector('#huxblog_navbar'),$collapse=document.querySelector('.navbar-collapse');$toggle.addEventListener('click',handleMagic);function handleMagic(a){$navbar.className.indexOf('in')>0?($navbar.className=" ",setTimeout(function(){$navbar.className.indexOf('in')<0&&($collapse.style.height="0px")},400)):($collapse.style.height="auto",$navbar.className+=" in")}</script><style type=text/css>header.intro-header{background-image:url(/img/111.jpg)}</style><header class=intro-header><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><div class=tags></div><h1>Building personal website with Hugo in one hour</h1><h2 class=subheading></h2><span class=meta>Posted by
+Katherine's Blog
+on
+Monday, April 13, 2020
+<span id=/post/building-personal-website-with-hugo/ class="leancloud_visitors meta_data_item" data-flag-title><span class=post-meta-item-icon><span class="octicon octicon-eye"></span></span><i class="fa fa-eye"></i>
+<span class=old-visitors-count style=display:none></span><span class=leancloud-visitors-count></span></span><script src=https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js></script><script>AV.initialize("","")</script><script type=text/javascript>function showTime(c){var b=new AV.Query(c),a=[],d=$(".leancloud_visitors");d.each(function(){a.push($(this).attr("id").trim())}),b.containedIn('url',a),b.find().done(function(f){for(var h='.leancloud-visitors-count',k='.old-visitors-count',b=0,g,e,j,c,d,i;b<f.length;b++)g=f[b],e=g.get('url'),j=g.get('time'),c=document.getElementById(e),$(c).find(h).text(j);for(b=0;b<a.length;b++)e=a[b],c=document.getElementById(e),d=$(c).find(h),d.text()==''&&(i=$(c).find(k).text(),i!=''?d.text(0+parseInt(i)):d.text(0))}).fail(function(b,a){console.log("Error: "+a.code+" "+a.message)})}function addCount(b){var c=$(".leancloud_visitors"),a=c.attr('id').trim(),e=c.attr('data-flag-title').trim(),d=new AV.Query(b);d.equalTo("url",a),d.find({success:function(j){var d,c,f,h,i,g;j.length>0?(d=j[0],d.fetchWhenSave(!0),d.increment("time"),d.save(null,{success:function(b){var c=$(document.getElementById(a));c.find('.leancloud-visitors-count').text(b.get('time'))},error:function(b,a){console.log('Failed to save Visitor num, with error message: '+a.message)}})):(c=new b,f=new AV.ACL,f.setPublicReadAccess(!0),f.setPublicWriteAccess(!0),c.setACL(f),c.set("title",e),c.set("url",a),h='.old-visitors-count',i=$(document.getElementById(a)),g=i.find(h).text(),g!=''?c.set("time",parseInt(g)+1):c.set("time",1),c.save(null,{success:function(b){var c=$(document.getElementById(a));c.find('.leancloud-visitors-count').text(b.get('time'))},error:function(a,b){console.log('Failed to create')}}))},error:function(a){console.log('Error:'+a.code+" "+a.message)}})}$(function(){var a=AV.Object.extend("Counter");$('.leancloud_visitors').length==1?addCount(a):showTime(a)})</script></span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
+post-container"><header><h2>TOC</h2></header><nav id=TableOfContents><ul><li><a href=#1-dot-register-a-github-account-and-install-local-terminal-dot>1. Register a GitHub account and install local terminal.</a></li><li><a href=#2-dot-download-hugo-executable-and-installment-dot>2. Download Hugo executable and installment.</a></li><li><a href=#3-dot-download-and-implement-a-hugo-theme-dot>3. Download and implement a Hugo theme.</a></li><li><a href=#4-dot-adding-articles-and-local-test>4. Adding articles and local test</a></li><li><a href=#5-dot-pushing-work-to-remote-server-dot>5. Pushing work to remote server.</a></li><li><a href=#6-dot-more-to-do>6. More to do</a></li></ul></nav><p>This is a minimum todo list for one to use a static website generator to build a
 personal website. The are a number of them such as Jekyll, Hexo, Octopress, World press,
 Hugo, etc. I have tried all of the above and personally prefer Hugo for speed and
 flexibility and compatibility with my Emacs. But another reason I recommend Hugo
 to everyone is that: the Hugo community is really well-developed and supportive.
 This is very important for non-proficient users to get help and not be baffled
-by technicalities, so that we can get things done.</p>
-
-<p>If you are interested in building a personal wiki, academic profile, home
+by technicalities, so that we can get things done.</p><p>If you are interested in building a personal wiki, academic profile, home
 cooking recipe album, small business official website, building and managing a
 website by these types of generator facilitates you with most flexibility with the
-minimum cost.</p>
-
-<p>By most flexibility, I mean you can change the look of your website any time
+minimum cost.</p><p>By most flexibility, I mean you can change the look of your website any time
 with lots and lots of fantastic designs, and upload articles/photo whenever you want.
 Check out the hundreds of themes Hugo:
-<a href="https://themes.gohugo.io/">Complete List | Hugo Themes</a></p>
-
-<p>By minimum expenditure, I mean zero cost, unless you want to get a customized
+<a href=https://themes.gohugo.io/>Complete List | Hugo Themes</a></p><p>By minimum expenditure, I mean zero cost, unless you want to get a customized
 website name like <em>awesome.ai</em> or rent some cloud based services to boost
-visitors experience with your website.</p>
-
-<p>To do:
+visitors experience with your website.</p><p>To do:
 The process can be roughly showed in this pic:
-<img src="/img/hugo.png" alt="" /></p>
-
-<h2 id="1-dot-register-a-github-account-and-install-local-terminal-dot">1. Register a GitHub account and install local terminal.</h2>
-
-<p><a href="https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners">An Intro to Git and GitHub for Beginners (Tutorial)</a></p>
-
-<p>Normally people use GitHub to share and maintain code repositories with
+<img src=/img/hugo.png alt></p><h2 id=1-dot-register-a-github-account-and-install-local-terminal-dot>1. Register a GitHub account and install local terminal.</h2><p><a href=https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners>An Intro to Git and GitHub for Beginners (Tutorial)</a></p><p>Normally people use GitHub to share and maintain code repositories with
 collaboration. But it can also host website repository for other people to visit. Using GitHub to
-host personal website is free and encouraged.</p>
-
-<p>There are other options, such as purchasing personal server/VPS, using Gitlab or
-other cloud based service. Each of them has its own advantage, but requires some more work or expenditure.</p>
-
-<p>Installing local terminal to push your local edited website content to remote
-server. For example, if you are using Windows, install git bash from: <a href="https://gitforwindows.org/">Git for Windows</a></p>
-
-<p><em>You don&rsquo;t have to learn all the git command unless you want to contribute to software/theme development. Building website do not refer those information. Only minimum
-experience with command is sufficient.</em></p>
-
-<h2 id="2-dot-download-hugo-executable-and-installment-dot">2. Download Hugo executable and installment.</h2>
-
-<p>Everything you need to know is here, for all types of operating systems:
-<a href="https://gohugo.io/getting-started/installing/">Install Hugo | Hugo</a></p>
-
-<p>If you are a proficient command line user of Linux/macOS, <code>(homebrew)</code> it!</p>
-
-<p>If you are a windows user and not sure which one to follow, the video in above
+host personal website is free and encouraged.</p><p>There are other options, such as purchasing personal server/VPS, using Gitlab or
+other cloud based service. Each of them has its own advantage, but requires some more work or expenditure.</p><p>Installing local terminal to push your local edited website content to remote
+server. For example, if you are using Windows, install git bash from: <a href=https://gitforwindows.org/>Git for Windows</a></p><p><em>You don&rsquo;t have to learn all the git command unless you want to contribute to software/theme development. Building website do not refer those information. Only minimum
+experience with command is sufficient.</em></p><h2 id=2-dot-download-hugo-executable-and-installment-dot>2. Download Hugo executable and installment.</h2><p>Everything you need to know is here, for all types of operating systems:
+<a href=https://gohugo.io/getting-started/installing/>Install Hugo | Hugo</a></p><p>If you are a proficient command line user of Linux/macOS, <code>(homebrew)</code> it!</p><p>If you are a windows user and not sure which one to follow, the video in above
 link should be sufficient. The download link he talks about is in <strong>Less-technical Users</strong> section. But make sure you update the environment variable. This
 is where your git bash could find the Hugo binary and access to it.
-<a href="https://docs.oracle.com/en/database/oracle/r-enterprise/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html#GUID-DD6F9982-60D5-48F6-8270-A27EC53807D0">Create and Modify Environment Variables on Windows</a></p>
-
-<h2 id="3-dot-download-and-implement-a-hugo-theme-dot">3. Download and implement a Hugo theme.</h2>
-
-<p>You could take your time browse the Hugo theme shop and choose a theme according
+<a href=https://docs.oracle.com/en/database/oracle/r-enterprise/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html#GUID-DD6F9982-60D5-48F6-8270-A27EC53807D0>Create and Modify Environment Variables on Windows</a></p><h2 id=3-dot-download-and-implement-a-hugo-theme-dot>3. Download and implement a Hugo theme.</h2><p>You could take your time browse the Hugo theme shop and choose a theme according
 to your needs. There are demos, which are real websites that people build with the
 corresponding theme. Don&rsquo;t just look the front page, make sure you like the
-structure, navigation style and everything since there are so many options!</p>
-
-<p>You can change easily later if you want different things every now and then.</p>
-
-<p>Step by Step instructions to download and implement a theme:
-<a href="https://www.youtube.com/watch?v=L34JL%5F3Jkyc">Installing &amp; Using Themes | Hugo - Static Site Generator | Tutorial 5 - YouTube</a>
+structure, navigation style and everything since there are so many options!</p><p>You can change easily later if you want different things every now and then.</p><p>Step by Step instructions to download and implement a theme:
+<a href="https://www.youtube.com/watch?v=L34JL%5F3Jkyc">Installing & Using Themes | Hugo - Static Site Generator | Tutorial 5 - YouTube</a>
 Notice that he is using a macOS, if you are using Windows, the command line tool
-he is using, is the Git bash in your environment.</p>
-
-<p>If you are happy with the way domo site looks like, the easiest way is just to copy <code>(content, static,
-config.toml)</code> from <code>themes/your-theme/(exampleSite)</code> and paste them with replacement to
+he is using, is the Git bash in your environment.</p><p>If you are happy with the way domo site looks like, the easiest way is just to copy <code>(content, static, config.toml)</code> from <code>themes/your-theme/(exampleSite)</code> and paste them with replacement to
 home file. To rewrite the great theme template to your website, all you need to do is modifying
-the template information in <strong>config.toml</strong> file.</p>
-
-<p>Example of themes:
-Casper <a href="https://brent-li.github.io/post/build-personal-site-with-hugo/">用Hugo搭建个人网站 · 李子峰的Github Page</a></p>
-
-<p>LeaveIt <a href="https://mogeko.me/2018/018/">https://mogeko.me/2018/018/</a></p>
-
-<h2 id="4-dot-adding-articles-and-local-test">4. Adding articles and local test</h2>
-
-<p>By the end of the third step, you should have a nice empty website in your name
+the template information in <strong>config.toml</strong> file.</p><p>Example of themes:
+Casper <a href=https://brent-li.github.io/post/build-personal-site-with-hugo/>用Hugo搭建个人网站 · 李子峰的Github Page</a></p><p>LeaveIt <a href=https://mogeko.me/2018/018/>https://mogeko.me/2018/018/</a></p><h2 id=4-dot-adding-articles-and-local-test>4. Adding articles and local test</h2><p>By the end of the third step, you should have a nice empty website in your name
 with your photo. More you can do is adding articles. The article are all saved
-in post folder, where you could initiate with:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nil" data-lang="nil">cd myblog
-hugo new post/name-of-new-article.md</code></pre></div>
-
-<p>You can always preview it in local host:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nil" data-lang="nil">hugo server themename</code></pre></div>
-
-<p>Open web browser input <code>(http://localhost:1313)</code> to preview. Input <code>(ctrl-c)</code> in
-Git bash to cease preview.</p>
-
-<h2 id="5-dot-pushing-work-to-remote-server-dot">5. Pushing work to remote server.</h2>
-
-<p>Make sure you generate html files into /public file first:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nil" data-lang="nil">hugo -t themename</code></pre></div>
-
-<p>Push everything generate in /public file to <code>(XX.github.io)</code> repository.</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nil" data-lang="nil">git init
+in post folder, where you could initiate with:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>cd myblog
+hugo new post/name-of-new-article.md</code></pre></div><p>You can always preview it in local host:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>hugo server themename</code></pre></div><p>Open web browser input <code>(http://localhost:1313)</code> to preview. Input <code>(ctrl-c)</code> in
+Git bash to cease preview.</p><h2 id=5-dot-pushing-work-to-remote-server-dot>5. Pushing work to remote server.</h2><p>Make sure you generate html files into /public file first:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>hugo -t themename</code></pre></div><p>Push everything generate in /public file to <code>(XX.github.io)</code> repository.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>git init
 git add .
 git commit -m &#34;Initial commit.&#34;
 git remote add origin git@github.com:Brent-Li/brent-li.github.io.git
-git push -u origin master</code></pre></div>
-
-<p>Unless you want to giving version control, not only for your website, but also for the
+git push -u origin master</code></pre></div><p>Unless you want to giving version control, not only for your website, but also for the
 source code. Then you are gonna have to do some work because there are many ways
 to achieve. I personally use two branches (dev for source code, and master for
-/public) to manage because I prefer to keep codes intact with non-bloat management.</p>
-
-<h2 id="6-dot-more-to-do">6. More to do</h2>
-
-<p>So far the minimum work that makes a sustainable website is done. Of course
-there are more work to escalate the efficiency and fun. Such as:</p>
-
-<p>(1). Get a personalized website domain (address) for people to remember.
+/public) to manage because I prefer to keep codes intact with non-bloat management.</p><h2 id=6-dot-more-to-do>6. More to do</h2><p>So far the minimum work that makes a sustainable website is done. Of course
+there are more work to escalate the efficiency and fun. Such as:</p><p>(1). Get a personalized website domain (address) for people to remember.
 This is one of the places where could use some money. GitHub has specific
 requirement for using <code>(XX.github.io)</code> as name for website, which is hard to
 remember, so you might want to check for buying a website domain with your own name:
-<a href="https://www.namecheap.com/">Buy domain name - Cheap domain names from $1.37 - Namecheap</a>
+<a href=https://www.namecheap.com/>Buy domain name - Cheap domain names from $1.37 - Namecheap</a>
 (There are many domain name sellers, all secondary distributors, so there are
-slightly price different for a same domain.)</p>
-
-<p>At here you need to link the domain you bought to GitHub, so that when people
+slightly price different for a same domain.)</p><p>At here you need to link the domain you bought to GitHub, so that when people
 are visiting <code>(xx.com)</code>, GitHub will re-direct to <code>(xx.github.io)</code>.
-<a href="https://www.namecheap.com/support/knowledgebase/article.aspx/9645/2208/how-do-i-link-my-domain-to-github-pages">How do I link my domain to GitHub Pages - Domains - Namecheap.com</a></p>
-
-<p>Chinese instruction:
-<a href="https://zhuanlan.zhihu.com/p/33261777">NameCheap域名解析教程 —— BasicDNS - 知乎</a></p>
-
-<p>(2). Get Google Analytics to get statistics of the visitors of your website.
-<a href="https://gohugo.io/templates/internal/">Internal Templates | Hugo</a>
+<a href=https://www.namecheap.com/support/knowledgebase/article.aspx/9645/2208/how-do-i-link-my-domain-to-github-pages>How do I link my domain to GitHub Pages - Domains - Namecheap.com</a></p><p>Chinese instruction:
+<a href=https://zhuanlan.zhihu.com/p/33261777>NameCheap域名解析教程 —— BasicDNS - 知乎</a></p><p>(2). Get Google Analytics to get statistics of the visitors of your website.
+<a href=https://gohugo.io/templates/internal/>Internal Templates | Hugo</a>
 The process only needs adding two lines of codes. But this is a controversial demand because some people care about privacy or refuse
-to create by traffic driven.</p>
-
-<p>Chinese instruction:
-<a href="https://note.qidong.name/2017/07/05/google-analytics-in-hugo/">Hugo中使用Google Analytics · 零壹軒·笔记</a></p>
-
-<p>(3). Adding Disqus for visitor to comments</p>
-
-<p>The website we generate is static website, which means generally the interactive
+to create by traffic driven.</p><p>Chinese instruction:
+<a href=https://note.qidong.name/2017/07/05/google-analytics-in-hugo/>Hugo中使用Google Analytics · 零壹軒·笔记</a></p><p>(3). Adding Disqus for visitor to comments</p><p>The website we generate is static website, which means generally the interactive
 operations like searching/chatting/commenting is not supported. But there are
-plug-in can help achieve.</p>
-
-<p>(4). Adding site search with Algolia</p>
-
-<p>(5). Auto deployment</p>
-
-<p>There are many automated deployment tools online, I use Werecker and I wrote an
+plug-in can help achieve.</p><p>(4). Adding site search with Algolia</p><p>(5). Auto deployment</p><p>There are many automated deployment tools online, I use Werecker and I wrote an
 article about the details:
-<a href="http://localhost:1313/post/hugo-blogging-with-wercker-auto-build-deployment/">Hugo Blogging with Wercker Auto Build &amp; Deployment 【用 Wercker 自动部署网站】-Katherine He Blog|何琪的博客</a></p>
-
-<p>(6). Search Engine Optimization</p>
-
-<p>(7). Redevelopment of website theme</p>
-
-<p>(8). Emacs users with ox-hugo</p>
-
-<p>I have written an article about this in another post:
-<a href="https://sheishe.xyz/post/hugo-blogging-with-ox-hugo/">Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】-Katherine He Blog|何琪的博客</a></p>
-
-
-                
-
-                <hr>
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/post/dd/" data-toggle="tooltip" data-placement="top" title="Detailed key proof of ANOVA test: SST=SSE&#43;SSB">&larr;
-                            Previous Post</a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/post/emacs-dotfile-loading-mechanism-in-windows-system/" data-toggle="tooltip" data-placement="top" title="Emacs dotfile loading mechanism in Windows system">Next
-                            Post &rarr;</a>
-                    </li>
-                    
-                </ul>
-
-                
-<div id="disqus-comment"></div>
-
-<div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "katherine He" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
-
-            </div>
-            
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                
-                
-                <section>
-                    <hr class="hidden-sm hidden-xs">
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                        
-                        
-                        
-                        <a href="/tags/anki" title="anki">
-                            anki
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/emacs" title="emacs">
-                            emacs
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/emasc" title="emasc">
-                            emasc
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/git" title="git">
-                            git
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/hugo" title="hugo">
-                            hugo
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/msys2" title="msys2">
-                            msys2
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/org-mode" title="org-mode">
-                            org-mode
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/ox-hugo" title="ox-hugo">
-                            ox-hugo
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/probability" title="probability">
-                            probability
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/spacemacs" title="spacemacs">
-                            spacemacs
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/statistics" title="statistics">
-                            statistics
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/stochastic-process" title="stochastic-process">
-                            stochastic-process
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/ubuntu" title="ubuntu">
-                            ubuntu
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/wercker" title="wercker">
-                            wercker
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/windows" title="windows">
-                            windows
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/windows10" title="windows10">
-                            windows10
-                        </a>
-                        
-                        
-                    </div>
-                </section>
-                
-
-                
-                
-                <section>
-                    <hr>
-                    <h5>FRIENDS</h5>
-                    <ul class="list-inline">
-                        
-                        <li><a target="_blank" href="https://twitter.com/laowai121">Twitter @ 伯逸</a></li>
-                        
-                    </ul>
-                </section>
-                
-            </div>
-        </div>
-    </div>
-</article>
-
-
-
-
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
-                   
-                    
-                    
-                    
-                    
-                    
-
-                    
-
-		    
-                    
-                    <li>
-                        <a target="_blank" href="/img/example-qr.png">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-		    
-                    
-                    <li>
-                        <a target="_blank" href="https://github.com/QiKatherine">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-		    
-                    
-                    
-                </ul>
-		<p class="copyright text-muted">
-                    Copyright &copy; Katherine&#39;s Blog 2021
-                    <br>
-                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="100px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
-                    </iframe>
-                </p>
-            </div>
-        </div>
-    </div>
-</footer>
-
-
-
-
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-
-
-
-
-
-
-<script>
-    
-    if($('#tag_cloud').length !== 0){
-        async("/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-
-<script>
-    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-
-
-
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-145919675-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-</body>
-</html>
+<a href=http://localhost:1313/post/hugo-blogging-with-wercker-auto-build-deployment/>Hugo Blogging with Wercker Auto Build & Deployment 【用 Wercker 自动部署网站】-Katherine He Blog|何琪的博客</a></p><p>(6). Search Engine Optimization</p><p>(7). Redevelopment of website theme</p><p>(8). Emacs users with ox-hugo</p><p>I have written an article about this in another post:
+<a href=https://sheishe.xyz/post/hugo-blogging-with-ox-hugo/>Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】-Katherine He Blog|何琪的博客</a></p><hr><ul class=pager><li class=previous><a href=/post/dd/ data-toggle=tooltip data-placement=top title="Detailed key proof of ANOVA test: SST=SSE+SSB">&larr;
+Previous Post</a></li><li class=next><a href=/post/emacs-dotfile-loading-mechanism-in-windows-system/ data-toggle=tooltip data-placement=top title="Emacs dotfile loading mechanism in Windows system">Next
+Post &rarr;</a></li></ul><div id=disqus-comment></div><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//katherine He.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
+sidebar-container"><section><hr class="hidden-sm hidden-xs"><h5><a href=/tags/>FEATURED TAGS</a></h5><div class=tags><a href=/tags/anki title=anki>anki</a>
+<a href=/tags/emacs title=emacs>emacs</a>
+<a href=/tags/emasc title=emasc>emasc</a>
+<a href=/tags/git title=git>git</a>
+<a href=/tags/hugo title=hugo>hugo</a>
+<a href=/tags/msys2 title=msys2>msys2</a>
+<a href=/tags/org-mode title=org-mode>org-mode</a>
+<a href=/tags/ox-hugo title=ox-hugo>ox-hugo</a>
+<a href=/tags/probability title=probability>probability</a>
+<a href=/tags/spacemacs title=spacemacs>spacemacs</a>
+<a href=/tags/statistics title=statistics>statistics</a>
+<a href=/tags/stochastic-process title=stochastic-process>stochastic-process</a>
+<a href=/tags/ubuntu title=ubuntu>ubuntu</a>
+<a href=/tags/wercker title=wercker>wercker</a>
+<a href=/tags/windows title=windows>windows</a>
+<a href=/tags/windows10 title=windows10>windows10</a></div></section><section><hr><h5>FRIENDS</h5><ul class=list-inline><li><a target=_blank href=https://twitter.com/laowai121>Twitter @ 伯逸</a></li></ul></section></div></div></div></article><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a target=_blank href=/img/example-qr.png><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
+<i class="fa fa-wechat fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://github.com/QiKatherine><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
+<i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="copyright text-muted">Copyright &copy; Katherine's Blog 2021<br><a href=https://themes.gohugo.io/hugo-theme-cleanwhite>CleanWhite Hugo Theme</a> by <a href=https://zhaohuabing.com>Huabing</a> |
+<iframe style=margin-left:2px;margin-bottom:-5px frameborder=0 scrolling=0 width=100px height=20px src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true"></iframe></p></div></div></div></footer><script>function async(f,b){var c=document,d='script',a=c.createElement(d),e=c.getElementsByTagName(d)[0];a.src=f,b&&a.addEventListener('load',function(a){b(null,a)},!1),e.parentNode.insertBefore(a,e)}</script><script>$('#tag_cloud').length!==0&&async("/js/jquery.tagcloud.js",function(){$.fn.tagcloud.defaults={color:{start:'#bbbbee',end:'#0085a1'}},$('#tag_cloud a').tagcloud()})</script><script>async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js",function(){var a=document.querySelector("nav");a&&FastClick.attach(a)})</script><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-145919675-1','auto'),ga('send','pageview'))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>

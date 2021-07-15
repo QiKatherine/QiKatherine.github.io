@@ -1,566 +1,171 @@
-<!DOCTYPE html>
-<html lang="en-us">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    
-    <meta property="og:site_name" content="Katherine&#39;s Blog">
-    <meta property="og:type" content="article">
-
-    
-    <meta property="og:image" content="http://sheishe.xyz/img/vivi.jpg">
-    <meta property="twitter:image" content="http://sheishe.xyz/img/vivi.jpg" />
-    
-
-    
-    <meta name="title" content="The Little Schemer speedy referring note (3/3)" />
-    <meta property="og:title" content="The Little Schemer speedy referring note (3/3)" />
-    <meta property="twitter:title" content="The Little Schemer speedy referring note (3/3)" />
-    
-
-    
-    <meta name="description" content="Katherine He coder statistician econometrician machine learning">
-    <meta property="og:description" content="Katherine He coder statistician econometrician machine learning" />
-    <meta property="twitter:description" content="Katherine He coder statistician econometrician machine learning" />
-    
-
-    
-    <meta property="twitter:card" content="summary" />
-    
-    
-
-    <meta name="keyword"  content=" ">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-
-    <title>The Little Schemer speedy referring note (3/3)-Katherine&#39;s Blog</title>
-
-    <link rel="canonical" href="/post/the-little-schemer-note-3-3/">
-
-    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
-	
-    
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-
-    
-    <link rel="stylesheet" href="/css/hux-blog.min.css">
-
-    
-    <link rel="stylesheet" href="/css/syntax.css">
-
-    
-    <link rel="stylesheet" href="/css/zanshang.css">
-
-    
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    
-    
-    <script src="/js/jquery.min.js"></script>
-    
-    
-    <script src="/js/bootstrap.min.js"></script>
-    
-    
-    <script src="/js/hux-blog.min.js"></script>
-	
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-	
-	
-<script src="http://sheishe.xyz/js/mathjax-config.js"></script>
- 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML"></script>
-
-
-
-</head>
-
-
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Katherine&#39;s Blog</a>
-        </div>
-
-        
-        
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/categories/math">math</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/categories/tech">tech</a>
-                    </li>
-                    
-                    
-		    
-                        <li><a href="/top/about/">ABOUT</a></li>
-                    
-
-                    
-		    <li>
-                        <a href="/search">SEARCH <img src="/img/search.png" height="15" style="cursor: pointer;" alt="Search"></a>
-		    </li>
-                    
-                </ul>
-            </div>
-        </div>
-        
-    </div>
-    
-</nav>
-<script>
-    
-    
-    
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
-
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        
-            $navbar.className = " ";
-            
-            setTimeout(function(){
-                
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
-
-
-
-
-<style type="text/css">
-    header.intro-header {
-        background-image: url('/img/111.jpg')
-    }
-</style>
-<header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                    </div>
-                    <h1>The Little Schemer speedy referring note (3/3)</h1>
-                    <h2 class="subheading"></h2>
-                    <span class="meta">
-			Posted by 
-			
-		            Katherine&#39;s Blog
-			 
-			on 
-			Monday, January 6, 2020
-                        
-                            <span id="/post/the-little-schemer-note-3-3/" class="leancloud_visitors meta_data_item" data-flag-title="">
-    <span class="post-meta-item-icon">
-      <span class="octicon octicon-eye"></span> 
-    </span>
-    <i class="fa fa-eye"></i>
-    <span class="old-visitors-count" style="display: none;"></span>
-    <span class="leancloud-visitors-count"></span>
-</span>
-
-
-
-<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-
-<script>
-	AV.initialize("", "");
-</script>
-
-<script type="text/javascript">
-function showTime(Counter) {
-    var query = new AV.Query(Counter);
-    var entries = [];
-    var $visitors = $(".leancloud_visitors");
-
-    $visitors.each(function() {
-        entries.push($(this).attr("id").trim());
-    });
-
-    query.containedIn('url', entries);
-    query.find()
-        .done(function(results) {
-            var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-            var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
-
-            
-            
-            
-            
-
-            for (var i = 0; i < results.length; i++) {
-                var item = results[i];
-                var url = item.get('url');
-                var time = item.get('time');
-                var element = document.getElementById(url);
-
-                $(element).find(COUNT_CONTAINER_REF).text(time);
-            }
-            for (var i = 0; i < entries.length; i++) {
-                var url = entries[i];
-                var element = document.getElementById(url);
-                var countSpan = $(element).find(COUNT_CONTAINER_REF);
-                if (countSpan.text() == '') {
-                    var oldCountSpan = $(element).find(OLD_COUNT_CONTAINER_REF).text();
-                    if(oldCountSpan!=''){
-                        countSpan.text(0+parseInt(oldCountSpan));
-                    }else{
-                        countSpan.text(0);          
-                    }
-                }
-            }
-        })
-        .fail(function(object, error) {
-            console.log("Error: " + error.code + " " + error.message);
-        });
-}
-
-function addCount(Counter) {
-    var $visitors = $(".leancloud_visitors");
-    var url = $visitors.attr('id').trim();
-    var title = $visitors.attr('data-flag-title').trim();
-    var query = new AV.Query(Counter);
-
-    query.equalTo("url", url);
-    query.find({
-        success: function(results) {
-            if (results.length > 0) {
-                var counter = results[0];
-                counter.fetchWhenSave(true);
-                counter.increment("time");
-                counter.save(null, {
-                    success: function(counter) {
-                        var $element = $(document.getElementById(url));
-                        $element.find('.leancloud-visitors-count').text(counter.get('time'));
-                    },
-                    error: function(counter, error) {
-                        console.log('Failed to save Visitor num, with error message: ' + error.message);
-                    }
-                });
-            } else {
-                var newcounter = new Counter();
-                 
-                var acl = new AV.ACL();
-                acl.setPublicReadAccess(true);
-                acl.setPublicWriteAccess(true);
-                newcounter.setACL(acl);
-                 
-                newcounter.set("title", title);
-                newcounter.set("url", url);
-                var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
-                var $element = $(document.getElementById(url));
-                var oldCountSpan = $element.find(OLD_COUNT_CONTAINER_REF).text();
-                if(oldCountSpan!=''){
-                    newcounter.set("time", parseInt(oldCountSpan)+1);
-                }else{
- 	                    newcounter.set("time",  1);
-                }
-                newcounter.save(null, {
-                    success: function(newcounter) {
-                        var $element = $(document.getElementById(url));
-                        $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-                    },
-                    error: function(newcounter, error) {
-                        console.log('Failed to create');
-                    }
-                });
-            }
-        },
-        error: function(error) {
-            console.log('Error:' + error.code + " " + error.message);
-        }
-    });
-}
-$(function() {
-    var Counter = AV.Object.extend("Counter");
-    
-    
-    if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-    } else {
-        showTime(Counter);
-    }
-});
-</script>
-
-                        
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-
-
-
-<article>
-    <div class="container">
-        <div class="row">
-
-            
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                
-                <header>
-                    <h2>TOC</h2>
-                </header>
-                <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#chapter-9-and-again-and-again-and-again">Chapter 9 and Again and Again and Again</a></li>
-<li><a href="#chapter-10-what-is-the-value-of-all-of-this">Chapter 10 What is the value of all of this?</a></li>
-</ul></li>
-</ul>
-</nav>
-                
-                
-
-<p>Part one:
-<a href="https://sheishe.xyz/post/the-little-schemer-note/">The Little Schemer speedy referring note (<sup>1</sup>&frasl;<sub>3</sub>)-Katherine He Blog|何琪的博客</a>
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:site_name" content="Katherine's Blog"><meta property="og:type" content="article"><meta property="og:image" content="http://sheishe.xyz/img/vivi.jpg"><meta property="twitter:image" content="http://sheishe.xyz/img/vivi.jpg"><meta name=title content="The Little Schemer speedy referring note (3/3)"><meta property="og:title" content="The Little Schemer speedy referring note (3/3)"><meta property="twitter:title" content="The Little Schemer speedy referring note (3/3)"><meta name=description content="Katherine He coder statistician econometrician machine learning"><meta property="og:description" content="Katherine He coder statistician econometrician machine learning"><meta property="twitter:description" content="Katherine He coder statistician econometrician machine learning"><meta property="twitter:card" content="summary"><meta name=keyword content=" "><link rel="shortcut icon" href=/img/favicon.ico><title>The Little Schemer speedy referring note (3/3)-Katherine's Blog</title><link rel=canonical href=/post/the-little-schemer-note-3-3/><link rel=stylesheet href=/css/iDisqus.min.css><link rel=stylesheet href=/css/bootstrap.min.css><link rel=stylesheet href=/css/hux-blog.min.css><link rel=stylesheet href=/css/syntax.css><link rel=stylesheet href=/css/zanshang.css><link href=//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css rel=stylesheet type=text/css><script src=/js/jquery.min.js></script><script src=/js/bootstrap.min.js></script><script src=/js/hux-blog.min.js></script><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js></script><script>hljs.initHighlightingOnLoad()</script><script src=http://sheishe.xyz/js/mathjax-config.js></script><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML"></script></head><nav class="navbar navbar-default navbar-custom navbar-fixed-top"><div class=container-fluid><div class="navbar-header page-scroll"><button type=button class=navbar-toggle>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button>
+<a class=navbar-brand href=/>Katherine's Blog</a></div><div id=huxblog_navbar><div class=navbar-collapse><ul class="nav navbar-nav navbar-right"><li><a href=/>Home</a></li><li><a href=/categories/math>math</a></li><li><a href=/categories/tech>tech</a></li><li><a href=/top/about/>ABOUT</a></li><li><a href=/search>SEARCH <img src=/img/search.png height=15 style=cursor:pointer alt=Search></a></li></ul></div></div></div></nav><script>var $body=document.body,$toggle=document.querySelector('.navbar-toggle'),$navbar=document.querySelector('#huxblog_navbar'),$collapse=document.querySelector('.navbar-collapse');$toggle.addEventListener('click',handleMagic);function handleMagic(a){$navbar.className.indexOf('in')>0?($navbar.className=" ",setTimeout(function(){$navbar.className.indexOf('in')<0&&($collapse.style.height="0px")},400)):($collapse.style.height="auto",$navbar.className+=" in")}</script><style type=text/css>header.intro-header{background-image:url(/img/111.jpg)}</style><header class=intro-header><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><div class=tags></div><h1>The Little Schemer speedy referring note (3/3)</h1><h2 class=subheading></h2><span class=meta>Posted by
+Katherine's Blog
+on
+Monday, January 6, 2020
+<span id=/post/the-little-schemer-note-3-3/ class="leancloud_visitors meta_data_item" data-flag-title><span class=post-meta-item-icon><span class="octicon octicon-eye"></span></span><i class="fa fa-eye"></i>
+<span class=old-visitors-count style=display:none></span><span class=leancloud-visitors-count></span></span><script src=https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js></script><script>AV.initialize("","")</script><script type=text/javascript>function showTime(c){var b=new AV.Query(c),a=[],d=$(".leancloud_visitors");d.each(function(){a.push($(this).attr("id").trim())}),b.containedIn('url',a),b.find().done(function(f){for(var h='.leancloud-visitors-count',k='.old-visitors-count',b=0,g,e,j,c,d,i;b<f.length;b++)g=f[b],e=g.get('url'),j=g.get('time'),c=document.getElementById(e),$(c).find(h).text(j);for(b=0;b<a.length;b++)e=a[b],c=document.getElementById(e),d=$(c).find(h),d.text()==''&&(i=$(c).find(k).text(),i!=''?d.text(0+parseInt(i)):d.text(0))}).fail(function(b,a){console.log("Error: "+a.code+" "+a.message)})}function addCount(b){var c=$(".leancloud_visitors"),a=c.attr('id').trim(),e=c.attr('data-flag-title').trim(),d=new AV.Query(b);d.equalTo("url",a),d.find({success:function(j){var d,c,f,h,i,g;j.length>0?(d=j[0],d.fetchWhenSave(!0),d.increment("time"),d.save(null,{success:function(b){var c=$(document.getElementById(a));c.find('.leancloud-visitors-count').text(b.get('time'))},error:function(b,a){console.log('Failed to save Visitor num, with error message: '+a.message)}})):(c=new b,f=new AV.ACL,f.setPublicReadAccess(!0),f.setPublicWriteAccess(!0),c.setACL(f),c.set("title",e),c.set("url",a),h='.old-visitors-count',i=$(document.getElementById(a)),g=i.find(h).text(),g!=''?c.set("time",parseInt(g)+1):c.set("time",1),c.save(null,{success:function(b){var c=$(document.getElementById(a));c.find('.leancloud-visitors-count').text(b.get('time'))},error:function(a,b){console.log('Failed to create')}}))},error:function(a){console.log('Error:'+a.code+" "+a.message)}})}$(function(){var a=AV.Object.extend("Counter");$('.leancloud_visitors').length==1?addCount(a):showTime(a)})</script></span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
+post-container"><header><h2>TOC</h2></header><nav id=TableOfContents><ul><li><a href=#chapter-9-and-again-and-again-and-again>Chapter 9 and Again and Again and Again</a></li><li><a href=#chapter-10-what-is-the-value-of-all-of-this>Chapter 10 What is the value of all of this?</a></li></ul></nav><p>Part one:
+<a href=https://sheishe.xyz/post/the-little-schemer-note/>The Little Schemer speedy referring note (1/3)-Katherine He Blog|何琪的博客</a>
 Part two:
-<a href="https://sheishe.xyz/post/the-little-schemer-note-2-3/">The Little Schemer speedy referring note (<sup>2</sup>&frasl;<sub>3</sub>)-Katherine He Blog|何琪的博客</a>
+<a href=https://sheishe.xyz/post/the-little-schemer-note-2-3/>The Little Schemer speedy referring note (2/3)-Katherine He Blog|何琪的博客</a>
 Part three:
-<a href="https://sheishe.xyz/post/the-little-schemer-note-3-3/">The Little Schemer speedy referring note (<sup>3</sup>&frasl;<sub>3</sub>)-Katherine He Blog|何琪的博客</a></p>
-
-<p>This is a quick reference note that I pull from the book The Little Schemer. The
- code in this note is from here with edition:</p>
-
-<p><a href="https://github.com/pkrumins/the-little-schemer/blob/master/02-do-it-again.ss">the-little-schemer/02-do-it-again.ss at master · pkrumins/the-little-schemer</a></p>
-
-<p>The former chapters can be easily understood from reading the code without
+<a href=https://sheishe.xyz/post/the-little-schemer-note-3-3/>The Little Schemer speedy referring note (3/3)-Katherine He Blog|何琪的博客</a></p><p>This is a quick reference note that I pull from the book The Little Schemer. The
+code in this note is from here with edition:</p><p><a href=https://github.com/pkrumins/the-little-schemer/blob/master/02-do-it-again.ss>the-little-schemer/02-do-it-again.ss at master · pkrumins/the-little-schemer</a></p><p>The former chapters can be easily understood from reading the code without
 counting parenthesis. <strong>However from this chapter, it is highly recommended to
 download Drracket and use a stepper to run all the recurions.</strong> For example, the
-stepper make the answer of <code>soegaard</code> very straightforward:</p>
-
-<p><a href="https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer?noredirect=1&amp;lq=1">scheme - Y combinator discussion in &ldquo;The Little Schemer&rdquo; - Stack Overflow</a></p>
-
-<p>This chapter introduces the idea of Y combinator based on recursion. We&rsquo;ve seen
+stepper make the answer of <code>soegaard</code> very straightforward:</p><p><a href="https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer?noredirect=1&lq=1">scheme - Y combinator discussion in &ldquo;The Little Schemer&rdquo; - Stack Overflow</a></p><p>This chapter introduces the idea of Y combinator based on recursion. We&rsquo;ve seen
 that recursion is a function calling itself during defining itself, but when the
-function is just an lambda expression without name, what do we do?</p>
-
-<p>The Y combinator provides a solution by designing an high order function, which
+function is just an lambda expression without name, what do we do?</p><p>The Y combinator provides a solution by designing an high order function, which
 is a function that takes a function as an argument and returns a function.
 Taking factorial as an example, we deduce a function G where G(factorial)=factorial.
-Let&rsquo;s learn how to deduce step by step.</p>
-
-<h2 id="chapter-9-and-again-and-again-and-again">Chapter 9 and Again and Again and Again</h2>
-
-<p>The key of writing recursion is making sure there is <code>termination condition</code>.
+Let&rsquo;s learn how to deduce step by step.</p><h2 id=chapter-9-and-again-and-again-and-again>Chapter 9 and Again and Again and Again</h2><p>The key of writing recursion is making sure there is <code>termination condition</code>.
 That&rsquo;s the basic requirement for function in both computation and mathmatics
 area: a function is a mapping procedure which takes in an argument and produces
-an output accordingly. We need to aviod any algorithm leading to infinite loop.</p>
+an output accordingly. We need to aviod any algorithm leading to infinite loop.</p><p>Here is an example of failed design: the <code>(keep-looking)</code> calls <code>(pick)</code> to see if <code>a</code> is equal to the random atom in lat (assuming the numbers in lat is random).</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme><span style=color:#6272a4>;pick return n-th element in lat:</span>
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>pick</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>n</span> <span style=color:#8be9fd;font-style:italic>lat</span>)
+    (<span style=color:#50fa7b>cond</span>
+      ((<span style=color:#8be9fd;font-style:italic>zero? </span>(<span style=color:#50fa7b>sub1</span> <span style=color:#8be9fd;font-style:italic>n</span>)) (<span style=color:#8be9fd;font-style:italic>car </span><span style=color:#8be9fd;font-style:italic>lat</span>))
+      (<span style=color:#50fa7b>else</span>
+        (<span style=color:#50fa7b>pick</span> (<span style=color:#50fa7b>sub1</span> <span style=color:#8be9fd;font-style:italic>n</span>) (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>lat</span>))))))
 
-<p>Here is an example of failed design: the <code>(keep-looking)</code> calls <code>(pick)</code> to see if <code>a</code> is equal to the random atom in lat (assuming the numbers in lat is random).</p>
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>keep-looking</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>a</span> <span style=color:#8be9fd;font-style:italic>sorn</span> <span style=color:#8be9fd;font-style:italic>lat</span>)
+    (<span style=color:#50fa7b>cond</span>
+      ((<span style=color:#8be9fd;font-style:italic>number? </span><span style=color:#8be9fd;font-style:italic>sorn</span>)
+       (<span style=color:#50fa7b>keep-looking</span> <span style=color:#8be9fd;font-style:italic>a</span> (<span style=color:#50fa7b>pick</span> <span style=color:#8be9fd;font-style:italic>sorn</span> <span style=color:#8be9fd;font-style:italic>lat</span>) <span style=color:#8be9fd;font-style:italic>lat</span>))
+      (<span style=color:#ff79c6>else </span>(<span style=color:#8be9fd;font-style:italic>eq? </span><span style=color:#8be9fd;font-style:italic>sorn</span> <span style=color:#8be9fd;font-style:italic>a</span> )))))
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;pick return n-th element in lat:</span>
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">pick</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
-    (<span style="color:#50fa7b">cond</span>
-      ((<span style="color:#8be9fd;font-style:italic">zero? </span>(<span style="color:#50fa7b">sub1</span> <span style="color:#8be9fd;font-style:italic">n</span>)) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">lat</span>))
-      (<span style="color:#50fa7b">else</span>
-        (<span style="color:#50fa7b">pick</span> (<span style="color:#50fa7b">sub1</span> <span style="color:#8be9fd;font-style:italic">n</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>))))))
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>looking</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>a</span> <span style=color:#8be9fd;font-style:italic>lat</span>)
+    (<span style=color:#50fa7b>keep-looking</span> <span style=color:#8be9fd;font-style:italic>a</span> (<span style=color:#50fa7b>pick</span> <span style=color:#bd93f9>1</span> <span style=color:#8be9fd;font-style:italic>lat</span>) <span style=color:#8be9fd;font-style:italic>lat</span>)))
 
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">keep-looking</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">sorn</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
-    (<span style="color:#50fa7b">cond</span>
-      ((<span style="color:#8be9fd;font-style:italic">number? </span><span style="color:#8be9fd;font-style:italic">sorn</span>)
-       (<span style="color:#50fa7b">keep-looking</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#50fa7b">pick</span> <span style="color:#8be9fd;font-style:italic">sorn</span> <span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">lat</span>))
-      (<span style="color:#ff79c6">else </span>(<span style="color:#8be9fd;font-style:italic">eq? </span><span style="color:#8be9fd;font-style:italic">sorn</span> <span style="color:#8be9fd;font-style:italic">a</span> )))))
-
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">looking</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">lat</span>)
-    (<span style="color:#50fa7b">keep-looking</span> <span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#50fa7b">pick</span> <span style="color:#bd93f9">1</span> <span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#8be9fd;font-style:italic">lat</span>)))
-
-<span style="color:#6272a4">; Example of looking</span>
-(<span style="color:#50fa7b">looking</span> <span style="color:#f1fa8c">&#39;caviar</span> <span style="color:#ff79c6">&#39;</span>(<span style="color:#bd93f9">6</span> <span style="color:#bd93f9">2</span> <span style="color:#bd93f9">4</span> <span style="color:#8be9fd;font-style:italic">caviar</span> <span style="color:#bd93f9">5</span> <span style="color:#bd93f9">7</span> <span style="color:#bd93f9">3</span>))         <span style="color:#6272a4">; #t</span>
-(<span style="color:#50fa7b">looking</span> <span style="color:#f1fa8c">&#39;caviar</span> <span style="color:#ff79c6">&#39;</span>(<span style="color:#bd93f9">6</span> <span style="color:#bd93f9">2</span> <span style="color:#8be9fd;font-style:italic">grits</span> <span style="color:#8be9fd;font-style:italic">caviar</span> <span style="color:#bd93f9">5</span> <span style="color:#bd93f9">7</span> <span style="color:#bd93f9">3</span>))     <span style="color:#6272a4">; #f</span></code></pre></div>
-
-<p>In the first test case we can find that, the <code>'caviar</code> is the 4th element in the
+<span style=color:#6272a4>; Example of looking</span>
+(<span style=color:#50fa7b>looking</span> <span style=color:#f1fa8c>&#39;caviar</span> <span style=color:#ff79c6>&#39;</span>(<span style=color:#bd93f9>6</span> <span style=color:#bd93f9>2</span> <span style=color:#bd93f9>4</span> <span style=color:#8be9fd;font-style:italic>caviar</span> <span style=color:#bd93f9>5</span> <span style=color:#bd93f9>7</span> <span style=color:#bd93f9>3</span>))         <span style=color:#6272a4>; #t</span>
+(<span style=color:#50fa7b>looking</span> <span style=color:#f1fa8c>&#39;caviar</span> <span style=color:#ff79c6>&#39;</span>(<span style=color:#bd93f9>6</span> <span style=color:#bd93f9>2</span> <span style=color:#8be9fd;font-style:italic>grits</span> <span style=color:#8be9fd;font-style:italic>caviar</span> <span style=color:#bd93f9>5</span> <span style=color:#bd93f9>7</span> <span style=color:#bd93f9>3</span>))     <span style=color:#6272a4>; #f</span></code></pre></div><p>In the first test case we can find that, the <code>'caviar</code> is the 4th element in the
 first example, and the list contains 4. So running it is very likely to hit the
 termination condition. But in second example the <code>'caviar</code> is the 4th element whereas no 4
 is contained in the list, so the recursion will run forever, meaning the
 function won&rsquo;t always return a value for an input. This illed function is called
-<strong>partial function</strong> as opposed to <strong>total function</strong> defined previously.</p>
-
-<p>Let&rsquo;s see another example. We&rsquo;ve defined <strong>pair</strong> is a list containing two
+<strong>partial function</strong> as opposed to <strong>total function</strong> defined previously.</p><p>Let&rsquo;s see another example. We&rsquo;ve defined <strong>pair</strong> is a list containing two
 s-expressions (s-expression: a binary tree). The <code>shift</code> takes a pair whose first component is a pair and builds a pair by shifting the second part of the first component into
-the second component.</p>
+the second component.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme>(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>first</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>p</span>)
+    (<span style=color:#8be9fd;font-style:italic>car </span><span style=color:#8be9fd;font-style:italic>p</span>)))
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">first</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">p</span>)
-    (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">p</span>)))
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>second</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>p</span>)
+    (<span style=color:#8be9fd;font-style:italic>car </span>(<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>p</span>))))
 
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">second</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">p</span>)
-    (<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">p</span>))))
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>build</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>s1</span> <span style=color:#8be9fd;font-style:italic>s2</span>)
+    (<span style=color:#8be9fd;font-style:italic>cons </span><span style=color:#8be9fd;font-style:italic>s1</span> (<span style=color:#8be9fd;font-style:italic>cons </span><span style=color:#8be9fd;font-style:italic>s2</span> <span style=color:#ff79c6>&#39;</span>()))))
 
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">build</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">s1</span> <span style="color:#8be9fd;font-style:italic">s2</span>)
-    (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">s1</span> (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">s2</span> <span style="color:#ff79c6">&#39;</span>()))))
+<span style=color:#6272a4>;(shift &#39;((a b) c)) -&gt; &#39;(a (b c))</span>
+<span style=color:#6272a4>;(shift &#39;((a b) (c d))) -&gt; &#39;(a (b (c d)))</span>
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>shift</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>pair</span>)
+    (<span style=color:#50fa7b>build</span> (<span style=color:#50fa7b>first</span> (<span style=color:#50fa7b>first</span> <span style=color:#8be9fd;font-style:italic>pair</span>))
+      (<span style=color:#50fa7b>build</span> (<span style=color:#50fa7b>second</span> (<span style=color:#50fa7b>first</span> <span style=color:#8be9fd;font-style:italic>pair</span>))
+        (<span style=color:#50fa7b>second</span> <span style=color:#8be9fd;font-style:italic>pair</span>)))))
 
-<span style="color:#6272a4">;(shift &#39;((a b) c)) -&gt; &#39;(a (b c))</span>
-<span style="color:#6272a4">;(shift &#39;((a b) (c d))) -&gt; &#39;(a (b (c d)))</span>
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">shift</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">pair</span>)
-    (<span style="color:#50fa7b">build</span> (<span style="color:#50fa7b">first</span> (<span style="color:#50fa7b">first</span> <span style="color:#8be9fd;font-style:italic">pair</span>))
-      (<span style="color:#50fa7b">build</span> (<span style="color:#50fa7b">second</span> (<span style="color:#50fa7b">first</span> <span style="color:#8be9fd;font-style:italic">pair</span>))
-        (<span style="color:#50fa7b">second</span> <span style="color:#8be9fd;font-style:italic">pair</span>)))))
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>a-pair?</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>x</span>)
+    (<span style=color:#50fa7b>cond</span>
+      ((<span style=color:#50fa7b>atom?</span> <span style=color:#8be9fd;font-style:italic>x</span>) #f)
+      ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>x</span>) #f)
+      ((<span style=color:#8be9fd;font-style:italic>null? </span>(<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>x</span>)) #f)
+      ((<span style=color:#8be9fd;font-style:italic>null? </span>(<span style=color:#8be9fd;font-style:italic>cdr </span>(<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>x</span>))) #t)
+      (<span style=color:#ff79c6>else </span>#f))))
 
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">a-pair?</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">x</span>)
-    (<span style="color:#50fa7b">cond</span>
-      ((<span style="color:#50fa7b">atom?</span> <span style="color:#8be9fd;font-style:italic">x</span>) #f)
-      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">x</span>) #f)
-      ((<span style="color:#8be9fd;font-style:italic">null? </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">x</span>)) #f)
-      ((<span style="color:#8be9fd;font-style:italic">null? </span>(<span style="color:#8be9fd;font-style:italic">cdr </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">x</span>))) #t)
-      (<span style="color:#ff79c6">else </span>#f))))
-
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">align</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">pora</span>)
-    (<span style="color:#50fa7b">cond</span>
-      ((<span style="color:#50fa7b">atom?</span> <span style="color:#8be9fd;font-style:italic">pora</span>) <span style="color:#8be9fd;font-style:italic">pora</span>)
-      ((<span style="color:#50fa7b">a-pair?</span> (<span style="color:#50fa7b">first</span> <span style="color:#8be9fd;font-style:italic">pora</span>))
-       (<span style="color:#50fa7b">align</span> (<span style="color:#50fa7b">shift</span> <span style="color:#8be9fd;font-style:italic">pora</span>))) <span style="color:#6272a4">;******alarming</span>
-      (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">build</span> (<span style="color:#50fa7b">first</span> <span style="color:#8be9fd;font-style:italic">pora</span>)
-              (<span style="color:#50fa7b">align</span> (<span style="color:#50fa7b">second</span> <span style="color:#8be9fd;font-style:italic">pora</span>)))))))</code></pre></div>
-
-<p>Based on <code>(shift)</code> we further creat <code>(align)</code>. Don&rsquo;t rush to run the function. Remember the seventh commandment emphasizes &ldquo;<strong>recursion should happen on the subparts that are of the same nature:
- either on the sublists of a list; or on the subexpressions of an arithmetic
- expression</strong>&rdquo;. We  notice something alarming in the starred line in <code>(align)</code>:
- the <code>(align)</code> as well as <code>(keep-looking)</code> both creat new argument in recursion
- that is <strong>not part</strong> of the original argument. It&rsquo;s an indicator of ill, but
- <code>(align)</code> will still generate output for every input, so it&rsquo;s not  partial function.</p>
-
-<p>We will continue and define a very similar function <code>(shuffle)</code> below, which is partial. It won&rsquo;t
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>align</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>pora</span>)
+    (<span style=color:#50fa7b>cond</span>
+      ((<span style=color:#50fa7b>atom?</span> <span style=color:#8be9fd;font-style:italic>pora</span>) <span style=color:#8be9fd;font-style:italic>pora</span>)
+      ((<span style=color:#50fa7b>a-pair?</span> (<span style=color:#50fa7b>first</span> <span style=color:#8be9fd;font-style:italic>pora</span>))
+       (<span style=color:#50fa7b>align</span> (<span style=color:#50fa7b>shift</span> <span style=color:#8be9fd;font-style:italic>pora</span>))) <span style=color:#6272a4>;******alarming</span>
+      (<span style=color:#ff79c6>else </span>(<span style=color:#50fa7b>build</span> (<span style=color:#50fa7b>first</span> <span style=color:#8be9fd;font-style:italic>pora</span>)
+              (<span style=color:#50fa7b>align</span> (<span style=color:#50fa7b>second</span> <span style=color:#8be9fd;font-style:italic>pora</span>)))))))</code></pre></div><p>Based on <code>(shift)</code> we further creat <code>(align)</code>. Don&rsquo;t rush to run the function. Remember the seventh commandment emphasizes &ldquo;<strong>recursion should happen on the subparts that are of the same nature:
+either on the sublists of a list; or on the subexpressions of an arithmetic
+expression</strong>&rdquo;. We notice something alarming in the starred line in <code>(align)</code>:
+the <code>(align)</code> as well as <code>(keep-looking)</code> both creat new argument in recursion
+that is <strong>not part</strong> of the original argument. It&rsquo;s an indicator of ill, but
+<code>(align)</code> will still generate output for every input, so it&rsquo;s not partial function.</p><p>We will continue and define a very similar function <code>(shuffle)</code> below, which is partial. It won&rsquo;t
 produce value for some cases, since the <code>a-pair</code> predicate will always swap the items of pair, which
-makes any input with form of <code>((a b) (c d))</code> trapped in infinite item swapping loop.</p>
+makes any input with form of <code>((a b) (c d))</code> trapped in infinite item swapping loop.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme><span style=color:#6272a4>;(revpair &#39;((a b) (c d))) -&gt; ((c d) (a b))</span>
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>revpair</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>p</span>)
+    (<span style=color:#50fa7b>build</span> (<span style=color:#50fa7b>second</span> <span style=color:#8be9fd;font-style:italic>p</span>) (<span style=color:#50fa7b>first</span> <span style=color:#8be9fd;font-style:italic>p</span>))))
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;(revpair &#39;((a b) (c d))) -&gt; ((c d) (a b))</span>
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">revpair</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">p</span>)
-    (<span style="color:#50fa7b">build</span> (<span style="color:#50fa7b">second</span> <span style="color:#8be9fd;font-style:italic">p</span>) (<span style="color:#50fa7b">first</span> <span style="color:#8be9fd;font-style:italic">p</span>))))
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>shuffle</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>pora</span>)
+    (<span style=color:#50fa7b>cond</span>
+      ((<span style=color:#50fa7b>atom?</span> <span style=color:#8be9fd;font-style:italic>pora</span>) <span style=color:#8be9fd;font-style:italic>pora</span>)
+      ((<span style=color:#50fa7b>a-pair?</span> (<span style=color:#50fa7b>first</span> <span style=color:#8be9fd;font-style:italic>pora</span>))
+       (<span style=color:#50fa7b>shuffle</span> (<span style=color:#50fa7b>revpair</span> <span style=color:#8be9fd;font-style:italic>pora</span>)))
+      (<span style=color:#50fa7b>else</span>
+        (<span style=color:#50fa7b>build</span> (<span style=color:#50fa7b>first</span> <span style=color:#8be9fd;font-style:italic>pora</span>)
+          (<span style=color:#50fa7b>shuffle</span> (<span style=color:#50fa7b>second</span> <span style=color:#8be9fd;font-style:italic>pora</span>)))))))
 
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">shuffle</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">pora</span>)
-    (<span style="color:#50fa7b">cond</span>
-      ((<span style="color:#50fa7b">atom?</span> <span style="color:#8be9fd;font-style:italic">pora</span>) <span style="color:#8be9fd;font-style:italic">pora</span>)
-      ((<span style="color:#50fa7b">a-pair?</span> (<span style="color:#50fa7b">first</span> <span style="color:#8be9fd;font-style:italic">pora</span>))
-       (<span style="color:#50fa7b">shuffle</span> (<span style="color:#50fa7b">revpair</span> <span style="color:#8be9fd;font-style:italic">pora</span>)))
-      (<span style="color:#50fa7b">else</span>
-        (<span style="color:#50fa7b">build</span> (<span style="color:#50fa7b">first</span> <span style="color:#8be9fd;font-style:italic">pora</span>)
-          (<span style="color:#50fa7b">shuffle</span> (<span style="color:#50fa7b">second</span> <span style="color:#8be9fd;font-style:italic">pora</span>)))))))
-
-(<span style="color:#50fa7b">shuffle</span> <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">a</span> (<span style="color:#50fa7b">b</span> <span style="color:#8be9fd;font-style:italic">c</span>)))        <span style="color:#6272a4">; &#39;(a (b c))</span>
-(<span style="color:#50fa7b">shuffle</span> <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">a</span> <span style="color:#8be9fd;font-style:italic">b</span>))            <span style="color:#6272a4">; &#39;(a b)</span>
-(<span style="color:#50fa7b">shuffle</span> <span style="color:#ff79c6">&#39;</span>((<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">b</span>) (<span style="color:#50fa7b">c</span> <span style="color:#8be9fd;font-style:italic">d</span>)))    <span style="color:#6272a4">; infinite swap pora  Ctrl + c  to break and input q to exit</span></code></pre></div>
-
-<p>We just define two different
+(<span style=color:#50fa7b>shuffle</span> <span style=color:#ff79c6>&#39;</span>(<span style=color:#8be9fd;font-style:italic>a</span> (<span style=color:#50fa7b>b</span> <span style=color:#8be9fd;font-style:italic>c</span>)))        <span style=color:#6272a4>; &#39;(a (b c))</span>
+(<span style=color:#50fa7b>shuffle</span> <span style=color:#ff79c6>&#39;</span>(<span style=color:#8be9fd;font-style:italic>a</span> <span style=color:#8be9fd;font-style:italic>b</span>))            <span style=color:#6272a4>; &#39;(a b)</span>
+(<span style=color:#50fa7b>shuffle</span> <span style=color:#ff79c6>&#39;</span>((<span style=color:#50fa7b>a</span> <span style=color:#8be9fd;font-style:italic>b</span>) (<span style=color:#50fa7b>c</span> <span style=color:#8be9fd;font-style:italic>d</span>)))    <span style=color:#6272a4>; infinite swap pora  Ctrl + c  to break and input q to exit</span></code></pre></div><p>We just define two different
 ways to measure the mass of the first component of <code>(align)</code>. The <code>(length*)</code> measures every
-atom with same weight, whereas the <code>(weight*)</code> puts twice as much weight to the first component.</p>
+atom with same weight, whereas the <code>(weight*)</code> puts twice as much weight to the first component.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme>(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>length*</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>pora</span>)
+    (<span style=color:#50fa7b>cond</span>
+      ((<span style=color:#50fa7b>atom?</span> <span style=color:#8be9fd;font-style:italic>pora</span>) <span style=color:#bd93f9>1</span>)
+      (<span style=color:#50fa7b>else</span>
+        (<span style=color:#8be9fd;font-style:italic>+ </span>(<span style=color:#50fa7b>length*</span> (<span style=color:#50fa7b>first</span> <span style=color:#8be9fd;font-style:italic>pora</span>))
+           (<span style=color:#50fa7b>length*</span> (<span style=color:#50fa7b>second</span> <span style=color:#8be9fd;font-style:italic>pora</span>)))))))
+<span style=color:#6272a4>;(length* &#39;((a b) c)) -&gt; 3</span>
+<span style=color:#6272a4>;(length* &#39;(a (b c)) -&gt; 3</span>
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">length*</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">pora</span>)
-    (<span style="color:#50fa7b">cond</span>
-      ((<span style="color:#50fa7b">atom?</span> <span style="color:#8be9fd;font-style:italic">pora</span>) <span style="color:#bd93f9">1</span>)
-      (<span style="color:#50fa7b">else</span>
-        (<span style="color:#8be9fd;font-style:italic">+ </span>(<span style="color:#50fa7b">length*</span> (<span style="color:#50fa7b">first</span> <span style="color:#8be9fd;font-style:italic">pora</span>))
-           (<span style="color:#50fa7b">length*</span> (<span style="color:#50fa7b">second</span> <span style="color:#8be9fd;font-style:italic">pora</span>)))))))
-<span style="color:#6272a4">;(length* &#39;((a b) c)) -&gt; 3</span>
-<span style="color:#6272a4">;(length* &#39;(a (b c)) -&gt; 3</span>
-
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">weight*</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">pora</span>)
-    (<span style="color:#50fa7b">cond</span>
-      ((<span style="color:#50fa7b">atom?</span> <span style="color:#8be9fd;font-style:italic">pora</span>) <span style="color:#bd93f9">1</span>)
-      (<span style="color:#50fa7b">else</span>
-        (<span style="color:#8be9fd;font-style:italic">+ </span>(<span style="color:#8be9fd;font-style:italic">* </span>(<span style="color:#50fa7b">weight*</span> (<span style="color:#50fa7b">first</span> <span style="color:#8be9fd;font-style:italic">pora</span>)) <span style="color:#bd93f9">2</span>)
-           (<span style="color:#50fa7b">weight*</span> (<span style="color:#50fa7b">second</span> <span style="color:#8be9fd;font-style:italic">pora</span>)))))))
-<span style="color:#6272a4">;(weight* &#39;((a b) c)) -&gt; 7</span>
-<span style="color:#6272a4">;(weight* &#39;(a (b c)) -&gt; 5</span></code></pre></div>
-
-<hr />
-
-<p>From <code>(align)</code> and <code>(shuffle)</code>, we realize that whether the arguments will
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>weight*</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>pora</span>)
+    (<span style=color:#50fa7b>cond</span>
+      ((<span style=color:#50fa7b>atom?</span> <span style=color:#8be9fd;font-style:italic>pora</span>) <span style=color:#bd93f9>1</span>)
+      (<span style=color:#50fa7b>else</span>
+        (<span style=color:#8be9fd;font-style:italic>+ </span>(<span style=color:#8be9fd;font-style:italic>* </span>(<span style=color:#50fa7b>weight*</span> (<span style=color:#50fa7b>first</span> <span style=color:#8be9fd;font-style:italic>pora</span>)) <span style=color:#bd93f9>2</span>)
+           (<span style=color:#50fa7b>weight*</span> (<span style=color:#50fa7b>second</span> <span style=color:#8be9fd;font-style:italic>pora</span>)))))))
+<span style=color:#6272a4>;(weight* &#39;((a b) c)) -&gt; 7</span>
+<span style=color:#6272a4>;(weight* &#39;(a (b c)) -&gt; 5</span></code></pre></div><hr><p>From <code>(align)</code> and <code>(shuffle)</code>, we realize that whether the arguments will
 decrease in recursion is not the key to infer whether a function is total. We
 start to think if possible to develop a diagnose function to detect the partial
 function. Let&rsquo;s imaging making
 up a function <code>(will-stop?)</code> without getting into detail. We want it to <strong>return
 #t if the function would eventually terminate with returning value, and return #f it does not
-stop</strong>. And itself has to be a total function, in which case <code>(will-stop? will-stop&gt;)</code> has
-to return #t.</p>
-
-<p>What would happen if the input are <code>(length)</code> and <code>(eternity)</code> like these? Sounds cool: the <code>(length)</code> stops when the input is <code>'()</code>, so the <code>(will-stop?)</code> returns #t, great!
+stop</strong>. And itself has to be a total function, in which case <code>(will-stop? will-stop>)</code> has
+to return #t.</p><p>What would happen if the input are <code>(length)</code> and <code>(eternity)</code> like these? Sounds cool: the <code>(length)</code> stops when the input is <code>'()</code>, so the <code>(will-stop?)</code> returns #t, great!
 Meanwhile the <code>(eternity)</code> is partial and won&rsquo;t stop for any input, which makes the
-<code>(will-stop?)</code> returns #f whatsoever.</p>
+<code>(will-stop?)</code> returns #f whatsoever.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme>(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>eternity</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>x</span>)
+    (<span style=color:#50fa7b>eternity</span> <span style=color:#8be9fd;font-style:italic>x</span>)))
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">eternity</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">x</span>)
-    (<span style="color:#50fa7b">eternity</span> <span style="color:#8be9fd;font-style:italic">x</span>)))
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>will-stop?</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>x</span>)
+    (<span style=color:#50fa7b>eternity</span> <span style=color:#8be9fd;font-style:italic>x</span>)))
 
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">will-stop?</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">x</span>)
-    (<span style="color:#50fa7b">eternity</span> <span style="color:#8be9fd;font-style:italic">x</span>)))
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>length</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>lat</span>)
+    (<span style=color:#50fa7b>cond</span>
+      ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>lat</span>) <span style=color:#bd93f9>0</span>)
+      (<span style=color:#ff79c6>else </span>(<span style=color:#50fa7b>add1</span> (<span style=color:#8be9fd;font-style:italic>length </span>(<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>lat</span>)))))
 
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">length</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">lat</span>)
-    (<span style="color:#50fa7b">cond</span>
-      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">lat</span>) <span style="color:#bd93f9">0</span>)
-      (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">add1</span> (<span style="color:#8be9fd;font-style:italic">length </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">lat</span>)))))
-
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">will-stop?</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">x</span>)
-    (<span style="color:#8be9fd;font-style:italic">length </span><span style="color:#8be9fd;font-style:italic">x</span>)))</code></pre></div>
-
-<p>But you might also sense logical flaws already: if there is a function can make
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>will-stop?</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>x</span>)
+    (<span style=color:#8be9fd;font-style:italic>length </span><span style=color:#8be9fd;font-style:italic>x</span>)))</code></pre></div><p>But you might also sense logical flaws already: if there is a function can make
 <code>(will-stop?)</code> return #t
 but won&rsquo;t stop, the partial function detection function may eventually NOT
 exist. If you cannot, the author has carefully come up with an example to show
-why.</p>
-
-<p>Let&rsquo;s see this example:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">last-try</span>
- (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">x</span>)
-  (<span style="color:#ff79c6">and </span>(<span style="color:#50fa7b">will-stop?</span> <span style="color:#8be9fd;font-style:italic">last-try</span>)
-    (<span style="color:#50fa7b">eternity</span> <span style="color:#8be9fd;font-style:italic">x</span>))))</code></pre></div>
-
-<p>In order to test if ths is a right function, we input <code>()</code> and that requires
+why.</p><p>Let&rsquo;s see this example:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme>(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>last-try</span>
+ (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>x</span>)
+  (<span style=color:#ff79c6>and </span>(<span style=color:#50fa7b>will-stop?</span> <span style=color:#8be9fd;font-style:italic>last-try</span>)
+    (<span style=color:#50fa7b>eternity</span> <span style=color:#8be9fd;font-style:italic>x</span>))))</code></pre></div><p>In order to test if ths is a right function, we input <code>()</code> and that requires
 evaluate <code>(will-stop? last-try)</code>. Provided it returns #f (aka the last-try will
 not stop with null input), then the whole function will stop and return #f.
 Clearly this mother function <code>(last-try (quote()))</code> stops for null input, which
@@ -570,1020 +175,541 @@ evaluate <code>(eternity (quote()))</code>, which never stops. And this time, it
 goes against the hypothesis again. This makes the <code>(will-stop?)</code> a
 function we can describe but can not define. The example delicately demonstrates
 this by constructing a function
-based on <code>(will-stop?)</code> which <code>(will-stop?)</code> cannot judge.</p>
-
-<p>You might ask what if we just ban the logical contradiction part,
+based on <code>(will-stop?)</code> which <code>(will-stop?)</code> cannot judge.</p><p>You might ask what if we just ban the logical contradiction part,
 such as &ldquo;preventing tested function from directly or indirectly calling <code>(will-stop?)</code>&rdquo;.
 In that case, will <code>(will-stop?)</code> exist? I am not sure. But that &ldquo;using
-functions without  recursively calling itself&rdquo; is exactly what we want to do
-with the Y combinator.</p>
-
-<hr />
-
-<p>A function calling itself directly or indirectly, is recursion. A nature wonder about
+functions without recursively calling itself&rdquo; is exactly what we want to do
+with the Y combinator.</p><hr><p>A function calling itself directly or indirectly, is recursion. A nature wonder about
 recursion is that, if we want to call a function that haven&rsquo;t been fully defined,
-how could we do it?</p>
-
-<p>There are
+how could we do it?</p><p>There are
 many ways to write programs to realize the same procedure. But a specific
 interpreter has clear rule to implement a function. In this
 chapter, we can use transformations and derivations to gain fundamental
 understanding of nested functions, to peel off the syntax sugar so that we can
-reform them to design elegant form.</p>
-
-<p>We probably can re-write a recursive function to
+reform them to design elegant form.</p><p>We probably can re-write a recursive function to
 non-recursive one, then we can use it as much as we want. That&rsquo;s what the Y
-combinator is for.</p>
-
-<p>Let&rsquo;s begin with recursive function we have seen, to see what part we can get
+combinator is for.</p><p>Let&rsquo;s begin with recursive function we have seen, to see what part we can get
 rid of and reform. We still use <code>(length)</code> as an example. Currently it is a fully defined function
 recursive function. The input is a list and the output is a value (i.e. the
-length of a list). It can use recursion inside itself because it has formal function name <strong>length</strong>.</p>
+length of a list). It can use recursion inside itself because it has formal function name <strong>length</strong>.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme><span style=color:#6272a4>;you have use to other name in DrRacket, coz length has been a build-in function</span>
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>length</span>
+ (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+  (<span style=color:#50fa7b>cond</span>
+    ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+    (<span style=color:#50fa7b>else</span>
+      (<span style=color:#50fa7b>add1</span> (<span style=color:#8be9fd;font-style:italic>length </span>(<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>)))))))
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;you have use to other name in DrRacket, coz length has been a build-in function</span>
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">length</span>
- (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-  (<span style="color:#50fa7b">cond</span>
-    ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-    (<span style="color:#50fa7b">else</span>
-      (<span style="color:#50fa7b">add1</span> (<span style="color:#8be9fd;font-style:italic">length </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))
-
-(<span style="color:#8be9fd;font-style:italic">length </span><span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">a</span> <span style="color:#8be9fd;font-style:italic">b</span>)) <span style="color:#6272a4">;-&gt; 2</span></code></pre></div>
-
-<p>I highlight four key procedures to show how it adapts:
-<img src="/img/little122.png" alt="" /></p>
-
-<p>The thing about the recursion <code>(length)</code> is, it may look like the <code>(length)</code> is
+(<span style=color:#8be9fd;font-style:italic>length </span><span style=color:#ff79c6>&#39;</span>(<span style=color:#8be9fd;font-style:italic>a</span> <span style=color:#8be9fd;font-style:italic>b</span>)) <span style=color:#6272a4>;-&gt; 2</span></code></pre></div><p>I highlight four key procedures to show how it adapts:
+<img src=/img/little122.png alt></p><p>The thing about the recursion <code>(length)</code> is, it may look like the <code>(length)</code> is
 calling itself. More broadly speaking, it is just calling a function happens to have the same
 name with itself. The function will be used when the input <code>(cdr l)</code> is not null. It can be any
 functions, so you
 can try substituting <code>(length)</code> with any function you like. This equals to
-having another layer of lambda expression to the function of <code>(length)</code>:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">length</span>)
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-    (<span style="color:#ff79c6">cond </span>((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-      (<span style="color:#ff79c6">else </span>(<span style="color:#8be9fd;font-style:italic">+ </span><span style="color:#bd93f9">1</span> (<span style="color:#8be9fd;font-style:italic">length </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))</code></pre></div>
-
-<p>Notice, you can try inputting any function in outer layer but most
+having another layer of lambda expression to the function of <code>(length)</code>:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme>(<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>length</span>)
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+    (<span style=color:#ff79c6>cond </span>((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+      (<span style=color:#ff79c6>else </span>(<span style=color:#8be9fd;font-style:italic>+ </span><span style=color:#bd93f9>1</span> (<span style=color:#8be9fd;font-style:italic>length </span>(<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>)))))))</code></pre></div><p>Notice, you can try inputting any function in outer layer but most
 functions will not work with non-null input list. For
 example let&rsquo;s call <code>(eternity)</code> instead of <code>(length)</code>: when the list has more
-than zero atom, the null predicate returns #f and <code>(eternity '())</code> will be called and the function will trap in infinite loop.</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;((lambda (length) ..) eternity)</span>
-<span style="color:#6272a4">;length&lt;=0</span>
-(<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-    (<span style="color:#50fa7b">cond</span>
-      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-      (<span style="color:#50fa7b">else</span>
-        (<span style="color:#50fa7b">add1</span> (<span style="color:#50fa7b">eternity</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))</code></pre></div>
-
-<p>It can still measure null list only in the <strong>applicative order</strong> interpreting, where the arguments will
-be instantaneously evaluated the leftmost innermost reducible expression before the function is applied.</p>
-
-<p>But there is still a way to measure list with less
+than zero atom, the null predicate returns #f and <code>(eternity '())</code> will be called and the function will trap in infinite loop.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme><span style=color:#6272a4>;((lambda (length) ..) eternity)</span>
+<span style=color:#6272a4>;length&lt;=0</span>
+(<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+    (<span style=color:#50fa7b>cond</span>
+      ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+      (<span style=color:#50fa7b>else</span>
+        (<span style=color:#50fa7b>add1</span> (<span style=color:#50fa7b>eternity</span> (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))</code></pre></div><p>It can still measure null list only in the <strong>applicative order</strong> interpreting, where the arguments will
+be instantaneously evaluated the leftmost innermost reducible expression before the function is applied.</p><p>But there is still a way to measure list with less
 than <strong>one</strong> element. We just have to call length
-measuring function on top of <code>(length0)</code> one more time.</p>
+measuring function on top of <code>(length0)</code> one more time.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme><span style=color:#6272a4>;length&lt;=1</span>
+(<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+  (<span style=color:#50fa7b>cond</span>
+    ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+    (<span style=color:#50fa7b>else</span>
+      (<span style=color:#50fa7b>add1</span> (<span style=color:#50fa7b>length0</span> (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;length&lt;=1</span>
-(<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-  (<span style="color:#50fa7b">cond</span>
-    ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-    (<span style="color:#50fa7b">else</span>
-      (<span style="color:#50fa7b">add1</span> (<span style="color:#50fa7b">length0</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))
+<span style=color:#6272a4>;length&lt;=1</span>
+(<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)  <span style=color:#6272a4>;read more details below if you don&#39;t understand here</span>
+  (<span style=color:#50fa7b>cond</span>
+    ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+    (<span style=color:#50fa7b>else</span>
+      (<span style=color:#50fa7b>add1</span>
+        ((<span style=color:#50fa7b>lambda</span>(<span style=color:#50fa7b>l</span>)
+           (<span style=color:#50fa7b>cond</span>
+             ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+             (<span style=color:#50fa7b>else</span>
+               (<span style=color:#50fa7b>add1</span> (<span style=color:#50fa7b>eternity</span> (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))
+         (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))</code></pre></div><figure><img src=/img/length1.png></figure><p>Recursively we can develop <code>(length&lt;=2)</code> below. Can you explain why these
+three functions are identical?</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme><span style=color:#6272a4>;length&lt;=2</span>
+(<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+  (<span style=color:#50fa7b>cond</span>
+    ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+    (<span style=color:#50fa7b>else</span>
+      (<span style=color:#50fa7b>add1</span> (<span style=color:#50fa7b>length1</span> (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))
 
-<span style="color:#6272a4">;length&lt;=1</span>
-(<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)  <span style="color:#6272a4">;read more details below if you don&#39;t understand here</span>
-  (<span style="color:#50fa7b">cond</span>
-    ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-    (<span style="color:#50fa7b">else</span>
-      (<span style="color:#50fa7b">add1</span>
-        ((<span style="color:#50fa7b">lambda</span>(<span style="color:#50fa7b">l</span>)
-           (<span style="color:#50fa7b">cond</span>
-             ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-             (<span style="color:#50fa7b">else</span>
-               (<span style="color:#50fa7b">add1</span> (<span style="color:#50fa7b">eternity</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))
-         (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))</code></pre></div>
+(<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+  (<span style=color:#50fa7b>cond</span>
+    ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+    (<span style=color:#50fa7b>else</span>
+      (<span style=color:#50fa7b>add1</span>
+        ((<span style=color:#50fa7b>lambda</span>(<span style=color:#50fa7b>l</span>)
+           (<span style=color:#50fa7b>cond</span>
+             ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+             (<span style=color:#50fa7b>else</span>
+               (<span style=color:#50fa7b>add1</span> (<span style=color:#50fa7b>length0</span> (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))
+         (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))
 
-<figure>
-    <img src="/img/length1.png"/> 
-</figure>
+(<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+  (<span style=color:#50fa7b>cond</span>
+    ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+    (<span style=color:#50fa7b>else</span>
+      (<span style=color:#50fa7b>add1</span>
+        ((<span style=color:#50fa7b>lambda</span>(<span style=color:#50fa7b>l</span>)
+           (<span style=color:#50fa7b>cond</span>
+             ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+             (<span style=color:#50fa7b>else</span>
+               (<span style=color:#50fa7b>add1</span>
+                ((<span style=color:#50fa7b>lambda</span>(<span style=color:#50fa7b>l</span>)
+                 (<span style=color:#50fa7b>cond</span>
+                   ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+                     (<span style=color:#50fa7b>else</span>
+                       (<span style=color:#50fa7b>add1</span> (<span style=color:#50fa7b>eternity</span> (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))
+               (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))
+      (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))
 
-
-<p>Recursively we can develop <code>(length&lt;=2)</code> below. Can you explain why these
-three functions are identical?</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;length&lt;=2</span>
-(<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-  (<span style="color:#50fa7b">cond</span>
-    ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-    (<span style="color:#50fa7b">else</span>
-      (<span style="color:#50fa7b">add1</span> (<span style="color:#50fa7b">length1</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))
-
-(<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-  (<span style="color:#50fa7b">cond</span>
-    ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-    (<span style="color:#50fa7b">else</span>
-      (<span style="color:#50fa7b">add1</span>
-        ((<span style="color:#50fa7b">lambda</span>(<span style="color:#50fa7b">l</span>)
-           (<span style="color:#50fa7b">cond</span>
-             ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-             (<span style="color:#50fa7b">else</span>
-               (<span style="color:#50fa7b">add1</span> (<span style="color:#50fa7b">length0</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))
-         (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))
-
-(<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-  (<span style="color:#50fa7b">cond</span>
-    ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-    (<span style="color:#50fa7b">else</span>
-      (<span style="color:#50fa7b">add1</span>
-        ((<span style="color:#50fa7b">lambda</span>(<span style="color:#50fa7b">l</span>)
-           (<span style="color:#50fa7b">cond</span>
-             ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-             (<span style="color:#50fa7b">else</span>
-               (<span style="color:#50fa7b">add1</span>
-                ((<span style="color:#50fa7b">lambda</span>(<span style="color:#50fa7b">l</span>)
-                 (<span style="color:#50fa7b">cond</span>
-                   ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-                     (<span style="color:#50fa7b">else</span>
-                       (<span style="color:#50fa7b">add1</span> (<span style="color:#50fa7b">eternity</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))
-               (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))
-      (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))
-
-<span style="color:#6272a4">;let&#39;s give distinguished names to arguments in every layer</span>
-(<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l2</span>)  <span style="color:#6272a4">;assume l2 = &#39;(b c)</span>
-  (<span style="color:#50fa7b">cond</span>
-    ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l2</span>) <span style="color:#bd93f9">0</span>)
-    (<span style="color:#50fa7b">else</span>
-      (<span style="color:#50fa7b">add1</span>
-        ((<span style="color:#50fa7b">lambda</span>(<span style="color:#50fa7b">l1</span>)  <span style="color:#6272a4">;then l1 &lt;- cdr(l2) = &#39;(c)</span>
-           (<span style="color:#50fa7b">cond</span>
-             ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l1</span>) <span style="color:#bd93f9">0</span>)
-             (<span style="color:#50fa7b">else</span>
-               (<span style="color:#50fa7b">add1</span>
-                ((<span style="color:#50fa7b">lambda</span>(<span style="color:#50fa7b">l0</span>)  <span style="color:#6272a4">;then l0 &lt;- cdr(l1) = &#39;( )</span>
-                 (<span style="color:#50fa7b">cond</span>
-                   ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l0</span>) <span style="color:#bd93f9">0</span>)  <span style="color:#6272a4">;so here returns 0, and terminates</span>
-                     (<span style="color:#50fa7b">else</span>
-                       (<span style="color:#50fa7b">add1</span> (<span style="color:#50fa7b">eternity</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l0</span>))))))
-               (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l1</span>))))))
-      (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l2</span>))))))</code></pre></div>
-
-<p>As you might imagine, the above form is not quite complete, so we were only saying
+<span style=color:#6272a4>;let&#39;s give distinguished names to arguments in every layer</span>
+(<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l2</span>)  <span style=color:#6272a4>;assume l2 = &#39;(b c)</span>
+  (<span style=color:#50fa7b>cond</span>
+    ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l2</span>) <span style=color:#bd93f9>0</span>)
+    (<span style=color:#50fa7b>else</span>
+      (<span style=color:#50fa7b>add1</span>
+        ((<span style=color:#50fa7b>lambda</span>(<span style=color:#50fa7b>l1</span>)  <span style=color:#6272a4>;then l1 &lt;- cdr(l2) = &#39;(c)</span>
+           (<span style=color:#50fa7b>cond</span>
+             ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l1</span>) <span style=color:#bd93f9>0</span>)
+             (<span style=color:#50fa7b>else</span>
+               (<span style=color:#50fa7b>add1</span>
+                ((<span style=color:#50fa7b>lambda</span>(<span style=color:#50fa7b>l0</span>)  <span style=color:#6272a4>;then l0 &lt;- cdr(l1) = &#39;( )</span>
+                 (<span style=color:#50fa7b>cond</span>
+                   ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l0</span>) <span style=color:#bd93f9>0</span>)  <span style=color:#6272a4>;so here returns 0, and terminates</span>
+                     (<span style=color:#50fa7b>else</span>
+                       (<span style=color:#50fa7b>add1</span> (<span style=color:#50fa7b>eternity</span> (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l0</span>))))))
+               (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l1</span>))))))
+      (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l2</span>))))))</code></pre></div><p>As you might imagine, the above form is not quite complete, so we were only saying
 its got a &ldquo;hidden layer of parameter&rdquo;. Let&rsquo;s make it slightly more formal by
 separating <code>(eternity)</code> and calling it as argument. In the <code>(length&lt;=1)</code> code we just want to use distinctive names for
-you to see this procedure clearer.</p>
+you to see this procedure clearer.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme><span style=color:#6272a4>;length&lt;=0</span>
+((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>length</span>)
+   (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+     (<span style=color:#50fa7b>cond</span>
+       ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+       (<span style=color:#ff79c6>else </span>(<span style=color:#50fa7b>add1</span> (<span style=color:#8be9fd;font-style:italic>length </span>(<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>)))))))
+ <span style=color:#8be9fd;font-style:italic>eternity</span>)
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;length&lt;=0</span>
-((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">length</span>)
-   (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-     (<span style="color:#50fa7b">cond</span>
-       ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-       (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">add1</span> (<span style="color:#8be9fd;font-style:italic">length </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))
- <span style="color:#8be9fd;font-style:italic">eternity</span>)
+<span style=color:#6272a4>;length&lt;=1</span>
+((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>f</span>)
+   (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+     (<span style=color:#50fa7b>cond</span>
+       ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+       (<span style=color:#ff79c6>else </span>(<span style=color:#50fa7b>add1</span> (<span style=color:#50fa7b>f</span> (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>)))))))
+ ((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>g</span>)
+    (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+      (<span style=color:#50fa7b>cond</span>
+        ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+        (<span style=color:#ff79c6>else </span>(<span style=color:#50fa7b>add1</span> (<span style=color:#50fa7b>g</span> (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>)))))))
+  <span style=color:#8be9fd;font-style:italic>eternity</span>))
 
-<span style="color:#6272a4">;length&lt;=1</span>
-((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">f</span>)
-   (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-     (<span style="color:#50fa7b">cond</span>
-       ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-       (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">add1</span> (<span style="color:#50fa7b">f</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))
- ((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">g</span>)
-    (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-      (<span style="color:#50fa7b">cond</span>
-        ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-        (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">add1</span> (<span style="color:#50fa7b">g</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))
-  <span style="color:#8be9fd;font-style:italic">eternity</span>))
-
-<span style="color:#6272a4">;length&lt;=2</span>
-((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">length</span>)
-  (<span style="color:#50fa7b">lambda</span>(<span style="color:#50fa7b">l</span>)
-   (<span style="color:#50fa7b">cond</span>)
-       ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-       (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">add1</span> (<span style="color:#8be9fd;font-style:italic">length </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))
- ((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">length</span>)
-    (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-      (<span style="color:#50fa7b">cond</span>
-        ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-        (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">add1</span> (<span style="color:#8be9fd;font-style:italic">length </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))
- ((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">length</span>)
-    (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-      (<span style="color:#50fa7b">cond</span>
-        ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-        (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">add1</span> (<span style="color:#8be9fd;font-style:italic">length </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))
-  <span style="color:#8be9fd;font-style:italic">eternity</span>)))</code></pre></div>
-
-<p>It&rsquo;s absolutely normal to get confused when there are more layers of lambda expressions involved in a
+<span style=color:#6272a4>;length&lt;=2</span>
+((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>length</span>)
+  (<span style=color:#50fa7b>lambda</span>(<span style=color:#50fa7b>l</span>)
+   (<span style=color:#50fa7b>cond</span>)
+       ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+       (<span style=color:#ff79c6>else </span>(<span style=color:#50fa7b>add1</span> (<span style=color:#8be9fd;font-style:italic>length </span>(<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>)))))))
+ ((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>length</span>)
+    (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+      (<span style=color:#50fa7b>cond</span>
+        ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+        (<span style=color:#ff79c6>else </span>(<span style=color:#50fa7b>add1</span> (<span style=color:#8be9fd;font-style:italic>length </span>(<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>)))))))
+ ((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>length</span>)
+    (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+      (<span style=color:#50fa7b>cond</span>
+        ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+        (<span style=color:#ff79c6>else </span>(<span style=color:#50fa7b>add1</span> (<span style=color:#8be9fd;font-style:italic>length </span>(<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>)))))))
+  <span style=color:#8be9fd;font-style:italic>eternity</span>)))</code></pre></div><p>It&rsquo;s absolutely normal to get confused when there are more layers of lambda expressions involved in a
 function/recursion. It helps to think whether the lambda expressions is being
 merely defined or being defined and called, i.e. counting the parenthesis very
-carefully. The difference between defining and calling is that calling a function has arguments involved:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;defining</span>
-(<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">f</span>)
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">g</span>)<span style="color:#ff79c6">...</span>)
+carefully. The difference between defining and calling is that calling a function has arguments involved:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme><span style=color:#6272a4>;defining</span>
+(<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>f</span>)
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>g</span>)<span style=color:#ff79c6>...</span>)
 )
 
-<span style="color:#6272a4">;calling(f) with defining(g)</span>
-((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">f</span>)
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">g</span>)<span style="color:#ff79c6">...</span>))
-    <span style="color:#8be9fd;font-style:italic">arguments-for-f</span>)</code></pre></div>
-
-<p>A more general case of calling with defining in lambda expression is called the
+<span style=color:#6272a4>;calling(f) with defining(g)</span>
+((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>f</span>)
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>g</span>)<span style=color:#ff79c6>...</span>))
+    <span style=color:#8be9fd;font-style:italic>arguments-for-f</span>)</code></pre></div><p>A more general case of calling with defining in lambda expression is called the
 omega combinator. It has shape in the below picture and more information can be
-found at <a href="https://en.wikipedia.org/wiki/Lambda%5Fcalculus#Standard%5Fterms">Lambda calculus - Wikipedia</a>
-<img src="/img/little2.png" alt="" /></p>
-
-<p>The above functions show repetitive content: the <code>(length)</code> part is being
+found at <a href=https://en.wikipedia.org/wiki/Lambda%5Fcalculus#Standard%5Fterms>Lambda calculus - Wikipedia</a>
+<img src=/img/little2.png alt></p><p>The above functions show repetitive content: the <code>(length)</code> part is being
 called over and over, working on a shorter and shorter argument. Normally, we would write and save as a named
 function for calling in the future like <code>(define length)</code>. <strong>But, if we don&rsquo;t
 save it, instead we want to directly address it within other function, or even
-address itself. How do we do that?</strong></p>
-
-<p>You may have realized the motivation of this question, addressing itself withing itself
+address itself. How do we do that?</strong></p><p>You may have realized the motivation of this question, addressing itself withing itself
 is exactly the nature of recursion. In this chapter we just want to find a good way to
-do it for anonymous functions.</p>
-
-<p>If we can define length abstractly, we can call it to simplify the reptitive procedure.
+do it for anonymous functions.</p><p>If we can define length abstractly, we can call it to simplify the reptitive procedure.
 This need is particularly necessary when there is going to be many algorithms
-having similar repetitions as <code>(length&lt;=n)</code>.</p>
+having similar repetitions as <code>(length&lt;=n)</code>.</p><p>Ok, we are finally reaching the core reforming step. We are giving the
+formal calling form as equivalent to <code>(define length)</code>:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme>(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>length</span>
+ (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+  (<span style=color:#50fa7b>cond</span>
+    ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+    (<span style=color:#50fa7b>else</span>
+      (<span style=color:#50fa7b>add1</span> (<span style=color:#8be9fd;font-style:italic>length </span>(<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>)))))))
 
-<p>Ok, we are finally reaching the core reforming step. We are giving the
-formal calling form as equivalent to <code>(define length)</code>:</p>
+(<span style=color:#8be9fd;font-style:italic>length </span><span style=color:#ff79c6>&#39;</span>( )) <span style=color:#6272a4>;-&gt; 0</span>
+(<span style=color:#8be9fd;font-style:italic>length </span><span style=color:#ff79c6>&#39;</span>(<span style=color:#8be9fd;font-style:italic>a</span> <span style=color:#8be9fd;font-style:italic>b</span>)) <span style=color:#6272a4>;-&gt; 2</span>
+<span style=color:#6272a4>;--------------------------------------------</span>
+((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length</span>)
+  (<span style=color:#50fa7b>mk-length</span> <span style=color:#8be9fd;font-style:italic>eternity</span>))
+ (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>length</span>)
+  (<span style=color:#50fa7b>lambda</span>(<span style=color:#50fa7b>l</span>)
+   (<span style=color:#50fa7b>cond</span>
+ ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+  (<span style=color:#ff79c6>else </span>(<span style=color:#50fa7b>add1</span> (<span style=color:#8be9fd;font-style:italic>length </span>(<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))))
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">length</span>
- (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-  (<span style="color:#50fa7b">cond</span>
-    ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-    (<span style="color:#50fa7b">else</span>
-      (<span style="color:#50fa7b">add1</span> (<span style="color:#8be9fd;font-style:italic">length </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))
-
-(<span style="color:#8be9fd;font-style:italic">length </span><span style="color:#ff79c6">&#39;</span>( )) <span style="color:#6272a4">;-&gt; 0</span>
-(<span style="color:#8be9fd;font-style:italic">length </span><span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">a</span> <span style="color:#8be9fd;font-style:italic">b</span>)) <span style="color:#6272a4">;-&gt; 2</span>
-<span style="color:#6272a4">;--------------------------------------------</span>
-((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length</span>)
-  (<span style="color:#50fa7b">mk-length</span> <span style="color:#8be9fd;font-style:italic">eternity</span>))
- (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">length</span>)
-  (<span style="color:#50fa7b">lambda</span>(<span style="color:#50fa7b">l</span>)
-   (<span style="color:#50fa7b">cond</span>
- ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-  (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">add1</span> (<span style="color:#8be9fd;font-style:italic">length </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))))
-
-((<span style="color:#50fa7b">mk-length</span> <span style="color:#8be9fd;font-style:italic">eternity</span>) <span style="color:#ff79c6">&#39;</span>())<span style="color:#6272a4">;-&gt; 0</span>
-((<span style="color:#50fa7b">mk-length</span> <span style="color:#8be9fd;font-style:italic">eternity</span>) <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">a</span>))<span style="color:#6272a4">;-&gt; error</span></code></pre></div>
-
-<p>From the above we can see instead of being a name defined by <strong>define</strong>, <strong>length</strong> can also work as an
-parameter/argument.</p>
-
-<p>However there is a major difference:  <code>(define length)</code> has only one lambda expression, the input must be
+((<span style=color:#50fa7b>mk-length</span> <span style=color:#8be9fd;font-style:italic>eternity</span>) <span style=color:#ff79c6>&#39;</span>())<span style=color:#6272a4>;-&gt; 0</span>
+((<span style=color:#50fa7b>mk-length</span> <span style=color:#8be9fd;font-style:italic>eternity</span>) <span style=color:#ff79c6>&#39;</span>(<span style=color:#8be9fd;font-style:italic>a</span>))<span style=color:#6272a4>;-&gt; error</span></code></pre></div><p>From the above we can see instead of being a name defined by <strong>define</strong>, <strong>length</strong> can also work as an
+parameter/argument.</p><p>However there is a major difference: <code>(define length)</code> has only one lambda expression, the input must be
 a list and the output is value. But the anonymous definition is adding another layer of lambda expression, the input and
 output for the outer lambda expression (i.e. the whole function) will have
 to be functions. It&rsquo;s the output &ldquo;function <code>(λ l)</code>&rdquo; that will return value like
-the defined length function.</p>
-
-<p>Another very important note is that, the <code>(define length)</code> function
+the defined length function.</p><p>Another very important note is that, the <code>(define length)</code> function
 can evalue list with <strong>any length</strong>. the anonymous function can only evaluate input of <strong>null list</strong>, why? Because the input for
 length must be function (<code>(cdr l)</code> sure won&rsquo;t fit), so if we don&rsquo;t want get error message, it will have to
 terminate at <code>(null? l)</code> stage. Like we said, we will have to use call function more times if
-we want to measure longer lists:</p>
+we want to measure longer lists:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme><span style=color:#6272a4>;length&lt;=1</span>
+((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length</span>)
+ (<span style=color:#50fa7b>mk-length</span>
+ (<span style=color:#50fa7b>mk-length</span> <span style=color:#8be9fd;font-style:italic>eternity</span>)))
+ (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>length</span>)
+  (<span style=color:#50fa7b>lambda</span>(<span style=color:#50fa7b>l</span>)
+   (<span style=color:#50fa7b>cond</span>
+ ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+  (<span style=color:#ff79c6>else </span>(<span style=color:#50fa7b>add1</span> (<span style=color:#8be9fd;font-style:italic>length </span>(<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))))
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;length&lt;=1</span>
-((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length</span>)
- (<span style="color:#50fa7b">mk-length</span>
- (<span style="color:#50fa7b">mk-length</span> <span style="color:#8be9fd;font-style:italic">eternity</span>)))
- (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">length</span>)
-  (<span style="color:#50fa7b">lambda</span>(<span style="color:#50fa7b">l</span>)
-   (<span style="color:#50fa7b">cond</span>
- ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-  (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">add1</span> (<span style="color:#8be9fd;font-style:italic">length </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))))
-
-<span style="color:#6272a4">;length&lt;=2</span>
-((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length</span>)
-  (<span style="color:#50fa7b">mk-length</span>
-   (<span style="color:#50fa7b">mk-length</span>
-    (<span style="color:#50fa7b">mk-length</span> <span style="color:#8be9fd;font-style:italic">eternity</span>))))
- (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">length</span>)
-  (<span style="color:#50fa7b">lambda</span>(<span style="color:#50fa7b">l</span>)
-   (<span style="color:#50fa7b">cond</span>
- ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-  (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">add1</span> (<span style="color:#8be9fd;font-style:italic">length </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))))</code></pre></div>
-
-<p>In the <code>(length&lt;=0)</code> function the only working part is <code>((null? l) 0)</code> and the <code>(else)</code> predicate
+<span style=color:#6272a4>;length&lt;=2</span>
+((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length</span>)
+  (<span style=color:#50fa7b>mk-length</span>
+   (<span style=color:#50fa7b>mk-length</span>
+    (<span style=color:#50fa7b>mk-length</span> <span style=color:#8be9fd;font-style:italic>eternity</span>))))
+ (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>length</span>)
+  (<span style=color:#50fa7b>lambda</span>(<span style=color:#50fa7b>l</span>)
+   (<span style=color:#50fa7b>cond</span>
+ ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+  (<span style=color:#ff79c6>else </span>(<span style=color:#50fa7b>add1</span> (<span style=color:#8be9fd;font-style:italic>length </span>(<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))))</code></pre></div><p>In the <code>(length&lt;=0)</code> function the only working part is <code>((null? l) 0)</code> and the <code>(else)</code> predicate
 would never got triggered. So in that predicate it doesn&rsquo;t really matter whether
-we call function <code>(eternity)</code>, or itself <code>(mk-length)</code>. We just change <code>(eternity)</code> to <code>(mk-length)</code>:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">; length&lt;=0</span>
-((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length</span>)
-   (<span style="color:#50fa7b">mk-length</span> <span style="color:#8be9fd;font-style:italic">mk-length</span>)) <span style="color:#6272a4">;&lt;- we change here</span>
- (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">length</span>)
-   (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-     (<span style="color:#50fa7b">cond</span>
-       ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-       (<span style="color:#50fa7b">else</span>
-         (<span style="color:#50fa7b">add1</span> (<span style="color:#8be9fd;font-style:italic">length </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))))</code></pre></div>
-
-<p>The above code is still ONLY able to measure null list, because for other input,
+we call function <code>(eternity)</code>, or itself <code>(mk-length)</code>. We just change <code>(eternity)</code> to <code>(mk-length)</code>:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme><span style=color:#6272a4>; length&lt;=0</span>
+((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length</span>)
+   (<span style=color:#50fa7b>mk-length</span> <span style=color:#8be9fd;font-style:italic>mk-length</span>)) <span style=color:#6272a4>;&lt;- we change here</span>
+ (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>length</span>)
+   (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+     (<span style=color:#50fa7b>cond</span>
+       ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+       (<span style=color:#50fa7b>else</span>
+         (<span style=color:#50fa7b>add1</span> (<span style=color:#8be9fd;font-style:italic>length </span>(<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))))</code></pre></div><p>The above code is still ONLY able to measure null list, because for other input,
 it will have to expand <code>(add1 (length (cdr l)))</code> where <strong>the input of argument
-has to be a function</strong>, defined by the <code>(lambda (mk-length)(mk-length
-mk-length)</code>. But the input <code>(cdr l)</code> is a list. See how it fails in stepper:
-<img src="/img/little121.png" alt="" /></p>
-
-<p>As you might guess, we can just pass a random/any function to make it
+has to be a function</strong>, defined by the <code>(lambda (mk-length)(mk-length mk-length)</code>. But the input <code>(cdr l)</code> is a list. See how it fails in stepper:
+<img src=/img/little121.png alt></p><p>As you might guess, we can just pass a random/any function to make it
 successfully measure the <strong>length one</strong> list, since it will stop in <code>(null? list)</code> in the second
-loop. For example any of these three functions could work:</p>
+loop. For example any of these three functions could work:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme>((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length</span>)
+   (<span style=color:#50fa7b>mk-length</span> <span style=color:#8be9fd;font-style:italic>mk-length</span>))
+ (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>length</span>)
+   (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+     (<span style=color:#50fa7b>cond</span>
+       ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+       (<span style=color:#50fa7b>else</span>
+         (<span style=color:#50fa7b>add1</span> ((<span style=color:#8be9fd;font-style:italic>length </span><span style=color:#8be9fd;font-style:italic>add1</span>) (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))))
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length</span>)
-   (<span style="color:#50fa7b">mk-length</span> <span style="color:#8be9fd;font-style:italic">mk-length</span>))
- (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">length</span>)
-   (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-     (<span style="color:#50fa7b">cond</span>
-       ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-       (<span style="color:#50fa7b">else</span>
-         (<span style="color:#50fa7b">add1</span> ((<span style="color:#8be9fd;font-style:italic">length </span><span style="color:#8be9fd;font-style:italic">add1</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))))
+((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length</span>)
+   (<span style=color:#50fa7b>mk-length</span> <span style=color:#8be9fd;font-style:italic>mk-length</span>))
+ (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>length</span>)
+   (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+     (<span style=color:#50fa7b>cond</span>
+       ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+       (<span style=color:#50fa7b>else</span>
+         (<span style=color:#50fa7b>add1</span> ((<span style=color:#8be9fd;font-style:italic>length </span><span style=color:#8be9fd;font-style:italic>eternity</span>) (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))))
 
-((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length</span>)
-   (<span style="color:#50fa7b">mk-length</span> <span style="color:#8be9fd;font-style:italic">mk-length</span>))
- (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">length</span>)
-   (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-     (<span style="color:#50fa7b">cond</span>
-       ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-       (<span style="color:#50fa7b">else</span>
-         (<span style="color:#50fa7b">add1</span> ((<span style="color:#8be9fd;font-style:italic">length </span><span style="color:#8be9fd;font-style:italic">eternity</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))))
-
-<span style="color:#6272a4">;This one is fundamentally different from the above two, why?</span>
-((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length</span>)
-   (<span style="color:#50fa7b">mk-length</span> <span style="color:#8be9fd;font-style:italic">mk-length</span>))
- (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">length</span>)
-   (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-     (<span style="color:#50fa7b">cond</span>
-       ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-       (<span style="color:#50fa7b">else</span>
-         (<span style="color:#50fa7b">add1</span> ((<span style="color:#8be9fd;font-style:italic">length </span><span style="color:#8be9fd;font-style:italic">length</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))))</code></pre></div>
-
-<p>The former two functions can only help you measure <strong>length one</strong> list. For
+<span style=color:#6272a4>;This one is fundamentally different from the above two, why?</span>
+((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length</span>)
+   (<span style=color:#50fa7b>mk-length</span> <span style=color:#8be9fd;font-style:italic>mk-length</span>))
+ (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>length</span>)
+   (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+     (<span style=color:#50fa7b>cond</span>
+       ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+       (<span style=color:#50fa7b>else</span>
+         (<span style=color:#50fa7b>add1</span> ((<span style=color:#8be9fd;font-style:italic>length </span><span style=color:#8be9fd;font-style:italic>length</span>) (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))))</code></pre></div><p>The former two functions can only help you measure <strong>length one</strong> list. For
 <strong>length two</strong> input it would fail in the function expansion, resulting in non-legitimate functions <code>(add1 add1)</code>
 <code>(eternity eternity)</code> in the second loop. However, the third one won&rsquo;t fail
 because <code>(length length)</code> is a legitimate function, it can help us measure list
-with <strong>any length</strong>. So functionally speaking, these two are finally consistent:</p>
+with <strong>any length</strong>. So functionally speaking, these two are finally consistent:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme>(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>length</span>
+ (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+  (<span style=color:#50fa7b>cond</span>
+    ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+    (<span style=color:#50fa7b>else</span>
+      (<span style=color:#50fa7b>add1</span> (<span style=color:#8be9fd;font-style:italic>length </span>(<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>)))))))
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">length</span>
- (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-  (<span style="color:#50fa7b">cond</span>
-    ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-    (<span style="color:#50fa7b">else</span>
-      (<span style="color:#50fa7b">add1</span> (<span style="color:#8be9fd;font-style:italic">length </span>(<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))
-
-((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length</span>)
-   (<span style="color:#50fa7b">mk-length</span> <span style="color:#8be9fd;font-style:italic">mk-length</span>))
- (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">length</span>)
-   (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-     (<span style="color:#50fa7b">cond</span>
-       ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-       (<span style="color:#50fa7b">else</span>
-         (<span style="color:#50fa7b">add1</span> ((<span style="color:#8be9fd;font-style:italic">length </span><span style="color:#8be9fd;font-style:italic">length</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))))</code></pre></div>
-
-<p>All left job is just to make things extremely pithy. Let&rsquo;s adding some syntax
+((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length</span>)
+   (<span style=color:#50fa7b>mk-length</span> <span style=color:#8be9fd;font-style:italic>mk-length</span>))
+ (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>length</span>)
+   (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+     (<span style=color:#50fa7b>cond</span>
+       ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+       (<span style=color:#50fa7b>else</span>
+         (<span style=color:#50fa7b>add1</span> ((<span style=color:#8be9fd;font-style:italic>length </span><span style=color:#8be9fd;font-style:italic>length</span>) (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))))</code></pre></div><p>All left job is just to make things extremely pithy. Let&rsquo;s adding some syntax
 sugar here: since it doesn&rsquo;t matter what we name the inner arguments, because it&rsquo;s
 just an pseudo name inside a function. So we can name it anything as long as we
-keep naming and calling consistent. The last function above can be written as:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length</span>)
-   (<span style="color:#50fa7b">mk-length</span> <span style="color:#8be9fd;font-style:italic">mk-length</span>))
- (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length</span>)
-   (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-     (<span style="color:#50fa7b">cond</span>
-       ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-       (<span style="color:#50fa7b">else</span>
-         (<span style="color:#50fa7b">add1</span> ((<span style="color:#50fa7b">mk-length</span> <span style="color:#8be9fd;font-style:italic">mk-length</span>) (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))))</code></pre></div>
-
-<p>The exercise in page 166 will help you on how it works. The instruction can be
+keep naming and calling consistent. The last function above can be written as:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme>((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length</span>)
+   (<span style=color:#50fa7b>mk-length</span> <span style=color:#8be9fd;font-style:italic>mk-length</span>))
+ (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length</span>)
+   (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+     (<span style=color:#50fa7b>cond</span>
+       ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+       (<span style=color:#50fa7b>else</span>
+         (<span style=color:#50fa7b>add1</span> ((<span style=color:#50fa7b>mk-length</span> <span style=color:#8be9fd;font-style:italic>mk-length</span>) (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))))</code></pre></div><p>The exercise in page 166 will help you on how it works. The instruction can be
 found in the answer of <code>soegaard</code> :
-<a href="https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer?noredirect=1&amp;lq=1">scheme - Y combinator discussion in &ldquo;The Little Schemer&rdquo; - Stack Overflow</a></p>
-
-<p>When running it with stepper in DrRacket, there are 27 steps for a case <code>(l is
-(' a b c))</code>, I only demonstrate 4 steps here (press ctrl and + to see the enlarged image)</p>
-
-<figure>
-    <img src="/img/little.png"/> 
-</figure>
-
-
-<p>You can try to play with longer list, such as this:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length</span>)
-    (<span style="color:#50fa7b">mk-length</span> <span style="color:#8be9fd;font-style:italic">mk-length</span>))
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length</span>)
-    (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-      (<span style="color:#50fa7b">cond</span>
-        ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span> )
-        (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">add1</span>
-               ((<span style="color:#50fa7b">mk-length</span> <span style="color:#8be9fd;font-style:italic">mk-length</span>)
-                (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))))
- <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">a</span> <span style="color:#8be9fd;font-style:italic">b</span> <span style="color:#8be9fd;font-style:italic">c</span>)) <span style="color:#6272a4">;&lt;- it works with lists in any length, try it</span></code></pre></div>
-
-<p>You would realize that this is just more recurrences of that &ldquo;bear in mind&rdquo;
+<a href="https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer?noredirect=1&lq=1">scheme - Y combinator discussion in &ldquo;The Little Schemer&rdquo; - Stack Overflow</a></p><p>When running it with stepper in DrRacket, there are 27 steps for a case <code>(l is (' a b c))</code>, I only demonstrate 4 steps here (press ctrl and + to see the enlarged image)</p><figure><img src=/img/little.png></figure><p>You can try to play with longer list, such as this:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme>(((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length</span>)
+    (<span style=color:#50fa7b>mk-length</span> <span style=color:#8be9fd;font-style:italic>mk-length</span>))
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length</span>)
+    (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+      (<span style=color:#50fa7b>cond</span>
+        ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span> )
+        (<span style=color:#ff79c6>else </span>(<span style=color:#50fa7b>add1</span>
+               ((<span style=color:#50fa7b>mk-length</span> <span style=color:#8be9fd;font-style:italic>mk-length</span>)
+                (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))))
+ <span style=color:#ff79c6>&#39;</span>(<span style=color:#8be9fd;font-style:italic>a</span> <span style=color:#8be9fd;font-style:italic>b</span> <span style=color:#8be9fd;font-style:italic>c</span>)) <span style=color:#6272a4>;&lt;- it works with lists in any length, try it</span></code></pre></div><p>You would realize that this is just more recurrences of that &ldquo;bear in mind&rdquo;
 picture, aka calling <code>(mk-length mk-length)</code> one more time before applying a
 shorter candidate list, until the <code>(cdr l)</code> runs out of atom. In the end, the null
 list becomes the termination condition, without triggering it, we will go stack overflow by calling
-<code>(mk-length mk-length)</code> infinite times.</p>
+<code>(mk-length mk-length)</code> infinite times.</p><p>If you find it confusing, read this preview of omega combinator in the first
+answer of this post:<a href=https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer/11864862#11864862>scheme - Y combinator discussion in &ldquo;The Little Schemer&rdquo; -
+Stack Overflow</a></p><p>Let&rsquo;s further abstract the function with the legitimate though interrupting
+<code>(mk-length mk-length)</code> part. Simple, just add another layer, I add some syntax salt <code>(mk-length-two)</code> to distinguish with the original <code>(mk-length i.e. mk-length-one)</code> so you can see it clearer:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme>((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length</span>)
+   (<span style=color:#50fa7b>mk-length</span> <span style=color:#8be9fd;font-style:italic>mk-length</span>))
+ (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length-two</span>)
+   ((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length-one</span>)
+      (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+        (<span style=color:#50fa7b>cond</span>
+          ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+          (<span style=color:#ff79c6>else </span>(<span style=color:#50fa7b>add1</span> (<span style=color:#50fa7b>mk-length-one</span> (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>)))))))
+   (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+     ((<span style=color:#50fa7b>mk-length-two</span> <span style=color:#8be9fd;font-style:italic>mk-length-two</span>) <span style=color:#8be9fd;font-style:italic>l</span>)))))</code></pre></div><p>Then we add one last more layer, (I swear it&rsquo;s the last layer) to switch the
+order a bit, moving the actual length measuring part to make it look nicer:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme>((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length-one</span>)
+   ((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length</span>)
+      (<span style=color:#50fa7b>mk-length</span> <span style=color:#8be9fd;font-style:italic>mk-length</span>))
+    (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length-two</span>)
+      (<span style=color:#50fa7b>mk-length-one</span> (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+            ((<span style=color:#50fa7b>mk-length-two</span> <span style=color:#8be9fd;font-style:italic>mk-length-two</span>) <span style=color:#8be9fd;font-style:italic>l</span>))))))
+ (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length-one</span>)
+   (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+     (<span style=color:#50fa7b>cond</span>
+       ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+       (<span style=color:#ff79c6>else </span>(<span style=color:#50fa7b>add1</span> (<span style=color:#50fa7b>mk-length-one</span> (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))))</code></pre></div><p>That&rsquo;s very complex, let&rsquo;s simplify it</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme>((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>f</span>)
+   ((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>x</span>) (<span style=color:#50fa7b>x</span> <span style=color:#8be9fd;font-style:italic>x</span>))
+    (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>x</span>)
+      (<span style=color:#50fa7b>f</span> (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+            ((<span style=color:#50fa7b>x</span> <span style=color:#8be9fd;font-style:italic>x</span>) <span style=color:#8be9fd;font-style:italic>l</span>))))))
+ (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>mk-length-one</span>)
+   (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+     (<span style=color:#50fa7b>cond</span>
+       ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+       (<span style=color:#ff79c6>else </span>(<span style=color:#50fa7b>add1</span> (<span style=color:#50fa7b>mk-length-one</span> (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>))))))))</code></pre></div><p>Define and name the first part as Y combinator</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme>(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>Y</span>
+ (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>f</span>)
+   ((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>x</span>) (<span style=color:#50fa7b>x</span> <span style=color:#8be9fd;font-style:italic>x</span>))
+    (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>x</span>)
+      (<span style=color:#50fa7b>f</span> (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+            ((<span style=color:#50fa7b>x</span> <span style=color:#8be9fd;font-style:italic>x</span>) <span style=color:#8be9fd;font-style:italic>l</span>)))))))
 
-<p>If you find it confusing, read this preview of omega combinator in the first
-answer of this post:<a href="https://stackoverflow.com/questions/10499514/y-combinator-discussion-in-the-little-schemer/11864862#11864862">scheme - Y combinator discussion in &ldquo;The Little Schemer&rdquo; -
-Stack Overflow</a></p>
-
-<p>Let&rsquo;s further abstract the function with the legitimate though interrupting
-<code>(mk-length mk-length)</code> part. Simple, just add another layer, I add some syntax salt <code>(mk-length-two)</code> to distinguish with the original <code>(mk-length i.e. mk-length-one)</code> so you can see it clearer:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length</span>)
-   (<span style="color:#50fa7b">mk-length</span> <span style="color:#8be9fd;font-style:italic">mk-length</span>))
- (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length-two</span>)
-   ((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length-one</span>)
-      (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-        (<span style="color:#50fa7b">cond</span>
-          ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-          (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">add1</span> (<span style="color:#50fa7b">mk-length-one</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))
-   (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-     ((<span style="color:#50fa7b">mk-length-two</span> <span style="color:#8be9fd;font-style:italic">mk-length-two</span>) <span style="color:#8be9fd;font-style:italic">l</span>)))))</code></pre></div>
-
-<p>Then we add one last more layer, (I swear it&rsquo;s the last layer) to switch the
-order a bit, moving the actual length measuring part to make it look nicer:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length-one</span>)
-   ((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length</span>)
-      (<span style="color:#50fa7b">mk-length</span> <span style="color:#8be9fd;font-style:italic">mk-length</span>))
-    (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length-two</span>)
-      (<span style="color:#50fa7b">mk-length-one</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-            ((<span style="color:#50fa7b">mk-length-two</span> <span style="color:#8be9fd;font-style:italic">mk-length-two</span>) <span style="color:#8be9fd;font-style:italic">l</span>))))))
- (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length-one</span>)
-   (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-     (<span style="color:#50fa7b">cond</span>
-       ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-       (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">add1</span> (<span style="color:#50fa7b">mk-length-one</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))))</code></pre></div>
-
-<p>That&rsquo;s very complex, let&rsquo;s simplify it</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">f</span>)
-   ((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">x</span>) (<span style="color:#50fa7b">x</span> <span style="color:#8be9fd;font-style:italic">x</span>))
-    (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">x</span>)
-      (<span style="color:#50fa7b">f</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-            ((<span style="color:#50fa7b">x</span> <span style="color:#8be9fd;font-style:italic">x</span>) <span style="color:#8be9fd;font-style:italic">l</span>))))))
- (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">mk-length-one</span>)
-   (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-     (<span style="color:#50fa7b">cond</span>
-       ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-       (<span style="color:#ff79c6">else </span>(<span style="color:#50fa7b">add1</span> (<span style="color:#50fa7b">mk-length-one</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>))))))))</code></pre></div>
-
-<p>Define and name the first part as Y combinator</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">Y</span>
- (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">f</span>)
-   ((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">x</span>) (<span style="color:#50fa7b">x</span> <span style="color:#8be9fd;font-style:italic">x</span>))
-    (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">x</span>)
-      (<span style="color:#50fa7b">f</span> (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-            ((<span style="color:#50fa7b">x</span> <span style="color:#8be9fd;font-style:italic">x</span>) <span style="color:#8be9fd;font-style:italic">l</span>)))))))
-
-<span style="color:#6272a4">;and call Y with any function you want</span>
-((<span style="color:#50fa7b">Y</span>
- (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">len</span>)
-   (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">l</span>)
-     (<span style="color:#50fa7b">cond</span>
-       ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">l</span>) <span style="color:#bd93f9">0</span>)
-       (<span style="color:#ff79c6">else </span>(<span style="color:#8be9fd;font-style:italic">+ </span><span style="color:#bd93f9">1</span> (<span style="color:#50fa7b">len</span> (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">l</span>)))))))) <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">a</span> <span style="color:#8be9fd;font-style:italic">b</span> <span style="color:#8be9fd;font-style:italic">c</span> <span style="color:#8be9fd;font-style:italic">d</span>))</code></pre></div>
-
-<p>Done. Happy hacking!</p>
-
-<h2 id="chapter-10-what-is-the-value-of-all-of-this">Chapter 10 What is the value of all of this?</h2>
-
-<p>Firstly this chapter defines entry and table/enviroment. An entry consists of a
+<span style=color:#6272a4>;and call Y with any function you want</span>
+((<span style=color:#50fa7b>Y</span>
+ (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>len</span>)
+   (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>l</span>)
+     (<span style=color:#50fa7b>cond</span>
+       ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>l</span>) <span style=color:#bd93f9>0</span>)
+       (<span style=color:#ff79c6>else </span>(<span style=color:#8be9fd;font-style:italic>+ </span><span style=color:#bd93f9>1</span> (<span style=color:#50fa7b>len</span> (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>l</span>)))))))) <span style=color:#ff79c6>&#39;</span>(<span style=color:#8be9fd;font-style:italic>a</span> <span style=color:#8be9fd;font-style:italic>b</span> <span style=color:#8be9fd;font-style:italic>c</span> <span style=color:#8be9fd;font-style:italic>d</span>))</code></pre></div><p>Done. Happy hacking!</p><h2 id=chapter-10-what-is-the-value-of-all-of-this>Chapter 10 What is the value of all of this?</h2><p>Firstly this chapter defines entry and table/enviroment. An entry consists of a
 pair of lists of <strong>equal length</strong> (length is the number of first level atoms in a
-list). A list of entries is table/environment.</p>
+list). A list of entries is table/environment.</p><figure><img src=/img/little10.png></figure><p>The entries can be built by <code>(cons)</code> lists.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme><span style=color:#6272a4>; Let&#39;s build entries with build from chapter 7 (07-friends-and-relations.ss)</span>
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>build</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>s1</span> <span style=color:#8be9fd;font-style:italic>s2</span>)
+    (<span style=color:#8be9fd;font-style:italic>cons </span><span style=color:#8be9fd;font-style:italic>s1</span> (<span style=color:#8be9fd;font-style:italic>cons </span><span style=color:#8be9fd;font-style:italic>s2</span> <span style=color:#ff79c6>&#39;</span>()))))
 
-<figure>
-    <img src="/img/little10.png"/> 
-</figure>
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>new-entry</span> <span style=color:#8be9fd;font-style:italic>build</span>)
 
-
-<p>The entries can be built by <code>(cons)</code> lists.</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">; Let&#39;s build entries with build from chapter 7 (07-friends-and-relations.ss)</span>
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">build</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">s1</span> <span style="color:#8be9fd;font-style:italic">s2</span>)
-    (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">s1</span> (<span style="color:#8be9fd;font-style:italic">cons </span><span style="color:#8be9fd;font-style:italic">s2</span> <span style="color:#ff79c6">&#39;</span>()))))
-
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">new-entry</span> <span style="color:#8be9fd;font-style:italic">build</span>)
-
-<span style="color:#6272a4">; Test it out and build the example entries above</span>
-(<span style="color:#50fa7b">build</span> <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">appetizer</span> <span style="color:#8be9fd;font-style:italic">entree</span> <span style="color:#8be9fd;font-style:italic">bevarage</span>)
-       <span style="color:#ff79c6">&#39;</span>(<span style="color:#8be9fd;font-style:italic">pate</span> <span style="color:#8be9fd;font-style:italic">boeuf</span> <span style="color:#8be9fd;font-style:italic">vin</span>))</code></pre></div>
-
-<p>We are using entries and tables to write an interpreter in this chapter, which
+<span style=color:#6272a4>; Test it out and build the example entries above</span>
+(<span style=color:#50fa7b>build</span> <span style=color:#ff79c6>&#39;</span>(<span style=color:#8be9fd;font-style:italic>appetizer</span> <span style=color:#8be9fd;font-style:italic>entree</span> <span style=color:#8be9fd;font-style:italic>bevarage</span>)
+       <span style=color:#ff79c6>&#39;</span>(<span style=color:#8be9fd;font-style:italic>pate</span> <span style=color:#8be9fd;font-style:italic>boeuf</span> <span style=color:#8be9fd;font-style:italic>vin</span>))</code></pre></div><p>We are using entries and tables to write an interpreter in this chapter, which
 refers to find names with matching values. So in our interested entry, the first
 list is usually a set of names, and
-the second list is a set of values corresponding to every names.</p>
+the second list is a set of values corresponding to every names.</p><p>Given a function <code>(lookup-in-entry)</code>, we would be able to find a value for every
+name.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme><span style=color:#6272a4>;(lookup-in-entry name entry)</span>
 
-<p>Given a function <code>(lookup-in-entry)</code>, we would be able to find a value for every
-name.</p>
+<span style=color:#6272a4>;food --</span>
+<span style=color:#ff79c6>&#39;</span>((<span style=color:#50fa7b>appetizer</span> <span style=color:#8be9fd;font-style:italic>entree</span> <span style=color:#8be9fd;font-style:italic>bevarage</span>)
+  (<span style=color:#50fa7b>pate</span> <span style=color:#8be9fd;font-style:italic>boeuf</span> <span style=color:#8be9fd;font-style:italic>vin</span>))
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;(lookup-in-entry name entry)</span>
-
-<span style="color:#6272a4">;food --</span>
-<span style="color:#ff79c6">&#39;</span>((<span style="color:#50fa7b">appetizer</span> <span style="color:#8be9fd;font-style:italic">entree</span> <span style="color:#8be9fd;font-style:italic">bevarage</span>)
-  (<span style="color:#50fa7b">pate</span> <span style="color:#8be9fd;font-style:italic">boeuf</span> <span style="color:#8be9fd;font-style:italic">vin</span>))
-
-(<span style="color:#50fa7b">lookup-in-entry</span> <span style="color:#8be9fd;font-style:italic">entree</span> <span style="color:#8be9fd;font-style:italic">food</span>)
-<span style="color:#6272a4">; -&gt; boeuf</span></code></pre></div>
-
-<p>Let&rsquo;s try writing it. The <code>(lookup-in-entry)</code> works this way: the <code>(eq?)</code> checks
+(<span style=color:#50fa7b>lookup-in-entry</span> <span style=color:#8be9fd;font-style:italic>entree</span> <span style=color:#8be9fd;font-style:italic>food</span>)
+<span style=color:#6272a4>; -&gt; boeuf</span></code></pre></div><p>Let&rsquo;s try writing it. The <code>(lookup-in-entry)</code> works this way: the <code>(eq?)</code> checks
 input with every element in name lists, and return the corresponding value in the
-second list. (Remember we always need to return <code>('())</code> first if the input is null.)</p>
+second list. (Remember we always need to return <code>('())</code> first if the input is null.)</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme><span style=color:#6272a4>;(define second</span>
+<span style=color:#6272a4>;  (lambda (p)</span>
+<span style=color:#6272a4>;    (car (cdr p))))</span>
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">;(define second</span>
-<span style="color:#6272a4">;  (lambda (p)</span>
-<span style="color:#6272a4">;    (car (cdr p))))</span>
+<span style=color:#6272a4>;the entry-f take null λ function to make it not break</span>
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>lookup-in-entry</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>name</span> <span style=color:#8be9fd;font-style:italic>entry</span> <span style=color:#8be9fd;font-style:italic>entry-f</span>)
+    (<span style=color:#50fa7b>lookup-in-entry-help</span>
+      <span style=color:#8be9fd;font-style:italic>name</span>
+      (<span style=color:#50fa7b>first</span> <span style=color:#8be9fd;font-style:italic>entry</span>)
+      (<span style=color:#50fa7b>second</span> <span style=color:#8be9fd;font-style:italic>entry</span>)
+      <span style=color:#8be9fd;font-style:italic>entry-f</span>)))
 
-<span style="color:#6272a4">;the entry-f take null λ function to make it not break</span>
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">lookup-in-entry</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">name</span> <span style="color:#8be9fd;font-style:italic">entry</span> <span style="color:#8be9fd;font-style:italic">entry-f</span>)
-    (<span style="color:#50fa7b">lookup-in-entry-help</span>
-      <span style="color:#8be9fd;font-style:italic">name</span>
-      (<span style="color:#50fa7b">first</span> <span style="color:#8be9fd;font-style:italic">entry</span>)
-      (<span style="color:#50fa7b">second</span> <span style="color:#8be9fd;font-style:italic">entry</span>)
-      <span style="color:#8be9fd;font-style:italic">entry-f</span>)))
+<span style=color:#6272a4>; lookup-in-entry uses lookup-in-entry-help helper function</span>
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>lookup-in-entry-help</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>name</span> <span style=color:#8be9fd;font-style:italic>names</span> <span style=color:#8be9fd;font-style:italic>values</span> <span style=color:#8be9fd;font-style:italic>entry-f</span>)
+    (<span style=color:#50fa7b>cond</span>
+      ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>names</span>) (<span style=color:#50fa7b>entry-f</span> <span style=color:#8be9fd;font-style:italic>name</span>))
+      ((<span style=color:#8be9fd;font-style:italic>eq? </span>(<span style=color:#8be9fd;font-style:italic>car </span><span style=color:#8be9fd;font-style:italic>names</span>) <span style=color:#8be9fd;font-style:italic>name</span>) (<span style=color:#8be9fd;font-style:italic>car </span><span style=color:#8be9fd;font-style:italic>values</span>))
+      (<span style=color:#50fa7b>else</span>
+        (<span style=color:#50fa7b>lookup-in-entry-help</span>
+          <span style=color:#8be9fd;font-style:italic>name</span>
+          (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>names</span>)
+          (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>values</span>)
+          <span style=color:#8be9fd;font-style:italic>entry-f</span>)))))
 
-<span style="color:#6272a4">; lookup-in-entry uses lookup-in-entry-help helper function</span>
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">lookup-in-entry-help</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">name</span> <span style="color:#8be9fd;font-style:italic">names</span> <span style="color:#8be9fd;font-style:italic">values</span> <span style="color:#8be9fd;font-style:italic">entry-f</span>)
-    (<span style="color:#50fa7b">cond</span>
-      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">names</span>) (<span style="color:#50fa7b">entry-f</span> <span style="color:#8be9fd;font-style:italic">name</span>))
-      ((<span style="color:#8be9fd;font-style:italic">eq? </span>(<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">names</span>) <span style="color:#8be9fd;font-style:italic">name</span>) (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">values</span>))
-      (<span style="color:#50fa7b">else</span>
-        (<span style="color:#50fa7b">lookup-in-entry-help</span>
-          <span style="color:#8be9fd;font-style:italic">name</span>
-          (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">names</span>)
-          (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">values</span>)
-          <span style="color:#8be9fd;font-style:italic">entry-f</span>)))))
+<span style=color:#6272a4>; Let&#39;s try out lookup-in-entry</span>
+(<span style=color:#50fa7b>lookup-in-entry</span>
+  <span style=color:#f1fa8c>&#39;entree</span>
+  <span style=color:#ff79c6>&#39;</span>((<span style=color:#50fa7b>appetizer</span> <span style=color:#8be9fd;font-style:italic>entree</span> <span style=color:#8be9fd;font-style:italic>bevarage</span>) (<span style=color:#50fa7b>pate</span> <span style=color:#8be9fd;font-style:italic>boeuf</span> <span style=color:#8be9fd;font-style:italic>vin</span>))
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>n</span>) <span style=color:#ff79c6>&#39;</span>()))
+<span style=color:#6272a4>;-&gt; boeuf</span>
 
-<span style="color:#6272a4">; Let&#39;s try out lookup-in-entry</span>
-(<span style="color:#50fa7b">lookup-in-entry</span>
-  <span style="color:#f1fa8c">&#39;entree</span>
-  <span style="color:#ff79c6">&#39;</span>((<span style="color:#50fa7b">appetizer</span> <span style="color:#8be9fd;font-style:italic">entree</span> <span style="color:#8be9fd;font-style:italic">bevarage</span>) (<span style="color:#50fa7b">pate</span> <span style="color:#8be9fd;font-style:italic">boeuf</span> <span style="color:#8be9fd;font-style:italic">vin</span>))
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span>) <span style="color:#ff79c6">&#39;</span>()))
-<span style="color:#6272a4">;-&gt; boeuf</span>
+<span style=color:#6272a4>; The null function make sure the function doesn&#39;t break with incorrect input.</span>
+(<span style=color:#50fa7b>lookup-in-entry</span>
+  <span style=color:#f1fa8c>&#39;no-such-item</span>
+  <span style=color:#ff79c6>&#39;</span>((<span style=color:#50fa7b>appetizer</span> <span style=color:#8be9fd;font-style:italic>entree</span> <span style=color:#8be9fd;font-style:italic>bevarage</span>) (<span style=color:#50fa7b>pate</span> <span style=color:#8be9fd;font-style:italic>boeuf</span> <span style=color:#8be9fd;font-style:italic>vin</span>))
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>n</span>) <span style=color:#ff79c6>&#39;</span>()))
+<span style=color:#6272a4>;-&gt; &#39;()</span></code></pre></div><p>Putting the above code to DrRacket and run with stepper, you can see how things
+are achieved.</p><p>The table/environment can be extended by adding more new pairs (aka entries) on top of the old
+table/entries.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme>(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>extend-table</span> <span style=color:#8be9fd;font-style:italic>cons</span>)</code></pre></div><p>We can write another <code>(lookup-in-entry)</code> working as above But notice
+the take the <code>(car (cdr table))</code> as input in every recursions, which means the function will immediately cease and return value when the first name matches the input.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme><span style=color:#6272a4>; lookup-in-table finds an entry in a table</span>
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>lookup-in-table</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>name</span> <span style=color:#8be9fd;font-style:italic>table</span> <span style=color:#8be9fd;font-style:italic>table-f</span>)
+    (<span style=color:#50fa7b>cond</span>
+      ((<span style=color:#8be9fd;font-style:italic>null? </span><span style=color:#8be9fd;font-style:italic>table</span>) (<span style=color:#50fa7b>table-f</span> <span style=color:#8be9fd;font-style:italic>name</span>))
+      (<span style=color:#50fa7b>else</span>
+        (<span style=color:#50fa7b>lookup-in-entry</span>
+          <span style=color:#8be9fd;font-style:italic>name</span>
+          (<span style=color:#8be9fd;font-style:italic>car </span><span style=color:#8be9fd;font-style:italic>table</span>)
+          (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>name</span>)
+            (<span style=color:#50fa7b>lookup-in-table</span>
+              <span style=color:#8be9fd;font-style:italic>name</span>
+              (<span style=color:#8be9fd;font-style:italic>cdr </span><span style=color:#8be9fd;font-style:italic>table</span>)
+              <span style=color:#8be9fd;font-style:italic>table-f</span>)))))))
 
-<span style="color:#6272a4">; The null function make sure the function doesn&#39;t break with incorrect input.</span>
-(<span style="color:#50fa7b">lookup-in-entry</span>
-  <span style="color:#f1fa8c">&#39;no-such-item</span>
-  <span style="color:#ff79c6">&#39;</span>((<span style="color:#50fa7b">appetizer</span> <span style="color:#8be9fd;font-style:italic">entree</span> <span style="color:#8be9fd;font-style:italic">bevarage</span>) (<span style="color:#50fa7b">pate</span> <span style="color:#8be9fd;font-style:italic">boeuf</span> <span style="color:#8be9fd;font-style:italic">vin</span>))
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span>) <span style="color:#ff79c6">&#39;</span>()))
-<span style="color:#6272a4">;-&gt; &#39;()</span></code></pre></div>
-
-<p>Putting the above code to DrRacket and run with stepper, you can see how things
-are achieved.</p>
-
-<p>The table/environment can be extended by adding more new pairs (aka entries) on top of the old
-table/entries.</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">extend-table</span> <span style="color:#8be9fd;font-style:italic">cons</span>)</code></pre></div>
-
-<p>We can write another <code>(lookup-in-entry)</code> working as above But notice
-the take the <code>(car (cdr table))</code> as input in every recursions, which means the function will immediately cease and return value when the first name matches the input.</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">; lookup-in-table finds an entry in a table</span>
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">lookup-in-table</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">name</span> <span style="color:#8be9fd;font-style:italic">table</span> <span style="color:#8be9fd;font-style:italic">table-f</span>)
-    (<span style="color:#50fa7b">cond</span>
-      ((<span style="color:#8be9fd;font-style:italic">null? </span><span style="color:#8be9fd;font-style:italic">table</span>) (<span style="color:#50fa7b">table-f</span> <span style="color:#8be9fd;font-style:italic">name</span>))
-      (<span style="color:#50fa7b">else</span>
-        (<span style="color:#50fa7b">lookup-in-entry</span>
-          <span style="color:#8be9fd;font-style:italic">name</span>
-          (<span style="color:#8be9fd;font-style:italic">car </span><span style="color:#8be9fd;font-style:italic">table</span>)
-          (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">name</span>)
-            (<span style="color:#50fa7b">lookup-in-table</span>
-              <span style="color:#8be9fd;font-style:italic">name</span>
-              (<span style="color:#8be9fd;font-style:italic">cdr </span><span style="color:#8be9fd;font-style:italic">table</span>)
-              <span style="color:#8be9fd;font-style:italic">table-f</span>)))))))
-
-<span style="color:#6272a4">; Let&#39;s try lookup-in-table</span>
-(<span style="color:#50fa7b">lookup-in-table</span>
-  <span style="color:#f1fa8c">&#39;beverage</span>
-  <span style="color:#ff79c6">&#39;</span>(((<span style="color:#50fa7b">entree</span> <span style="color:#8be9fd;font-style:italic">dessert</span>) (<span style="color:#50fa7b">spaghetti</span> <span style="color:#8be9fd;font-style:italic">spumoni</span>))
-    ((<span style="color:#50fa7b">appetizer</span> <span style="color:#8be9fd;font-style:italic">entree</span> <span style="color:#8be9fd;font-style:italic">beverage</span>) (<span style="color:#50fa7b">food</span> <span style="color:#8be9fd;font-style:italic">tastes</span> <span style="color:#8be9fd;font-style:italic">good</span>)))
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">n</span>) <span style="color:#ff79c6">&#39;</span>()))
-<span style="color:#6272a4">; -&gt; &#39;good</span></code></pre></div>
-
-<hr />
-
-<p>Then let&rsquo;s look at value and type. When asking what&rsquo;s the
+<span style=color:#6272a4>; Let&#39;s try lookup-in-table</span>
+(<span style=color:#50fa7b>lookup-in-table</span>
+  <span style=color:#f1fa8c>&#39;beverage</span>
+  <span style=color:#ff79c6>&#39;</span>(((<span style=color:#50fa7b>entree</span> <span style=color:#8be9fd;font-style:italic>dessert</span>) (<span style=color:#50fa7b>spaghetti</span> <span style=color:#8be9fd;font-style:italic>spumoni</span>))
+    ((<span style=color:#50fa7b>appetizer</span> <span style=color:#8be9fd;font-style:italic>entree</span> <span style=color:#8be9fd;font-style:italic>beverage</span>) (<span style=color:#50fa7b>food</span> <span style=color:#8be9fd;font-style:italic>tastes</span> <span style=color:#8be9fd;font-style:italic>good</span>)))
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>n</span>) <span style=color:#ff79c6>&#39;</span>()))
+<span style=color:#6272a4>; -&gt; &#39;good</span></code></pre></div><hr><p>Then let&rsquo;s look at value and type. When asking what&rsquo;s the
 value of an S-expression, in most of the cases, it returns the nature of itself. For
-example, see the value of these S-expression:</p>
+example, see the value of these S-expression:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme>(<span style=color:#50fa7b>value</span> <span style=color:#8be9fd;font-style:italic>e</span>) <span style=color:#8be9fd;font-style:italic>where</span> <span style=color:#8be9fd;font-style:italic>e</span> <span style=color:#8be9fd;font-style:italic>is</span> (<span style=color:#8be9fd;font-style:italic>car </span>(<span style=color:#ff79c6>quote </span>(<span style=color:#50fa7b>a</span> <span style=color:#8be9fd;font-style:italic>b</span> <span style=color:#8be9fd;font-style:italic>c</span>)))
+<span style=color:#6272a4>; is a, coz the first element of &#39;(a b c) is an atom</span>
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#50fa7b">value</span> <span style="color:#8be9fd;font-style:italic">e</span>) <span style="color:#8be9fd;font-style:italic">where</span> <span style="color:#8be9fd;font-style:italic">e</span> <span style="color:#8be9fd;font-style:italic">is</span> (<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#ff79c6">quote </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">b</span> <span style="color:#8be9fd;font-style:italic">c</span>)))
-<span style="color:#6272a4">; is a, coz the first element of &#39;(a b c) is an atom</span>
+(<span style=color:#50fa7b>value</span> <span style=color:#8be9fd;font-style:italic>e</span>) <span style=color:#8be9fd;font-style:italic>where</span> <span style=color:#8be9fd;font-style:italic>e</span> <span style=color:#8be9fd;font-style:italic>is</span> (<span style=color:#ff79c6>quote </span>(<span style=color:#8be9fd;font-style:italic>car </span>(<span style=color:#ff79c6>quote </span>(<span style=color:#50fa7b>a</span> <span style=color:#8be9fd;font-style:italic>b</span> <span style=color:#8be9fd;font-style:italic>c</span>))))
+<span style=color:#6272a4>; is (car (quote (a b c)))</span>
+<span style=color:#6272a4>; coz (quote()) make the whole argument literal as a list</span>
+<span style=color:#6272a4>; the inner car won&#39;t be called.</span>
 
-(<span style="color:#50fa7b">value</span> <span style="color:#8be9fd;font-style:italic">e</span>) <span style="color:#8be9fd;font-style:italic">where</span> <span style="color:#8be9fd;font-style:italic">e</span> <span style="color:#8be9fd;font-style:italic">is</span> (<span style="color:#ff79c6">quote </span>(<span style="color:#8be9fd;font-style:italic">car </span>(<span style="color:#ff79c6">quote </span>(<span style="color:#50fa7b">a</span> <span style="color:#8be9fd;font-style:italic">b</span> <span style="color:#8be9fd;font-style:italic">c</span>))))
-<span style="color:#6272a4">; is (car (quote (a b c)))</span>
-<span style="color:#6272a4">; coz (quote()) make the whole argument literal as a list</span>
-<span style="color:#6272a4">; the inner car won&#39;t be called.</span>
-
-(<span style="color:#50fa7b">value</span> <span style="color:#8be9fd;font-style:italic">e</span>) <span style="color:#8be9fd;font-style:italic">where</span> <span style="color:#8be9fd;font-style:italic">e</span> <span style="color:#8be9fd;font-style:italic">is</span>
-((<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">nothing</span>)
-  (<span style="color:#50fa7b">cond</span>
-     (<span style="color:#50fa7b">nothing</span> (<span style="color:#ff79c6">quote </span><span style="color:#8be9fd;font-style:italic">something</span>))
-     (<span style="color:#ff79c6">else </span>(<span style="color:#ff79c6">quote </span><span style="color:#8be9fd;font-style:italic">nothing</span>))))
+(<span style=color:#50fa7b>value</span> <span style=color:#8be9fd;font-style:italic>e</span>) <span style=color:#8be9fd;font-style:italic>where</span> <span style=color:#8be9fd;font-style:italic>e</span> <span style=color:#8be9fd;font-style:italic>is</span>
+((<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>nothing</span>)
+  (<span style=color:#50fa7b>cond</span>
+     (<span style=color:#50fa7b>nothing</span> (<span style=color:#ff79c6>quote </span><span style=color:#8be9fd;font-style:italic>something</span>))
+     (<span style=color:#ff79c6>else </span>(<span style=color:#ff79c6>quote </span><span style=color:#8be9fd;font-style:italic>nothing</span>))))
 #t)
-<span style="color:#6272a4">;is something</span>
-<span style="color:#6272a4">;coz the e is evaluated first, returned &#39;something</span>
-<span style="color:#6272a4">;&#39;something is an atom</span></code></pre></div>
-
-<p>What is type? Based on the working essence, all the functions we have seen in
+<span style=color:#6272a4>;is something</span>
+<span style=color:#6272a4>;coz the e is evaluated first, returned &#39;something</span>
+<span style=color:#6272a4>;&#39;something is an atom</span></code></pre></div><p>What is type? Based on the working essence, all the functions we have seen in
 this book can be described in six types:
 <code>(const, quote, identifier, lambda, cond, application)</code>. In interpreting
 program, implementing a type classification function in the first step is an
 efficiency booster. Because functions in the same type work in similar way. If we can write an universal function for each type, we can call and optimize each function
-based on their distinctive characteristics.</p>
-
-<p>The similar part of interpretation is, recognizing the type and arguments of function, finding the
+based on their distinctive characteristics.</p><p>The similar part of interpretation is, recognizing the type and arguments of function, finding the
 corresponding value for each type and arguments (use <code>(lookup-in-table)</code>), then
-implementing the value to the type and arguments.</p>
-
-<p>So firstly let&rsquo;s how the type classification works. The first layer of
+implementing the value to the type and arguments.</p><p>So firstly let&rsquo;s how the type classification works. The first layer of
 classifier is <code>(expression-to-action)</code> and followed by other more detailed ones.
 This is going to be the most important function in this
 chapter: it classifies any input into the above six categories
 based on the &ldquo;nature of action&rdquo; of the input. Then each categories has its own
 running/interpreting rules with starred names (e.g. *const, *identifier). With
 these starred functions, we can roughly find values for anything, with a proper table.
-<img src="/img/little11.png" alt="" /></p>
+<img src=/img/little11.png alt></p><p>Since everything can be classified with the above function, we can use <code>(meaning e table)</code> to find value for both functions and arguments, and merge the type and value together in a table to further writing implementing
+procedure. The above tree code blocks can be linked by two functions as:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme><span style=color:#6272a4>; The value function takes an expression and evaulates it</span>
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>value</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>e</span>)
+    (<span style=color:#50fa7b>meaning</span> <span style=color:#8be9fd;font-style:italic>e</span> <span style=color:#ff79c6>&#39;</span>())))
 
-<p>Since everything can be classified with the above function, we can use <code>(meaning
-e table)</code> to find value for both functions and arguments, and merge the type and value together in a table to further writing implementing
-procedure. The above tree code blocks can be linked by two functions as:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#6272a4">; The value function takes an expression and evaulates it</span>
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">value</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">e</span>)
-    (<span style="color:#50fa7b">meaning</span> <span style="color:#8be9fd;font-style:italic">e</span> <span style="color:#ff79c6">&#39;</span>())))
-
-<span style="color:#6272a4">; The meaning function translates an expression to its meaning</span>
-(<span style="color:#ff79c6">define </span><span style="color:#8be9fd;font-style:italic">meaning</span>
-  (<span style="color:#ff79c6">lambda </span>(<span style="color:#50fa7b">e</span> <span style="color:#8be9fd;font-style:italic">table</span>)
-    ((<span style="color:#50fa7b">expression-to-action</span> <span style="color:#8be9fd;font-style:italic">e</span>) <span style="color:#8be9fd;font-style:italic">e</span> <span style="color:#8be9fd;font-style:italic">table</span>)))</code></pre></div>
-
-<p>Most of the running rules for the six categories are just writing down details
+<span style=color:#6272a4>; The meaning function translates an expression to its meaning</span>
+(<span style=color:#ff79c6>define </span><span style=color:#8be9fd;font-style:italic>meaning</span>
+  (<span style=color:#ff79c6>lambda </span>(<span style=color:#50fa7b>e</span> <span style=color:#8be9fd;font-style:italic>table</span>)
+    ((<span style=color:#50fa7b>expression-to-action</span> <span style=color:#8be9fd;font-style:italic>e</span>) <span style=color:#8be9fd;font-style:italic>e</span> <span style=color:#8be9fd;font-style:italic>table</span>)))</code></pre></div><p>Most of the running rules for the six categories are just writing down details
 of its working nature. And the examples on book are easy to follow. We will see some difficult ones together:
-*lambda, *cond, *application.</p>
-
-<p><strong>(1) lambda</strong></p>
-
-<p>We can see that e as an lambda expression, when passed to <code>(meaning e table)</code> it
+*lambda, *cond, *application.</p><p><strong>(1) lambda</strong></p><p>We can see that e as an lambda expression, when passed to <code>(meaning e table)</code> it
 got classified as *lambda. The following rule of *lambda action defines e as
 non-primitive and attaches the table to its remainder. Later we will see in <code>(apply-closure)</code>, for a
 function defined as non-primitive, we will further deconstruct the content of
 itself to run.
-<img src="/img/little14.png" alt="" /></p>
-
-<p><strong>(2) cond</strong></p>
-
-<p>The rule for <code>(*cond)</code> category is similar to lambda. As we know an eternal condition of <code>(cond)</code> is
+<img src=/img/little14.png alt></p><p><strong>(2) cond</strong></p><p>The rule for <code>(*cond)</code> category is similar to lambda. As we know an eternal condition of <code>(cond)</code> is
 <code>(else)</code> so it&rsquo;s the first one got translated into meaning. The other predicates
 conditions of cond (cond-lines-of e) do not have much varieties either, no much more
-than <code>(atom? eq? null? zero? o&lt; o&gt;)</code> with combinations of <code>(and or)</code>. These
+than <code>(atom? eq? null? zero? o&lt; o>)</code> with combinations of <code>(and or)</code>. These
 primitive ones got translated in the second predicate with meaning of <code>(*const)</code>
 from the <code>(atom-to-action)</code>. The remaining non-usual ones which either goes to atom/identifier or got translated into <code>(*application)</code>.
-<img src="/img/little12.png" alt="" /></p>
-
-<p>If you wonder, put the book example in DrRacket:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#50fa7b">*cond</span> (<span style="color:#ff79c6">cond </span>(<span style="color:#50fa7b">coffee</span> <span style="color:#8be9fd;font-style:italic">klatsch</span>)(<span style="color:#ff79c6">else </span><span style="color:#8be9fd;font-style:italic">party</span>))
-  (((<span style="color:#50fa7b">coffee</span>)(#t))
-   ((<span style="color:#50fa7b">klatsch</span> <span style="color:#8be9fd;font-style:italic">party</span>)(<span style="color:#bd93f9">5</span> (<span style="color:#bd93f9">6</span>)))))</code></pre></div>
-
-<p>And my answer:
+<img src=/img/little12.png alt></p><p>If you wonder, put the book example in DrRacket:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scheme data-lang=scheme>(<span style=color:#50fa7b>*cond</span> (<span style=color:#ff79c6>cond </span>(<span style=color:#50fa7b>coffee</span> <span style=color:#8be9fd;font-style:italic>klatsch</span>)(<span style=color:#ff79c6>else </span><span style=color:#8be9fd;font-style:italic>party</span>))
+  (((<span style=color:#50fa7b>coffee</span>)(#t))
+   ((<span style=color:#50fa7b>klatsch</span> <span style=color:#8be9fd;font-style:italic>party</span>)(<span style=color:#bd93f9>5</span> (<span style=color:#bd93f9>6</span>)))))</code></pre></div><p>And my answer:
 The coffee example roughly shows an idea of searching function for meaning/action in
-the table when it&rsquo;s not primitive like <code>(eq?)</code>.</p>
-
-<figure>
-    <img src="/img/little13.png"/> 
-</figure>
-
-
-<p><strong>(3) application</strong></p>
-
-<p>This category processes all other complex function expressions. For example, a S-expression
+the table when it&rsquo;s not primitive like <code>(eq?)</code>.</p><figure><img src=/img/little13.png></figure><p><strong>(3) application</strong></p><p>This category processes all other complex function expressions. For example, a S-expression
 applying value to a lambda function.
-<img src="/img/little15.png" alt="" /></p>
-
-<p>Starting from a simple example, implementing a lambda expression, is equal to
+<img src=/img/little15.png alt></p><p>Starting from a simple example, implementing a lambda expression, is equal to
 find the meaning of an e with a table like this:
-<img src="/img/little17.png" alt="" /></p>
-
-<p>It equals evaluating =(*application (cons x y) table) too. We are not sure what
+<img src=/img/little17.png alt></p><p>It equals evaluating =(*application (cons x y) table) too. We are not sure what
 kind of tables will always work, but We would like to have an universal form to do this, maybe with a closure that
 got functions, arguments and corresponding values stored in a structural form.
 Evaluating any non-primitive function would be like evaluating the meaning/*application of a
-standard object.</p>
-
-<p>In fact yes, it is achievable. As is mention in *lambda part, applying a non-primitive function - a closure -
+standard object.</p><p>In fact yes, it is achievable. As is mention in *lambda part, applying a non-primitive function - a closure -
 to a list of values is the same as finding the meaning of the closure&rsquo;s body
 with its table extended by an entry of the form <code>(formals values)</code>.
-In this entry, <em>formals</em> is the <em>formals</em> of the closure and <em>values</em> is the results of <em>evlis</em>.</p>
-
-<p>There may be a thousand possible closures, but let&rsquo;s start with a simple one
+In this entry, <em>formals</em> is the <em>formals</em> of the closure and <em>values</em> is the results of <em>evlis</em>.</p><p>There may be a thousand possible closures, but let&rsquo;s start with a simple one
 matching a function with known form.
-<img src="/img/little18.png" alt="" /></p>
-
-<p>This is how it evolves:
-<img src="/img/little16.png" alt="" /></p>
-
-
-                
-
-                <hr>
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/post/the-little-schemer-note-2-3/" data-toggle="tooltip" data-placement="top" title="The Little Schemer speedy referring note (2/3)">&larr;
-                            Previous Post</a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/post/dd/" data-toggle="tooltip" data-placement="top" title="Detailed key proof of ANOVA test: SST=SSE&#43;SSB">Next
-                            Post &rarr;</a>
-                    </li>
-                    
-                </ul>
-
-                
-<div id="disqus-comment"></div>
-
-<div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "katherine He" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
-
-            </div>
-            
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                
-                
-                <section>
-                    <hr class="hidden-sm hidden-xs">
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                        
-                        
-                        
-                        <a href="/tags/anki" title="anki">
-                            anki
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/emacs" title="emacs">
-                            emacs
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/emasc" title="emasc">
-                            emasc
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/git" title="git">
-                            git
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/hugo" title="hugo">
-                            hugo
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/msys2" title="msys2">
-                            msys2
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/org-mode" title="org-mode">
-                            org-mode
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/ox-hugo" title="ox-hugo">
-                            ox-hugo
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/probability" title="probability">
-                            probability
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/spacemacs" title="spacemacs">
-                            spacemacs
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/statistics" title="statistics">
-                            statistics
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/stochastic-process" title="stochastic-process">
-                            stochastic-process
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/ubuntu" title="ubuntu">
-                            ubuntu
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/wercker" title="wercker">
-                            wercker
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/windows" title="windows">
-                            windows
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/windows10" title="windows10">
-                            windows10
-                        </a>
-                        
-                        
-                    </div>
-                </section>
-                
-
-                
-                
-                <section>
-                    <hr>
-                    <h5>FRIENDS</h5>
-                    <ul class="list-inline">
-                        
-                        <li><a target="_blank" href="https://twitter.com/laowai121">Twitter @ 伯逸</a></li>
-                        
-                    </ul>
-                </section>
-                
-            </div>
-        </div>
-    </div>
-</article>
-
-
-
-
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
-                   
-                    
-                    
-                    
-                    
-                    
-
-                    
-
-		    
-                    
-                    <li>
-                        <a target="_blank" href="/img/example-qr.png">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-		    
-                    
-                    <li>
-                        <a target="_blank" href="https://github.com/QiKatherine">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-		    
-                    
-                    
-                </ul>
-		<p class="copyright text-muted">
-                    Copyright &copy; Katherine&#39;s Blog 2021
-                    <br>
-                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="100px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
-                    </iframe>
-                </p>
-            </div>
-        </div>
-    </div>
-</footer>
-
-
-
-
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-
-
-
-
-
-
-<script>
-    
-    if($('#tag_cloud').length !== 0){
-        async("/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-
-<script>
-    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-
-
-
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-145919675-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-</body>
-</html>
+<img src=/img/little18.png alt></p><p>This is how it evolves:
+<img src=/img/little16.png alt></p><hr><ul class=pager><li class=previous><a href=/post/the-little-schemer-note-2-3/ data-toggle=tooltip data-placement=top title="The Little Schemer speedy referring note (2/3)">&larr;
+Previous Post</a></li><li class=next><a href=/post/dd/ data-toggle=tooltip data-placement=top title="Detailed key proof of ANOVA test: SST=SSE+SSB">Next
+Post &rarr;</a></li></ul><div id=disqus-comment></div><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//katherine He.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
+sidebar-container"><section><hr class="hidden-sm hidden-xs"><h5><a href=/tags/>FEATURED TAGS</a></h5><div class=tags><a href=/tags/anki title=anki>anki</a>
+<a href=/tags/emacs title=emacs>emacs</a>
+<a href=/tags/emasc title=emasc>emasc</a>
+<a href=/tags/git title=git>git</a>
+<a href=/tags/hugo title=hugo>hugo</a>
+<a href=/tags/msys2 title=msys2>msys2</a>
+<a href=/tags/org-mode title=org-mode>org-mode</a>
+<a href=/tags/ox-hugo title=ox-hugo>ox-hugo</a>
+<a href=/tags/probability title=probability>probability</a>
+<a href=/tags/spacemacs title=spacemacs>spacemacs</a>
+<a href=/tags/statistics title=statistics>statistics</a>
+<a href=/tags/stochastic-process title=stochastic-process>stochastic-process</a>
+<a href=/tags/ubuntu title=ubuntu>ubuntu</a>
+<a href=/tags/wercker title=wercker>wercker</a>
+<a href=/tags/windows title=windows>windows</a>
+<a href=/tags/windows10 title=windows10>windows10</a></div></section><section><hr><h5>FRIENDS</h5><ul class=list-inline><li><a target=_blank href=https://twitter.com/laowai121>Twitter @ 伯逸</a></li></ul></section></div></div></div></article><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a target=_blank href=/img/example-qr.png><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
+<i class="fa fa-wechat fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://github.com/QiKatherine><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
+<i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="copyright text-muted">Copyright &copy; Katherine's Blog 2021<br><a href=https://themes.gohugo.io/hugo-theme-cleanwhite>CleanWhite Hugo Theme</a> by <a href=https://zhaohuabing.com>Huabing</a> |
+<iframe style=margin-left:2px;margin-bottom:-5px frameborder=0 scrolling=0 width=100px height=20px src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true"></iframe></p></div></div></div></footer><script>function async(f,b){var c=document,d='script',a=c.createElement(d),e=c.getElementsByTagName(d)[0];a.src=f,b&&a.addEventListener('load',function(a){b(null,a)},!1),e.parentNode.insertBefore(a,e)}</script><script>$('#tag_cloud').length!==0&&async("/js/jquery.tagcloud.js",function(){$.fn.tagcloud.defaults={color:{start:'#bbbbee',end:'#0085a1'}},$('#tag_cloud a').tagcloud()})</script><script>async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js",function(){var a=document.querySelector("nav");a&&FastClick.attach(a)})</script><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-145919675-1','auto'),ga('send','pageview'))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>

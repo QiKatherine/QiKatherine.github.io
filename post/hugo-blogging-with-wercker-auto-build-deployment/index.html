@@ -1,730 +1,87 @@
-<!DOCTYPE html>
-<html lang="en-us">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:site_name" content="Katherine's Blog"><meta property="og:type" content="article"><meta property="og:image" content="http://sheishe.xyz/img/vivi.jpg"><meta property="twitter:image" content="http://sheishe.xyz/img/vivi.jpg"><meta name=title content="Hugo Blogging with Wercker Auto Build & Deployment 【用 Wercker 自动部署网站】"><meta property="og:title" content="Hugo Blogging with Wercker Auto Build & Deployment 【用 Wercker 自动部署网站】"><meta property="twitter:title" content="Hugo Blogging with Wercker Auto Build & Deployment 【用 Wercker 自动部署网站】"><meta name=description content="Katherine He coder statistician econometrician machine learning"><meta property="og:description" content="Katherine He coder statistician econometrician machine learning"><meta property="twitter:description" content="Katherine He coder statistician econometrician machine learning"><meta property="twitter:card" content="Using Wercker to for automated website code build and deployment"><meta name=keyword content=" "><link rel="shortcut icon" href=/img/favicon.ico><title>Hugo Blogging with Wercker Auto Build & Deployment 【用 Wercker 自动部署网站】-Katherine's Blog</title><link rel=canonical href=/post/hugo-blogging-with-wercker-auto-build-deployment/><link rel=stylesheet href=/css/iDisqus.min.css><link rel=stylesheet href=/css/bootstrap.min.css><link rel=stylesheet href=/css/hux-blog.min.css><link rel=stylesheet href=/css/syntax.css><link rel=stylesheet href=/css/zanshang.css><link href=//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css rel=stylesheet type=text/css><script src=/js/jquery.min.js></script><script src=/js/bootstrap.min.js></script><script src=/js/hux-blog.min.js></script><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js></script><script>hljs.initHighlightingOnLoad()</script><script src=http://sheishe.xyz/js/mathjax-config.js></script><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML"></script></head><nav class="navbar navbar-default navbar-custom navbar-fixed-top"><div class=container-fluid><div class="navbar-header page-scroll"><button type=button class=navbar-toggle>
+<span class=sr-only>Toggle navigation</span>
+<span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button>
+<a class=navbar-brand href=/>Katherine's Blog</a></div><div id=huxblog_navbar><div class=navbar-collapse><ul class="nav navbar-nav navbar-right"><li><a href=/>Home</a></li><li><a href=/categories/math>math</a></li><li><a href=/categories/tech>tech</a></li><li><a href=/top/about/>ABOUT</a></li><li><a href=/search>SEARCH <img src=/img/search.png height=15 style=cursor:pointer alt=Search></a></li></ul></div></div></div></nav><script>var $body=document.body,$toggle=document.querySelector('.navbar-toggle'),$navbar=document.querySelector('#huxblog_navbar'),$collapse=document.querySelector('.navbar-collapse');$toggle.addEventListener('click',handleMagic);function handleMagic(a){$navbar.className.indexOf('in')>0?($navbar.className=" ",setTimeout(function(){$navbar.className.indexOf('in')<0&&($collapse.style.height="0px")},400)):($collapse.style.height="auto",$navbar.className+=" in")}</script><style type=text/css>header.intro-header{background-image:url(/img/111.jpg)}</style><header class=intro-header><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=post-heading><div class=tags><a class=tag href=/tags/hugo title=Hugo>Hugo</a>
+<a class=tag href=/tags/git title=Git>Git</a>
+<a class=tag href=/tags/wercker title=Wercker>Wercker</a>
+<a class=tag href=/tags/org-mode title=Org-mode>Org-mode</a>
+<a class=tag href=/tags/emacs title=Emacs>Emacs</a></div><h1>Hugo Blogging with Wercker Auto Build & Deployment 【用 Wercker 自动部署网站】</h1><h2 class=subheading></h2><span class=meta>Posted by
+Katherine's Blog
+on
+Friday, July 26, 2019
+<span id=/post/hugo-blogging-with-wercker-auto-build-deployment/ class="leancloud_visitors meta_data_item" data-flag-title><span class=post-meta-item-icon><span class="octicon octicon-eye"></span></span><i class="fa fa-eye"></i>
+<span class=old-visitors-count style=display:none></span><span class=leancloud-visitors-count></span></span><script src=https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js></script><script>AV.initialize("","")</script><script type=text/javascript>function showTime(c){var b=new AV.Query(c),a=[],d=$(".leancloud_visitors");d.each(function(){a.push($(this).attr("id").trim())}),b.containedIn('url',a),b.find().done(function(f){for(var h='.leancloud-visitors-count',k='.old-visitors-count',b=0,g,e,j,c,d,i;b<f.length;b++)g=f[b],e=g.get('url'),j=g.get('time'),c=document.getElementById(e),$(c).find(h).text(j);for(b=0;b<a.length;b++)e=a[b],c=document.getElementById(e),d=$(c).find(h),d.text()==''&&(i=$(c).find(k).text(),i!=''?d.text(0+parseInt(i)):d.text(0))}).fail(function(b,a){console.log("Error: "+a.code+" "+a.message)})}function addCount(b){var c=$(".leancloud_visitors"),a=c.attr('id').trim(),e=c.attr('data-flag-title').trim(),d=new AV.Query(b);d.equalTo("url",a),d.find({success:function(j){var d,c,f,h,i,g;j.length>0?(d=j[0],d.fetchWhenSave(!0),d.increment("time"),d.save(null,{success:function(b){var c=$(document.getElementById(a));c.find('.leancloud-visitors-count').text(b.get('time'))},error:function(b,a){console.log('Failed to save Visitor num, with error message: '+a.message)}})):(c=new b,f=new AV.ACL,f.setPublicReadAccess(!0),f.setPublicWriteAccess(!0),c.setACL(f),c.set("title",e),c.set("url",a),h='.old-visitors-count',i=$(document.getElementById(a)),g=i.find(h).text(),g!=''?c.set("time",parseInt(g)+1):c.set("time",1),c.save(null,{success:function(b){var c=$(document.getElementById(a));c.find('.leancloud-visitors-count').text(b.get('time'))},error:function(a,b){console.log('Failed to create')}}))},error:function(a){console.log('Error:'+a.code+" "+a.message)}})}$(function(){var a=AV.Object.extend("Counter");$('.leancloud_visitors').length==1?addCount(a):showTime(a)})</script></span></div></div></div></div></header><article><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
+post-container"><header><h2>TOC</h2></header><nav id=TableOfContents></nav><p>The automated static website generators (e.g., Octopress, Hexo, and Hugo) have made <strong>website building and maintaining</strong> way more relaxed than before. The workflow has been simplified to: write and save markdown &ndash; preview on the localhost 1313 &ndash; generate the ~/public (HTML) file &ndash; push to a remote server (GitHub) &ndash; backup source code.</p><p>If one considers all technicalities, there are still many questions worth discussing to make this process more efficient, such as (1) which is the best way to host HTML files and source code files (2), which is the better way to automate the procedure.</p><p>I used to use Hexo where three things need to be tracked separately: source code and ~/public file (both updated for every article), forked/cloned theme (updated according to theme author), and Hexo generator. I have to use git submodules to track everything. Soon, the hustle and page generation speed make me convert to Hugo. Hugo requires only a binary file to generate a website, with which the update cannot be more straightforward: you download a new .exe file and replace the old one. The updated theme can be manually merged as long as the site config.toml file is well preserved.</p><p>Let&rsquo;s go back to the first issue. The Hugo official manual has given two way to publish ~/public file: (1) using Master branch of user.github.io to host /doc (instead of public) folder, which is the easiest one to me; (2) using gh-pages and the advantage of this method is that allows you to have another branch hosting source code in the same repo. I fail to generate /doc file somehow, but it gives me a chance to try Wercker, which surprisingly allows me to achieve the first method with the same advantages as the second method. Long story short, now I am using the Master branch of user.github.io to host ~/public file and dev branch to host source file.</p><p>My answer to the second issue is using Wercker. It will automatically go to your source code repo and build the ~/public folder and deploy the website. So the process mentioned at the beginning of this article becomes even easier: write and save an article in markdown &ndash; push the full source code to the remote repo. This means you do NOT need to generate and deploy in the local terminal anymore. Wercker does the work every time it detects a new push on the designated repo on the remote server. The script wercker.yml (generated and pushed by you) will tell Wercker precisely how and where to build and deploy. There are also other popular continuous integration tools such as Travis CI, Jenkins, which has advantages at different aspects such as free usage, commercial stability, running speed and etc. I choose to use wercker based on my needs.</p><p>The Hugo instruction <a href=https://gohugo.io/hosting-and-deployment/deployment-with-wercker/>https://gohugo.io/hosting-and-deployment/deployment-with-wercker/</a> is very detailed and well written, and you should be quite clear before the &lsquo;Configure Access&rsquo; section. The Wercker has changed quite a bit in the generating wercker.yml part. You do NOT HAVE to search and choose boxes or steps to build and deploy. The default script contains the box information, and it can be modified unless you don&rsquo;t like it. The build and deploy part are generated separately in the workflow section (press CTRL and + to see the bigger picture) ![](/img/Hugo blogging with werecker 1.png)</p><p>Here is my wercker.yml:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yml data-lang=yml><span style=color:#6272a4># This references a standard debian container from the</span>
+<span style=color:#6272a4># Docker Hub https://registry.hub.docker.com/_/debian/</span>
+<span style=color:#6272a4># Read more about containers on our dev center</span>
+<span style=color:#6272a4># https://devcenter.wercker.com/overview-and-core-concepts/containers/</span>
+<span style=color:#ff79c6>box</span>: debian
+<span style=color:#6272a4># You can also use services such as databases. Read more on our dev center:</span>
+<span style=color:#6272a4># https://devcenter.wercker.com/administration/services/</span>
+<span style=color:#6272a4># services:</span>
+    <span style=color:#6272a4># - postgres</span>
+    <span style=color:#6272a4># https://devcenter.wercker.com/administration/services/examples/postgresql/</span>
 
-    
-    <meta property="og:site_name" content="Katherine&#39;s Blog">
-    <meta property="og:type" content="article">
+    <span style=color:#6272a4># - mongo</span>
+    <span style=color:#6272a4># https://devcenter.wercker.com/administration/services/examples/mongodb/</span>
 
-    
-    <meta property="og:image" content="http://sheishe.xyz/img/vivi.jpg">
-    <meta property="twitter:image" content="http://sheishe.xyz/img/vivi.jpg" />
-    
+<span style=color:#6272a4># This is the build pipeline. Pipelines are the core of wercker</span>
+<span style=color:#6272a4># Read more about pipelines on our dev center</span>
+<span style=color:#6272a4># https://devcenter.wercker.com/development/pipelines/</span>
+<span style=color:#ff79c6>build</span>:
+    <span style=color:#ff79c6>steps</span>:
+    <span style=color:#6272a4># Steps make up the actions in your pipeline</span>
+    <span style=color:#6272a4># Read more about steps on our dev center:</span>
+    <span style=color:#6272a4># https://devcenter.wercker.com/development/steps/</span>
+        - <span style=color:#ff79c6>arjen/hugo-build@2.8.0</span>:
+            <span style=color:#6272a4># your hugo theme name</span>
+            <span style=color:#ff79c6>theme</span>: hugo-theme-cleanwhite
+            <span style=color:#ff79c6>flags</span>: --buildDrafts=false
+<span style=color:#ff79c6>deploy</span>:
+    <span style=color:#ff79c6>steps</span>:
+        - <span style=color:#ff79c6>install-packages</span>:
+            <span style=color:#ff79c6>packages</span>: git ssh-client
 
-    
-    <meta name="title" content="Hugo Blogging with Wercker Auto Build &amp; Deployment 【用 Wercker 自动部署网站】" />
-    <meta property="og:title" content="Hugo Blogging with Wercker Auto Build &amp; Deployment 【用 Wercker 自动部署网站】" />
-    <meta property="twitter:title" content="Hugo Blogging with Wercker Auto Build &amp; Deployment 【用 Wercker 自动部署网站】" />
-    
+        - <span style=color:#ff79c6>sf-zhou/gh-pages@0.2.6</span>:
+            <span style=color:#ff79c6>token</span>: $GIT_TOKEN
+            <span style=color:#ff79c6>domain</span>: sheishe.xyz
+            <span style=color:#ff79c6>repo</span>: QiKatherine/QiKatherine.github.io
+            <span style=color:#ff79c6>branch</span>: master
+            <span style=color:#ff79c6>basedir</span>: public</code></pre></div><p>Notice the name &lsquo;build&rsquo; and &lsquo;deploy&rsquo; in the workflow above need to be the same with the name in steps in the wercker.yml file.</p><p>You can also add a local deploy.sh to make source code push easier too:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#ff79c6>#!/bin/bash
+</span><span style=color:#ff79c6></span><span style=color:#8be9fd;font-style:italic>cd</span> ~/Hugo/myblog/
 
-    
-    <meta name="description" content="Katherine He coder statistician econometrician machine learning">
-    <meta property="og:description" content="Katherine He coder statistician econometrician machine learning" />
-    <meta property="twitter:description" content="Katherine He coder statistician econometrician machine learning" />
-    
-
-    
-    <meta property="twitter:card" content="Using Wercker to for automated website code build and deployment" />
-    
-    
-
-    <meta name="keyword"  content=" ">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-
-    <title>Hugo Blogging with Wercker Auto Build &amp; Deployment 【用 Wercker 自动部署网站】-Katherine&#39;s Blog</title>
-
-    <link rel="canonical" href="/post/hugo-blogging-with-wercker-auto-build-deployment/">
-
-    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
-	
-    
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-
-    
-    <link rel="stylesheet" href="/css/hux-blog.min.css">
-
-    
-    <link rel="stylesheet" href="/css/syntax.css">
-
-    
-    <link rel="stylesheet" href="/css/zanshang.css">
-
-    
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    
-    
-    <script src="/js/jquery.min.js"></script>
-    
-    
-    <script src="/js/bootstrap.min.js"></script>
-    
-    
-    <script src="/js/hux-blog.min.js"></script>
-	
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-	
-	
-<script src="http://sheishe.xyz/js/mathjax-config.js"></script>
- 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML"></script>
-
-
-
-</head>
-
-
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Katherine&#39;s Blog</a>
-        </div>
-
-        
-        
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/categories/math">math</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/categories/tech">tech</a>
-                    </li>
-                    
-                    
-		    
-                        <li><a href="/top/about/">ABOUT</a></li>
-                    
-
-                    
-		    <li>
-                        <a href="/search">SEARCH <img src="/img/search.png" height="15" style="cursor: pointer;" alt="Search"></a>
-		    </li>
-                    
-                </ul>
-            </div>
-        </div>
-        
-    </div>
-    
-</nav>
-<script>
-    
-    
-    
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
-
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        
-            $navbar.className = " ";
-            
-            setTimeout(function(){
-                
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
-
-
-
-
-<style type="text/css">
-    header.intro-header {
-        background-image: url('/img/111.jpg')
-    }
-</style>
-<header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                        <a class="tag" href="/tags/hugo" title="Hugo">
-                            Hugo
-                        </a>
-                        
-                        <a class="tag" href="/tags/git" title="Git">
-                            Git
-                        </a>
-                        
-                        <a class="tag" href="/tags/wercker" title="Wercker">
-                            Wercker
-                        </a>
-                        
-                        <a class="tag" href="/tags/org-mode" title="Org-mode">
-                            Org-mode
-                        </a>
-                        
-                        <a class="tag" href="/tags/emacs" title="Emacs">
-                            Emacs
-                        </a>
-                        
-                    </div>
-                    <h1>Hugo Blogging with Wercker Auto Build &amp; Deployment 【用 Wercker 自动部署网站】</h1>
-                    <h2 class="subheading"></h2>
-                    <span class="meta">
-			Posted by 
-			
-		            Katherine&#39;s Blog
-			 
-			on 
-			Friday, July 26, 2019
-                        
-                            <span id="/post/hugo-blogging-with-wercker-auto-build-deployment/" class="leancloud_visitors meta_data_item" data-flag-title="">
-    <span class="post-meta-item-icon">
-      <span class="octicon octicon-eye"></span> 
-    </span>
-    <i class="fa fa-eye"></i>
-    <span class="old-visitors-count" style="display: none;"></span>
-    <span class="leancloud-visitors-count"></span>
-</span>
-
-
-
-<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-
-<script>
-	AV.initialize("", "");
-</script>
-
-<script type="text/javascript">
-function showTime(Counter) {
-    var query = new AV.Query(Counter);
-    var entries = [];
-    var $visitors = $(".leancloud_visitors");
-
-    $visitors.each(function() {
-        entries.push($(this).attr("id").trim());
-    });
-
-    query.containedIn('url', entries);
-    query.find()
-        .done(function(results) {
-            var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-            var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
-
-            
-            
-            
-            
-
-            for (var i = 0; i < results.length; i++) {
-                var item = results[i];
-                var url = item.get('url');
-                var time = item.get('time');
-                var element = document.getElementById(url);
-
-                $(element).find(COUNT_CONTAINER_REF).text(time);
-            }
-            for (var i = 0; i < entries.length; i++) {
-                var url = entries[i];
-                var element = document.getElementById(url);
-                var countSpan = $(element).find(COUNT_CONTAINER_REF);
-                if (countSpan.text() == '') {
-                    var oldCountSpan = $(element).find(OLD_COUNT_CONTAINER_REF).text();
-                    if(oldCountSpan!=''){
-                        countSpan.text(0+parseInt(oldCountSpan));
-                    }else{
-                        countSpan.text(0);          
-                    }
-                }
-            }
-        })
-        .fail(function(object, error) {
-            console.log("Error: " + error.code + " " + error.message);
-        });
-}
-
-function addCount(Counter) {
-    var $visitors = $(".leancloud_visitors");
-    var url = $visitors.attr('id').trim();
-    var title = $visitors.attr('data-flag-title').trim();
-    var query = new AV.Query(Counter);
-
-    query.equalTo("url", url);
-    query.find({
-        success: function(results) {
-            if (results.length > 0) {
-                var counter = results[0];
-                counter.fetchWhenSave(true);
-                counter.increment("time");
-                counter.save(null, {
-                    success: function(counter) {
-                        var $element = $(document.getElementById(url));
-                        $element.find('.leancloud-visitors-count').text(counter.get('time'));
-                    },
-                    error: function(counter, error) {
-                        console.log('Failed to save Visitor num, with error message: ' + error.message);
-                    }
-                });
-            } else {
-                var newcounter = new Counter();
-                 
-                var acl = new AV.ACL();
-                acl.setPublicReadAccess(true);
-                acl.setPublicWriteAccess(true);
-                newcounter.setACL(acl);
-                 
-                newcounter.set("title", title);
-                newcounter.set("url", url);
-                var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
-                var $element = $(document.getElementById(url));
-                var oldCountSpan = $element.find(OLD_COUNT_CONTAINER_REF).text();
-                if(oldCountSpan!=''){
-                    newcounter.set("time", parseInt(oldCountSpan)+1);
-                }else{
- 	                    newcounter.set("time",  1);
-                }
-                newcounter.save(null, {
-                    success: function(newcounter) {
-                        var $element = $(document.getElementById(url));
-                        $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-                    },
-                    error: function(newcounter, error) {
-                        console.log('Failed to create');
-                    }
-                });
-            }
-        },
-        error: function(error) {
-            console.log('Error:' + error.code + " " + error.message);
-        }
-    });
-}
-$(function() {
-    var Counter = AV.Object.extend("Counter");
-    
-    
-    if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-    } else {
-        showTime(Counter);
-    }
-});
-</script>
-
-                        
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-
-
-
-<article>
-    <div class="container">
-        <div class="row">
-
-            
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                
-                <header>
-                    <h2>TOC</h2>
-                </header>
-                
-                
-                <p>The automated static website generators (e.g., Octopress, Hexo, and Hugo) have made <strong>website building and maintaining</strong> way more relaxed than before. The workflow has been simplified to: write and save markdown &ndash; preview on the localhost 1313 &ndash; generate the ~/public (HTML) file &ndash; push to a remote server (GitHub) &ndash; backup source code.</p>
-
-<p>If one considers all technicalities, there are still many questions worth discussing to make this process more efficient, such as (1) which is the best way to host HTML files and source code files (2), which is the better way to automate the procedure.</p>
-
-<p>I used to use Hexo where three things need to be tracked separately: source code and ~/public file (both updated for every article), forked/cloned theme (updated according to theme author), and Hexo generator. I have to use git submodules to track everything. Soon, the hustle and page generation speed make me convert to Hugo. Hugo requires only a binary file to generate a website, with which the update cannot be more straightforward: you download a new .exe file and replace the old one. The updated theme can be manually merged as long as the site config.toml file is well preserved.</p>
-
-<p>Let&rsquo;s go back to the first issue. The Hugo official manual has given two way to publish ~/public file: (1) using Master branch of user.github.io to host /doc (instead of public) folder, which is the easiest one to me; (2) using gh-pages and the advantage of this method is that allows you to have another branch hosting source code in the same repo. I fail to generate /doc file somehow, but it gives me a chance to try Wercker, which surprisingly allows me to achieve the first method with the same advantages as the second method. Long story short, now I am using the Master branch of user.github.io to host ~/public file and dev branch to host source file.</p>
-
-<p>My answer to the second issue is using Wercker. It will automatically go to your source code repo and build the ~/public folder and deploy the website. So the process mentioned at the beginning of this article becomes even easier: write and save an article in markdown &ndash; push the full source code to the remote repo. This means you do NOT need to generate and deploy in the local terminal anymore. Wercker does the work every time it detects a new push on the designated repo on the remote server. The script wercker.yml (generated and pushed by you) will tell Wercker precisely how and where to build and deploy. There are also other popular continuous integration tools such as Travis CI, Jenkins, which has advantages at different aspects such as free usage, commercial stability, running speed and etc. I choose to use wercker based on my needs.</p>
-
-<p>The Hugo instruction <a href="https://gohugo.io/hosting-and-deployment/deployment-with-wercker/">https://gohugo.io/hosting-and-deployment/deployment-with-wercker/</a> is very detailed and well written, and you should be quite clear before the &lsquo;Configure Access&rsquo; section. The Wercker has changed quite a bit in the generating wercker.yml part. You do NOT HAVE to search and choose boxes or steps to build and deploy. The default script contains the box information, and it can be modified unless you don&rsquo;t like it. The build and deploy part are generated separately in the workflow section (press CTRL and + to see the bigger picture) <img src="/img/Hugo blogging with werecker 1.png" alt="" /></p>
-
-<p>Here is my wercker.yml:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#6272a4"># This references a standard debian container from the</span>
-<span style="color:#6272a4"># Docker Hub https://registry.hub.docker.com/_/debian/</span>
-<span style="color:#6272a4"># Read more about containers on our dev center</span>
-<span style="color:#6272a4"># https://devcenter.wercker.com/overview-and-core-concepts/containers/</span>
-box: debian
-<span style="color:#6272a4"># You can also use services such as databases. Read more on our dev center:</span>
-<span style="color:#6272a4"># https://devcenter.wercker.com/administration/services/</span>
-<span style="color:#6272a4"># services:</span>
-    <span style="color:#6272a4"># - postgres</span>
-    <span style="color:#6272a4"># https://devcenter.wercker.com/administration/services/examples/postgresql/</span>
-
-    <span style="color:#6272a4"># - mongo</span>
-    <span style="color:#6272a4"># https://devcenter.wercker.com/administration/services/examples/mongodb/</span>
-
-<span style="color:#6272a4"># This is the build pipeline. Pipelines are the core of wercker</span>
-<span style="color:#6272a4"># Read more about pipelines on our dev center</span>
-<span style="color:#6272a4"># https://devcenter.wercker.com/development/pipelines/</span>
-build:
-    steps:
-    <span style="color:#6272a4"># Steps make up the actions in your pipeline</span>
-    <span style="color:#6272a4"># Read more about steps on our dev center:</span>
-    <span style="color:#6272a4"># https://devcenter.wercker.com/development/steps/</span>
-        - arjen/hugo-build@<span style="color:#bd93f9">2.8.0</span>:
-            <span style="color:#6272a4"># your hugo theme name</span>
-            theme: hugo-theme-cleanwhite
-            flags: --buildDrafts=<span style="color:#ff79c6">false</span>
-deploy:
-    steps:
-        - install-packages:
-            packages: git ssh-client
-
-        - sf-zhou/gh-pages@<span style="color:#bd93f9">0.2.6</span>:
-            token: $GIT_TOKEN
-            domain: sheishe.xyz
-            repo: QiKatherine/QiKatherine.github.io
-            branch: master
-            basedir: public</code></pre></div>
-
-<p>Notice the name &lsquo;build&rsquo; and &lsquo;deploy&rsquo; in the workflow above need to be the same with the name in steps in the wercker.yml file.</p>
-
-<p>You can also add a local deploy.sh to make source code push easier too:</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nil" data-lang="nil"><span style="color:#ff79c6">#!/bin/bash
-</span><span style="color:#ff79c6"></span><span style="color:#8be9fd;font-style:italic">cd</span> ~/Hugo/myblog/
-
-<span style="color:#6272a4"># Add changes to git.</span>
+<span style=color:#6272a4># Add changes to git.</span>
 git add .
 
-<span style="color:#6272a4"># Commit changes.</span>
-<span style="color:#8be9fd;font-style:italic">msg</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;rebuilding site `date`&#34;</span>
-<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">[</span> <span style="color:#8be9fd;font-style:italic">$#</span> -eq <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">]</span>
-  <span style="color:#ff79c6">then</span> <span style="color:#8be9fd;font-style:italic">msg</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;</span><span style="color:#8be9fd;font-style:italic">$1</span><span style="color:#f1fa8c">&#34;</span>
-<span style="color:#ff79c6">fi</span>
-git commit -m <span style="color:#f1fa8c">&#34;</span><span style="color:#8be9fd;font-style:italic">$msg</span><span style="color:#f1fa8c">&#34;</span>
+<span style=color:#6272a4># Commit changes.</span>
+<span style=color:#8be9fd;font-style:italic>msg</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;rebuilding site `date`&#34;</span>
+<span style=color:#ff79c6>if</span> <span style=color:#ff79c6>[</span> <span style=color:#8be9fd;font-style:italic>$#</span> -eq <span style=color:#bd93f9>1</span> <span style=color:#ff79c6>]</span>
+  <span style=color:#ff79c6>then</span> <span style=color:#8be9fd;font-style:italic>msg</span><span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;</span><span style=color:#8be9fd;font-style:italic>$1</span><span style=color:#f1fa8c>&#34;</span>
+<span style=color:#ff79c6>fi</span>
+git commit -m <span style=color:#f1fa8c>&#34;</span><span style=color:#8be9fd;font-style:italic>$msg</span><span style=color:#f1fa8c>&#34;</span>
 
-<span style="color:#6272a4"># Push source and build repos.</span>
-git push origin -u dev</code></pre></div>
-
-<p>Happy hacking! :)</p>
-
-
-                
-
-                <hr>
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/post/hugo-blogging-with-ox-hugo/" data-toggle="tooltip" data-placement="top" title="Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】">&larr;
-                            Previous Post</a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/post/best-workaround-to-use-emacs-in-ms-windows/" data-toggle="tooltip" data-placement="top" title="Best workaround to use Emacs in MS Windows 【在 MS windows 中使用 Emacs 的最佳解决方案】">Next
-                            Post &rarr;</a>
-                    </li>
-                    
-                </ul>
-
-                
-<div id="disqus-comment"></div>
-
-<div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "katherine He" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
-
-            </div>
-            
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                
-                
-                <section>
-                    <hr class="hidden-sm hidden-xs">
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                        
-                        
-                        
-                        <a href="/tags/anki" title="anki">
-                            anki
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/emacs" title="emacs">
-                            emacs
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/emasc" title="emasc">
-                            emasc
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/git" title="git">
-                            git
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/hugo" title="hugo">
-                            hugo
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/msys2" title="msys2">
-                            msys2
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/org-mode" title="org-mode">
-                            org-mode
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/ox-hugo" title="ox-hugo">
-                            ox-hugo
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/probability" title="probability">
-                            probability
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/spacemacs" title="spacemacs">
-                            spacemacs
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/statistics" title="statistics">
-                            statistics
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/stochastic-process" title="stochastic-process">
-                            stochastic-process
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/ubuntu" title="ubuntu">
-                            ubuntu
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/wercker" title="wercker">
-                            wercker
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/windows" title="windows">
-                            windows
-                        </a>
-                        
-                        
-                        
-                        <a href="/tags/windows10" title="windows10">
-                            windows10
-                        </a>
-                        
-                        
-                    </div>
-                </section>
-                
-
-                
-                
-                <section>
-                    <hr>
-                    <h5>FRIENDS</h5>
-                    <ul class="list-inline">
-                        
-                        <li><a target="_blank" href="https://twitter.com/laowai121">Twitter @ 伯逸</a></li>
-                        
-                    </ul>
-                </section>
-                
-            </div>
-        </div>
-    </div>
-</article>
-
-
-
-
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
-                   
-                    
-                    
-                    
-                    
-                    
-
-                    
-
-		    
-                    
-                    <li>
-                        <a target="_blank" href="/img/example-qr.png">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-		    
-                    
-                    <li>
-                        <a target="_blank" href="https://github.com/QiKatherine">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-		    
-                    
-                    
-                </ul>
-		<p class="copyright text-muted">
-                    Copyright &copy; Katherine&#39;s Blog 2021
-                    <br>
-                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="100px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
-                    </iframe>
-                </p>
-            </div>
-        </div>
-    </div>
-</footer>
-
-
-
-
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-
-
-
-
-
-
-<script>
-    
-    if($('#tag_cloud').length !== 0){
-        async("/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-
-<script>
-    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-
-
-
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-145919675-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-</body>
-</html>
+<span style=color:#6272a4># Push source and build repos.</span>
+git push origin -u dev</code></pre></div><p>Happy hacking! :)</p><hr><ul class=pager><li class=previous><a href=/post/hugo-blogging-with-ox-hugo/ data-toggle=tooltip data-placement=top title="Hugo blogging with Ox-hugo 【用 ox-hugo 在 Emacs 中搭建网站流】">&larr;
+Previous Post</a></li><li class=next><a href=/post/best-workaround-to-use-emacs-in-ms-windows/ data-toggle=tooltip data-placement=top title="Best workaround to use Emacs in MS Windows 【在 MS windows 中使用 Emacs 的最佳解决方案】">Next
+Post &rarr;</a></li></ul><div id=disqus-comment></div><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//katherine He.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><div class="col-lg-8 col-lg-offset-2
+col-md-10 col-md-offset-1
+sidebar-container"><section><hr class="hidden-sm hidden-xs"><h5><a href=/tags/>FEATURED TAGS</a></h5><div class=tags><a href=/tags/anki title=anki>anki</a>
+<a href=/tags/emacs title=emacs>emacs</a>
+<a href=/tags/emasc title=emasc>emasc</a>
+<a href=/tags/git title=git>git</a>
+<a href=/tags/hugo title=hugo>hugo</a>
+<a href=/tags/msys2 title=msys2>msys2</a>
+<a href=/tags/org-mode title=org-mode>org-mode</a>
+<a href=/tags/ox-hugo title=ox-hugo>ox-hugo</a>
+<a href=/tags/probability title=probability>probability</a>
+<a href=/tags/spacemacs title=spacemacs>spacemacs</a>
+<a href=/tags/statistics title=statistics>statistics</a>
+<a href=/tags/stochastic-process title=stochastic-process>stochastic-process</a>
+<a href=/tags/ubuntu title=ubuntu>ubuntu</a>
+<a href=/tags/wercker title=wercker>wercker</a>
+<a href=/tags/windows title=windows>windows</a>
+<a href=/tags/windows10 title=windows10>windows10</a></div></section><section><hr><h5>FRIENDS</h5><ul class=list-inline><li><a target=_blank href=https://twitter.com/laowai121>Twitter @ 伯逸</a></li></ul></section></div></div></div></article><footer><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a target=_blank href=/img/example-qr.png><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
+<i class="fa fa-wechat fa-stack-1x fa-inverse"></i></span></a></li><li><a target=_blank href=https://github.com/QiKatherine><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i>
+<i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="copyright text-muted">Copyright &copy; Katherine's Blog 2021<br><a href=https://themes.gohugo.io/hugo-theme-cleanwhite>CleanWhite Hugo Theme</a> by <a href=https://zhaohuabing.com>Huabing</a> |
+<iframe style=margin-left:2px;margin-bottom:-5px frameborder=0 scrolling=0 width=100px height=20px src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true"></iframe></p></div></div></div></footer><script>function async(f,b){var c=document,d='script',a=c.createElement(d),e=c.getElementsByTagName(d)[0];a.src=f,b&&a.addEventListener('load',function(a){b(null,a)},!1),e.parentNode.insertBefore(a,e)}</script><script>$('#tag_cloud').length!==0&&async("/js/jquery.tagcloud.js",function(){$.fn.tagcloud.defaults={color:{start:'#bbbbee',end:'#0085a1'}},$('#tag_cloud a').tagcloud()})</script><script>async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js",function(){var a=document.querySelector("nav");a&&FastClick.attach(a)})</script><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-145919675-1','auto'),ga('send','pageview'))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>
